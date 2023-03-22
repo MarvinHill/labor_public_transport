@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 // remove the exclude
 @SpringBootApplication(
         exclude = {
-                DataSourceAutoConfiguration.class,
                 SecurityAutoConfiguration.class})
 public class Get2bugaApplication {
 
