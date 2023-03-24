@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 export class TransportEntryComponent{
 
   @Input() text: string = "no name";
+  @Input() image_name: string = "notfound";
 
 }
