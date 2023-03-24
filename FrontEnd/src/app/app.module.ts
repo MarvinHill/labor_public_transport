@@ -8,6 +8,7 @@ import { RoutingTopBarComponent } from './routing-top-bar/routing-top-bar.compon
 import { ShuttleViewComponent } from './shuttle-view/shuttle-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { RouterModule,Routes } from '@angular/router';
+import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RouterModule,Routes } from '@angular/router';
     TransportEntryComponent,
     RoutingTopBarComponent,
     ShuttleViewComponent,
-    MainViewComponent
+    MainViewComponent,
+    ShuttleLineEntryComponent
   ],
   imports: [
     BrowserModule,
