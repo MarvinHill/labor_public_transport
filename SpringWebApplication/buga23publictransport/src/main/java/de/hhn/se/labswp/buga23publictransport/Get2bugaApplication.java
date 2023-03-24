@@ -21,5 +21,4 @@ public class Get2bugaApplication {
     public static void main(String[] args) {
         SpringApplication.run(Get2bugaApplication.class, args);
     }
-
 }
