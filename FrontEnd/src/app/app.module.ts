@@ -5,12 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TransportEntryComponent } from './transport-entry/transport-entry.component';
 import { RoutingTopBarComponent } from './routing-top-bar/routing-top-bar.component';
+import { ShuttleViewComponent } from './shuttle-view/shuttle-view.component';
+import { MainViewComponent } from './main-view/main-view.component';
+import { RouterModule,Routes } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     TransportEntryComponent,
-    RoutingTopBarComponent
+    RoutingTopBarComponent,
+    ShuttleViewComponent,
+    MainViewComponent
   ],
   imports: [
     BrowserModule,
