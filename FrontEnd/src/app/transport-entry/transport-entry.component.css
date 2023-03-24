@@ -1,0 +1,24 @@
+.outer-container {
+    height: 5.5em;
+    position: relative;
+}
+
+.image-container {
+    background-color: rgb(224, 57, 27);
+    position: absolute;
+    left: 0.2em;
+    bottom: 0.4em;
+    width: 5em;
+    height: 5em;
+}
+
+.background-bar {
+    height: 3.5em;
+    border-radius: 1em;
+}
+
+.text-box {
+    background-color: white;
+    border: none;
+    border-radius: 1em;
+}
