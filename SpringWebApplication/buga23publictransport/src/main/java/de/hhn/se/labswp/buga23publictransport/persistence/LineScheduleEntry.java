@@ -26,7 +26,6 @@ public class LineScheduleEntry {
         this.waitTime = waitTime;
         this.delay = delay;
         this.stationDesignator = stationDesignator;
-        this.publicTransportLine = null;
     }
 
     public Long getId() {

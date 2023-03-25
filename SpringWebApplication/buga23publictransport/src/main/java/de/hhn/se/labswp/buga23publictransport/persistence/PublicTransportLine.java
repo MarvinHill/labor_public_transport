@@ -25,10 +25,13 @@ public class PublicTransportLine {
     protected PublicTransportLine() {
     }
 
-    public PublicTransportLine(int type, String lineDesignator, boolean hasDelay) {
+    public PublicTransportLine(int type, String lineDesignator, boolean hasDelay, List<LineScheduleEntry> lineScheduleEntryList) {
         this.type = type;
         this.lineDesignator = lineDesignator;
         this.hasDelay = hasDelay;
+        for (var entry : lineScheduleEntryList) {
+            addLineScheduleEntry(entry);
+        }
     }
 
     public Integer getId() {
