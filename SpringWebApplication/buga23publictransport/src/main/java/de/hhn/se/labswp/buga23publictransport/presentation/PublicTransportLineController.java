@@ -5,9 +5,11 @@ import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntry;
 import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntryRepo;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLine;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLineRepo;
+import java.util.Optional;
 import org.hibernate.LazyInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +36,16 @@ public class PublicTransportLineController {
     @GetMapping("/lse")
     Iterable<LineScheduleEntry> all2() {
         return repo2.findAll();
+    }
+
+    @GetMapping("/ptl/{lineId}")
+    PublicTransportLine oneLine(@PathVariable("lineId") String lineId) {
+        long parsedId = Long.parseLong(lineId);
+        Optional<PublicTransportLine> line = repo.findById(parsedId);
+        if (line.isEmpty()) {
+            return null;
+        }
+        return line.get();
+
     }
 }

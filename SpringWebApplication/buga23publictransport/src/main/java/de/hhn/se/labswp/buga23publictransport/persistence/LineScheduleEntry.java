@@ -8,7 +8,7 @@ import java.time.LocalTime;
 @Entity
 public class LineScheduleEntry {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private LocalTime arrivalTime;
     private int waitTime;
     private int delay;
@@ -29,7 +29,7 @@ public class LineScheduleEntry {
         this.publicTransportLine = null;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
