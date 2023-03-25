@@ -25,7 +25,7 @@ public class LoadDatabase {
             for (int i = 0; i < 5; i++) {
                 ArrayList<LineScheduleEntry> children = new ArrayList<>();
                 for (int j = 0; j < 5; j++) {
-                    LineScheduleEntry entry = new LineScheduleEntry(LocalTime.now(), 1, 0, "TestStation" + j);
+                    LineScheduleEntry entry = new LineScheduleEntry(LocalTime.now(), 1, 0, "TestStation" + i + "," + j);
                     children.add(entry);
                     //log.info("Preloading " +  entryRepo.save(entry));
                 }
