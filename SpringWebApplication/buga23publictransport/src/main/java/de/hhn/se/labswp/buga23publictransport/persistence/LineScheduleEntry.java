@@ -9,6 +9,26 @@ import java.time.LocalTime;
 
 @Entity
 public class LineScheduleEntry {
+    public Long getId() {
+        return id;
+    }
+
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public int getWaitTime() {
+        return waitTime;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public String getStationDesignator() {
+        return stationDesignator;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

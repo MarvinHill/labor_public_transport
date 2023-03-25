@@ -11,7 +11,7 @@ public class PublicTransportLine {
     private int type;
     private String lineDesignator;
     private boolean hasDelay;
-    @ElementCollection
+    @OneToMany(cascade = CascadeType.ALL)
     private List<LineScheduleEntry> lineScheduleEntryArrayList;
 
     protected PublicTransportLine() {}
