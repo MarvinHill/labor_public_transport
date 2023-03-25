@@ -1,67 +1,57 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 import java.time.LocalTime;
 
 @Entity
 public class LineScheduleEntry {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalTime arrivalTime;
     private int waitTime;
     private int delay;
     private String stationDesignator;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "public_transport_line_id", nullable = false)
+    @JsonBackReference
+    private PublicTransportLine publicTransportLine;
 
-    protected LineScheduleEntry() {}
+    public LineScheduleEntry() {
+    }
 
     public LineScheduleEntry(LocalTime arrivalTime, int waitTime, int delay, String stationDesignator) {
         this.arrivalTime = arrivalTime;
         this.waitTime = waitTime;
         this.delay = delay;
         this.stationDesignator = stationDesignator;
-    }
-
-
-
-    public void setArrivalTime(LocalTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-
-    public void setWaitTime(int waitTime) {
-        this.waitTime = waitTime;
-    }
-
-    public void setDelay(int delay) {
-        this.delay = delay;
-    }
-
-    public void setStationDesignator(String stationDesignator) {
-        this.stationDesignator = stationDesignator;
+        this.publicTransportLine = null;
     }
 
     public Long getId() {
-        return id;
-    }
-
-    public LocalTime getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public int getWaitTime() {
-        return waitTime;
+        return this.id;
     }
 
     public int getDelay() {
-        return delay;
+        return this.delay;
+    }
+
+    public LocalTime getArrivalTime() {
+        return this.arrivalTime;
     }
 
     public String getStationDesignator() {
-        return stationDesignator;
+        return this.stationDesignator;
+    }
+
+    public PublicTransportLine getPublicTransportLine() {
+        return this.publicTransportLine;
+    }
+
+    public void  setPublicTransportLine(PublicTransportLine publicTransportLine) {
+        if (this.publicTransportLine == null) {
+            this.publicTransportLine = publicTransportLine;
+        }
     }
 }
