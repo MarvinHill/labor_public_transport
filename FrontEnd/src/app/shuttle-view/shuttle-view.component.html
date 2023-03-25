@@ -11,9 +11,9 @@
 <div class="container-lg">
     <h3 class="m-3">DER WEG ZUR BUGA 23</h3>
     <div class="row">
-        <ng-container *ngFor="let item of [0,1,2,3,5]; let i = index">
-            <div class="col-lg-4 p-2"><app-shuttle-line-entry [line_name]="'Linie'" [from_station]="'P20'"
-                    [to_station]="'luisenpark'"></app-shuttle-line-entry></div>
+        <ng-container *ngFor="let item of shuttle_line_list;">
+            <div class="col-lg-4 p-2"><app-shuttle-line-entry [line_name]="item.lineDesignator" [from_station]="item.lineScheduleEntryList[0].stationDesignator"
+                    [to_station]="item.lineScheduleEntryList[item.lineScheduleEntryList.length  - 1].stationDesignator"></app-shuttle-line-entry></div>
         </ng-container>
     </div>
 </div>
