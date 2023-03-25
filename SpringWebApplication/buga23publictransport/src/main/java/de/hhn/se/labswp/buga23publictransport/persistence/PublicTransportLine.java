@@ -1,29 +1,37 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class PublicTransportLine {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private int type;
     private String lineDesignator;
     private boolean hasDelay;
-    @ElementCollection
-    private List<LineScheduleEntry> lineScheduleEntryArrayList;
 
-    protected PublicTransportLine() {}
+    @OneToMany(
+            mappedBy = "publicTransportLine",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<LineScheduleEntry> lineScheduleEntryList = new ArrayList<>();
 
-    public PublicTransportLine(int type, String lineDesignator, boolean hasDelay, List<LineScheduleEntry> lineScheduleEntryArrayList) {
+    protected PublicTransportLine() {
+    }
+
+    public PublicTransportLine(int type, String lineDesignator, boolean hasDelay) {
         this.type = type;
         this.lineDesignator = lineDesignator;
         this.hasDelay = hasDelay;
-        this.lineScheduleEntryArrayList = lineScheduleEntryArrayList;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -39,7 +47,12 @@ public class PublicTransportLine {
         return lineDesignator;
     }
 
-    public List<LineScheduleEntry> getLineScheduleEntryArrayList() {
-        return lineScheduleEntryArrayList;
+    public List<LineScheduleEntry> getlineScheduleEntryList() {
+        return lineScheduleEntryList;
+    }
+
+    public void addLineScheduleEntry(LineScheduleEntry lineScheduleEntry) {
+        this.lineScheduleEntryList.add(lineScheduleEntry);
+        lineScheduleEntry.setPublicTransportLine(this);
     }
 }
