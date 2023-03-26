@@ -11,6 +11,7 @@ import { RouterModule,Routes } from '@angular/router';
 import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
+import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.com
     ShuttleViewComponent,
     MainViewComponent,
     ShuttleLineEntryComponent,
-    AddShuttleLineComponent
+    AddShuttleLineComponent,
+    PublicTransportLineComponent
   ],
   imports: [
     BrowserModule,
