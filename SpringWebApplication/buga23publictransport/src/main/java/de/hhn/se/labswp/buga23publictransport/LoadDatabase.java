@@ -29,7 +29,7 @@ public class LoadDatabase {
                     children.add(entry);
                     //log.info("Preloading " +  entryRepo.save(entry));
                 }
-                PublicTransportLine publicTransportLine = new PublicTransportLine(0,"TestLine" + i, false, children);
+                PublicTransportLine publicTransportLine = new PublicTransportLine("TestLine" + i, false, children);
                 log.info("Preloading " +  lineRepo.save(publicTransportLine));
             }
         };

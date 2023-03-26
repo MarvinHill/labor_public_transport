@@ -11,7 +11,6 @@ public class PublicTransportLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int type;
     private String lineDesignator;
     private boolean hasDelay;
 
@@ -25,8 +24,7 @@ public class PublicTransportLine {
     protected PublicTransportLine() {
     }
 
-    public PublicTransportLine(int type, String lineDesignator, boolean hasDelay, List<LineScheduleEntry> lineScheduleEntryList) {
-        this.type = type;
+    public PublicTransportLine(String lineDesignator, boolean hasDelay, List<LineScheduleEntry> lineScheduleEntryList) {
         this.lineDesignator = lineDesignator;
         this.hasDelay = hasDelay;
         for (var entry : lineScheduleEntryList) {
@@ -36,10 +34,6 @@ public class PublicTransportLine {
 
     public Integer getId() {
         return id;
-    }
-
-    public int getType() {
-        return type;
     }
 
     public boolean getDelay() {
