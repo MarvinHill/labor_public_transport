@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.bc-g{
+    background-color: #ECF4E5;
+}
+
+.bc-p{
+    background-color: #E1416D;
+}
+
+.bc-dg{
+    background-color: #678C47;
+}
+
+.bc-w{
+    background-color: #ffffff;
+}
