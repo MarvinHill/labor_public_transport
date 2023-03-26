@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import{ShuttleLine} from '../ShuttleLine';
+import { UserLoginServiceService } from '../user-login-service.service';
 
 @Component({
   selector: 'app-shuttle-view',
@@ -9,8 +10,9 @@ import{ShuttleLine} from '../ShuttleLine';
 })
 export class ShuttleViewComponent implements OnInit{
 
-  shuttle_line_list: ShuttleLine[];
-
+  shuttleLineList: ShuttleLine[];
+  http:HttpClient;
+  loginService : UserLoginServiceService;
   options!: {
     headers?: HttpHeaders | { [header: string]: string | string[]; };
     observe?: 'body' | 'events' | 'response';
@@ -23,12 +25,15 @@ export class ShuttleViewComponent implements OnInit{
   ngOnInit(): void {
 
     const request = this.http.get<ShuttleLine[]>('http://localhost:8080/ptl')
-    request.subscribe(resp => {this.shuttle_line_list = resp});
+    request.subscribe(resp => {this.shuttleLineList = resp});
 
-    console.log(this.shuttle_line_list);
+    console.log(this.shuttleLineList);
 
   }
 
-  constructor(private http:HttpClient){}
+  constructor(http:HttpClient, loginService : UserLoginServiceService){
+    this.http = http;
+    this.loginService = loginService;
+  }
 
 }

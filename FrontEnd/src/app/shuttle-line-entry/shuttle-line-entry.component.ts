@@ -7,13 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ShuttleLineEntryComponent implements OnInit {
   ngOnInit(): void {
-    this.from_to = this.from_station + " - " + this.to_station
+    this.fromTo = this.fromStation + " - " + this.toStation
   }
 
-  @Input() line_name : string = "no linename";
-  @Input() from_station: string = "station1";
-  @Input() to_station: string = "station2";
-  from_to:string = "";
+  @Input() lineName : string = "no linename";
+  @Input() fromStation: string = "station1";
+  @Input() toStation: string = "station2";
+  fromTo: string = "";
 
   
 

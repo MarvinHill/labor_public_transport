@@ -10,6 +10,7 @@ import { MainViewComponent } from './main-view/main-view.component';
 import { RouterModule,Routes } from '@angular/router';
 import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {HttpClientModule} from '@angular/common/http';
     RoutingTopBarComponent,
     ShuttleViewComponent,
     MainViewComponent,
-    ShuttleLineEntryComponent
+    ShuttleLineEntryComponent,
+    AddShuttleLineComponent
   ],
   imports: [
     BrowserModule,
