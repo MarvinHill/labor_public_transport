@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ParkingLotRepository extends CrudRepository<ParkingLot, Integer> { }
+public interface ParkingLotRepository extends CrudRepository<ParkingLot, Long> { }

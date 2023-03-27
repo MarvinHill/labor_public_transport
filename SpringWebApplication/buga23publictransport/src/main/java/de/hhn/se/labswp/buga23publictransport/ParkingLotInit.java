@@ -6,7 +6,6 @@ import de.hhn.se.labswp.buga23publictransport.business.ParkingStatus;
 import de.hhn.se.labswp.buga23publictransport.business.ParkingType;
 import de.hhn.se.labswp.buga23publictransport.persistence.ParkingLot;
 import de.hhn.se.labswp.buga23publictransport.persistence.ParkingLotRepository;
-import org.geolatte.geom.M;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class ParkingLotInit {
 
     @Bean
-    CommandLineRunner initializeParkingLots(ParkingLotRepository p1Repo) {
+    CommandLineRunner initializeParkingLots(ParkingLotRepository repo) {
         // Parkplatz Info Quelle: https://parken-mannheim.de/
 
         GeometryFactory c1Geo = new GeometryFactory();
@@ -342,31 +341,31 @@ public class ParkingLotInit {
         }));
 
         return args -> {
-            p1Repo.save(new ParkingLot(c1Poly, 49.48670372470029, 8.464163607570061, "C1 Hauptverwaltung MPB, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(c1Poly, 49.48670372470029, 8.464163607570061, "C1 Hauptverwaltung MPB, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
             // TODO "Collini-Center, Tiefgarage" nochmal anschauen -> Webseite war in Wartungsarbeiten
-            // p1Repo.save(new ParkingLot(polygon, null, null, "Collini-Center, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(colliniCenterMuldePoly, 49.49075408061332, 8.478267019395627, "Collini-Center Mulde, Parkplatz", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(d3Poly, 49.4879110562813, 8.463559501710186, "D3, Tiefgarage", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(d5Poly, 49.48840258589768, 8.462012476971653, "D5 Reiß-Museum, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(g1Poly, 49.49017774981759, 8.467326004459226, "G1 Marktplatz, Tiefgarage", false, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(h6Poly, 49.492302393034954, 8.463884183978568, "H6, Tiefgarage", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(p1Poly, 49.48091242621506, 8.471008262790422, "Hauptbahnhof P1 , Tiefgarage", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(p2Poly, 49.47810296964162, 8.472913116529053, "Hauptbahnhof P2, Parkhaus", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(p3Poly, 49.47943310412634, 8.474430709912857, "Hauptbahnhof P3, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(p5Poly, 49.477339431515155, 8.469362153107816, "Hauptbahnhof P5, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(klinikumPoly, 49.49013345858847, 8.490011035470456, "Klinikum, Tiefgarage", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(kunsthallePoly, 49.48443764466305, 8.475898516530139, "Kunsthalle, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(klinikumP3Poly, 49.48950663949485, 8.492225870581493, "Klinikum P3, Parkplatz", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(m4aPoly, 49.484289619483214, 8.467058337801216, "M4a, Parkplatz", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(n1Poly, 49.485791241035606, 8.4646044171931, "N1, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(n2Poly, 49.48562986289634, 8.466035848816876, "N2 Stadthaus, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(n6KomfortPoly, 49.48484219488636, 8.470228049013805, "N6 Komforthaus, Parkhaus", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(n6StandardPoly, 49.484824917464934, 8.469293288064907, "N6 Standardhaus, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(u2Poly, 49.49157386839632, 8.471817003175763, "U2, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(sap1Poly, 49.46099304022919, 8.516293830056059, "SAP Arena P1, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(sap2Poly, 49.46237835883444, 8.51694056641826, "SAP Arena P2, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(sap3Poly, 49.46519123847139, 8.522292420707142, "SAP Arena P3, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
-            p1Repo.save(new ParkingLot(sap6_8Poly, 49.470033156114305, 8.521692923027938, "SAP Arena P6-P8, Parkplatz", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            // repo.save(new ParkingLot(polygon, null, null, "Collini-Center, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(colliniCenterMuldePoly, 49.49075408061332, 8.478267019395627, "Collini-Center Mulde, Parkplatz", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(d3Poly, 49.4879110562813, 8.463559501710186, "D3, Tiefgarage", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(d5Poly, 49.48840258589768, 8.462012476971653, "D5 Reiß-Museum, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(g1Poly, 49.49017774981759, 8.467326004459226, "G1 Marktplatz, Tiefgarage", false, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(h6Poly, 49.492302393034954, 8.463884183978568, "H6, Tiefgarage", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(p1Poly, 49.48091242621506, 8.471008262790422, "Hauptbahnhof P1 , Tiefgarage", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(p2Poly, 49.47810296964162, 8.472913116529053, "Hauptbahnhof P2, Parkhaus", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(p3Poly, 49.47943310412634, 8.474430709912857, "Hauptbahnhof P3, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(p5Poly, 49.477339431515155, 8.469362153107816, "Hauptbahnhof P5, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(klinikumPoly, 49.49013345858847, 8.490011035470456, "Klinikum, Tiefgarage", true, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(kunsthallePoly, 49.48443764466305, 8.475898516530139, "Kunsthalle, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(klinikumP3Poly, 49.48950663949485, 8.492225870581493, "Klinikum P3, Parkplatz", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(m4aPoly, 49.484289619483214, 8.467058337801216, "M4a, Parkplatz", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(n1Poly, 49.485791241035606, 8.4646044171931, "N1, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(n2Poly, 49.48562986289634, 8.466035848816876, "N2 Stadthaus, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(n6KomfortPoly, 49.48484219488636, 8.470228049013805, "N6 Komforthaus, Parkhaus", false, AccessRight.VISITOR, false, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(n6StandardPoly, 49.484824917464934, 8.469293288064907, "N6 Standardhaus, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(u2Poly, 49.49157386839632, 8.471817003175763, "U2, Tiefgarage", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(sap1Poly, 49.46099304022919, 8.516293830056059, "SAP Arena P1, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(sap2Poly, 49.46237835883444, 8.51694056641826, "SAP Arena P2, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(sap3Poly, 49.46519123847139, 8.522292420707142, "SAP Arena P3, Parkhaus", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
+            repo.save(new ParkingLot(sap6_8Poly, 49.470033156114305, 8.521692923027938, "SAP Arena P6-P8, Parkplatz", true, AccessRight.VISITOR, true, ParkingStatus.AVAILABLE, ParkingType.CAR));
         };
     }
 

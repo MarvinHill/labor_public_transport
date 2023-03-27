@@ -11,9 +11,10 @@ public class ParkingLot {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     @Convert(converter = PolygonConverter.class)
-    @Column( length = 100000 )
+    @Column(length = 1000)
+    @Lob
     private Polygon area;
     private Double longtitude, latitude;
     private String name;
@@ -37,11 +38,11 @@ public class ParkingLot {
 
     public ParkingLot() { }
 
-    public void setID(Integer id) {
+    public void setID(Long id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
