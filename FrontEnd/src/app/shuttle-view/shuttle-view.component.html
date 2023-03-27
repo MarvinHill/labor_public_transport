@@ -18,9 +18,7 @@
                             [fromStation]="item.lineScheduleEntryList[0]?.stationDesignator || 'start'"
                             [toStation]="item.lineScheduleEntryList[item.lineScheduleEntryList.length  - 1]?.stationDesignator || 'ende'"></app-shuttle-line-entry>
                     </div>
-                    <div class="col-1" *ngIf="loginService.logginStatus === true" (click) = "delete(item.id)"> <span class="material-symbols-outlined col-2" style="margin: auto;">
-                            close
-                    </span></div>
+                    <div class="col-1" *ngIf="loginService.logginStatus === true" (click) = "delete(item.id)"> <img class="material-symbols-outlined col-2" style="margin: auto; height: 2.5em; width: 1.5em;" src="assets/icon/close_FILL0_wght400_GRAD0_opsz48.svg"></div>
                 </div>
             </div>
         </ng-container>
