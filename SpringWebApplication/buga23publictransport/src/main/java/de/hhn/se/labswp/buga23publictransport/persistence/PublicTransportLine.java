@@ -23,12 +23,13 @@ public class PublicTransportLine {
 
     protected PublicTransportLine() {
     }
-
     public PublicTransportLine(String lineDesignator, boolean hasDelay, List<LineScheduleEntry> lineScheduleEntryList) {
         this.lineDesignator = lineDesignator;
         this.hasDelay = hasDelay;
-        for (var entry : lineScheduleEntryList) {
-            addLineScheduleEntry(entry);
+        if (lineScheduleEntryList != null) {
+            for (var entry : lineScheduleEntryList) {
+                addLineScheduleEntry(entry);
+            }
         }
     }
 
