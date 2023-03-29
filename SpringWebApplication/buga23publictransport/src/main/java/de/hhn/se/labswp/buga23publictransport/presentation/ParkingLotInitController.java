@@ -1,7 +1,6 @@
 package de.hhn.se.labswp.buga23publictransport.presentation;
 
-import de.hhn.se.labswp.buga23publictransport.persistence.ParkingLot;
-import de.hhn.se.labswp.buga23publictransport.persistence.ParkingLotRepository;
+import de.hhn.se.labswp.buga23publictransport.persistence.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,20 +11,44 @@ import java.util.Optional;
 @RequestMapping("/parking")
 public class ParkingLotInitController {
 
-    ParkingLotRepository repo;
+    ParkingLotRepository allRepo;
+    CarParkingLotRepository carRepo;
+    BikeParkingLotRepository bikeRepo;
 
-    ParkingLotInitController(ParkingLotRepository repo) {
-        this.repo = repo;
+    ParkingLotInitController(ParkingLotRepository allRepo, CarParkingLotRepository carRepo, BikeParkingLotRepository bikeRepo) {
+        this.allRepo = allRepo;
+        this.carRepo = carRepo;
+        this.bikeRepo = bikeRepo;
     }
 
     @GetMapping("/all")
     Iterable<ParkingLot> all() {
-        return repo.findAll();
+        return allRepo.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Optional<ParkingLot> findById(@PathVariable long id) {
-        return repo.findById(id);
+    @GetMapping("/bike/all")
+    Iterable<BikeParkingLot> bikeAll() {
+        return bikeRepo.findAll();
     }
+
+    @GetMapping("/car/all")
+    Iterable<CarParkingLot> carAll() {
+        return carRepo.findAll();
+    }
+
+    @GetMapping("/all/{id}")
+    Optional<ParkingLot> findByIdAll(@PathVariable long id) {
+        return allRepo.findById(id);
+    }
+
+//    @GetMapping("/bike/{id}")
+//    public Optional<BikeParkingLot> findByIdBike(@PathVariable long id) {
+//        return bikeRepo.findById(id);
+//    }
+//
+//    @GetMapping("/car/{id}")
+//    public Optional<CarParkingLot> findByIdCar(@PathVariable long id) {
+//        return carRepo.findById(id);
+//    }
 
 }
