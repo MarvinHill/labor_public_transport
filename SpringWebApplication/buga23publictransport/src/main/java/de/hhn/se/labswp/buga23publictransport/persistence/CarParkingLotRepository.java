@@ -4,4 +4,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ParkingLotRepository extends CrudRepository<CarParkingLot, Long> { }
+public interface CarParkingLotRepository extends CrudRepository<CarParkingLot, Long> { }
