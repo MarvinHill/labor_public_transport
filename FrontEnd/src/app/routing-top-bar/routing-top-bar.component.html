@@ -1,11 +1,7 @@
-<div class="d-flex sticky-top align-items-center" *ngIf="innerWidth < 992">
+<div class="d-flex sticky-top bc-w align-items-center" *ngIf="innerWidth < 992">
     <h2 class="m-2">Get2Buga</h2>
-    <div class="p-2 my-auto" style="margin-left: auto;"> <span class=" p-1 material-symbols-outlined">
-            tune
-        </span> </div>
-    <div class="p-2 my-auto"><span class="p-1 material-symbols-outlined">
-            person
-        </span></div>
+    <div class="p-2 my-auto" style="margin-left: auto;"> <img class=" p-1 material-symbols-outlined" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"> </div>
+    <div class="p-2 my-auto" (click) = "accountClicked()"><img class="p-1 material-symbols-outlined" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"></div>
 
 </div>
 <div class="d-flex sticky-top bc-w zindex-sticky" *ngIf="innerWidth >= 992">
@@ -13,14 +9,10 @@
         <h2>Get2Buga</h2>
     </div>
     <button class="ml-4 mt-4 mr-4 mb-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="margin-left: auto; border:none;"> 
-        <span class="p-1 material-symbols-outlined">
-            tune
-        </span>
+        <img class=" p-1 material-symbols-outlined" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
         Einstellungen
     </button>
-    <button class="m-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="border: none;"> <span class="p-1 material-symbols-outlined">
-            person
-        </span>
+    <button class="m-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="border: none;" (click) = "accountClicked()"> <img class="p-1 material-symbols-outlined" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
         Account
     </button>
 
