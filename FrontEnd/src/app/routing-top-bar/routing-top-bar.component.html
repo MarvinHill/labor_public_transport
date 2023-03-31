@@ -1,18 +1,18 @@
 <div class="d-flex sticky-top bc-w align-items-center" *ngIf="innerWidth < 992">
-    <h2 class="m-2">Get2Buga</h2>
-    <div class="p-2 my-auto" style="margin-left: auto;"> <img class=" p-1 material-symbols-outlined" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"> </div>
-    <div class="p-2 my-auto" [routerLink]="['/login-page']"><img class="p-1 material-symbols-outlined" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"></div>
+    <h2 role="button" class="m-2 not-select" [routerLink]="['/main']">Get2Buga</h2>
+    <div class="p-2 my-auto" style="margin-left: auto;"> <img class=" p-1 material-symbols-outlined not-select" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"> </div>
+    <div class="p-2 my-auto" [routerLink]="['/login-page']"><img class="p-1 material-symbols-outlined not-select" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"></div>
 
 </div>
 <div class="d-flex sticky-top bc-w zindex-sticky" *ngIf="innerWidth >= 992">
     <div class="m-3">
-        <h2>Get2Buga</h2>
+        <h2 class="not-select" role="button" [routerLink]="['/main']">Get2Buga</h2>
     </div>
     <button class="ml-4 mt-4 mr-4 mb-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="margin-left: auto; border:none;"> 
-        <img class=" p-1 material-symbols-outlined" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
+        <img class=" p-1 material-symbols-outlined not-select" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
         Einstellungen
     </button>
-    <button class="m-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="border: none;" [routerLink]="['/login-page']"> <img class="p-1 material-symbols-outlined" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
+    <button class="m-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="border: none;" [routerLink]="['/login-page']"> <img class="p-1 material-symbols-outlined not-select" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
         Account
     </button>
 
