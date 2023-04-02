@@ -20,6 +20,8 @@ dependencies {
 	implementation 'org.hibernate:hibernate-spatial:6.1.7.Final'
 	implementation 'com.vividsolutions:jts:1.13'
 	implementation 'org.hibernate:hibernate-core:6.1.7.Final'
+    implementation 'org.projectlombok:lombok:1.18.22'
+	implementation 'org.projectlombok:lombok:1.18.22'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
