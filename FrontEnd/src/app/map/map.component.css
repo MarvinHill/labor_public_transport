@@ -1,6 +1,16 @@
-.map-container {
+.map-container-large {
   position: absolute;
   top: 10%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  z-index: 1;
+}
+
+.map-container-small {
+  position: absolute;
+  top: 80%;
   left: 0;
   right: 0;
   bottom: 0;
@@ -17,9 +27,9 @@
   height: 100%;
 }
 
-.minimize-button {
+.resize-button {
   position: absolute;
   top: 11%;
-  left: 95%;
+  left: 85%;
   z-index: 2;
 }

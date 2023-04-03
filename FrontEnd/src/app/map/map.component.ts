@@ -11,6 +11,8 @@ export class MapComponent implements OnInit {
   private map: L.Map;
   private centroid: L.LatLngExpression = [49.485, 8.5];
 
+  private minimized: boolean = false;
+
   private initMap(): void {
     this.map = L.map('map', {
       center: this.centroid,
@@ -33,8 +35,18 @@ export class MapComponent implements OnInit {
     this.initMap();
   }
 
-  minimize(): void {
+  resizeMap(): void {
+    console.log("test");
+    const container = document.getElementById("map-container");
+    if(this.minimized) {
+      container.className = "map-container-large";
 
+      this.minimized = false;
+    } else {
+      container.className = "map-container-small";
+
+      this.minimized = true;
+    }
   }
 }
 
