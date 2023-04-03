@@ -11,9 +11,21 @@
 <div class="container-lg">
     <h3 class="m-3">DER WEG ZUR BUGA 23</h3>
     <div class="row">
-        <ng-container *ngFor="let item of [0,1,2,3,5]; let i = index">
-            <div class="col-lg-4 p-2"><app-shuttle-line-entry [line_name]="'Linie'" [from_station]="'P20'"
-                    [to_station]="'luisenpark'"></app-shuttle-line-entry></div>
+        <ng-container *ngFor="let item of shuttleLineList;">
+            <div class="col-md-6 p-3">
+                <div class="row">
+                    <div class="col-11"><app-shuttle-line-entry [lineName]="item?.lineDesignator || 'Kein Name'"
+                            [fromStation]="item.lineScheduleEntryList[0]?.stationDesignator || 'start'"
+                            [toStation]="item.lineScheduleEntryList[item.lineScheduleEntryList.length  - 1]?.stationDesignator || 'ende'"></app-shuttle-line-entry>
+                    </div>
+                    <div class="col-1" *ngIf="loginService.logginStatus === true" (click) = "delete(item.id)"> <img class="material-symbols-outlined col-2" style="margin: auto; height: 2.5em; width: 1.5em;" src="assets/icon/close_FILL0_wght400_GRAD0_opsz48.svg"></div>
+                </div>
+            </div>
         </ng-container>
     </div>
+</div>
+
+<div class="container-lg justfy-content-center" *ngIf="loginService.logginStatus === true">
+    <h3 class="m-3">ADD A NEW SHUTTLE LINE</h3>
+    <app-add-shuttle-line></app-add-shuttle-line>
 </div>
