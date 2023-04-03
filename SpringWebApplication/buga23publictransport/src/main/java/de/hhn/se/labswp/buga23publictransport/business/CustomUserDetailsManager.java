@@ -2,6 +2,9 @@ package de.hhn.se.labswp.buga23publictransport.business;
 
 import de.hhn.se.labswp.buga23publictransport.persistence.enity.User;
 import de.hhn.se.labswp.buga23publictransport.persistence.repository.UserRepo;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +37,10 @@ public class CustomUserDetailsManager implements UserDetailsManager {
 
   @Override
   public void changePassword(String oldPassword, String newPassword) {
-    // todo - implement
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    User user = repo.findByEmail(authentication.getName()).get();
+    user.setPassword(newPassword);
+    repo.saveAndFlush(user);
   }
 
   @Override
