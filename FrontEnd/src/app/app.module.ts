@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ShuttleViewComponent,
     MainViewComponent,
     ShuttleLineEntryComponent,
-    MapComponent
+    MapComponent,
     ShuttleLineEntryComponent,
     AddShuttleLineComponent,
     PublicTransportLineComponent,
