@@ -33,5 +33,8 @@ export class MapComponent implements OnInit {
     this.initMap();
   }
 
+  minimize(): void {
+
+  }
 }
 
