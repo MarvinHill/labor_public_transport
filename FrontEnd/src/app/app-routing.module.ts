@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   {path:'main', component: MainViewComponent},
   {path:'shuttle', component: ShuttleViewComponent},
-  {path:'login-page', component:LoginFormComponent}
+  {path:'login', component:LoginFormComponent}
 ];
 
 @NgModule({

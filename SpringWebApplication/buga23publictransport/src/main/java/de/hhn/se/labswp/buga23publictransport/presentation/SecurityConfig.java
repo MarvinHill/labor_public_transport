@@ -19,10 +19,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,15 +40,17 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception{
     http.authorizeHttpRequests()
-//        .requestMatchers(HttpMethod.GET,"/").permitAll()
-//        .requestMatchers(HttpMethod.GET,"/ptl").permitAll()
-//        .requestMatchers(HttpMethod.GET,"/ptl/**").permitAll()
-//        .requestMatchers(HttpMethod.GET).permitAll()
+          //.requestMatchers(HttpMethod.GET,"/").permitAll()
+          //.requestMatchers(HttpMethod.GET,"/ptl").permitAll()
+          //.requestMatchers(HttpMethod.GET,"/ptl/**").permitAll()
+        .requestMatchers(HttpMethod.GET).permitAll()
+            // todo - add login-check path endpoint
+            // todo - add register path endpoint
 //        .requestMatchers(HttpMethod.POST).hasRole(UserRole.ADMIN.name())
+//        .requestMatchers("/login-page**").permitAll()
         .anyRequest().authenticated()
-        .and().httpBasic()
-        .and().authenticationProvider(authenticationProvider);
-
+        .and().httpBasic();
+    http.authenticationProvider(authenticationProvider);
     return http.build();
   }
   @Bean

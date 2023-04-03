@@ -1,7 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, Subject } from 'rxjs';
+import { interval, Observable, Subject } from 'rxjs';
 import { ShuttleLine } from './ShuttleLine';
 import { Subscription, timer } from 'rxjs';
 
@@ -25,7 +25,6 @@ export class DataServiceService {
     request.subscribe(resp => {
       this.lines.next(resp)
       console.warn(resp);
-      
     });
   }
 }
