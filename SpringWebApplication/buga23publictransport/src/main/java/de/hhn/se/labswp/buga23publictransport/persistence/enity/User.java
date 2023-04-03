@@ -1,17 +1,26 @@
 package de.hhn.se.labswp.buga23publictransport.persistence.enity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.Collection;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Entity
+@Table(name = "buga_user")
 public class User implements UserDetails {
   @Id
   private String email;
   private String password;
+  @Enumerated(EnumType.STRING)
   private UserRole role;
 
   @Override

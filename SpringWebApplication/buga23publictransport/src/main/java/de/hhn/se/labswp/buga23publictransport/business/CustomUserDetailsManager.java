@@ -1,36 +1,30 @@
 package de.hhn.se.labswp.buga23publictransport.business;
 
 import de.hhn.se.labswp.buga23publictransport.persistence.enity.User;
-import de.hhn.se.labswp.buga23publictransport.persistence.repository.UserDetailRepo;
-import org.springframework.security.core.context.SecurityContextHolder;
+import de.hhn.se.labswp.buga23publictransport.persistence.repository.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsManager implements UserDetailsManager {
+  private final UserRepo repo;
 
-  private UserDetailRepo repo;
 
-
-  public CustomUserDetailsManager(UserDetailRepo repo) {
+  public CustomUserDetailsManager(UserRepo repo) {
     this.repo = repo;
   }
 
   @Override
   public void createUser(UserDetails user) {
-    if (!repo.existsById(user.getUsername()) && user instanceof User){
       repo.saveAndFlush((User)user);
-    }
   }
 
   @Override
   public void updateUser(UserDetails user) {
-    if (user instanceof User){
-      repo.saveAndFlush((User) user);
-    }
-
+      repo.saveAndFlush((User)user);
   }
 
   @Override
