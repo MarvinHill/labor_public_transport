@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
@@ -11,7 +11,9 @@ export class MapComponent implements OnInit {
   private map: L.Map;
   private centroid: L.LatLngExpression = [49.485, 8.5];
 
-  private minimized: boolean = false;
+  private minimized: boolean = true;
+
+
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -35,17 +37,27 @@ export class MapComponent implements OnInit {
     this.initMap();
   }
 
-  resizeMap(): void {
-    console.log("test");
-    const container = document.getElementById("map-container");
+  maximizeMap(): void {
     if(this.minimized) {
-      container.className = "map-container-large";
+      document.getElementById("map-container").className = "map-container-large";
 
       this.minimized = false;
-    } else {
-      container.className = "map-container-small";
+    }
+  }
+
+  minimizeMap(): void {
+    if(!this.minimized) {
+      document.getElementById("map-container").className = "map-container-small";
 
       this.minimized = true;
+    }
+  }
+
+  resizeMap(): void {
+    if(this.minimized) {
+      this.maximizeMap();
+    } else {
+      this.minimizeMap();
     }
   }
 }
