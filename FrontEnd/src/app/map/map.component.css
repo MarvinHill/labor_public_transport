@@ -22,6 +22,14 @@
   border-radius: 10%;
 }
 
+.map-container-large .map {
+  border-radius: 0;
+}
+
+.map-container-small .map {
+  border-radius: 10%;
+}
+
 #map {
   height: 100%;
 }
