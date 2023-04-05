@@ -52,7 +52,9 @@
 
 .resize-button {
   position: absolute;
-  top: 11%;
-  left: 85%;
-  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 3em;
+  height: 3em;
+  z-index: 401;
 }
