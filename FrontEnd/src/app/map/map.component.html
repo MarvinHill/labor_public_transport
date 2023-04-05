@@ -2,5 +2,14 @@
   <div [ngClass]="mapContainerClass" id="map-container" (click)="maximizeMap()">
     <div class="map" id="map"></div>
   </div>
+<div class="map-container-small" id="map-container" [ngStyle]="{ 'height':this.mapHeight}">
+  <div class="inner-container">
+    <button id="resize" class=resize-button (click)="resizeMap()">resize map</button>
+    <div class="d-flex bootstrap-container bc-w">
+      <div id="sidebar" class="sidebar" *ngIf="(isLoggedIn === false && !minimized)">sidebar</div>
+      <div class=" flex-grow-1">
+        <div class="map" id="map"></div>
+      </div>
+    </div>
+  </div>
 </div>
-<button id="resize" class=resize-button (click)="resizeMap()">resize map</button>

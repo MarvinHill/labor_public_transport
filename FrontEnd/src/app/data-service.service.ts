@@ -25,7 +25,6 @@ export class DataServiceService {
     request.subscribe(resp => {
       this.lines.next(resp)
       console.warn(resp);
-      
     });
   }
 }

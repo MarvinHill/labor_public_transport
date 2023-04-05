@@ -1,6 +1,6 @@
-import {Component, HostListener, OnInit, TemplateRef} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 import * as L from 'leaflet';
-import {NgIfContext} from "@angular/common";
+import { UserLoginServiceService } from '../user-login-service.service';
 
 @Component({
   selector: 'app-map',
@@ -12,9 +12,28 @@ export class MapComponent implements OnInit {
   private map: L.Map;
   private centroid: L.LatLngExpression = [49.485, 8.5];
 
-  private minimized: boolean = true;
+  protected minimized: boolean = true;
 
   mapContainerClass:string = "map-container-small-desktop";
+  private userService : UserLoginServiceService;
+  private renderer : Renderer2;
+
+  protected isLoggedIn : boolean = true;
+  protected mapHeight: string = "10em";
+
+  @ViewChild('container', { static: false }) container: ElementRef;
+  windowHeight: number;
+  topBarHeight: number;
+
+
+  constructor(userService : UserLoginServiceService, renderer : Renderer2){
+    this.userService = userService;
+    this.userService.isLoggedIn.subscribe(value => {
+      this.isLoggedIn = value;
+    });
+    this.renderer = renderer;
+  }
+
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -29,13 +48,11 @@ export class MapComponent implements OnInit {
     });
 
     tiles.addTo(this.map);
-
   }
-
-  constructor() { }
 
   ngOnInit(): void {
     this.initMap();
+    this.updateHeight()
   }
 
   maximizeMap(): void {
@@ -44,6 +61,7 @@ export class MapComponent implements OnInit {
 
       this.minimized = false;
     }
+    this.updateHeight()
   }
 
   minimizeMap(): void {
@@ -54,7 +72,9 @@ export class MapComponent implements OnInit {
         this.mapContainerClass = "map-container-small-desktop";
       }
       this.minimized = true;
+      this.updateHeight()
     }
+
   }
 
   resizeMap(): void {
@@ -62,6 +82,28 @@ export class MapComponent implements OnInit {
       this.maximizeMap();
     } else {
       this.minimizeMap();
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+  this.updateHeight();
+  }
+
+  private updateHeight() {
+    this.computeMaxHeight();
+    document.getElementById("map-container").style.height = this.mapHeight;
+    this.map.invalidateSize();
+  }
+
+  private computeMaxHeight() {
+    this.windowHeight = window.innerHeight;
+    this.topBarHeight  = document.getElementById("top-bar").offsetHeight;
+    if (this.minimized) {
+      this.mapHeight = "10em";
+    }
+    else {
+      this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";
     }
   }
 
