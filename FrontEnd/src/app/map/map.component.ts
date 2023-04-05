@@ -90,6 +90,12 @@ export class MapComponent implements OnInit {
   onResize(event) {
     this.updateHeight();
     this.innerWidth = event.target.innerWidth;
+
+    if((this.innerWidth < 992) && this.minimized) {
+      this.mapContainerClass = "map-container-small-mobile";
+    } else if(this.minimized) {
+      this.mapContainerClass = "map-container-small-desktop";
+    }
   }
 
   private updateHeight() {
