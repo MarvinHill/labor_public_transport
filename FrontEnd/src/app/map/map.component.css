@@ -1,20 +1,18 @@
 .map-container-large {
- position: absolute;
- z-index: 1000;
- bottom: 0;
- left: 0;
- max-width: 100%;
- width: 100%;
- margin: 0em;
- overflow: hidden;
- border-radius: none;
- border-style: none;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
 .map-container-small-desktop {
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: 2em;
+  bottom: 2em;
   width: 10em;
   height: 10em;
   margin: 0;
@@ -57,14 +55,19 @@
 }
 
 .bootstrap-container{
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.inner-container{
+  width: 100%;
+  height: 100%;
 }
 
 .resize-button {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 90%;
   width: 3em;
   height: 3em;
   z-index: 401;

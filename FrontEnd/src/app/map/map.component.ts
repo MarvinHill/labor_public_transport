@@ -21,8 +21,11 @@ export class MapComponent implements OnInit {
   protected isLoggedIn : boolean = true;
   protected mapHeight: string = "10em";
 
+  public innerWidth: number = 1000;
   @ViewChild('container', { static: false }) container: ElementRef;
   windowHeight: number;
+
+
   topBarHeight: number;
 
 
@@ -33,7 +36,6 @@ export class MapComponent implements OnInit {
     });
     this.renderer = renderer;
   }
-
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -74,7 +76,6 @@ export class MapComponent implements OnInit {
       this.minimized = true;
       this.updateHeight()
     }
-
   }
 
   resizeMap(): void {
@@ -87,7 +88,8 @@ export class MapComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-  this.updateHeight();
+    this.updateHeight();
+    this.innerWidth = event.target.innerWidth;
   }
 
   private updateHeight() {
@@ -105,19 +107,6 @@ export class MapComponent implements OnInit {
     else {
       this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";
     }
-  }
-
-  public innerWidth: number = 500;
-  desktop: TemplateRef<NgIfContext<boolean>>;
-  mobile: TemplateRef<NgIfContext<boolean>>;
-
-  ngAfterViewInit() {
-    this.innerWidth = window.innerWidth;
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = event.target.innerWidth;
   }
 }
 
