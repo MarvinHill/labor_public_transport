@@ -51,6 +51,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap();
+    this.updateHeight()
   }
 
   maximizeMap(): void {
@@ -82,8 +83,6 @@ export class MapComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-  this.windowHeight = window.innerHeight;
-  this.topBarHeight  = document.getElementById("top-bar").offsetHeight;
   this.updateHeight();
   }
 
@@ -93,6 +92,8 @@ export class MapComponent implements OnInit {
   }
 
   private computeMaxHeight() {
+    this.windowHeight = window.innerHeight;
+    this.topBarHeight  = document.getElementById("top-bar").offsetHeight;
     if (this.minimized) {
       this.mapHeight = "10em";
     }
