@@ -11,8 +11,8 @@ import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-ent
 import { MapComponent } from './map/map.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
-import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShuttleMarkerComponent } from './shuttle-marker/shuttle-marker.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MapComponent,
     ShuttleLineEntryComponent,
     AddShuttleLineComponent,
-    PublicTransportLineComponent,
+    ShuttleMarkerComponent,
   ],
   imports: [
     BrowserModule,
