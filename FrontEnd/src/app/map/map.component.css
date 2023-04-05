@@ -19,14 +19,17 @@
 }
 
 .map-container-large .map {
- 
+ border-radius: none;
+ border-style: none;
 }
 
 .map-container-small .map {
-  
+  border-radius: 1em;
+  border-style: solid;
 }
 
 .inner-container{
+  position: relative;
   margin: 0;
   padding: 0;
   height: 100%;

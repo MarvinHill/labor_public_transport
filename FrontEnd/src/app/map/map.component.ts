@@ -18,12 +18,14 @@ export class MapComponent implements OnInit {
   private renderer : Renderer2;
 
   protected isLoggedIn : boolean = true;
-  protected mapHeight: number = 10;
+  protected mapHeight: string = "10em";
 
   @ViewChild('container', { static: false }) container: ElementRef;
+  windowHeight: number;
+  topBarHeight: number;
   
   
-  MapComponent(userService : UserLoginServiceService, renderer : Renderer2){
+  constructor(userService : UserLoginServiceService, renderer : Renderer2){
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -45,27 +47,29 @@ export class MapComponent implements OnInit {
     });
 
     tiles.addTo(this.map);
-
   }
-
-  constructor() { }
 
   ngOnInit(): void {
     this.initMap();
   }
 
   maximizeMap(): void {
+    
+
     if(this.minimized) {
       document.getElementById("map-container").className = "map-container-large";
       this.minimized = false;
     }
+    this.updateHeight()
   }
 
   minimizeMap(): void {
     if(!this.minimized) {
       document.getElementById("map-container").className = "map-container-small";
       this.minimized = true;
+      this.updateHeight()
     }
+    
   }
 
   resizeMap(): void {
@@ -78,9 +82,23 @@ export class MapComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-  var windowHeight = window.innerHeight;
-  var topBarHeight  = document.getElementById("top-bar").offsetHeight;
-  this.mapHeight = windowHeight - topBarHeight;
+  this.windowHeight = window.innerHeight;
+  this.topBarHeight  = document.getElementById("top-bar").offsetHeight;
+  this.updateHeight();
+  }
+
+  private updateHeight() {
+    this.computeMaxHeight();
+    document.getElementById("map-container").style.height = this.mapHeight;
+  }
+
+  private computeMaxHeight() {
+    if (this.minimized) {
+      this.mapHeight = "10em";
+    }
+    else {
+      this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";
+    }
   }
 }
 
