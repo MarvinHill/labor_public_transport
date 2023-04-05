@@ -64,11 +64,20 @@
   height: 100%;
 }
 
-.resize-button {
+.resize-button-max {
   position: absolute;
   top: 0;
-  right: 90%;
   width: 3em;
   height: 3em;
-  z-index: 401;
+  z-index: 500;
+  border: outset darkred 4px;
+  border-radius: 1em;
+}
+
+.resize-button-min {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 0;
+  height: 0;
 }

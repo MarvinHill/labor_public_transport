@@ -15,6 +15,7 @@ export class MapComponent implements OnInit {
   protected minimized: boolean = true;
 
   mapContainerClass:string = "map-container-small-desktop";
+  resizeButtonClass:string = "resize-button-min";
   private userService : UserLoginServiceService;
   private renderer : Renderer2;
 
@@ -54,12 +55,13 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap();
-    this.updateHeight()
+    this.updateHeight();
   }
 
   maximizeMap(): void {
     if(this.minimized) {
       this.mapContainerClass = "map-container-large";
+      this.resizeButtonClass = "resize-button-max";
 
       this.minimized = false;
     }
@@ -73,6 +75,7 @@ export class MapComponent implements OnInit {
       } else {
         this.mapContainerClass = "map-container-small-desktop";
       }
+      this.resizeButtonClass = "resize-button-min";
       this.minimized = true;
       this.updateHeight()
     }
