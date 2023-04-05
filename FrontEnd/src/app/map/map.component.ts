@@ -1,6 +1,9 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { UserLoginServiceService } from '../user-login-service.service';
+import { ShuttleLine } from '../ShuttleLine';
+import { ShuttleLineService } from '../services/shuttle-line.service';
+import { LineScheduleEntry } from '../LineScheduleEntry';
 
 @Component({
   selector: 'app-map',
@@ -9,23 +12,32 @@ import { UserLoginServiceService } from '../user-login-service.service';
 })
 export class MapComponent implements OnInit {
 
+  shuttleLines: ShuttleLine[];
+
   private map: L.Map;
+  private layerGroupMarkers: L.LayerGroup = new L.LayerGroup();
   private centroid: L.LatLngExpression = [49.485, 8.5];
 
   protected minimized: boolean = true;
 
-  private userService : UserLoginServiceService;
-  private renderer : Renderer2;
+  private userService: UserLoginServiceService;
+  private renderer: Renderer2;
 
-  protected isLoggedIn : boolean = true;
+  protected isLoggedIn: boolean = true;
   protected mapHeight: string = "10em";
+
 
   @ViewChild('container', { static: false }) container: ElementRef;
   windowHeight: number;
   topBarHeight: number;
-  
-  
-  constructor(userService : UserLoginServiceService, renderer : Renderer2){
+
+
+  constructor(
+    private shuttleLineService: ShuttleLineService,
+    userService: UserLoginServiceService,
+    renderer: Renderer2
+  ) {
+    this.shuttleLineService = shuttleLineService;
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -33,6 +45,9 @@ export class MapComponent implements OnInit {
     this.renderer = renderer;
   }
 
+  public getMap(): L.Map {
+    return this.map;
+  }
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -47,17 +62,52 @@ export class MapComponent implements OnInit {
     });
 
     tiles.addTo(this.map);
+    this.layerGroupMarkers.addTo(this.map);
   }
 
   ngOnInit(): void {
     this.initMap();
-    this.updateHeight()
+    this.initShuttleLineViewOnMap();
+    this.updateHeight();
   }
 
-  maximizeMap(): void {
-    
+  private initShuttleLineViewOnMap() {
+    this.shuttleLineService.getShuttleLines().subscribe(
+      lines => {
+        this.shuttleLines = lines;
+        this.shuttleLines.forEach(line => {
+          line.lineScheduleEntryList.forEach(entry => {
+            this.addMarkerToMap(entry);
+          });
+        });
+      }
+    );
+  }
 
-    if(this.minimized) {
+  private addMarkerToMap(entry: LineScheduleEntry) {
+    var customIcon = L.icon({
+      iconUrl: 'assets/image/ShuttleLineEntry.png',
+      iconSize: [30, 30], // size of the icon
+      shadowSize: [50, 64], // size of the shadow
+      iconAnchor: [15, 30], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+
+    let marker = new L.Marker(
+      [entry.geoLocation.y, entry.geoLocation.x],
+      { icon: customIcon }
+    );
+
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+    marker.addTo(this.layerGroupMarkers);
+
+    marker.addTo(this.map);
+  }
+
+
+  maximizeMap(): void {
+    if (this.minimized) {
       document.getElementById("map-container").className = "map-container-large";
       this.minimized = false;
     }
@@ -65,16 +115,15 @@ export class MapComponent implements OnInit {
   }
 
   minimizeMap(): void {
-    if(!this.minimized) {
+    if (!this.minimized) {
       document.getElementById("map-container").className = "map-container-small";
       this.minimized = true;
       this.updateHeight()
     }
-    
   }
 
   resizeMap(): void {
-    if(this.minimized) {
+    if (this.minimized) {
       this.maximizeMap();
     } else {
       this.minimizeMap();
@@ -83,7 +132,7 @@ export class MapComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-  this.updateHeight();
+    this.updateHeight();
   }
 
   private updateHeight() {
@@ -94,7 +143,7 @@ export class MapComponent implements OnInit {
 
   private computeMaxHeight() {
     this.windowHeight = window.innerHeight;
-    this.topBarHeight  = document.getElementById("top-bar").offsetHeight;
+    this.topBarHeight = document.getElementById("top-bar").offsetHeight;
     if (this.minimized) {
       this.mapHeight = "10em";
     }
@@ -102,5 +151,8 @@ export class MapComponent implements OnInit {
       this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";
     }
   }
+
+
+
 }
 
