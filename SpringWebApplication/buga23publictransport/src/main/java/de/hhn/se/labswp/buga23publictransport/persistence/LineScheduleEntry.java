@@ -35,7 +35,7 @@ public class LineScheduleEntry {
         this.waitTime = waitTime;
         this.delay = delay;
         this.stationDesignator = stationDesignator;
-        this.geoLocation = new Point(longitude, latitude);
+        this.geoLocation = new Point(latitude, longitude);
     }
 
     public Long getId() {
