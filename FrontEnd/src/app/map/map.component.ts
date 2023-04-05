@@ -89,6 +89,7 @@ export class MapComponent implements OnInit {
   private updateHeight() {
     this.computeMaxHeight();
     document.getElementById("map-container").style.height = this.mapHeight;
+    this.map.invalidateSize();
   }
 
   private computeMaxHeight() {
