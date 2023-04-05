@@ -1,4 +1,8 @@
-<div class="map-container-small" id="map-container" (click)="maximizeMap()">
-  <div class="map" id="map"></div>
+<div class="map-container-small" id="map-container" (click)="maximizeMap()" [ngStyle]="{'height': mapHeight}">
+  <div class="inner-container row">
+    <button id="resize" class=resize-button (click)="resizeMap()">resize map</button>
+    <div id="sidebar" *ngIf="(isLoggedIn === false && minimized)" class="col-3">sidebar</div>
+    <div class="map" id="map"></div>
+  </div> 
 </div>
-<button id="resize" class=resize-button (click)="resizeMap()">resize map</button>
+
