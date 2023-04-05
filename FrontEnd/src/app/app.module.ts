@@ -7,8 +7,11 @@ import { TransportEntryComponent } from './transport-entry/transport-entry.compo
 import { RoutingTopBarComponent } from './routing-top-bar/routing-top-bar.component';
 import { ShuttleViewComponent } from './shuttle-view/shuttle-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
-import { RouterModule,Routes } from '@angular/router';
 import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
+import {HttpClientModule} from '@angular/common/http';
+import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
+import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,11 +20,16 @@ import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-ent
     RoutingTopBarComponent,
     ShuttleViewComponent,
     MainViewComponent,
-    ShuttleLineEntryComponent
+    ShuttleLineEntryComponent,
+    AddShuttleLineComponent,
+    PublicTransportLineComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
