@@ -3,9 +3,9 @@
     <div class="d-flex bootstrap-container bc-w">
       <div id="sidebar" class="sidebar" *ngIf="(isLoggedIn === false && !minimized)">sidebar</div>
       <div class="flex-grow-1">
+        <button [ngClass]="resizeButtonClass" id="resize" (click)="resizeMap()">X</button>
         <div class="map" id="map" (click)="maximizeMap()"></div>
       </div>
     </div>
   </div>
-  <button [ngClass]="resizeButtonClass" id="resize" (click)="resizeMap()">X</button>
 </div>
