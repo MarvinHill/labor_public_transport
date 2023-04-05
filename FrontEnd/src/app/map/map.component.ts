@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit, TemplateRef} from '@angular/core';
 import * as L from 'leaflet';
+import {NgIfContext} from "@angular/common";
 
 @Component({
   selector: 'app-map',
@@ -13,7 +14,7 @@ export class MapComponent implements OnInit {
 
   private minimized: boolean = true;
 
-
+  mapContainerClass:string = "map-container-small-desktop";
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -39,7 +40,7 @@ export class MapComponent implements OnInit {
 
   maximizeMap(): void {
     if(this.minimized) {
-      document.getElementById("map-container").className = "map-container-large";
+      this.mapContainerClass = "map-container-large";
 
       this.minimized = false;
     }
@@ -47,8 +48,11 @@ export class MapComponent implements OnInit {
 
   minimizeMap(): void {
     if(!this.minimized) {
-      document.getElementById("map-container").className = "map-container-small";
-
+      if (this.innerWidth < 992) {
+        this.mapContainerClass = "map-container-small-mobile";
+      } else {
+        this.mapContainerClass = "map-container-small-desktop";
+      }
       this.minimized = true;
     }
   }
@@ -59,6 +63,19 @@ export class MapComponent implements OnInit {
     } else {
       this.minimizeMap();
     }
+  }
+
+  public innerWidth: number = 500;
+  desktop: TemplateRef<NgIfContext<boolean>>;
+  mobile: TemplateRef<NgIfContext<boolean>>;
+
+  ngAfterViewInit() {
+    this.innerWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = event.target.innerWidth;
   }
 }
 

@@ -1,4 +1,6 @@
-<div class="map-container-small" id="map-container" (click)="maximizeMap()">
-  <div class="map" id="map"></div>
+<div class="container">
+  <div [ngClass]="mapContainerClass" id="map-container" (click)="maximizeMap()">
+    <div class="map" id="map"></div>
+  </div>
 </div>
 <button id="resize" class=resize-button (click)="resizeMap()">resize map</button>

@@ -10,7 +10,7 @@
   z-index: 1;
 }
 
-.map-container-small {
+.map-container-small-desktop {
   position: absolute;
   top: 75%;
   left: 5%;
@@ -18,16 +18,32 @@
   height: 10em;
   margin: 0;
   z-index: 1;
-  border: 2px solid black;
   border-radius: 10%;
+}
+
+.map-container-small-mobile {
+  position: absolute;
+  top: 80%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: 1;
+  border-radius: 2em 2em 0 0;
 }
 
 .map-container-large .map {
   border-radius: 0;
 }
 
-.map-container-small .map {
+.map-container-small-desktop .map {
+  border: outset #ECF4E5 4px;
   border-radius: 10%;
+}
+
+.map-container-small-mobile .map {
+  border: outset #ECF4E5 4px;
+  border-radius: 2em 2em 0 0;
 }
 
 #map {
