@@ -1,10 +1,11 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
 import de.hhn.se.labswp.buga23publictransport.business.AccessRight;
-import de.hhn.se.labswp.buga23publictransport.business.ParkingStatus;
 import de.hhn.se.labswp.buga23publictransport.business.ParkingType;
 import jakarta.persistence.*;
 import com.vividsolutions.jts.geom.Polygon;
+import org.springframework.data.geo.Point;
+import java.util.List;
 
 @Entity
 public class ParkingLot {
@@ -16,23 +17,23 @@ public class ParkingLot {
     @Column(length = 1000)
     @Lob
     Polygon area;
-    Double longtitude, latitude;
+    Point geoLocation;
+    @Lob
+    List<Point> entrance;
     String name;
     boolean barrierfree;
     AccessRight accessRight;    // 1 = employee, 2 = visitor
     boolean charging;
-    ParkingStatus parkingStatus;  // 1 = available, 2 = full, 3 = closed
     ParkingType parkingType;    // 1 = bike, 2 = car, 3 = bus
 
-    public ParkingLot(Polygon area, Double longtitude, Double latitude, String name, boolean barrierfree, AccessRight accessRight, boolean charging, ParkingStatus parkingStatus, ParkingType parkingType) {
+    public ParkingLot(Point geoLocation, Polygon area, List<Point> entrance, String name, boolean barrierfree, AccessRight accessRight, boolean charging, ParkingType parkingType) {
+        this.geoLocation = geoLocation;
         this.area = area;
-        this.longtitude = longtitude;
-        this.latitude = latitude;
+        this.entrance = entrance;
         this.name = name;
         this.barrierfree = barrierfree;
         this.accessRight = accessRight;
         this.charging = charging;
-        this.parkingStatus = parkingStatus;
         this.parkingType = parkingType;
     }
 
@@ -54,20 +55,20 @@ public class ParkingLot {
         return area;
     }
 
-    public void setLongtitude(Double longtitude) {
-        this.longtitude = longtitude;
+    public void setGeoLocation(Point geoLocation) {
+        this.geoLocation = geoLocation;
     }
 
-    public Double getLongtitude() {
-        return longtitude;
+    public Point getGeoLocation() {
+        return this.geoLocation;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    public void setEntrance(List<Point> entrance) {
+        this.entrance = entrance;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public List<Point> getEntrance() {
+        return this.entrance;
     }
 
     public void setName(String name) {
@@ -100,14 +101,6 @@ public class ParkingLot {
 
     public boolean getCharging() {
         return charging;
-    }
-
-    public void setParkingStatus(ParkingStatus parkingStatus) {
-        this.parkingStatus = parkingStatus;
-    }
-
-    public ParkingStatus getParkingStatus() {
-        return parkingStatus;
     }
 
     public void setParkingType(ParkingType parkingType) {
