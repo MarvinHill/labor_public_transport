@@ -41,14 +41,4 @@ public class ParkingLotInitController {
         return allRepo.findById(id);
     }
 
-//    @GetMapping("/bike/{id}")
-//    public Optional<BikeParkingLot> findByIdBike(@PathVariable long id) {
-//        return bikeRepo.findById(id);
-//    }
-//
-//    @GetMapping("/car/{id}")
-//    public Optional<CarParkingLot> findByIdCar(@PathVariable long id) {
-//        return carRepo.findById(id);
-//    }
-
 }
