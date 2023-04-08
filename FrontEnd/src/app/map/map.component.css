@@ -20,7 +20,7 @@
   height: 10em;
   margin: 1em;
   border-radius: 1em;
-  border-style: solid;
+  border-style: none;
 }
 
 .border-rounded{
