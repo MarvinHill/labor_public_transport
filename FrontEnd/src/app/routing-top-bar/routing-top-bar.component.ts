@@ -1,9 +1,11 @@
 import { NgIfContext } from '@angular/common';
-import { Component, HostListener, TemplateRef } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, TemplateRef } from '@angular/core';
 import { UserLoginServiceService } from '../user-login-service.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { IfStmt } from '@angular/compiler';
 import { interval, timer } from 'rxjs';
+import { Router, NavigationEnd, RouterFeature } from '@angular/router';
+
 
 @Component({
   selector: 'app-routing-top-bar',
@@ -28,7 +30,9 @@ export class RoutingTopBarComponent {
   desktop: TemplateRef<NgIfContext<boolean>>;
   mobile: TemplateRef<NgIfContext<boolean>>;
   infoWindow: boolean = false;
-  intervalInfoText = interval(200);
+  router: Router;
+  update: boolean = true;
+
 
   ngAfterViewInit() {
     this.innerWidth = window.innerWidth;
@@ -39,14 +43,19 @@ export class RoutingTopBarComponent {
     this.innerWidth = event.target.innerWidth;
   }
 
-  constructor(userService: UserLoginServiceService) {
+  constructor(userService: UserLoginServiceService, router: Router) {
     this.userService = userService;
-    this.intervalInfoText.subscribe(val => {
-      this.updateInfoText();
-    })
+    this.router = router;
+
+    const source = interval(200);
+    source.subscribe(val => this.updateInfoText());
   }
 
   updateInfoText() {
+
+    if (!this.update) {
+      return;
+    }
 
     var elements = Array.from(document.getElementsByClassName("hidden-info")) as HTMLElement[];
     var container = document.getElementById("info-container");
@@ -65,15 +74,17 @@ export class RoutingTopBarComponent {
         clone.className = "info";
       }
 
-
       if (container != null) {
         container.appendChild(clone);
       }
     });
+
+    this.update = !this.update
   }
 
   switchInfoWindow() {
     this.infoWindow = !this.infoWindow;
+    this.update = true;
   }
 
 }
