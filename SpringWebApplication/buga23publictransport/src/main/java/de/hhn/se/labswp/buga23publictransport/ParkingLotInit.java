@@ -4,7 +4,6 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
 import org.springframework.data.geo.Point;
-import de.hhn.se.labswp.buga23publictransport.business.AccessRight;
 import de.hhn.se.labswp.buga23publictransport.business.ParkingType;
 import de.hhn.se.labswp.buga23publictransport.persistence.*;
 import org.springframework.boot.CommandLineRunner;
@@ -665,7 +664,6 @@ public class ParkingLotInit {
 
 
         //Fahrad
-        // Point geoLocation, Polygon area, List<Point> entrance, String name, boolean barrierfree, AccessRight accessRight, boolean charging, ParkingType parkingType)
         GeometryFactory luisenparkHaupteingangGeo = new GeometryFactory();
         Polygon luisenparkHaupteingangPoly = luisenparkHaupteingangGeo.createPolygon(luisenparkHaupteingangGeo.createLinearRing(new Coordinate[]{}));
 
@@ -679,46 +677,46 @@ public class ParkingLotInit {
         Polygon spinelliParkEingangParkschalePoly = spinelliParkEingangParkschaleGeo.createPolygon(spinelliParkEingangParkschaleGeo.createLinearRing(new Coordinate[]{}));
 
         return args -> {
-            carRepo.save(new CarParkingLot(c1GeoLocation, c1Poly, c1Entrances, "C1 Hauptverwaltung MPB, Parkhaus", true, AccessRight.VISITOR, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(c1GeoLocation, c1Poly, c1Entrances, "C1 Hauptverwaltung MPB, Parkhaus", true, true, ParkingType.CAR));
             // TODO "Collini-Center, Tiefgarage" nochmal anschauen -> Webseite war in Wartungsarbeiten
-            // allRepo.save(new CarParkingLot(polygon, null, null, "Collini-Center, Tiefgarage", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(colliniCenterMuldeGeoLocation, colliniCenterMuldePoly, colliniCenterMuldeEntrances, "Collini-Center Mulde, Parkplatz", false, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(d3GeoLocation, d3Poly, d3Entrances, "D3, Tiefgarage", true, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(d5GeoLocation, d5Poly, d5Entrances, "D5 Reiß-Museum, Tiefgarage", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(g1GeoLocation, g1Poly, g1Entrances, "G1 Marktplatz, Tiefgarage", false, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(h6GeoLocation, h6Poly, h6Entrances, "H6, Tiefgarage", false, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1 , Tiefgarage", true, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(p2GeoLocation, p2Poly, p2Entrances, "Hauptbahnhof P2, Parkhaus", true, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(p3GeoLocation, p3Poly, p3Entrances, "Hauptbahnhof P3, Parkhaus", true, AccessRight.VISITOR, true,ParkingType.CAR));
-            carRepo.save(new CarParkingLot(p5GeoLocation, p5Poly, p5Entrances, "Hauptbahnhof P5, Parkhaus", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(klinikumGeoLocation, klinikumPoly, klinikumEntrances, "Klinikum, Tiefgarage", true, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(kunsthalleGeoLocation, kunsthallePoly, kunsthalleEntrances, "Kunsthalle, Tiefgarage", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(klinikumP3GeoLocation, klinikumP3Poly, klinikumP3Entrances, "Klinikum P3, Parkplatz", false, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(m4aGeoLocation, m4aPoly, m4aEntrances, "M4a, Parkplatz", false, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(n1GeoLocation, n1Poly, n1Entrances, "N1, Parkhaus", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(n2GeoLocation, n2Poly, n2Entrances, "N2 Stadthaus, Parkhaus", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(n6KomfortGeoLocation, n6KomfortPoly, n6KomfortEntrances, "N6 Komforthaus, Parkhaus", false, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(n6StandardGeoLocation, n6StandardPoly, n6StandardEntrances, "N6 Standardhaus, Parkhaus", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(u2GeoLocation, u2Poly, u2Entrances, "U2, Tiefgarage", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(sapP1GeoLocation, sap1Poly, sapP1Entrances,"SAP Arena P1, Parkplatz", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(sapP2GeoLocation, sap2Poly, sapP2Entrances, "SAP Arena P2, Parkplatz", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(sapP3GeoLocation, sap3Poly, sapP3Entrances, "SAP Arena P3, Parkplatz", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(sapP6GeoLocation, sap6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(sapP7GeoLocation, sap7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(sapP8GeoLocation, sap8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(cityAirportGeoLocation, cityAirportPoly, cityAirportEntrances, "City Airport, Parkhaus", false, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(p4GeoLocation, p4Poly, p4Entrances, "Hauptbahnhof P4, Parkplatz", false, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(lortzingblockGeoLocation, lortzingblockPoly, lortzingblockEntrances, "Lortzingblock, Parkhaus", true, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(marchivumGeoLocation, marchivumPoly, marchivumEntrances, "Marchivum, Parkplatz", false, AccessRight.VISITOR, true, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, AccessRight.VISITOR, false, ParkingType.CAR));
-            carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, AccessRight.VISITOR, false, ParkingType.CAR));
+            // allRepo.save(new CarParkingLot(polygon, null, null, "Collini-Center, Tiefgarage", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(colliniCenterMuldeGeoLocation, colliniCenterMuldePoly, colliniCenterMuldeEntrances, "Collini-Center Mulde, Parkplatz", false, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(d3GeoLocation, d3Poly, d3Entrances, "D3, Tiefgarage", true, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(d5GeoLocation, d5Poly, d5Entrances, "D5 Reiß-Museum, Tiefgarage", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(g1GeoLocation, g1Poly, g1Entrances, "G1 Marktplatz, Tiefgarage", false, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(h6GeoLocation, h6Poly, h6Entrances, "H6, Tiefgarage", false, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1 , Tiefgarage", true, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(p2GeoLocation, p2Poly, p2Entrances, "Hauptbahnhof P2, Parkhaus", true, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(p3GeoLocation, p3Poly, p3Entrances, "Hauptbahnhof P3, Parkhaus", true, true,ParkingType.CAR));
+            carRepo.save(new CarParkingLot(p5GeoLocation, p5Poly, p5Entrances, "Hauptbahnhof P5, Parkhaus", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(klinikumGeoLocation, klinikumPoly, klinikumEntrances, "Klinikum, Tiefgarage", true, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(kunsthalleGeoLocation, kunsthallePoly, kunsthalleEntrances, "Kunsthalle, Tiefgarage", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(klinikumP3GeoLocation, klinikumP3Poly, klinikumP3Entrances, "Klinikum P3, Parkplatz", false, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(m4aGeoLocation, m4aPoly, m4aEntrances, "M4a, Parkplatz", false, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(n1GeoLocation, n1Poly, n1Entrances, "N1, Parkhaus", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(n2GeoLocation, n2Poly, n2Entrances, "N2 Stadthaus, Parkhaus", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(n6KomfortGeoLocation, n6KomfortPoly, n6KomfortEntrances, "N6 Komforthaus, Parkhaus", false, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(n6StandardGeoLocation, n6StandardPoly, n6StandardEntrances, "N6 Standardhaus, Parkhaus", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(u2GeoLocation, u2Poly, u2Entrances, "U2, Tiefgarage", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(sapP1GeoLocation, sap1Poly, sapP1Entrances,"SAP Arena P1, Parkplatz", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(sapP2GeoLocation, sap2Poly, sapP2Entrances, "SAP Arena P2, Parkplatz", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(sapP3GeoLocation, sap3Poly, sapP3Entrances, "SAP Arena P3, Parkplatz", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(sapP6GeoLocation, sap6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(sapP7GeoLocation, sap7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(sapP8GeoLocation, sap8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(cityAirportGeoLocation, cityAirportPoly, cityAirportEntrances, "City Airport, Parkhaus", false, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(p4GeoLocation, p4Poly, p4Entrances, "Hauptbahnhof P4, Parkplatz", false, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(lortzingblockGeoLocation, lortzingblockPoly, lortzingblockEntrances, "Lortzingblock, Parkhaus", true, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(marchivumGeoLocation, marchivumPoly, marchivumEntrances, "Marchivum, Parkplatz", false, true, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, false, ParkingType.CAR));
+            carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR));
 
             // Auskommentiert da Daten fehlen
-//            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangPoly, "Luisenpark Haupteingang, Fahradstellplatz", false, AccessRight.VISITOR, false, ParkingType.BIKE));
-//            bikeRepo.save(new BikeParkingLot(luisenparkEingangFernmeldeturmPoly, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", false, AccessRight.VISITOR, false, ParkingType.BIKE));
-//            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangPoly, "Spinelli Park, Fahrradabstellung Haupteingang", false, AccessRight.VISITOR, false, ParkingType.BIKE));
-//            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschalePoly, "Spinelli Park, Fahrradabstellung Eingang Parkschale", false, AccessRight.VISITOR, false, ParkingType.BIKE));
+//            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangPoly, "Luisenpark Haupteingang, Fahradstellplatz", false, false, ParkingType.BIKE));
+//            bikeRepo.save(new BikeParkingLot(luisenparkEingangFernmeldeturmPoly, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", false, false, ParkingType.BIKE));
+//            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangPoly, "Spinelli Park, Fahrradabstellung Haupteingang", false, false, ParkingType.BIKE));
+//            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschalePoly, "Spinelli Park, Fahrradabstellung Eingang Parkschale", false, false, ParkingType.BIKE));
         };
     }
 

@@ -1,6 +1,5 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
-import de.hhn.se.labswp.buga23publictransport.business.AccessRight;
 import de.hhn.se.labswp.buga23publictransport.business.ParkingType;
 import jakarta.persistence.*;
 import com.vividsolutions.jts.geom.Polygon;
@@ -22,17 +21,15 @@ public class ParkingLot {
     List<Point> entrance;
     String name;
     boolean barrierfree;
-    AccessRight accessRight;    // 1 = employee, 2 = visitor
     boolean charging;
     ParkingType parkingType;    // 1 = bike, 2 = car, 3 = bus
 
-    public ParkingLot(Point geoLocation, Polygon area, List<Point> entrance, String name, boolean barrierfree, AccessRight accessRight, boolean charging, ParkingType parkingType) {
+    public ParkingLot(Point geoLocation, Polygon area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
         this.name = name;
         this.barrierfree = barrierfree;
-        this.accessRight = accessRight;
         this.charging = charging;
         this.parkingType = parkingType;
     }
@@ -85,14 +82,6 @@ public class ParkingLot {
 
     public boolean getBarrierfree() {
         return barrierfree;
-    }
-
-    public void setAccessRight(AccessRight accessRight) {
-        this.accessRight = accessRight;
-    }
-
-    public AccessRight getAccessRight() {
-        return accessRight;
     }
 
     public void setCharging(boolean charging) {
