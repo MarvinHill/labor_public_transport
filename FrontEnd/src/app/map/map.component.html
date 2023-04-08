@@ -5,7 +5,11 @@
       <div [ngClass] = "minimized === true ? 'col border-rounded' : 'col-md-8 order-md-2' " style="padding: 0;">
         <div id="map" [ngClass] = "minimized === true ? 'map border-rounded' : 'map' "></div>
       </div>
-      <div id="sidebar" class="sidebar col-md-4 order-md-1" *ngIf="(isLoggedIn === true && !minimized)">SIDEBAR</div>
+      <div id="sidebar" class="sidebar col-md-4 order-md-1" *ngIf="(!minimized)">
+        <div class="p-2">
+          <app-map-details-observer></app-map-details-observer>
+        </div>
+      </div>
     </div>
   </div>
 </div>

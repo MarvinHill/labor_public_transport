@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
+import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MapComponent } from './map/map.component';
     MapComponent,
     ShuttleLineEntryComponent,
     AddShuttleLineComponent,
+    MapDetailsObserverComponent,
   ],
   imports: [
     BrowserModule,
