@@ -2,8 +2,9 @@ import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } fro
 import * as L from 'leaflet';
 import { UserLoginServiceService } from '../user-login-service.service';
 import { ShuttleLine } from '../ShuttleLine';
-import { ShuttleLineService } from '../services/shuttle-line.service';
+
 import { LineScheduleEntry } from '../LineScheduleEntry';
+import { ShuttleLineService } from '../services/shuttle-line.service';
 
 @Component({
   selector: 'app-map',

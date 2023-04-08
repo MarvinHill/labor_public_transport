@@ -2,7 +2,7 @@
   <div class="inner-container">
     <button id="resize" class=resize-button (click)="resizeMap()">resize map</button>
     <div class="d-flex bootstrap-container bc-w">
-      <div id="sidebar" class="sidebar" *ngIf="(isLoggedIn === false && !minimized)">sidebar</div>
+      <div id="sidebar" class="sidebar" *ngIf="(isLoggedIn === true && !minimized)">sidebar</div>
       <div class=" flex-grow-1">
         <div class="map" id="map"></div>
       </div>
