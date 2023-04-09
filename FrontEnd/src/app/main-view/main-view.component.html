@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylsheet" href="style.css">
+    <link rel="stylsheet" href="main-view.component.css">
   </head>   
 
 
@@ -16,45 +16,39 @@
     </div>
     <h3 class="m-3">GENERAL INFORMATION</h3>
     <body>
-   <!--Slider startet-->
-    <div class="slider">
-        <div class="slides">
-          <!--radio buttons start-->
-          <input type = "radio" name="radio-btn" id="radio1">
-          <input type = "radio" name="radio-btn" id="radio2">
-          <input type = "radio" name="radio-btn" id="radio3">
-          <input type = "radio" name="radio-btn" id="radio4">
-          <!--Radio button end-->
-          <div class="slide first">
-            <img src="https://i.postimg.cc/t490Cyvk/Buga-Info-Karusel-Icon.png" alt="Info Icon">
-          </div>
-          <div class="slide">
-            <img src="https://i.postimg.cc/d0SgBCsN/Buga-Info-Karusell-Icon-Zug.png" alt="Zug Icon">
-          </div>
-          <div class="slide">
-            <img src="https://i.postimg.cc/0QMFHNrk/Buga-Info-Karusell-Icon-Auto.png" alt="Auto Icon">
-          </div>
-          <div class="slide">
-            <img src="https://i.postimg.cc/nLL6B2JQ/Buga-Info-Karusell-Icon-Bus.png" alt="Bus Icon">
-          <!--slide image end-->
-          <!--automatic navigation-->
-          <div class="navigation auto">
-            <div class="auto-btn1"></div>
-            <div class="auto-btn2"></div>
-            <div class="auto-btn3"></div>
-            <div class="auto-btn4"></div>
-          </div>
-          <!--auto navigation ende-->
-          </div>
-          <div class="navigation-manual">
-            <label for="radio1" class="manual-btn"></label>
-            <label for="radio2" class="manual-btn"></label>
-            <label for="radio3" class="manual-btn"></label>
-            <label for="radio4" class="manual-btn"></label>
-          </div>
-
-
+      <div class="carousel">
+        <button class="carousel__button carousel__button--left">
+            <img src="https://cdn-icons-png.flaticon.com/512/60/60775.png" alt="">
+        </button>
+        <div class="carousel__track-container">
+          <ul class="carousel__track">
+            <li class="carousel__slide">
+            <img class="carousel__image" src="https://i.postimg.cc/t490Cyvk/Buga-Info-Karusel-Icon.png" alt="Info Icon">
+              </li>
+            <li class="carousel__slide">
+              <img class="carousel__image" src="https://i.postimg.cc/d0SgBCsN/Buga-Info-Karusell-Icon-Zug.png" alt="Zug Icon">
+            </li>
+            <li class="carousel__slide">
+              <img class="carousel__image" src="https://i.postimg.cc/0QMFHNrk/Buga-Info-Karusell-Icon-Auto.png" alt="Auto Icon">
+            </li>
+          </ul>
         </div>
+
+        <button class="carousel__button carousel__button--right">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60758.png" alt="">
+        </button>
+
+        <div class="carousel__nav">
+          <button class="carousel__indicator current-slide">
+
+          </button>
+          <button class="carousel__indicator">
+
+          </button>
+          <button class="carousel__indicator">
+
+          </button>
         </div>
-        </body> 
-  </div>
+      </div>
+    </body> 
+    

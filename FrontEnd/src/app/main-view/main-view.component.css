@@ -1,34 +1,73 @@
-body{
-    margin: 0;
+.carousel {
+    position: relative;
+    height: 400px;
+    width: 222px;
+    margin: 0 auto;
+}
+
+.carousel__image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel__track-container{
+    background: lightgreen;
+    height: 100%;
+    position: relative;
+
+}
+
+.carousel__track{
     padding: 0;
-    height: 100vh;
+    margin: 0;
+    list-style: none;
+}
+
+.carousel__slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.carousel__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.carousel__button--left {
+    left: -40px;
+}
+
+.carousel__button--right{
+    right: -40px;
+}
+
+.carousel__button img {
+    width: 12px;
+    height: 12px;
+}
+
+.carousel__nav{
     display: flex;
-   justify-content: center;
-   align-items: center;
-   background: #23E3C9;
-
+    justify-content: center;
+    padding: 10px 0;
 }
 
-.slider{
-    width: 400px;
-    height: 500px;
-    border-radius: 10px;
-    overflow: hidden;
+.carousel__indicator{
+    border: 0;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background: rgba(0,0,0,.3);
+    margin: 0 12px;
 }
 
-.slides{
-    width: 500%;
-    height: 500px;
-    display: flex;
-}
-
-.slide{
-    width: 20%;
-    transition: 2s;
-}
-
-.slide img{
-    width: 350px;
-    height: 1000px;
-
+.carousel__indicator.current-slide{
+    background: rgba(0,0,0,.75)
 }
