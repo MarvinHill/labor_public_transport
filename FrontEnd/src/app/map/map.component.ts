@@ -29,8 +29,9 @@ export class MapComponent implements OnInit {
 
 
   @ViewChild('container', { static: false }) container: ElementRef;
-  windowHeight: number;
-  topBarHeight: number;
+  windowHeight: number = 0;
+  topBarHeight: number = 0;
+  windowWidth: number = 0;
 
 
   constructor(
@@ -70,6 +71,7 @@ export class MapComponent implements OnInit {
     this.initMap();
     this.initShuttleLineViewOnMap();
     this.updateHeight();
+    this.updateWidth();
   }
 
   private initShuttleLineViewOnMap() {
@@ -134,12 +136,16 @@ export class MapComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.updateHeight();
+    this.updateWidth();
   }
 
   private updateHeight() {
     this.computeMaxHeight();
     document.getElementById("map-container").style.height = this.mapHeight;
     this.map.invalidateSize();
+  }
+  private updateWidth(){
+    this.windowWidth = window.innerWidth
   }
 
   private computeMaxHeight() {
