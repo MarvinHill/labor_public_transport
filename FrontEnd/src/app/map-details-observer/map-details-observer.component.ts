@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataServiceService } from '../data-service.service';
 
 @Component({
   selector: 'app-map-details-observer',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
 export class MapDetailsObserverComponent {
 
   state : number = 1; // 0 Nothing, 1 Parking, 2 RNV
+
+  constructor(private service : DataServiceService){}
+
+  openMaps(){
+    this.service.openMapExternal('Asperg', 'Ludwigsburg');
+  }
 
 }

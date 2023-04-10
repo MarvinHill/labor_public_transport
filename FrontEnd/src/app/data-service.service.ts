@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { interval, Subject } from 'rxjs';
 import { ShuttleLine } from './ShuttleLine';
 import { Subscription, timer } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,9 @@ export class DataServiceService {
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
-  http : HttpClient;
 
 
-
-  constructor(http:HttpClient) {
-    this.http = http;
-  }
+  constructor(private http:HttpClient, private router : Router ) {}
 
   update() {
     const request = this.http.get<ShuttleLine[]>('http://localhost:8080/ptl')
@@ -26,5 +23,9 @@ export class DataServiceService {
       this.lines.next(resp)
       console.warn(resp);
     });
+  }
+
+  openMapExternal(from : string, to : string){
+    window.open(`https://www.google.de/maps/dir/${from}/${to}/`);
   }
 }
