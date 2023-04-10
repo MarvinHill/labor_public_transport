@@ -1,4 +1,5 @@
-<div class="row">
+<div *ngIf = "state === 0"><h3>Nothing to see</h3></div>
+<div *ngIf = "state === 1" class="row">
     <div class="col text-center">
         <img class="m-4" src="assets/icon/parkingIcon.svg" alt="parking-icon">
         <h2>Sap Arena P6</h2>
@@ -9,5 +10,4 @@
     </div>
         
 </div>
-<div>RNV Details</div>
-<div><h3>Nothing to see</h3></div>
+<div *ngIf = "state === 2">RNV Details</div>

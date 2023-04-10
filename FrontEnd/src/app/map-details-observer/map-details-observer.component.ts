@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class MapDetailsObserverComponent {
 
-  state : number = 0; // 0 Nothing, 1 Parking, 2 RNV
+  state : number = 1; // 0 Nothing, 1 Parking, 2 RNV
 
 }
