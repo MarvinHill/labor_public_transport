@@ -20,6 +20,11 @@ export class DataServiceService {
     this.http = http;
   }
 
+  getData() {
+  return this.http.get<ShuttleLine[]>('http://localhost:8080/ptl');
+  //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
+  }
+
   update() {
     const request = this.http.get<ShuttleLine[]>('http://localhost:8080/ptl')
     request.subscribe(resp => {

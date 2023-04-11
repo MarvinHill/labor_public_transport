@@ -8,7 +8,7 @@ import { RoutingTopBarComponent } from './routing-top-bar/routing-top-bar.compon
 import { ShuttleViewComponent } from './shuttle-view/shuttle-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
 import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

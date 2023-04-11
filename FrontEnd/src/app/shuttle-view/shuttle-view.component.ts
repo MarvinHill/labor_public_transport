@@ -3,6 +3,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DataServiceService } from '../data-service.service';
 import{ShuttleLine} from '../ShuttleLine';
 import { UserLoginServiceService } from '../user-login-service.service';
+import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-shuttle-view',
@@ -44,5 +45,12 @@ export class ShuttleViewComponent{
       })
       }
 
+      myData: any;
+      myData$: any;
+ 
+     ngOnInit(): void {
+       this.myData$ = this.dataService.getData();
+     }
+ 
 
 }

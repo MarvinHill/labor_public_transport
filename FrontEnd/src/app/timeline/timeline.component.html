@@ -1,8 +1,9 @@
 <!-- Section: Timeline -->
+{{myData | json}}
 <section class="py-5">
     <div class="row p-2 background-bar bc-g">
         <div class="p-2 text-box">
-            <h5 class="fw-bold">{{text}}</h5>
+            <h5 class="fw-bold">{{myData | json}}</h5>
     <ul class="timeline">
       <li class="timeline-item mb-5">
         <p class="text-muted mb-2 fw-bold" id="elements1">Elements 1</p>
@@ -13,7 +14,7 @@
       </li>
   
       <li class="timeline-item mb-5">
-        <p class="text-muted mb-2 fw-bold">{{text}}</p>
+        <p class="text-muted mb-2 fw-bold">{{myData | json}}</p>
       </li>
 
       <li class="timeline-item mb-5">
