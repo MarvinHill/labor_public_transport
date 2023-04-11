@@ -1,28 +1,21 @@
 <!-- Section: Timeline -->
-{{myData | json}}
 <section class="py-5">
-    <div class="row p-2 background-bar bc-g">
-        <div class="p-2 text-box">
-            <h5 class="fw-bold">{{myData | json}}</h5>
-    <ul class="timeline">
-      <li class="timeline-item mb-5">
-        <p class="text-muted mb-2 fw-bold" id="elements1">Elements 1</p>
-      </li>
-  
-      <li class="timeline-item mb-5">
-        <p class="text-muted mb-2 fw-bold" id="elements2">Elements 2</p>
-      </li>
-  
-      <li class="timeline-item mb-5">
-        <p class="text-muted mb-2 fw-bold">{{myData | json}}</p>
-      </li>
+  <div class="row p-2 background-bar bc-g">
+    <div class="p-2 text-box">
+      <h5 class="fw-bold">"{{lineName}}"</h5>
+      <ul class="timeline">
+        <li class="timeline-item mb-5">
+          <p class="text-muted mb-2 fw-bold">{{stationDesignator}} + {{arrivalTime}}</p>
+        </li>
 
-      <li class="timeline-item mb-5">
-        <p class="text-muted mb-2 fw-bold">{{text}}</p> 
-    </li> 
-    </ul>
-</div>
-</div>
+        <li class="timeline-item mb-5">
+          <p class="text-muted mb-2 fw-bold">{{stationDesignator}} + {{arrivalTime}}</p>
+        </li>
+        <li class="timeline-item mb-5">
+          <p class="text-muted mb-2 fw-bold">{{stationDesignator}} + {{arrivalTime}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
 </section>
-  <!-- Section: Timeline -->
- 
+<!-- Section: Timeline -->

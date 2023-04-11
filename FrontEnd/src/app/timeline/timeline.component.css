@@ -1,5 +1,5 @@
 .timeline {
-    border-left: 1px solid hsl(0, 0%, 90%);
+    border-left: 1px solid hsl(0, 0%, 0%);
     position: relative;
     list-style: none;
   }
@@ -15,7 +15,7 @@
   }
   
   .timeline .timeline-item:after {
-    background-color: hsl(0, 0%, 90%);
+    background-color: hsl(0, 0%, 0%);
     left: -38px;
     border-radius: 50%;
     height: 11px;
