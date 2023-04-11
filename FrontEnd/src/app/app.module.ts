@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
 import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TimelineComponent } from './timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ShuttleLineEntryComponent,
     AddShuttleLineComponent,
     PublicTransportLineComponent,
+    TimelineComponent,
   ],
   imports: [
     BrowserModule,
