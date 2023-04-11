@@ -25,3 +25,10 @@
 .tc-p{
     color: #E1416D;
 }
+
+.hidden-info{
+    display: none;
+}
+.info{
+    display: block;
+}
