@@ -13,11 +13,12 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 // security needs to be configurated and the default behaivior is a login screen
 // if security is correctly implemented
 // remove the exclude
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+
+@SpringBootApplication(
+        exclude = {SecurityAutoConfiguration.class})
 public class Get2bugaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Get2bugaApplication.class, args);
     }
-
 }

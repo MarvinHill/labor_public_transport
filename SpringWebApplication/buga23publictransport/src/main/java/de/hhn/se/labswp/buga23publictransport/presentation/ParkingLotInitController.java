@@ -1,6 +1,7 @@
 package de.hhn.se.labswp.buga23publictransport.presentation;
 
 import de.hhn.se.labswp.buga23publictransport.persistence.*;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,3 @@
-
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
 import com.vividsolutions.jts.geom.Polygon;
