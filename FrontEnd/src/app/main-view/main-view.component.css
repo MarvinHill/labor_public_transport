@@ -1,9 +1,3 @@
-body{
-    background-image: url('https://i.postimg.cc/ncF2RQ9Q/buga-auschnitt.png');
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position-x: center;
-}
 
 .carousel {
     position: relative;
@@ -31,7 +25,7 @@ body{
     list-style: none;
     position: relative;
     height: 100%;
-    transition:  transform 450ms ease-in;
+    transition:  transform 400ms ease-in;
 }
 
 .carousel__slide {

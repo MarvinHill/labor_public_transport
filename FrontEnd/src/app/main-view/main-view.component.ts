@@ -15,7 +15,6 @@ export class MainViewComponent implements AfterViewInit {
     const prevButton = document.querySelector('.carousel__button--left');
     const dotsNav = document.querySelector('.carousel__nav');
     const dots = Array.from(dotsNav.children);
-    const clickCurrentSlide = document.querySelector('.current-slide');
 
     const slideWidth = slides[0].getBoundingClientRect().width;
     
@@ -86,7 +85,10 @@ export class MainViewComponent implements AfterViewInit {
      
      
     });
-    
+
+    track.addEventListener('click', () => {
+      open('/travelinfo', '_blank', 'width=400,height=800');
+    });
   
 
   }
