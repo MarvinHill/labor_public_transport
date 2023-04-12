@@ -1,23 +1,38 @@
 .map-container-large {
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  left: 0;
-  max-width: 100%;
-  width: 100%;
-  margin: 0;
-  overflow: hidden;
+ position: fixed;
+ z-index: 1000;
+ bottom: 0;
+ left: 0;
+ max-width: 100%;
+ width: 100%;
+ margin: 0em;
+ overflow: hidden;
+ border-radius: none;
+ border-style: none;
 }
 
 .map-container-small-desktop {
-  position: absolute;
+  position: fixed;
   left: 2em;
   bottom: 2em;
   width: 10em;
   height: 10em;
+  margin: 1em;
+  border-radius: 1em;
+  border-style: none;
+}
+
+.border-rounded{
+  border-radius: 1em;
+}
+
+.inner-container{
+  position: relative;
   margin: 0;
   z-index: 1;
   border-radius: 10%;
+  width: 100%;
+  height: 100%;
 }
 
 .map-container-small-mobile {
@@ -50,22 +65,13 @@
   height: 100%;
 }
 
-.sidebar{
-  height: 100%;
-  width: 30%;
-}
-
 .bootstrap-container{
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
-.inner-container{
-  width: 100%;
-  height: 100%;
-}
-
-.resize-button-max {
+.resize-button {
   position: absolute;
   top: 1em;
   right: 1em;
@@ -83,4 +89,13 @@
   left: 1em;
   width: 0;
   height: 0;
+}
+
+.sidebar{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 10001;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }

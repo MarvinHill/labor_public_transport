@@ -1,9 +1,6 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { UserLoginServiceService } from '../user-login-service.service';
-import {Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {ParkingLot} from "../ParkingLot";
 import {DataServiceService} from "../data-service.service";
 
 @Component({
@@ -16,10 +13,6 @@ export class MapComponent implements OnInit {
   private map: L.Map;
   private centroid: L.LatLngExpression = [49.485, 8.5];
 
-  lines: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
-
-  http : HttpClient;
-
   protected minimized: boolean = true;
 
   mapContainerClass:string = "map-container-small-desktop";
@@ -27,15 +20,15 @@ export class MapComponent implements OnInit {
   private userService : UserLoginServiceService;
   private renderer : Renderer2;
 
-  protected isLoggedIn : boolean = true;
+  protected isLoggedIn: boolean = true;
   protected mapHeight: string = "10em";
 
   public innerWidth: number = 1000;
   @ViewChild('container', { static: false }) container: ElementRef;
   windowHeight: number;
-
-
+  windowWidth: number;
   topBarHeight: number;
+
 
   constructor(userService : UserLoginServiceService, renderer : Renderer2, private dataService: DataServiceService){
     this.userService = userService;
@@ -44,6 +37,7 @@ export class MapComponent implements OnInit {
     });
     this.renderer = renderer;
   }
+
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -84,6 +78,7 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.initMap();
     this.updateHeight();
+    this.updateWidth();
   }
 
   maximizeMap(): void {
@@ -110,7 +105,7 @@ export class MapComponent implements OnInit {
   }
 
   resizeMap(): void {
-    if(this.minimized) {
+    if (this.minimized) {
       this.maximizeMap();
     } else {
       this.minimizeMap();
@@ -120,6 +115,7 @@ export class MapComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.updateHeight();
+    this.updateWidth();
     this.innerWidth = event.target.innerWidth;
 
     if((this.innerWidth < 992) && this.minimized) {
@@ -134,10 +130,13 @@ export class MapComponent implements OnInit {
     document.getElementById("map-container").style.height = this.mapHeight;
     this.map.invalidateSize();
   }
+  private updateWidth(){
+    this.windowWidth = window.innerWidth
+  }
 
   private computeMaxHeight() {
     this.windowHeight = window.innerHeight;
-    this.topBarHeight  = document.getElementById("top-bar").offsetHeight;
+    this.topBarHeight = document.getElementById("top-bar").offsetHeight;
     if (this.minimized) {
       this.mapHeight = "10em";
     }

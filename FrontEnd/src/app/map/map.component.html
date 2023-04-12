@@ -1,11 +1,11 @@
 <div [ngClass]="mapContainerClass" id="map-container" [ngStyle]="{ 'height':this.mapHeight}">
   <div class="inner-container">
-    <div class="d-flex bootstrap-container bc-w">
-      <div id="sidebar" class="sidebar" *ngIf="(isLoggedIn === false && !minimized)">sidebar</div>
-      <div class="flex-grow-1">
-        <div class="map" id="map" (click)="maximizeMap()"></div>
+    <button id="resize" class=resize-button (click)="resizeMap()">resize map</button>
+    <div id="map" (click)="maximizeMap()" [ngClass] = "minimized === true ? 'map border-rounded' : 'map' "></div>
+    <div id="sidebar" class="sidebar bc-w overscroll-auto" *ngIf="!minimized" [ngStyle]="this.windowWidth < 992 ? {'height' : '30vh', 'width' : '100%'} : {'height' : '100%', 'width' : '30vw'}">
+      <div class="p-2">
+        <app-map-details-observer></app-map-details-observer>
       </div>
     </div>
   </div>
-  <button [ngClass]="resizeButtonClass" id="resize" (click)="resizeMap()">X</button>
 </div>

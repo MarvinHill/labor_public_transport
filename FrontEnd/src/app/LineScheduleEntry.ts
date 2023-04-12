@@ -1,3 +1,4 @@
+import { Point } from "leaflet";
 import { ShuttleLine } from "./ShuttleLine";
 
 export class LineScheduleEntry{
@@ -7,4 +8,5 @@ export class LineScheduleEntry{
     delay: number;
     stationDesignator: string;
     publicTransportLine: ShuttleLine;
+    geoLocation: Point;
 }
