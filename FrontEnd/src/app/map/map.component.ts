@@ -51,6 +51,21 @@ export class MapComponent implements OnInit {
     });
 
     tiles.addTo(this.map);
+
+    var carParkingLots = new L.LayerGroup;
+
+    this.map.addLayer(carParkingLots);
+
+    makeCarMarkers();
+    async function makeCarMarkers() {
+      const response = await fetch('/parking/car/all')
+
+      const data = await response.json();
+      for (const item of data.list) {
+        const parkingMarker = L.marker(item.geolocation).addTo(carParkingLots);
+      }
+
+    }
   }
 
   ngOnInit(): void {
