@@ -7,6 +7,7 @@ import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntryRepo;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLine;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLineRepo;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.LazyInitializationException;

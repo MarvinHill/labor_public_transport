@@ -16,4 +16,8 @@ export class ShuttleLineService {
   public getShuttleLines(): Observable<ShuttleLine[]> {
       return this.http.get<ShuttleLine[]>('http://localhost:8080/ptl');
   }
+
+  public getShuttleLine(id: number): Observable<ShuttleLine> {
+    return this.http.get<ShuttleLine>('http://localhost:8080/ptl/' + id);
+  }
 }

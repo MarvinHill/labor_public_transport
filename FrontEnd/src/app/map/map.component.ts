@@ -74,35 +74,56 @@ export class MapComponent implements OnInit {
   private initShuttleLineViewOnMap() {
     this.shuttleLineService.getShuttleLines().subscribe(
       lines => {
+        console.log(lines);
         this.shuttleLines = lines;
         this.shuttleLines.forEach(line => {
           line.lineScheduleEntryList.forEach(entry => {
-            this.addMarkerToMap(entry);
+            this.addMarkerToMap(entry, line);
           });
         });
       }
     );
   }
 
-  private addMarkerToMap(entry: LineScheduleEntry) {
-    var customIcon = L.icon({
-      iconUrl: 'assets/image/ShuttleLineEntry.png',
-      iconSize: [30, 30], // size of the icon
+  private addMarkerToMap(entry: LineScheduleEntry, line: ShuttleLine) {
+    var shuttleMarkerIcon = L.icon({
+      iconUrl: 'assets/image/shuttle.png',
+      iconSize: [60, 60], // size of the icon
       shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [15, 30], // point of the icon which will correspond to marker's location
+      iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
-    let marker = new L.Marker(
-      [entry.geoLocation.y, entry.geoLocation.x],
-      { icon: customIcon }
-    );
+    var trainMarkerIcon = L.icon({
+      iconUrl: 'assets/image/train.png',
+      iconSize: [60, 60], // size of the icon
+      shadowSize: [50, 64], // size of the shadow
+      iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
 
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-    marker.addTo(this.layerGroupMarkers);
-
-    marker.addTo(this.map);
+    if (line.lineDesignator == "BUGA Shuttlelinie") {
+      let marker = new L.Marker(
+        [entry.geoLocation.x, entry.geoLocation.y],
+        { icon: shuttleMarkerIcon }
+      );
+  
+      marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
+      marker.addTo(this.layerGroupMarkers);
+      marker.addTo(this.map);
+    } else {
+      let marker = new L.Marker(
+        [entry.geoLocation.x, entry.geoLocation.y],
+        { icon: trainMarkerIcon }
+      );
+  
+      marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
+      marker.addTo(this.layerGroupMarkers);
+      marker.addTo(this.map);
+    }
+    
   }
 
 
