@@ -1,3 +1,10 @@
+body{
+    background-image: url('https://i.postimg.cc/ncF2RQ9Q/buga-auschnitt.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position-x: center;
+}
+
 .carousel {
     position: relative;
     height: 400px;
@@ -12,7 +19,6 @@
 }
 
 .carousel__track-container{
-    background: lightgreen;
     height: 100%;
     position: relative;
     overflow: hidden;
@@ -25,7 +31,7 @@
     list-style: none;
     position: relative;
     height: 100%;
-    transition:  transform 250ms ease-in;
+    transition:  transform 450ms ease-in;
 }
 
 .carousel__slide {
@@ -70,8 +76,11 @@
     height: 15px;
     background: rgba(0,0,0,.3);
     margin: 0 12px;
+    cursor: pointer;
 }
 
 .carousel__indicator.current-slide{
     background: rgba(0,0,0,.75)
 }
+
+.is-hidden{display: none;}
