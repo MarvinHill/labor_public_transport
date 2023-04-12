@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
   protected isLoggedIn : boolean = true;
   protected mapHeight: string = "10em";
 
-  public innerWidth: number = window.innerWidth;
+  public innerWidth: number = 1000;
   @ViewChild('container', { static: false }) container: ElementRef;
   windowHeight: number;
 
