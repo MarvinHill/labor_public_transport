@@ -1,5 +1,5 @@
-<div *ngIf = "state === 0"><h3 class="text-center">Keine Details</h3></div>
-<div *ngIf = "state === 1" class="row">
+<div *ngIf = "observerService.state === 0"><h3 class="text-center">Keine Details</h3></div>
+<div *ngIf = "observerService.state === 1" class="row">
     <div class="col text-center">
         <img class="m-4" src="assets/icon/parkingIcon.svg" alt="parking-icon">
         <h2>Sap Arena P6</h2>
@@ -10,7 +10,7 @@
     </div>
         
 </div>
-<div *ngIf = "state === 2">RNV Details</div>
-<div *ngIf = "state === 3">
+<div *ngIf = "observerService.state === 2">RNV Details</div>
+<div *ngIf = "observerService.state === 3">
     <app-shuttle-line-entry></app-shuttle-line-entry> 
 </div>

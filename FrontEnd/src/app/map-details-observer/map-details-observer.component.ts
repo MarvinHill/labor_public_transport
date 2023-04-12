@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { DataServiceService } from '../data-service.service';
 import { ShuttleLine } from '../ShuttleLine';
 import { ParkingLot } from '../ParkingLot';
 import { RnvLine } from '../RnvLine';
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
+import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-map-details-observer',
@@ -11,27 +12,10 @@ import { RnvLine } from '../RnvLine';
 })
 export class MapDetailsObserverComponent {
 
-  state : number = 0; // 0 Nothing, 1 Parking, 2 RNV, 3 Shuttle Line
-  data = null;
-
-  constructor(private service : DataServiceService){}
+  constructor(protected service : DataServiceService, protected observerService : MapDetailsObserverService){}
 
   openMaps(){
     this.service.openMapExternal('Asperg', 'Ludwigsburg');
-  }
-
-  changeDisplay(data){
-    switch(data.constructor){
-    case(ShuttleLine): this.state = 3; break;
-    case(RnvLine): this.state = 2; break;
-    case(ParkingLot): this.state = 1; break;
-    default: this.state = 0; break;
-    }
-    this.data = data;
-  }
-
-  hide(){
-    
   }
 
 }

@@ -2,7 +2,7 @@
   <div class="inner-container">
     <button id="resize" class=resize-button (click)="resizeMap()">resize map</button>
     <div id="map" [ngClass] = "minimized === true ? 'map border-rounded' : 'map' "></div>
-    <div id="sidebar" class="sidebar bc-w overscroll-auto" *ngIf="!minimized" [ngStyle]="this.windowWidth < 992 ? {'height' : '30vh', 'width' : '100%'} : {'height' : '100%', 'width' : '30vw'}">
+    <div id="sidebar" class="sidebar bc-w overscroll-auto" *ngIf="!minimized && observerService.visible" [ngStyle]="this.windowWidth < 992 ? {'height' : '30vh', 'width' : '100%'} : {'height' : '100%', 'width' : '30vw'}">
       <div class="p-2">
         <app-map-details-observer></app-map-details-observer>
       </div>

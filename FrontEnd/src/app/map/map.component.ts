@@ -1,10 +1,13 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { UserLoginServiceService } from '../user-login-service.service';
+
 import { ShuttleLine } from '../ShuttleLine';
 
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import { ShuttleLineService } from '../services/shuttle-line.service';
+import { MapDetailsObserverComponent } from '../map-details-observer/map-details-observer.component';
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
+import { UserLoginServiceService } from '../services/user-login-service.service';
 
 @Component({
   selector: 'app-map',
@@ -35,6 +38,7 @@ export class MapComponent implements OnInit {
 
 
   constructor(
+    protected observerService : MapDetailsObserverService,
     private shuttleLineService: ShuttleLineService,
     userService: UserLoginServiceService,
     renderer: Renderer2
