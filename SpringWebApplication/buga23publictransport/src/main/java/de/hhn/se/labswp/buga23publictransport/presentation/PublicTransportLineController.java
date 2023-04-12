@@ -1,5 +1,7 @@
 package de.hhn.se.labswp.buga23publictransport.presentation;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import de.hhn.se.labswp.buga23publictransport.LoadDatabase;
 import de.hhn.se.labswp.buga23publictransport.business.LineScheduleService;
 import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntry;

@@ -1,6 +1,7 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
@@ -9,8 +10,6 @@ import java.util.*;
 
 @Entity
 @Table(name = "public_transport_line")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class PublicTransportLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +17,12 @@ public class PublicTransportLine {
     private String lineDesignator;
     private boolean hasDelay;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
-            name = "ptl_lse",
-            joinColumns = {@JoinColumn(name = "public_schedule_line_id")},
-            inverseJoinColumns = {@JoinColumn(name = "line_schedule_line_id")})
-    @JsonManagedReference
-    private Set<LineScheduleEntry> lineScheduleEntryList = new HashSet<>();
+            name = "public_transport_line_line_schedule_entry",
+            joinColumns = @JoinColumn(name = "public_transport_line_id"),
+            inverseJoinColumns = @JoinColumn(name = "line_schedule_entry_id"))
+    private List<LineScheduleEntry> lineScheduleEntryList = new ArrayList<>();
 
     public void addLineScheduleEntryList(LineScheduleEntry lineScheduleEntry) {
         this.lineScheduleEntryList.add(lineScheduleEntry);
@@ -60,7 +58,7 @@ public class PublicTransportLine {
         return lineDesignator;
     }
 
-    public Set<LineScheduleEntry> getLineScheduleEntryList() {
+    public List<LineScheduleEntry> getLineScheduleEntryList() {
         return this.lineScheduleEntryList;
     }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import org.springframework.data.geo.Point;
 
@@ -12,8 +13,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "line_schedule_entry")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonSerialize(using = LineScheduleEntrySerializer.class)
 public class LineScheduleEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,8 @@ public class LineScheduleEntry {
     private String stationDesignator;
     private Point geoLocation;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "lineScheduleEntryList", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Set<PublicTransportLine> publicTransportLines = new HashSet<>();
+    @ManyToMany(mappedBy = "lineScheduleEntryList")
+    private List<PublicTransportLine> publicTransportLines = new ArrayList<>();
 
     public LineScheduleEntry() {
     }
@@ -70,11 +69,11 @@ public class LineScheduleEntry {
         ptl.addLineScheduleEntryList(this);
     }
 
-    public Set<PublicTransportLine> getPublicTransportLine() {
+    public List<PublicTransportLine> getPublicTransportLine() {
         return this.publicTransportLines;
     }
 
-    public void setPublicTransportLines(Set<PublicTransportLine> publicTransportLines) {
+    public void setPublicTransportLines(List<PublicTransportLine> publicTransportLines) {
         this.publicTransportLines = publicTransportLines;
 
     }
