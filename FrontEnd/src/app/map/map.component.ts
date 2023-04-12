@@ -1,6 +1,10 @@
 import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
 import * as L from 'leaflet';
 import { UserLoginServiceService } from '../user-login-service.service';
+import {Subject} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {ParkingLot} from "../ParkingLot";
+import {DataServiceService} from "../data-service.service";
 
 @Component({
   selector: 'app-map',
@@ -11,6 +15,10 @@ export class MapComponent implements OnInit {
 
   private map: L.Map;
   private centroid: L.LatLngExpression = [49.485, 8.5];
+
+  lines: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+
+  http : HttpClient;
 
   protected minimized: boolean = true;
 
@@ -29,8 +37,7 @@ export class MapComponent implements OnInit {
 
   topBarHeight: number;
 
-
-  constructor(userService : UserLoginServiceService, renderer : Renderer2){
+  constructor(userService : UserLoginServiceService, renderer : Renderer2, private dataService: DataServiceService){
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -54,15 +61,21 @@ export class MapComponent implements OnInit {
 
     var carParkingLots = new L.LayerGroup;
 
-    makeCarMarkers();
+    this.dataService.carParking.subscribe(values => {
+      carParkingLots.clearLayers();
+      for (let valuesKey of values) {
+        console.log("for-Schleife")
+        makeCarMarkers(valuesKey.geoLocation.x, valuesKey.geoLocation.y);
+      }
+    })
 
-    async function makeCarMarkers() {
-      const response = await fetch('/parking/car/all')
-      const data = await response.json();
+    this.dataService.getAllCarParking();
 
-      data.forEach (element => {
-        const parkingMarker = L.marker(element['geo_location']).addTo(carParkingLots);
-      });
+    makeCarMarkers(49.4874592, 8.4660395);
+
+
+    function makeCarMarkers(lat: number, lon: number) {
+      L.marker([lat, lon]).addTo(carParkingLots);
     }
 
     this.map.addLayer(carParkingLots);

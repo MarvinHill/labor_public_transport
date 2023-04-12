@@ -1,19 +1,9 @@
-<div class="d-flex sticky-top bc-w align-items-center" *ngIf="innerWidth < 992" id="top-bar">
+<div class="d-flex sticky-top align-items-center">
     <h2 class="m-2">Get2Buga</h2>
-    <div class="p-2 my-auto" style="margin-left: auto;"> <img class=" p-1 material-symbols-outlined" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"> </div>
-    <div class="p-2 my-auto" (click) = "accountClicked()"><img class="p-1 material-symbols-outlined" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;"></div>
-
-</div>
-<div class="d-flex sticky-top bc-w zindex-sticky" *ngIf="innerWidth >= 992" id="top-bar">
-    <div class="m-3">
-        <h2>Get2Buga</h2>
+    <div class="p-2 my-auto position-relative" style="margin-left: auto;">
+        <img class=" p-1 material-symbols-outlined icon-info" src="assets/icon/info_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;" (click)="switchInfoWindow()">
+        <div class="info-window rounded-4 bc-w shadow" @fadeIn *ngIf="this.infoWindow" >
+            <div style="width: 100%; height: 100%;" id="info-container" class="p-2"></div>
+        </div>
     </div>
-    <button class="ml-4 mt-4 mr-4 mb-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="margin-left: auto; border:none;"> 
-        <img class=" p-1 material-symbols-outlined" src="assets/icon/tune_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
-        Einstellungen
-    </button>
-    <button class="m-4 p-2 d-flex align-items-center text-center bg-white shadow rounded" style="border: none;" (click) = "accountClicked()"> <img class="p-1 material-symbols-outlined" src="assets/icon/person_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;">
-        Account
-    </button>
-
 </div>

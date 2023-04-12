@@ -1,0 +1,18 @@
+.info-window{
+    position:absolute;
+    right: 0;
+    top: 0;
+    padding: 3em;
+    max-width: 100vw;
+    
+}
+
+#info-container{
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.icon-info{
+    position: relative;
+    z-index: 1000000;
+}
