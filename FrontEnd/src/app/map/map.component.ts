@@ -91,11 +91,11 @@ export class MapComponent implements OnInit {
   maximizeMap(): void {
     if(this.minimized) {
       this.mapContainerClass = "map-container-large";
-      this.resizeButtonClass = "resize-button-max";
+      this.resizeButtonClass = "resize-button-max shadow";
 
       this.minimized = false;
+      this.updateHeight()
     }
-    this.updateHeight()
   }
 
   minimizeMap(): void {
