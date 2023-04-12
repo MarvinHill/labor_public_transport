@@ -12,7 +12,7 @@ export class TimelineComponent implements OnInit {
     this.lineName = this.shuttleLine.lineDesignator;
     this.lineScheduleEntryList = this.shuttleLine.lineScheduleEntryList;
     //this.lineScheduleEntry = this.shuttleLine.lineScheduleEntryList;
-    this.arrivalTime = this.shuttleLine.lineScheduleEntryList[this.shuttleLine.id].arrivalTime;
+    this.arrivalTime = this.shuttleLine.lineScheduleEntryList[this.shuttleLine.id.valueOf.length-1].arrivalTime;
     //this.lineScheduleEntry = this.shuttleLine.lineScheduleEntryList;
     //this.arrivalTime = this.lineScheduleEntry.arrivalTime;
     //this.stationDesignator = this.lineScheduleEntry.stationDesignator;
