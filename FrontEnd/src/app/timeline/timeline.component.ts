@@ -10,14 +10,22 @@ import { LineScheduleEntry } from '../LineScheduleEntry';
 export class TimelineComponent implements OnInit {
   ngOnInit(): void {
     this.lineName = this.shuttleLine.lineDesignator;
-    this.arrivalTime = this.lineScheduleEntry.arrivalTime;
-    this.stationDesignator = this.lineScheduleEntry.stationDesignator;
+    this.lineScheduleEntryList = this.shuttleLine.lineScheduleEntryList;
+    //this.lineScheduleEntry = this.shuttleLine.lineScheduleEntryList;
+    this.arrivalTime = this.shuttleLine.lineScheduleEntryList[this.shuttleLine.id].arrivalTime;
+    //this.lineScheduleEntry = this.shuttleLine.lineScheduleEntryList;
+    //this.arrivalTime = this.lineScheduleEntry.arrivalTime;
+    //this.stationDesignator = this.lineScheduleEntry.stationDesignator;
   }
 
   @Input() shuttleLine: ShuttleLine;
-  @Input() lineScheduleEntry: LineScheduleEntry;
+ // lineScheduleEntry: LineScheduleEntry;
   lineName: string = "no line name";
+  lineScheduleEntryList: LineScheduleEntry[];
   arrivalTime: string = "no arrival time";
-  stationDesignator: string = "no station name";
+  publicTransportLine: ShuttleLine;
+
+  @Input() stationDesignator1: string = "no station name";
+  @Input() stationDesignator2: string = "no station name";
 
 }
