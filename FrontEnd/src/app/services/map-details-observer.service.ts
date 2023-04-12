@@ -10,7 +10,7 @@ export class MapDetailsObserverService {
 
   state : number = 0; // 0 Nothing, 1 Parking, 2 RNV, 3 Shuttle Line
   data = null;
-  visible : boolean = false;
+  visible : boolean = true;
 
   constructor() { }
 

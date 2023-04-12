@@ -10,7 +10,7 @@
     </div>
         
 </div>
-<div *ngIf = "observerService.state === 2">RNV Details</div>
+<div *ngIf = "observerService.state === 2">RNV Details {{observerService.data}} </div>
 <div *ngIf = "observerService.state === 3">
     <app-shuttle-line-entry></app-shuttle-line-entry> 
 </div>

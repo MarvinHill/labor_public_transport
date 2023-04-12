@@ -69,6 +69,12 @@ export class MapComponent implements OnInit {
 
     tiles.addTo(this.map);
     this.layerGroupMarkers.addTo(this.map);
+
+    this.map.addEventListener("click",function(e){
+      
+      this.observerService.changeVisibility(false);
+      
+    }.bind(this));
   }
 
   ngOnInit(): void {
