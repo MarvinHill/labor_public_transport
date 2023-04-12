@@ -32,6 +32,7 @@
 }
 
 .map-container-large .map {
+  border: outset #ECF4E5 4px;
   border-radius: 0;
 }
 
@@ -66,12 +67,14 @@
 
 .resize-button-max {
   position: absolute;
-  top: 0;
+  top: 1em;
+  right: 1em;
   width: 3em;
   height: 3em;
   z-index: 500;
-  border: outset darkred 4px;
+  border: outset #ECF4E5 4px;
   border-radius: 1em;
+  background: lightgray;
 }
 
 .resize-button-min {
