@@ -1,10 +1,10 @@
 import { NgIfContext } from '@angular/common';
 import { Component, ElementRef, HostListener, Inject, TemplateRef } from '@angular/core';
-import { UserLoginServiceService } from '../user-login-service.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { IfStmt } from '@angular/compiler';
 import { interval, timer } from 'rxjs';
 import { Router, NavigationEnd, RouterFeature } from '@angular/router';
+import { UserLoginServiceService } from '../services/user-login-service.service';
 
 
 @Component({

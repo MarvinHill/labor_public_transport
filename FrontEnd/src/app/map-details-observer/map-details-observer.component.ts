@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { DataServiceService } from '../data-service.service';
+import { ShuttleLine } from '../ShuttleLine';
+import { ParkingLot } from '../ParkingLot';
+import { RnvLine } from '../RnvLine';
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
+import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-map-details-observer',
@@ -8,9 +12,7 @@ import { DataServiceService } from '../data-service.service';
 })
 export class MapDetailsObserverComponent {
 
-  state : number = 1; // 0 Nothing, 1 Parking, 2 RNV
-
-  constructor(private service : DataServiceService){}
+  constructor(protected service : DataServiceService, protected observerService : MapDetailsObserverService){}
 
   openMaps(){
     this.service.openMapExternal('Asperg', 'Ludwigsburg');

@@ -2,10 +2,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { interval, Subject } from 'rxjs';
-import { ShuttleLine } from './ShuttleLine';
+import { ShuttleLine } from '../ShuttleLine';
 import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
-import {ParkingLot} from "./ParkingLot";
+import {ParkingLot} from "../ParkingLot";
 
 @Injectable({
   providedIn: 'root'

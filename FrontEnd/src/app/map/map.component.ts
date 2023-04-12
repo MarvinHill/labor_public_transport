@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { UserLoginServiceService } from '../user-login-service.service';
-import {DataServiceService} from "../data-service.service";
+import {UserLoginServiceService} from "../services/user-login-service.service";
+import {DataServiceService} from "../services/data-service.service";
+import {MapDetailsObserverService} from "../services/map-details-observer.service";
 
 @Component({
   selector: 'app-map',
@@ -30,7 +31,7 @@ export class MapComponent implements OnInit {
   topBarHeight: number;
 
 
-  constructor(userService : UserLoginServiceService, renderer : Renderer2, private dataService: DataServiceService){
+  constructor(userService : UserLoginServiceService, renderer : Renderer2, private dataService: DataServiceService, protected observerService : MapDetailsObserverService){
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -73,6 +74,12 @@ export class MapComponent implements OnInit {
     }
 
     this.map.addLayer(carParkingLots);
+
+    this.map.addEventListener("click",function(e){
+
+      this.observerService.changeVisibility(false);
+
+    }.bind(this));
   }
 
   ngOnInit(): void {
