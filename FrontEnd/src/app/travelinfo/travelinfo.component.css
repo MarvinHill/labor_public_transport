@@ -4,10 +4,10 @@ body {
   font-size: 16px;
   color: #333;
   margin: 0;
-  background-image: url('https://i.postimg.cc/ncF2RQ9Q/buga-auschnitt.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-image: url('https://wallpaperaccess.com/full/260164.jpg');
+  background-repeat: repeat-y;
+  background-size: auto;
+  background-position: auto;
   background-blend-mode: darken;
   
 }
@@ -40,7 +40,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f0cd0aca;
+
 }
 
 /* Abschnitte */
