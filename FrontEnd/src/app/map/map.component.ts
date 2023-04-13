@@ -1,9 +1,10 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import {UserLoginServiceService} from "../services/user-login-service.service";
-import {DataServiceService} from "../services/data-service.service";
-import {MapDetailsObserverService} from "../services/map-details-observer.service";
+import { UserLoginServiceService } from "../services/user-login-service.service";
+import { DataServiceService } from "../services/data-service.service";
+import { MapDetailsObserverService } from "../services/map-details-observer.service";
 import { ParkingLot } from '../ParkingLot';
+import { ThisReceiver, verifyHostBindings } from '@angular/compiler';
 
 @Component({
   selector: 'app-map',
@@ -17,10 +18,10 @@ export class MapComponent implements OnInit {
 
   protected minimized: boolean = true;
 
-  mapContainerClass:string = "map-container-small-desktop";
-  resizeButtonClass:string = "resize-button-min";
-  private userService : UserLoginServiceService;
-  private renderer : Renderer2;
+  mapContainerClass: string = "map-container-small-desktop";
+  resizeButtonClass: string = "resize-button-min";
+  private userService: UserLoginServiceService;
+  private renderer: Renderer2;
 
   protected isLoggedIn: boolean = true;
   protected mapHeight: string = "10em";
@@ -31,10 +32,10 @@ export class MapComponent implements OnInit {
   windowWidth: number;
   topBarHeight: number;
   public innerWidth: number = 1000;
-  breakPoint : number = 720;
+  breakPoint: number = 720;
 
 
-  constructor(userService : UserLoginServiceService, renderer : Renderer2, private dataService: DataServiceService, protected observerService : MapDetailsObserverService){
+  constructor(userService: UserLoginServiceService, renderer: Renderer2, private dataService: DataServiceService, protected observerService: MapDetailsObserverService) {
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -61,30 +62,34 @@ export class MapComponent implements OnInit {
 
     this.dataService.carParking.subscribe(values => {
       carParkingLots.clearLayers();
-      for (let valuesKey of values) {
-        console.log("for-Schleife")
-        makeCarMarkers(valuesKey);
-      }
+      values.forEach(element => {
+        makeCarMarkers(element);
+      });
     })
 
     this.dataService.getAllCarParking();
 
 
-    function makeCarMarkers(parkingLot : ParkingLot) {    
-      var marker = L.marker([parkingLot.geoLocation.x,parkingLot.geoLocation.y]);
-      marker.on("click", function(e){
-          this.observerService?.changeDisplay(parkingLot);
-      }.bind(this))
+    function makeCarMarkers(parkingLot) {
+      var marker = L.marker([parkingLot.geoLocation.x, parkingLot.geoLocation.y]);
+      marker.on("click", function (e: any) {
+        this.callObserverService(parkingLot);      
+      }.bind(this));
       marker.addTo(carParkingLots);
-    }
+    };
 
     this.map.addLayer(carParkingLots);
 
-    this.map.addEventListener("click",function(e){
+    this.map.addEventListener("click", function (e: any) {
 
       this.observerService.changeVisibility(false);
 
     }.bind(this));
+
+  }
+
+  callObserverService(val : MapDetailsObserverService){
+    this.observerService.changeDisplay(val);
   }
 
   ngOnInit(): void {
@@ -96,7 +101,7 @@ export class MapComponent implements OnInit {
   }
 
   maximizeMap(): void {
-    if(this.minimized) {
+    if (this.minimized) {
       this.mapContainerClass = "map-container-large";
       this.resizeButtonClass = "resize-button-max shadow";
 
@@ -104,12 +109,12 @@ export class MapComponent implements OnInit {
       this.updateHeight()
       this.updateWidth();
     }
-     this.map.invalidateSize();
-    
+    this.map.invalidateSize();
+
   }
 
   minimizeMap(): void {
-    if(!this.minimized) {
+    if (!this.minimized) {
       this.minimized = true;
       this.updateMobileDesktopMap();
       this.resizeButtonClass = "resize-button-min";
@@ -129,27 +134,27 @@ export class MapComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: { target: { innerWidth: number; }; }) {
     this.innerWidth = event.target.innerWidth;
     this.updateHeight();
     this.updateWidth();
     this.updateMobileDesktopMap();
-    
+
   }
 
-  private updateMobileDesktopMap(){
-    if((this.innerWidth < this.breakPoint) && this.minimized) {
+  private updateMobileDesktopMap() {
+    if ((this.innerWidth < this.breakPoint) && this.minimized) {
       this.mapContainerClass = "map-container-small-mobile";
-    } else if(this.minimized) {
+    } else if (this.minimized) {
       this.mapContainerClass = "map-container-small-desktop";
     }
   }
 
   private updateHeight() {
     this.computeMaxHeight();
-    document.getElementById("map-container").style.height = this.mapHeight; 
+    document.getElementById("map-container").style.height = this.mapHeight;
   }
-  private updateWidth(){
+  private updateWidth() {
     this.windowWidth = window.innerWidth
   }
 
@@ -157,13 +162,13 @@ export class MapComponent implements OnInit {
     this.windowHeight = window.innerHeight;
     this.topBarHeight = document.getElementById("top-bar").offsetHeight;
     if (this.minimized) {
-      if(this.innerWidth < this.breakPoint){
+      if (this.innerWidth < this.breakPoint) {
         this.mapHeight = "5em";
       }
-      else{
+      else {
         this.mapHeight = "10em";
       }
-      
+
     }
     else {
       this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";

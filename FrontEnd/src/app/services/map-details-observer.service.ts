@@ -18,6 +18,8 @@ export class MapDetailsObserverService {
   constructor() { }
 
   changeDisplay(data){
+    console.warn(data);
+    
     this.changeVisibility(true);
     switch(data.constructor){
       case(ShuttleLine): this.show = ObserverState.SHUTTLE; break;
