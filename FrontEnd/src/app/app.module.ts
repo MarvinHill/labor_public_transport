@@ -13,6 +13,7 @@ import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.com
 import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TravelinfoComponent } from './travelinfo/travelinfo.component';
+import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TravelinfoComponent } from './travelinfo/travelinfo.component';
     AddShuttleLineComponent,
     PublicTransportLineComponent,
     TravelinfoComponent,
+    InfoCarouselComponent,
   ],
   imports: [
     BrowserModule,

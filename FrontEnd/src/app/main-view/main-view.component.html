@@ -15,40 +15,7 @@
       <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
     </div>
     <h3 class="m-3">GENERAL INFORMATION</h3>
-    <div class="background">
-      <div class="carousel">
-        <button class="carousel__button carousel__button--left is-hidden">
-            <img src="https://cdn-icons-png.flaticon.com/512/60/60775.png" alt="">
-        </button>
-      
-        <div class="carousel__track-container">
-        
-          <ul class="carousel__track">
-            <li class="carousel__slide current-slide">
-            <img class="carousel__image" src="https://i.postimg.cc/tRxLPgsx/info-slide.png" alt="Info Icon">
-              </li>
-            <li class="carousel__slide">
-              <img class="carousel__image" src="https://i.postimg.cc/Hs0RZP4W/bus-slide.png" alt="Bus Icon">
-            </li>
-            <li class="carousel__slide">
-              <img class="carousel__image" src="https://i.postimg.cc/kXPLydSh/car-slide.png" alt="Auto Icon">
-            </li>
-            <li class="carousel__slide">
-              <img class="carousel__image" src="https://i.postimg.cc/8cM9VZ2H/zug-slide.png" alt="Zug Icon">
-            </li>
-          </ul>
-        </div>
-
-        <button class="carousel__button carousel__button--right">
-          <img src="https://cdn-icons-png.flaticon.com/512/60/60758.png" alt="">
-        </button>
-
-        <div class="carousel__nav">
-          <button class="carousel__indicator current-slide"></button>
-          <button class="carousel__indicator"></button>
-          <button class="carousel__indicator"></button>
-          <button class="carousel__indicator"></button>
-        </div>
-      </div>
-    </div>
+    <app-info-carousel></app-info-carousel>
+  </div>
+</html>
     
