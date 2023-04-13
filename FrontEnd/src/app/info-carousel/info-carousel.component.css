@@ -1,7 +1,7 @@
 
 .carousel {
     position: relative;
-    height: 400px;
+    height: 300px;
     width: 222px;
     margin: 0 auto;
 }
@@ -77,4 +77,6 @@
     background: rgba(0,0,0,.75)
 }
 
-.is-hidden{display: none;}
+.is-hidden{
+    opacity: 20%;
+}
