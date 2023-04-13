@@ -4,6 +4,7 @@ import { ParkingLot } from '../ParkingLot';
 import { RnvLine } from '../RnvLine';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { DataServiceService } from '../services/data-service.service';
+import { ObserverState } from '../ObserverState';
 
 @Component({
   selector: 'app-map-details-observer',
@@ -11,6 +12,7 @@ import { DataServiceService } from '../services/data-service.service';
   styleUrls: ['./map-details-observer.component.css']
 })
 export class MapDetailsObserverComponent {
+  protected ObserverState = ObserverState;
 
   constructor(protected service : DataServiceService, protected observerService : MapDetailsObserverService){}
 

@@ -2,24 +2,28 @@ import { Injectable } from '@angular/core';
 import { ParkingLot } from '../ParkingLot';
 import { RnvLine } from '../RnvLine';
 import { ShuttleLine } from '../ShuttleLine';
+import { ObserverState } from '../ObserverState';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapDetailsObserverService {
 
-  state : number = 0; // 0 Nothing, 1 Parking, 2 RNV, 3 Shuttle Line
-  data = null;
-  visible : boolean = true;
+  public data = null;
+  public visible : boolean = true;
+  public show:ObserverState = ObserverState.NOTHING;
+
+
 
   constructor() { }
 
   changeDisplay(data){
+    this.changeVisibility(true);
     switch(data.constructor){
-    case(ShuttleLine): this.state = 3; break;
-    case(RnvLine): this.state = 2; break;
-    case(ParkingLot): this.state = 1; break;
-    default: this.state = 0; break;
+      case(ShuttleLine): this.show = ObserverState.SHUTTLE; break;
+      case(RnvLine): this.show = ObserverState.RNV; break;
+      case(ParkingLot): this.show = ObserverState.PARKING; break;
+      default: this.show = ObserverState.NOTHING; break;
     }
     this.data = data;
   }

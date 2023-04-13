@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import {UserLoginServiceService} from "../services/user-login-service.service";
 import {DataServiceService} from "../services/data-service.service";
 import {MapDetailsObserverService} from "../services/map-details-observer.service";
+import { ParkingLot } from '../ParkingLot';
 
 @Component({
   selector: 'app-map',
@@ -62,17 +63,19 @@ export class MapComponent implements OnInit {
       carParkingLots.clearLayers();
       for (let valuesKey of values) {
         console.log("for-Schleife")
-        makeCarMarkers(valuesKey.geoLocation.x, valuesKey.geoLocation.y);
+        makeCarMarkers(valuesKey);
       }
     })
 
     this.dataService.getAllCarParking();
 
-    makeCarMarkers(49.4874592, 8.4660395);
 
-
-    function makeCarMarkers(lat: number, lon: number) {
-      L.marker([lat, lon]).addTo(carParkingLots);
+    function makeCarMarkers(parkingLot : ParkingLot) {    
+      var marker = L.marker([parkingLot.geoLocation.x,parkingLot.geoLocation.y]);
+      marker.on("click", function(e){
+          this.observerService?.changeDisplay(parkingLot);
+      }.bind(this))
+      marker.addTo(carParkingLots);
     }
 
     this.map.addLayer(carParkingLots);
@@ -101,6 +104,7 @@ export class MapComponent implements OnInit {
       this.updateHeight()
       this.updateWidth();
     }
+     this.map.invalidateSize();
     
   }
 
