@@ -37,4 +37,7 @@ export class DataServiceService {
   openMapExternal(from : string, to : string){
     window.open(`https://www.google.de/maps/dir/${from}/${to}/`);
   }
+  openMapExternalWithDestPosition(lat : string, lon : string){
+      window.open(`https://www.google.de/maps/dir//${lat},${lon}/`);
+  }
 }
