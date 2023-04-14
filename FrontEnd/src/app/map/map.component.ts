@@ -26,6 +26,8 @@ export class MapComponent implements OnInit {
   protected isLoggedIn: boolean = true;
   protected mapHeight: string = "10em";
 
+  carParkingLots = new L.LayerGroup;
+
   @ViewChild('container', { static: false }) container: ElementRef;
 
   windowHeight: number;
@@ -58,27 +60,17 @@ export class MapComponent implements OnInit {
 
     tiles.addTo(this.map);
 
-    var carParkingLots = new L.LayerGroup;
-
     this.dataService.carParking.subscribe(values => {
-      carParkingLots.clearLayers();
+      this.carParkingLots.clearLayers();
       values.forEach(element => {
-        makeCarMarkers(element);
+        this.makeCarMarkers(element);
       });
     })
 
     this.dataService.getAllCarParking();
 
 
-    function makeCarMarkers(parkingLot) {
-      var marker = L.marker([parkingLot.geoLocation.x, parkingLot.geoLocation.y]);
-      marker.on("click", function (e: any) {
-        this.callObserverService(parkingLot);      
-      }.bind(this));
-      marker.addTo(carParkingLots);
-    };
-
-    this.map.addLayer(carParkingLots);
+    this.map.addLayer(this.carParkingLots);
 
     this.map.addEventListener("click", function (e: any) {
 
@@ -88,9 +80,13 @@ export class MapComponent implements OnInit {
 
   }
 
-  callObserverService(val : MapDetailsObserverService){
-    this.observerService.changeDisplay(val);
-  }
+  makeCarMarkers(parkingLot) { 
+    var marker = L.marker([parkingLot.geoLocation.x, parkingLot.geoLocation.y]);
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(parkingLot)     
+    }.bind(this));
+    marker.addTo(this.carParkingLots);
+  };
 
   ngOnInit(): void {
     this.initMap();
@@ -168,7 +164,6 @@ export class MapComponent implements OnInit {
       else {
         this.mapHeight = "10em";
       }
-
     }
     else {
       this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";

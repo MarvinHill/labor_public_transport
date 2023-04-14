@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ParkingLot } from '../ParkingLot';
-import { RnvLine } from '../RnvLine';
-import { ShuttleLine } from '../ShuttleLine';
 import { ObserverState } from '../ObserverState';
+import { RnvLine } from '../RnvLine';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapDetailsObserverService {
 
-  public data = null;
+  public data = null ;
   public visible : boolean = true;
   public show:ObserverState = ObserverState.NOTHING;
 
@@ -18,17 +17,23 @@ export class MapDetailsObserverService {
   constructor() { }
 
   changeDisplay(data){
-    console.warn(data);
+    console.warn("Change Display called:");
+    console.log(JSON.stringify(data))
     
-    this.changeVisibility(true);
-    switch(data.constructor){
-      case(ShuttleLine): this.show = ObserverState.SHUTTLE; break;
-      case(RnvLine): this.show = ObserverState.RNV; break;
-      case(ParkingLot): this.show = ObserverState.PARKING; break;
-      default: this.show = ObserverState.NOTHING; break;
+
+    
+    if("parkingType" in data){
+      this.show = ObserverState.PARKING;
+      this.data = <ParkingLot> data;
     }
-    this.data = data;
+
+    this.changeVisibility(true);
+
   }
+
+  isParkingLot = (object : Object): object is ParkingLot => {
+  return true;
+ }
 
   changeVisibility(visibility : boolean){
         this.visible = visibility;
