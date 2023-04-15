@@ -95,7 +95,7 @@ export class MapComponent implements OnInit {
   makeCarMarkers(parkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerCar.png',
-  
+
       iconSize:     [45, 72], // size of the icon
       iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -120,7 +120,7 @@ export class MapComponent implements OnInit {
     for(var i = 0; i < area.length; i++) {
       arr.push([area.at(i).x, area.at(i).y]);
     }
-    L.polygon(arr, {color: 'blue'}).addTo(this.carParkingLots);
+    L.polygon(arr, {color: '#0677e0'}).addTo(this.carParkingLots);
   }
 
   makeCarParkingEntries(entrances: Array<Point>) {
