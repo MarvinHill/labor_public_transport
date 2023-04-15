@@ -32,3 +32,20 @@
 .info{
     display: block;
 }
+.info-gif-big{
+    height:30vh; 
+    width: auto;
+}
+.info-gif-small{
+    height:15vh; 
+    width: auto;
+}
+
+.info-img-big{
+    height:30vh; 
+    width: auto;
+}
+.info-img-small{
+    height:15vh; 
+    width: auto;
+}
