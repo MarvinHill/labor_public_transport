@@ -17,15 +17,15 @@ export class MapDetailsObserverService {
   constructor() { }
 
   changeDisplay(data){
-    console.warn("Change Display called:");
-    console.log(JSON.stringify(data))
-    
-
     
     if("parkingType" in data){
       this.show = ObserverState.PARKING;
       this.data = <ParkingLot> data;
     }
+    else{
+      this.show = ObserverState.NOTHING;
+    }
+
 
     this.changeVisibility(true);
 
