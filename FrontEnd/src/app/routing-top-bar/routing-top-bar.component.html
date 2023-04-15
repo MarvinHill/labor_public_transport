@@ -2,7 +2,7 @@
     <h2 class="m-2">Get2Buga</h2>
     <div class="p-2 my-auto position-relative" style="margin-left: auto;">
         <img class=" p-1 material-symbols-outlined icon-info" src="assets/icon/info_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;" (click)="switchInfoWindow()">
-        <div class="info-window rounded-4 bc-w shadow" @fadeIn *ngIf="this.infoWindow" >
+        <div class="info-window rounded-4 bc-w shadow" style="max-width: 100vw; width: 30em;" @fadeIn *ngIf="this.infoWindow">
             <div style="width: 100%; height: 100%;" id="info-container" class="p-2"></div>
         </div>
     </div>
