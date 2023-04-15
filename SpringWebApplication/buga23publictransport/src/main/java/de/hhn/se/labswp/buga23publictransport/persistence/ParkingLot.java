@@ -2,7 +2,6 @@ package de.hhn.se.labswp.buga23publictransport.persistence;
 
 import de.hhn.se.labswp.buga23publictransport.business.ParkingType;
 import jakarta.persistence.*;
-import com.vividsolutions.jts.geom.Polygon;
 import org.springframework.data.geo.Point;
 import java.util.List;
 
@@ -12,10 +11,9 @@ public class ParkingLot {
     @Id
     @GeneratedValue
     Long id;
-    @Convert(converter = PolygonConverter.class)
-    @Column(length = 1000)
+    @Column(length = 100000)
     @Lob
-    Polygon area;
+    List<Point> area;
     Point geoLocation;
     @Lob
     List<Point> entrance;
@@ -24,7 +22,7 @@ public class ParkingLot {
     boolean charging;
     ParkingType parkingType;    // 1 = bike, 2 = car, 3 = bus
 
-    public ParkingLot(Point geoLocation, Polygon area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType) {
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -44,13 +42,18 @@ public class ParkingLot {
         return id;
     }
 
-    public void setArea(Polygon area) {
-        this.area = area;
+//    public void setArea(Polygon area) {
+//        this.area = area;
+//    }
+//
+//    public Polygon getArea() {
+//        return area;
+//    }
+
+    public List<Point> getArea() {
+        return this.area;
     }
 
-    public Polygon getArea() {
-        return area;
-    }
 
     public void setGeoLocation(Point geoLocation) {
         this.geoLocation = geoLocation;

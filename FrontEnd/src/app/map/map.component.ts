@@ -5,6 +5,7 @@ import { DataServiceService } from "../services/data-service.service";
 import { MapDetailsObserverService } from "../services/map-details-observer.service";
 import { ParkingLot } from '../ParkingLot';
 import { ThisReceiver, verifyHostBindings } from '@angular/compiler';
+import {Point} from "leaflet";
 
 @Component({
   selector: 'app-map',
@@ -61,9 +62,20 @@ export class MapComponent implements OnInit {
     tiles.addTo(this.map);
 
     this.dataService.carParking.subscribe(values => {
-      this.carParkingLots.clearLayers();
       values.forEach(element => {
         this.makeCarMarkers(element);
+      });
+    })
+
+    this.dataService.carParking.subscribe(values => {
+      values.forEach(element => {
+        this.makeCarPolygons(element.area);
+      });
+    })
+
+    this.dataService.carParking.subscribe(values => {
+      values.forEach(element => {
+        this.makeCarParkingEntries(element.entrances);
       });
     })
 
@@ -80,13 +92,31 @@ export class MapComponent implements OnInit {
 
   }
 
-  makeCarMarkers(parkingLot) { 
+  makeCarMarkers(parkingLot) {
     var marker = L.marker([parkingLot.geoLocation.x, parkingLot.geoLocation.y]);
     marker.on("click", function (e: any) {
-      this.observerService.changeDisplay(parkingLot)     
+      this.observerService.changeDisplay(parkingLot)
     }.bind(this));
     marker.addTo(this.carParkingLots);
   };
+
+  makeCarPolygons(area: Array<Point>) {
+    var arr = [];
+    for(var i = 0; i < area.length; i++) {
+      arr.push([area.at(i).x, area.at(i).y]);
+    }
+    L.polygon(arr, {color: 'blue'}).addTo(this.carParkingLots);
+  }
+
+  makeCarParkingEntries(entrances: Array<Point>) {
+    var arr = [];
+    for(var i = 0; i < 1; i++) {
+      arr.push([[entrances.at(i).x, entrances.at(i).y]]);
+    }
+    for(var i = 0; i < arr.length; i++) {
+      L.marker(arr.pop());
+    }
+  }
 
   ngOnInit(): void {
     this.initMap();
@@ -170,4 +200,3 @@ export class MapComponent implements OnInit {
     }
   }
 }
-
