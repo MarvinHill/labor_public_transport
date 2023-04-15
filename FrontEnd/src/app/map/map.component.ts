@@ -93,7 +93,23 @@ export class MapComponent implements OnInit {
   }
 
   makeCarMarkers(parkingLot) {
-    var marker = L.marker([parkingLot.geoLocation.x, parkingLot.geoLocation.y]);
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/MarkerCar.png',
+  
+      iconSize:     [45, 72], // size of the icon
+      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
+    if((parkingLot as ParkingLot).charging === true ){
+      parkingIcon = L.icon({
+        iconUrl: 'assets/icon/parking/MarkerECar.png',
+    
+        iconSize:     [45, 72], // size of the icon
+        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    }
+    var marker = L.marker([parkingLot.geoLocation.x, parkingLot.geoLocation.y], {icon:parkingIcon});
     marker.on("click", function (e: any) {
       this.observerService.changeDisplay(parkingLot)
     }.bind(this));
