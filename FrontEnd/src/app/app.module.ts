@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
 import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
+
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { InfoBahnComponent } from './info-bahn/info-bahn.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
