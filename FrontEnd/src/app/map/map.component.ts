@@ -109,6 +109,12 @@ export class MapComponent implements OnInit {
       this.observerService.changeDisplay(parkinglot)
     }.bind(this));
     marker.addTo(this.carParkingLots);
+
+    if(parkinglot.entrance.length > 0) {
+      for (var i = 0; i < parkinglot.entrance.length; i++) {
+        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y]).addTo(this.carParkingLots);
+      }
+    }
   }
 
   ngOnInit(): void {
