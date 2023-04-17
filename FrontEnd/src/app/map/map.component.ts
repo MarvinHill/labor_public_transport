@@ -28,6 +28,7 @@ export class MapComponent implements OnInit {
   protected mapHeight: string = "10em";
 
   carParkingLots = new L.LayerGroup;
+  bikeParkingLots = new L.LayerGroup;
 
   @ViewChild('container', { static: false }) container: ElementRef;
 
@@ -45,7 +46,6 @@ export class MapComponent implements OnInit {
     });
     this.renderer = renderer;
   }
-
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -67,9 +67,19 @@ export class MapComponent implements OnInit {
       });
     })
 
+    this.dataService.bikeParking.subscribe(values => {
+      values.forEach(element => {
+        this.makeBikeParking(element);
+      });
+    })
+
     this.dataService.getAllCarParking();
 
+    this.dataService.getAllBikeParking();
+
     this.map.addLayer(this.carParkingLots);
+
+    this.map.addLayer(this.bikeParkingLots);
 
     this.map.addEventListener("click", function (e: any) {
       this.observerService.changeVisibility(false);
@@ -80,7 +90,6 @@ export class MapComponent implements OnInit {
   makeCarParking(parkinglot: ParkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerCar.png',
-
       iconSize:     [45, 72], // size of the icon
       iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -99,7 +108,7 @@ export class MapComponent implements OnInit {
         arr.push([parkinglot.area.at(i).x, parkinglot.area.at(i).y]);
       }
       var poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.carParkingLots);
-      var marker = L.marker(poly.getCenter(), {icon:parkingIcon}).addTo(this.carParkingLots);
+      var marker = L.marker(poly.getCenter(), {icon:parkingIcon});
     }
     else {
       var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], {icon:parkingIcon});
@@ -115,6 +124,30 @@ export class MapComponent implements OnInit {
         L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y]).addTo(this.carParkingLots);
       }
     }
+  }
+
+  makeBikeParking(bikeparking: ParkingLot) {
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/MarkerBike.png',
+      iconSize:     [45, 72], // size of the icon
+      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    if(bikeparking.area.length > 0) {
+      var arr = [];
+      for(var i = 0; i < bikeparking.area.length; i++) {
+        arr.push([bikeparking.area.at(i).x, bikeparking.area.at(i).y]);
+      }
+      var poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.bikeParkingLots);
+      var marker = L.marker(poly.getCenter(), {icon : parkingIcon}).addTo(this.bikeParkingLots);
+    }
+    else {
+      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], {icon: parkingIcon}).addTo(this.bikeParkingLots);
+    }
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(bikeparking)
+    }.bind(this));
+    marker.addTo(this.carParkingLots);
   }
 
   ngOnInit(): void {
