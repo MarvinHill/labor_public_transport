@@ -82,7 +82,18 @@ a:hover {
   color: black;
 }
 
+.list{
+    cursor: pointer;
+  }
 
-footer{
-  margin-left: 10px;
-}
+  footer{
+    margin-left: 10px;
+    background-color: #f8f8f8;
+    color: #777;
+    font-size: 14px;
+    padding: 20px;
+    text-align: center;
+    position: bottom;
+    bottom: 0;
+    width: 100%;
+  }
