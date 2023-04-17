@@ -23,6 +23,7 @@ export class MapDetailsObserverService {
       this.data = <ParkingLot> data;
     }
     else{
+      this.visible = false;
       this.show = ObserverState.NOTHING;
     }
 
@@ -30,10 +31,6 @@ export class MapDetailsObserverService {
     this.changeVisibility(true);
 
   }
-
-  isParkingLot = (object : Object): object is ParkingLot => {
-  return true;
- }
 
   changeVisibility(visibility : boolean){
         this.visible = visibility;
