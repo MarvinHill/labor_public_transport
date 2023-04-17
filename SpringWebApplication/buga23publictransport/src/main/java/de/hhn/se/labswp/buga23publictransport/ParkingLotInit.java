@@ -606,17 +606,26 @@ public class ParkingLotInit {
         roggenPoly.add(new Point(49.5275639, 8.4799765));
 
         //Fahrad
-        GeometryFactory luisenparkHaupteingangGeo = new GeometryFactory();
-        Polygon luisenparkHaupteingangPoly = luisenparkHaupteingangGeo.createPolygon(luisenparkHaupteingangGeo.createLinearRing(new Coordinate[]{}));
+        Point luisenparkHaupteingangGeoLocation = new Point(49.4789910, 8.4965408);
+        List<Point> luisenparkHaupteingangEntrances = new ArrayList<>();
+        List<Point> luisenparkHaupteingangPoly = new ArrayList<>();
 
-        GeometryFactory luisenparkEingangFernmeldeturmGeo = new GeometryFactory();
-        Polygon luisenparkEingangFernmeldeturmPoly = luisenparkEingangFernmeldeturmGeo.createPolygon(luisenparkEingangFernmeldeturmGeo.createLinearRing(new Coordinate[]{}));
+        Point luisenparkFernmeldeturmGeoLocation = new Point(49.4866014220824, 8.492042359111437);
+        List<Point> luisenparkFernmeldeturmEntrances = new ArrayList<>();
+        List<Point> luisenparkFernmeldeturmPoly = new ArrayList<>();
+        luisenparkFernmeldeturmPoly.add(new Point(49.4866682, 8.4919824));
+        luisenparkFernmeldeturmPoly.add(new Point(49.4866754, 8.4920072));
+        luisenparkFernmeldeturmPoly.add(new Point(49.4865877, 8.4920623));
+        luisenparkFernmeldeturmPoly.add(new Point(49.4865841, 8.4920381));
+        luisenparkFernmeldeturmPoly.add(new Point(49.4866682, 8.4919824));
 
-        GeometryFactory spinelliParkHaupteingangGeo = new GeometryFactory();
-        Polygon spinelliParkHaupteingangPoly = spinelliParkHaupteingangGeo.createPolygon(spinelliParkHaupteingangGeo.createLinearRing(new Coordinate[]{}));
+        Point spinelliParkHaupteingangGeoLocation = new Point(49.4965228, 8.5233826);
+        List<Point> spinelliParkHaupteingangEntrances = new ArrayList<>();
+        List<Point> spinelliParkHaupteingangPoly = new ArrayList<>();
 
-        GeometryFactory spinelliParkEingangParkschaleGeo = new GeometryFactory();
-        Polygon spinelliParkEingangParkschalePoly = spinelliParkEingangParkschaleGeo.createPolygon(spinelliParkEingangParkschaleGeo.createLinearRing(new Coordinate[]{}));
+        Point spinelliParkEingangParkschaleGeoLocation = new Point(49.50456629500593, 8.516429628068975);
+        List<Point> spinelliParkEingangParkschaleEntrances = new ArrayList<>();
+        List <Point> spinelliParkEingangParkschalePoly = new ArrayList<>();
 
         return args -> {
             carRepo.save(new CarParkingLot(c1GeoLocation, c1Poly, c1Entrances, "C1 Hauptverwaltung MPB, Parkhaus", true, true, ParkingType.CAR));
@@ -655,10 +664,10 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR));
 
             // Auskommentiert da Daten fehlen
-//            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangPoly, "Luisenpark Haupteingang, Fahradstellplatz", false, false, ParkingType.BIKE));
-//            bikeRepo.save(new BikeParkingLot(luisenparkEingangFernmeldeturmPoly, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", false, false, ParkingType.BIKE));
-//            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangPoly, "Spinelli Park, Fahrradabstellung Haupteingang", false, false, ParkingType.BIKE));
-//            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschalePoly, "Spinelli Park, Fahrradabstellung Eingang Parkschale", false, false, ParkingType.BIKE));
+            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", false, false, ParkingType.BIKE));
+            bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", false, false, ParkingType.BIKE));
+            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park, Fahrradabstellung Haupteingang", false, false, ParkingType.BIKE));
+            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park, Fahrradabstellung Eingang Parkschale", false, false, ParkingType.BIKE));
         };
     }
 
