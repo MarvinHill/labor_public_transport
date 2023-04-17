@@ -16,6 +16,8 @@ export class DataServiceService {
 
   carParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
 
+  bikeParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
+
   constructor(private http:HttpClient, private router : Router ) {}
 
   update() {
@@ -30,6 +32,14 @@ export class DataServiceService {
     const request = this.http.get<ParkingLot[]>('http://localhost:8080/parking/car/all')
     request.subscribe(resp => {
       this.carParking.next(resp);
+      console.warn(resp);
+    })
+  }
+
+  getAllBikeParking() {
+    const request = this.http.get<ParkingLot[]>('http://localhost:8080/parking/bike/all')
+    request.subscribe(resp => {
+      this.bikeParking.next(resp);
       console.warn(resp);
     })
   }
