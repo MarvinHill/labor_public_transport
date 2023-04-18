@@ -28,6 +28,7 @@ export class MapComponent implements OnInit {
   protected mapHeight: string = "10em";
 
   carParkingLots = new L.LayerGroup;
+  carParkingLotEntrances = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
 
   @ViewChild('container', { static: false }) container: ElementRef;
@@ -119,11 +120,27 @@ export class MapComponent implements OnInit {
     }.bind(this));
     marker.addTo(this.carParkingLots);
 
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Entrance.png',
+      iconSize:     [15, 15], // size of the icon
+      iconAnchor:   [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor:  [7.5, 15] // point from which the popup should open relative to the iconAnchor
+    });
+
     if(parkinglot.entrance.length > 0) {
       for (var i = 0; i < parkinglot.entrance.length; i++) {
-        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y]).addTo(this.carParkingLots);
+        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
       }
     }
+
+    this.map.on("zoomend", function(e){
+      if(this.map.getZoom() < 16 ){
+        this.carParkingLotEntrances.remove();
+      }
+      else{
+        this.carParkingLotEntrances.addTo(this.map);
+      }
+    }.bind(this));
   }
 
   makeBikeParking(bikeparking: ParkingLot) {
