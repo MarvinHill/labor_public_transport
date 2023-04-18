@@ -80,7 +80,7 @@
   right: 1em;
   width: 3em;
   height: 3em;
-  z-index: 500;
+  z-index: 1001;
   border: outset #ECF4E5 4px;
   border-radius: 1em;
   background: lightgray;
