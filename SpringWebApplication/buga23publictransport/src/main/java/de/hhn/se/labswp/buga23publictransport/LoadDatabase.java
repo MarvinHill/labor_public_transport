@@ -8,11 +8,13 @@ import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLineRep
 import java.sql.Array;
 import java.time.LocalTime;
 
+import de.hhn.se.labswp.buga23publictransport.util.LineLoader;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ResourceUtils;
 
 import javax.sound.sampled.Line;
 import java.util.ArrayList;
@@ -265,6 +267,8 @@ public class LoadDatabase {
 
             // Real data for the train station of line 7 (yellow line)
             var line7 = new PublicTransportLine("7", false);
+            var path = ResourceUtils.getFile("classpath:database/Buga Line 7.txt");
+            line7.setGeoLinePoints(LineLoader.loadLineFile(path.getPath()));
             line7.addLineScheduleEntryList(berlinerPlatz);
             line7.addLineScheduleEntryList(konradAdenauerBrücke);
             line7.addLineScheduleEntryList(universität);

@@ -1,10 +1,7 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import org.springframework.data.geo.Point;
 
 import java.util.*;
 
@@ -17,12 +14,24 @@ public class PublicTransportLine {
     private String lineDesignator;
     private boolean hasDelay;
 
+    @Column(length=10000)
+    @Lob
+    private List<Point> geoLinePoints = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "public_transport_line_line_schedule_entry",
             joinColumns = @JoinColumn(name = "public_transport_line_id"),
             inverseJoinColumns = @JoinColumn(name = "line_schedule_entry_id"))
     private List<LineScheduleEntry> lineScheduleEntryList = new ArrayList<>();
+
+    protected PublicTransportLine() {
+    }
+
+    public PublicTransportLine(String lineDesignator, boolean hasDelay) {
+        this.lineDesignator = lineDesignator;
+        this.hasDelay = hasDelay;
+    }
 
     public void addLineScheduleEntryList(LineScheduleEntry lineScheduleEntry) {
         this.lineScheduleEntryList.add(lineScheduleEntry);
@@ -38,28 +47,28 @@ public class PublicTransportLine {
         }
     }
 
-    protected PublicTransportLine() {
-    }
-
-    public PublicTransportLine(String lineDesignator, boolean hasDelay) {
-        this.lineDesignator = lineDesignator;
-        this.hasDelay = hasDelay;
-    }
-
     public Integer getId() {
         return id;
-    }
-
-    public boolean getDelay() {
-        return hasDelay;
     }
 
     public String getLineDesignator() {
         return lineDesignator;
     }
 
+    public boolean getDelay() {
+        return hasDelay;
+    }
+
     public List<LineScheduleEntry> getLineScheduleEntryList() {
         return this.lineScheduleEntryList;
+    }
+
+    public List<Point> getGeoLinePoints() {
+        return this.geoLinePoints;
+    }
+
+    public void setGeoLinePoints(List<Point> geoLinePoints) {
+        this.geoLinePoints = geoLinePoints;
     }
 
 }

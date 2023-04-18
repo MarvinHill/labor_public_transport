@@ -4,6 +4,7 @@ import { UserLoginServiceService } from '../user-login-service.service';
 import { ShuttleLine } from '../ShuttleLine';
 import { ShuttleLineService } from '../services/shuttle-line.service';
 import { LineScheduleEntry } from '../LineScheduleEntry';
+import { Point } from "leaflet";
 
 @Component({
   selector: 'app-map',
@@ -77,6 +78,14 @@ export class MapComponent implements OnInit {
         console.log(lines);
         this.shuttleLines = lines;
         this.shuttleLines.forEach(line => {
+          
+          if (line.lineDesignator == "7") {
+            this.drawLineToMap(line);
+          }
+          
+
+
+
           line.lineScheduleEntryList.forEach(entry => {
             this.addMarkerToMap(entry, line);
           });
@@ -125,7 +134,21 @@ export class MapComponent implements OnInit {
     }
     
   }
+  
+  private drawLineToMap(line: ShuttleLine) {
+    let fpl = this.tPL(line.geoLinePoints);
+    console.log(fpl);
+    var polyline = L.polyline(fpl, {color: '#ffee00', weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(this.map);
+  }
 
+  private tPL(point: Object[]) {
+    var tranformedPolyLine: L.LatLng[] = [];
+    for(let i = 0; i < point.length; i++) {
+      // @ts-ignore
+      tranformedPolyLine.push(new L.LatLng(point[i].y, point[i].x));
+    }
+    return tranformedPolyLine;
+  }
 
   maximizeMap(): void {
     if (this.minimized) {
