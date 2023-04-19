@@ -5,9 +5,8 @@
  left: 0;
  max-width: 100%;
  width: 100%;
- margin: 0em;
+ margin: 0;
  overflow: hidden;
- border-radius: none;
  border-style: none;
 }
 
@@ -49,17 +48,14 @@
 }
 
 .map-container-large .map {
-  border: outset #ECF4E5 4px;
   border-radius: 0;
 }
 
 .map-container-small-desktop .map {
-  border: outset #ECF4E5 4px;
   border-radius: 10%;
 }
 
 .map-container-small-mobile .map {
-  border: outset #ECF4E5 4px;
   border-radius: 2em 2em 0 0;
 }
 
@@ -78,12 +74,13 @@
   position: absolute;
   top: 1em;
   right: 1em;
-  width: 3em;
-  height: 3em;
+  width: 2.5em;
+  height: 2.5em;
   z-index: 1001;
-  border: outset #ECF4E5 4px;
-  border-radius: 1em;
-  background: lightgray;
+  border: solid lightgray 2px;
+  border-radius: 0.6em;
+  background: white;
+  font-weight: bolder;
 }
 
 .resize-button-min {
