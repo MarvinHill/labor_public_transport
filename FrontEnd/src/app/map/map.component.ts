@@ -72,6 +72,7 @@ export class MapComponent implements OnInit {
     this.updateHeight();
   }
 
+  // place holder will be cleaned into service
   private initShuttleLineViewOnMap() {
     this.shuttleLineService.getShuttleLines().subscribe(
       lines => {
@@ -82,10 +83,6 @@ export class MapComponent implements OnInit {
           if (line.lineDesignator == "7") {
             this.drawLineToMap(line);
           }
-          
-
-
-
           line.lineScheduleEntryList.forEach(entry => {
             this.addMarkerToMap(entry, line);
           });
@@ -94,6 +91,7 @@ export class MapComponent implements OnInit {
     );
   }
 
+  // place holder will be cleaned into service
   private addMarkerToMap(entry: LineScheduleEntry, line: ShuttleLine) {
     var shuttleMarkerIcon = L.icon({
       iconUrl: 'assets/image/shuttle.png',
@@ -135,12 +133,14 @@ export class MapComponent implements OnInit {
     
   }
   
+  // place holder will be cleaned into service
   private drawLineToMap(line: ShuttleLine) {
     let fpl = this.tPL(line.geoLinePoints);
     console.log(fpl);
     var polyline = L.polyline(fpl, {color: '#ffee00', weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(this.map);
   }
 
+  // place holder will be cleaned into service
   private tPL(point: Object[]) {
     var tranformedPolyLine: L.LatLng[] = [];
     for(let i = 0; i < point.length; i++) {
