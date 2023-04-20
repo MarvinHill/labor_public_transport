@@ -28,6 +28,11 @@ export class DataServiceService {
     });
   }
 
+  getData() {
+    return this.http.get<ShuttleLine[]>('http://localhost:8080/ptl');
+    //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
+    }
+
   getAllCarParking() {
     const request = this.http.get<ParkingLot[]>('http://localhost:8080/parking/car/all')
     request.subscribe(resp => {
