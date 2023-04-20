@@ -4,5 +4,7 @@ export class ShuttleLine {
     id: number;
     lineDesignator: string;
     hasDelay: boolean;
-    lineScheduleEntryList: LineScheduleEntry[]  
+    lineScheduleEntryList: LineScheduleEntry[]
+    length: number;
+    
 }
