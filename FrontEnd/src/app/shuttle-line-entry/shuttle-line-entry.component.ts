@@ -20,6 +20,7 @@ export class ShuttleLineEntryComponent implements OnInit {
   arrivalTime: string = "no arrival time";
   stationDesignator: string = "no station name";
   
+  
 
 
 

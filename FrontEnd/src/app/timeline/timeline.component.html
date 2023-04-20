@@ -1,21 +1,25 @@
 <!-- Section: Timeline -->
-<section class="py-5">
-  <div class="row p-2 background-bar bc-g">
-    <div class="p-2 text-box">
+<section class="py-10">
+  <div class="row background-bar bc-g">
+    <div class="text-box">
       <h5 class="fw-bold">{{lineName}}</h5>
+      <p class="text-muted fw-bold" style="text-align: right;">{{this.lineScheduleEntryList[0].stationDesignator}} -
+        {{this.lineScheduleEntryList[number].stationDesignator}}</p>
       <ul class="timeline">
-        <li class="timeline-item mb-5">
-          <p class="text-muted mb-2 fw-bold">{{lineScheduleEntryList}} + {{arrivalTime}}</p>
-        </li>
-
-        <li class="timeline-item mb-5">
-          <p class="text-muted mb-2 fw-bold">{{stationDesignator2}} + {{arrivalTime}}</p>
-        </li>
-        <li class="timeline-item mb-5">
-          <p class="text-muted mb-2 fw-bold">{{stationDesignator2}} + {{arrivalTime}}</p>
+        <li class="timeline-item" *ngFor="let lineScheduleEntry of lineScheduleEntryList" style="text-align: start;">
+          <p class="text-muted fw-bold">{{lineScheduleEntry.stationDesignator}}: {{lineScheduleEntry.arrivalTime}}</p>
         </li>
       </ul>
-    </div>
+      <div style="text-align: right;">
+        <button type="button" class="btn success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+            viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z" />
+          </svg>
+        </button>
+    </div> </div>
   </div>
+
 </section>
 <!-- Section: Timeline -->

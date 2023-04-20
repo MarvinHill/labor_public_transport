@@ -30,7 +30,7 @@ export class ShuttleViewComponent{
     this.http = http;
     this.loginService = loginService;
     this.dataService = dataService;
-    dataService.lines.subscribe(value => {
+    dataService.lines.subscribe(value=> {
       this.shuttleLineList = value;
     })
     dataService.update()
