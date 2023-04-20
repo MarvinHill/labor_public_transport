@@ -1,3 +1,4 @@
+import { Point } from "leaflet";
 import { ShuttleLine } from "./ShuttleLine";
 
 export class LineScheduleEntry{   // -> ist ein Punk in der Shuttleline
@@ -7,4 +8,5 @@ export class LineScheduleEntry{   // -> ist ein Punk in der Shuttleline
     delay: number;
     stationDesignator: string;    // -> ist der Name
     publicTransportLine: ShuttleLine;
+    geoLocation: Point;
 }
