@@ -13,6 +13,12 @@ import {HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
 import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TravelinfoComponent } from './travelinfo/travelinfo.component';
+import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
+import { InfoParkingComponent } from './info-parking/info-parking.component';
+import { InfoBusComponent } from './info-bus/info-bus.component';
+import { InfoBahnComponent } from './info-bahn/info-bahn.component';
+
 
 
 @NgModule({
@@ -25,6 +31,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ShuttleLineEntryComponent,
     AddShuttleLineComponent,
     PublicTransportLineComponent,
+    TravelinfoComponent,
+    InfoCarouselComponent,
+    InfoParkingComponent,
+    InfoBusComponent,
+    InfoBahnComponent,
   ],
   imports: [
     BrowserModule,
