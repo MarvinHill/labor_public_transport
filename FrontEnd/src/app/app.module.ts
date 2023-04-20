@@ -12,6 +12,12 @@ import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-ent
 import {HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TravelinfoComponent } from './travelinfo/travelinfo.component';
+import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
+import { InfoParkingComponent } from './info-parking/info-parking.component';
+import { InfoBusComponent } from './info-bus/info-bus.component';
+import { InfoBahnComponent } from './info-bahn/info-bahn.component';
+
 import { MapComponent } from './map/map.component';
 import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
 
@@ -28,6 +34,11 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
     ShuttleLineEntryComponent,
     AddShuttleLineComponent,
     MapDetailsObserverComponent,
+    TravelinfoComponent,
+    InfoCarouselComponent,
+    InfoParkingComponent,
+    InfoBusComponent,
+    InfoBahnComponent,
   ],
   imports: [
     BrowserModule,
