@@ -18,6 +18,7 @@ import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
 import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
+import { InfoCardsComponent } from './info-cards/info-cards.component';
 
 
 
@@ -36,6 +37,7 @@ import { InfoBahnComponent } from './info-bahn/info-bahn.component';
     InfoParkingComponent,
     InfoBusComponent,
     InfoBahnComponent,
+    InfoCardsComponent,
   ],
   imports: [
     BrowserModule,
