@@ -15,7 +15,12 @@
       <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
     </div>
     <h3 class="m-3">GENERAL INFORMATION</h3>
+    <ng-container *ngIf="(window.innerWidth <= 768) else desktopView">
     <app-info-carousel></app-info-carousel>
+    </ng-container>
+    <ng-template #desktopView>
+    <app-info-cards></app-info-cards>
+    </ng-template>
     <div class="hidden-info">
       <h3>Bedienungsanleitung</h3>
       <p>Du befindest dich im Startmodus hier kannst du entweder die Karte öffnen und eine der vielen Filter nutzen oder auf einer der Transportmöglichkeiten klicken um die Informationen in Listenform zu erhalten. Weiter unten findest du weitere informationen für deine Anreiße zur Buga.</p>
