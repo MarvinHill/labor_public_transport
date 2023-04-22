@@ -3,6 +3,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 import{ShuttleLine} from '../ShuttleLine';
 import { UserLoginServiceService } from '../services/user-login-service.service';
+import { LineScheduleEntry } from '../LineScheduleEntry';
 import { DataServiceService } from '../services/data-service.service';
 
 
@@ -31,7 +32,7 @@ export class ShuttleViewComponent{
     this.http = http;
     this.loginService = loginService;
     this.dataService = dataService;
-    dataService.lines.subscribe(value => {
+    dataService.lines.subscribe(value=> {
       this.shuttleLineList = value;
     })
     dataService.update()
@@ -45,6 +46,5 @@ export class ShuttleViewComponent{
         this.dataService.update();
       })
       }
-
 
 }
