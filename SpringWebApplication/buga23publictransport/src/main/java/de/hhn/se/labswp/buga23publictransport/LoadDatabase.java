@@ -256,7 +256,8 @@ public class LoadDatabase {
             entryRepo.save(wasserTurm);
 
             // Real data for the shuttle line from the BUGA entrance pdf file and openstreetmap
-            var bugaShuttlelinie = new PublicTransportLine("BUGA Shuttlelinie", false);
+            var bugaShuttlelinie = new PublicTransportLine("BUGA Shuttlelinie", false, "#4e2583");
+            //TODO: shuttle line polygon
             bugaShuttlelinie.addLineScheduleEntryList(sapArena);
             bugaShuttlelinie.addLineScheduleEntryList(luisenPark);
             bugaShuttlelinie.addLineScheduleEntryList(neuOstHeim);
@@ -266,9 +267,9 @@ public class LoadDatabase {
             log.info("Saving Buga Shuttle Line " + lineRepo.save(bugaShuttlelinie));
 
             // Real data for the train station of line 7 (yellow line)
-            var line7 = new PublicTransportLine("7", false);
-            var path = ResourceUtils.getFile("classpath:database/Buga Line 7.txt");
-            line7.setGeoLinePoints(LineLoader.loadLineFile(path.getPath()));
+            var line7 = new PublicTransportLine("7", false, "#FFCC00");
+            var pathLine7 = ResourceUtils.getFile("classpath:database/Buga Line 7.txt");
+            line7.setGeoLinePoints(LineLoader.loadLineFile(pathLine7.getPath()));
             line7.addLineScheduleEntryList(berlinerPlatz);
             line7.addLineScheduleEntryList(konradAdenauerBrücke);
             line7.addLineScheduleEntryList(universität);
@@ -290,7 +291,9 @@ public class LoadDatabase {
             log.info("Saving Line 7 " + lineRepo.save(line7));
 
             // Real data for buga 23 express blue line
-            var lineBuga23Express = new PublicTransportLine("Buga 23 Express", false);
+            var lineBuga23Express = new PublicTransportLine("Buga 23 Express", false, "#0BBBEF");
+            var path23Express = ResourceUtils.getFile("classpath:database/Buga Line 23 Express.txt");
+            lineBuga23Express.setGeoLinePoints(LineLoader.loadLineFile(path23Express.getPath()));
             lineBuga23Express.addLineScheduleEntryList(mannheimHauptBahnHof);
             lineBuga23Express.addLineScheduleEntryList(kunstHalle);
             lineBuga23Express.addLineScheduleEntryList(rosenGarten);
@@ -307,7 +310,8 @@ public class LoadDatabase {
             log.info("Saving Line Buga 23 Express" + lineRepo.save(lineBuga23Express));
 
             // real data for ex9 green line
-            var ex9 = new PublicTransportLine("EX9", false);
+            var ex9 = new PublicTransportLine("EX9", false, "#95c23d");
+            // TODO EX9 polygon line
             ex9.addLineScheduleEntryList(mannheimHauptBahnHof);
             ex9.addLineScheduleEntryList(tattersall);
             ex9.addLineScheduleEntryList(werderStrasse);
@@ -323,7 +327,9 @@ public class LoadDatabase {
             log.info("Saving Line EX9 " + lineRepo.save(ex9));
 
             // real data for buga 23 bl line pink line
-            var bugaBL = new PublicTransportLine("BUGA 23 Sonderlinie BL", false);
+            var bugaBL = new PublicTransportLine("BUGA 23 Sonderlinie BL", false, "#e6007e");
+            var pathBL = ResourceUtils.getFile("classpath:database/Buga Line 23 Express.txt");
+            bugaBL.setGeoLinePoints(LineLoader.loadLineFile(pathBL.getPath()));
             bugaBL.addLineScheduleEntryList(mannheimHauptBahnHof);
             bugaBL.addLineScheduleEntryList(tattersall);
             bugaBL.addLineScheduleEntryList(werderStrasse);
@@ -343,7 +349,7 @@ public class LoadDatabase {
             log.info("Saving Buga 23 BL line " + lineRepo.save(bugaBL));
 
             // real data for rnv bahnlinie brown line
-            var rnvBahnlinie6 = new PublicTransportLine("RNV-Bahnlinie 6", false);
+            var rnvBahnlinie6 = new PublicTransportLine("RNV-Bahnlinie 6", false, "966c29");
             rnvBahnlinie6.addLineScheduleEntryList(berlinerPlatz);
             rnvBahnlinie6.addLineScheduleEntryList(ludwigStrasse);
             rnvBahnlinie6.addLineScheduleEntryList(ratHausLU);

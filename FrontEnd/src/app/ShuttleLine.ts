@@ -6,5 +6,6 @@ export class ShuttleLine {
     lineDesignator: string;
     hasDelay: boolean;
     lineScheduleEntryList: LineScheduleEntry[];
-    geoLinePoints: Object[];
+    geoLinePoints: Point[];
+    colorHexCode: string;
 }

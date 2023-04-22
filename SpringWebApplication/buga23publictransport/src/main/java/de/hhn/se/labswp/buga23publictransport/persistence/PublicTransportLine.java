@@ -13,10 +13,10 @@ public class PublicTransportLine {
     private Integer id;
     private String lineDesignator;
     private boolean hasDelay;
-
-    @Column(length=10000)
+    @Column(length=5000)
     @Lob
     private List<Point> geoLinePoints = new ArrayList<>();
+    private String colorHexCode;
 
     @ManyToMany
     @JoinTable(
@@ -28,9 +28,10 @@ public class PublicTransportLine {
     protected PublicTransportLine() {
     }
 
-    public PublicTransportLine(String lineDesignator, boolean hasDelay) {
+    public PublicTransportLine(String lineDesignator, boolean hasDelay, String colorHexCode) {
         this.lineDesignator = lineDesignator;
         this.hasDelay = hasDelay;
+        this.colorHexCode = colorHexCode;
     }
 
     public void addLineScheduleEntryList(LineScheduleEntry lineScheduleEntry) {
@@ -59,6 +60,9 @@ public class PublicTransportLine {
         return hasDelay;
     }
 
+    public String getColorHexCode() {
+        return this.colorHexCode;
+    }
     public List<LineScheduleEntry> getLineScheduleEntryList() {
         return this.lineScheduleEntryList;
     }

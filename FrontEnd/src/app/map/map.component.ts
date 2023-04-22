@@ -1,10 +1,10 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { UserLoginServiceService } from '../user-login-service.service';
-import { ShuttleLine } from '../ShuttleLine';
+import { UserLoginServiceService } from '../services/user-login-service.service';
+import { DataServiceService } from "../services/data-service.service";
+import { MapDetailsObserverService } from "../services/map-details-observer.service";
+import { ParkingLot } from '../ParkingLot';
 import { ShuttleLineService } from '../services/shuttle-line.service';
-import { LineScheduleEntry } from '../LineScheduleEntry';
-import { Point } from "leaflet";
 
 @Component({
   selector: 'app-map',
@@ -13,41 +13,44 @@ import { Point } from "leaflet";
 })
 export class MapComponent implements OnInit {
 
-  shuttleLines: ShuttleLine[];
-
   private map: L.Map;
-  private layerGroupMarkers: L.LayerGroup = new L.LayerGroup();
   private centroid: L.LatLngExpression = [49.485, 8.5];
 
   protected minimized: boolean = true;
 
+  mapContainerClass: string = "map-container-small-desktop";
+  resizeButtonClass: string = "resize-button-min";
   private userService: UserLoginServiceService;
   private renderer: Renderer2;
 
   protected isLoggedIn: boolean = true;
   protected mapHeight: string = "10em";
 
+  carParkingLots = new L.LayerGroup;
+  carParkingLotEntrances = new L.LayerGroup;
+  bikeParkingLots = new L.LayerGroup;
 
   @ViewChild('container', { static: false }) container: ElementRef;
+
   windowHeight: number;
+  windowWidth: number;
   topBarHeight: number;
+  public innerWidth: number = 1000;
+  breakPoint: number = 720;
 
 
   constructor(
-    private shuttleLineService: ShuttleLineService,
-    userService: UserLoginServiceService,
-    renderer: Renderer2
-  ) {
-    this.shuttleLineService = shuttleLineService;
+    userService: UserLoginServiceService, 
+    renderer: Renderer2, 
+    private dataService: DataServiceService, 
+    protected observerService: MapDetailsObserverService,
+    private shuttleService: ShuttleLineService) {
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
     });
     this.renderer = renderer;
-  }
-
-  public getMap(): L.Map {
-    return this.map;
+    this.shuttleService = shuttleService;
   }
 
   private initMap(): void {
@@ -63,107 +66,143 @@ export class MapComponent implements OnInit {
     });
 
     tiles.addTo(this.map);
-    this.layerGroupMarkers.addTo(this.map);
+
+    this.dataService.carParking.subscribe(values => {
+      values.forEach(element => {
+        this.makeCarParking(element);
+      });
+    })
+
+    this.dataService.bikeParking.subscribe(values => {
+      values.forEach(element => {
+        this.makeBikeParking(element);
+      });
+    })
+
+    this.dataService.getAllCarParking();
+
+    this.dataService.getAllBikeParking();
+
+    this.map.addLayer(this.carParkingLots);
+
+    this.map.addLayer(this.bikeParkingLots);
+
+    this.map.addEventListener("click", function (e: any) {
+      this.observerService.changeVisibility(false);
+    }.bind(this));
+
+    console.log(this.map);
+    this.shuttleService.initShuttleLineViewOnMap(this.map);
+  }
+
+  makeCarParking(parkinglot: ParkingLot) {
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/MarkerCar.png',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    if (parkinglot.charging === true) {
+      parkingIcon = L.icon({
+        iconUrl: 'assets/icon/parking/MarkerECar.png',
+        iconSize: [45, 72], // size of the icon
+        iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+      });
+    }
+    if (parkinglot.area.length > 0) {
+      var arr = [];
+      for (var i = 0; i < parkinglot.area.length; i++) {
+        arr.push([parkinglot.area.at(i).x, parkinglot.area.at(i).y]);
+      }
+      var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.carParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon });
+    }
+    else {
+      var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], { icon: parkingIcon });
+    }
+
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(parkinglot)
+    }.bind(this));
+    marker.addTo(this.carParkingLots);
+
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Entrance.png',
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
+    });
+
+    if (parkinglot.entrance.length > 0) {
+      for (var i = 0; i < parkinglot.entrance.length; i++) {
+        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
+      }
+    }
+    this.map.on("zoomend", function (e) {
+      if (this.map.getZoom() < 16) {
+        this.carParkingLotEntrances.remove();
+      }
+      else {
+        this.carParkingLotEntrances.addTo(this.map);
+      }
+    }.bind(this));
+  }
+
+  makeBikeParking(bikeparking: ParkingLot) {
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/MarkerBike.png',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    if (bikeparking.area.length > 0) {
+      var arr = [];
+      for (var i = 0; i < bikeparking.area.length; i++) {
+        arr.push([bikeparking.area.at(i).x, bikeparking.area.at(i).y]);
+      }
+      var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.bikeParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon }).addTo(this.bikeParkingLots);
+    }
+    else {
+      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], { icon: parkingIcon }).addTo(this.bikeParkingLots);
+    }
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(bikeparking)
+    }.bind(this));
+    marker.addTo(this.carParkingLots);
   }
 
   ngOnInit(): void {
     this.initMap();
-    this.initShuttleLineViewOnMap();
+    this.innerWidth = window.innerWidth;
     this.updateHeight();
-  }
-
-  // place holder will be cleaned into service
-  private initShuttleLineViewOnMap() {
-    this.shuttleLineService.getShuttleLines().subscribe(
-      lines => {
-        console.log(lines);
-        this.shuttleLines = lines;
-        this.shuttleLines.forEach(line => {
-          
-          if (line.lineDesignator == "7") {
-            this.drawLineToMap(line);
-          }
-          line.lineScheduleEntryList.forEach(entry => {
-            this.addMarkerToMap(entry, line);
-          });
-        });
-      }
-    );
-  }
-
-  // place holder will be cleaned into service
-  private addMarkerToMap(entry: LineScheduleEntry, line: ShuttleLine) {
-    var shuttleMarkerIcon = L.icon({
-      iconUrl: 'assets/image/shuttle.png',
-      iconSize: [60, 60], // size of the icon
-      shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62],  // the same for the shadow
-      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
-
-    var trainMarkerIcon = L.icon({
-      iconUrl: 'assets/image/train.png',
-      iconSize: [60, 60], // size of the icon
-      shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62],  // the same for the shadow
-      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
-
-    if (line.lineDesignator == "BUGA Shuttlelinie") {
-      let marker = new L.Marker(
-        [entry.geoLocation.x, entry.geoLocation.y],
-        { icon: shuttleMarkerIcon }
-      );
-  
-      marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
-      marker.addTo(this.layerGroupMarkers);
-      marker.addTo(this.map);
-    } else {
-      let marker = new L.Marker(
-        [entry.geoLocation.x, entry.geoLocation.y],
-        { icon: trainMarkerIcon }
-      );
-  
-      marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
-      marker.addTo(this.layerGroupMarkers);
-      marker.addTo(this.map);
-    }
-    
-  }
-  
-  // place holder will be cleaned into service
-  private drawLineToMap(line: ShuttleLine) {
-    let fpl = this.tPL(line.geoLinePoints);
-    console.log(fpl);
-    var polyline = L.polyline(fpl, {color: '#ffee00', weight: 5, opacity: 0.8, smoothFactor: 1}).addTo(this.map);
-  }
-
-  // place holder will be cleaned into service
-  private tPL(point: Object[]) {
-    var tranformedPolyLine: L.LatLng[] = [];
-    for(let i = 0; i < point.length; i++) {
-      // @ts-ignore
-      tranformedPolyLine.push(new L.LatLng(point[i].y, point[i].x));
-    }
-    return tranformedPolyLine;
+    this.updateWidth();
+    this.updateMobileDesktopMap();
   }
 
   maximizeMap(): void {
     if (this.minimized) {
-      document.getElementById("map-container").className = "map-container-large";
+      this.mapContainerClass = "map-container-large";
+      this.resizeButtonClass = "resize-button-max shadow";
+
       this.minimized = false;
+      this.updateHeight()
+      this.updateWidth();
     }
-    this.updateHeight()
+    this.map.invalidateSize();
+
   }
 
   minimizeMap(): void {
     if (!this.minimized) {
-      document.getElementById("map-container").className = "map-container-small";
       this.minimized = true;
+      this.updateMobileDesktopMap();
+      this.resizeButtonClass = "resize-button-min";
       this.updateHeight()
+      this.updateWidth();
     }
+    this.map.invalidateSize();
   }
 
   resizeMap(): void {
@@ -172,31 +211,47 @@ export class MapComponent implements OnInit {
     } else {
       this.minimizeMap();
     }
+    this.map.invalidateSize();
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize(event: { target: { innerWidth: number; }; }) {
+    this.innerWidth = event.target.innerWidth;
     this.updateHeight();
+    this.updateWidth();
+    this.updateMobileDesktopMap();
+
+  }
+
+  private updateMobileDesktopMap() {
+    if ((this.innerWidth < this.breakPoint) && this.minimized) {
+      this.mapContainerClass = "map-container-small-mobile";
+    } else if (this.minimized) {
+      this.mapContainerClass = "map-container-small-desktop";
+    }
   }
 
   private updateHeight() {
     this.computeMaxHeight();
     document.getElementById("map-container").style.height = this.mapHeight;
-    this.map.invalidateSize();
+  }
+  private updateWidth() {
+    this.windowWidth = window.innerWidth
   }
 
   private computeMaxHeight() {
     this.windowHeight = window.innerHeight;
     this.topBarHeight = document.getElementById("top-bar").offsetHeight;
     if (this.minimized) {
-      this.mapHeight = "10em";
+      if (this.innerWidth < this.breakPoint) {
+        this.mapHeight = "5em";
+      }
+      else {
+        this.mapHeight = "10em";
+      }
     }
     else {
       this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";
     }
   }
-
-
-
 }
-

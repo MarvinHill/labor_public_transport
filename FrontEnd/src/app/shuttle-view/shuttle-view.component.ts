@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { DataServiceService } from '../data-service.service';
+
 import{ShuttleLine} from '../ShuttleLine';
-import { UserLoginServiceService } from '../user-login-service.service';
+import { UserLoginServiceService } from '../services/user-login-service.service';
+import { DataServiceService } from '../services/data-service.service';
+
 
 @Component({
   selector: 'app-shuttle-view',
