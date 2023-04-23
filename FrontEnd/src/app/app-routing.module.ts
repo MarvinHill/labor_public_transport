@@ -6,7 +6,8 @@ import { TravelinfoComponent } from './travelinfo/travelinfo.component';
 import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
-import {MapComponent} from "./map/map.component";
+import { MapComponent } from "./map/map.component";
+import { BikeViewComponent } from "./bike-view/bike-view.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:"info-parking",component: InfoParkingComponent},
   {path:"info-bahn", component: InfoBahnComponent},
   {path:"info-bus", component: InfoBusComponent},
-  {path:'map', component: MapComponent}
+  {path:'map', component: MapComponent},
+  {path:'bike', component: BikeViewComponent}
 ];
 
 @NgModule({
