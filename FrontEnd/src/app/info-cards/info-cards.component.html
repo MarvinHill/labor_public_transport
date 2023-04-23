@@ -1,3 +1,4 @@
+<html>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="widt=device-width, initial-scale = 1.0" />
@@ -5,3 +6,152 @@
     <link href="info-cards.component.css" rel="stylsheet">
     <script src="info-cards.component.ts"></script>
 </head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="accordion">
+
+            <div class="accordion-panel">
+                <h2 id="panel1-heading">
+                    <button
+                        class="accordion-trigger"
+                        aria-controls="panel1-content"
+                        aria-expanded='true'
+                        >
+                            <span id="panel1-title">Allg. Informationen</span>
+                            <svg aria-hidden="true" class="accordion-icon">
+                                <use xlink:href="#info-icon"></use>
+                            </svg>
+                            
+                    </button>
+                </h2>
+
+                <div 
+                    class="accordion-content" 
+                    id="panel1-content"
+                    aria-labelledby="panel1-heading"
+                    aria-hidden='false'
+                    role="region"
+                >
+                <p>
+                    Hier finden Sie allg. Informationen zur BUGA 23
+                </p>
+                <img
+                    class="accordion-image"
+                    [src]="'assets/image/info-slide.png'"
+                    alt="A info slide imgae"
+                    />
+                </div>
+            </div>
+
+            <div class="accordion-panel">
+                <h2 id="panel2-heading">
+                    <button
+                        class="accordion-trigger"
+                        aria-controls="panel2-content"
+                        aria-expanded="false"
+                        >
+                            <span id="panel2-title">Parking Info</span>
+                            <svg aria-hidden="true" class="accordion-icon">
+                                <use xlink:href="#info-icon"></use>
+                            </svg>
+                            
+                    </button>
+                </h2>
+
+                <div 
+                    class="accordion-content" 
+                    id="panel2-content"
+                    aria-labelledby="panel2-heading"
+                    aria-hidden='true'
+                    role="region"
+                >
+                <p>
+                    Hier finden Sie Parking Infos zur BUGA 23
+                </p>
+                <img
+                    class="accordion-image"
+                    [src]="'assets/image/info-parking.avif'"
+                    alt="A info slide imgae"
+                    />
+                </div>
+            </div>
+
+            <div class="accordion-panel">
+                <h2 id="panel3-heading">
+                    <button
+                        class="accordion-trigger"
+                        aria-controls="panel3-content"
+                        aria-expanded="false"
+                        >
+                            <span id="panel3-title">Bus Info</span>
+                            <svg aria-hidden="true" class="accordion-icon">
+                                <use xlink:href="#info-icon"></use>
+                            </svg>
+                            
+                    </button>
+                </h2>
+
+                <div 
+                    class="accordion-content" 
+                    id="panel3-content"
+                    aria-labelledby="panel3-heading"
+                    aria-hidden='true'
+                    role="region"
+                >
+                <p>
+                    Hier finden Sie Bus Informationen zur BUGA 23
+                </p>
+                <img
+                    class="accordion-image"
+                    [src]="'assets/image/info-bus.avif'"
+                    alt="A info slide imgae"
+                    />
+                </div>
+            </div>
+
+            <div class="accordion-panel">
+                <h2 id="panel4-heading">
+                    <button
+                        class="accordion-trigger"
+                        aria-controls="panel4-content"
+                        aria-expanded='false'
+                        >
+                            <span id="panel4-title">Train Info</span>
+                            <svg aria-hidden="true" class="accordion-icon">
+                                <use href="#info-icon"></use>
+                            </svg>
+                            
+                    </button>
+                </h2>
+
+                <div 
+                    class="accordion-content" 
+                    id="panel4-content"
+                    aria-labelledby="panel4-heading"
+                    aria-hidden='true'
+                    role="region"
+                >
+                <p>
+                    Hier finden Sie Train Informationen zur BUGA 23
+                </p>
+                <img
+                    class="accordion-image"
+                    [src]="'assets/image/info-train.avif'"
+                    alt="A info slide imgae"
+                    />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <svg> <symbol id="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"> width="50px" height="50px"><path d="M 25 2 C 12.264481 2 2 12.264481 2 25 C 2 37.735519 12.264481 48 25 48 C 37.735519 48 48 37.735519 48 25 C 48 12.264481 37.735519 2 25 2 z M 25 4 C 36.664481 4 46 13.335519 46 25 C 46 36.664481 36.664481 46 25 46 C 13.335519 46 4 36.664481 4 25 C 4 13.335519 13.335519 4 25 4 z M 25 11 A 3 3 0 0 0 25 17 A 3 3 0 0 0 25 11 z M 21 21 L 21 23 L 23 23 L 23 36 L 21 36 L 21 38 L 29 38 L 29 36 L 27 36 L 27 21 L 21 21 z"/></symbol></svg>
+
+
+</body>
+</html>
