@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylsheet" href="main-view.component.css">
-  </head>   
+  </head>
 
 
 <div class="container">
@@ -13,6 +13,7 @@
       <div class = "col-lg-4"><app-transport-entry [text]="'Parkplätze'" [imageName]="'parkinglot.png'"></app-transport-entry></div>
       <div class = "col-lg-4"><app-transport-entry [text]="'Bus'" [imageName]="'shuttle.png'"></app-transport-entry></div>
       <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'Fahrrad'" [imageName]="'train.png'" [routerLink]="['/bike']"></app-transport-entry></div>
     </div>
     <h3 class="m-3">GENERAL INFORMATION</h3>
     <app-info-carousel></app-info-carousel>
@@ -23,4 +24,4 @@
     </div>
   </div>
 </html>
-    
+

@@ -22,6 +22,7 @@ import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 
 import { MapComponent } from './map/map.component';
 import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
+import { BikeViewComponent } from './bike-view/bike-view.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
     InfoParkingComponent,
     InfoBusComponent,
     InfoBahnComponent,
+    BikeViewComponent,
 
   ],
   imports: [
