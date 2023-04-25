@@ -22,6 +22,8 @@ import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 
 import { MapComponent } from './map/map.component';
 import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
+import { ParkingViewComponent } from './parking-view/parking-view.component';
+import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeViewComponent } from './bike-view/bike-view.component';
 
 
@@ -45,6 +47,8 @@ import { BikeViewComponent } from './bike-view/bike-view.component';
     InfoBahnComponent,
     BikeViewComponent,
 
+    ParkingViewComponent,
+    ParkingItemComponent,
   ],
   imports: [
     BrowserModule,
