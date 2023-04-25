@@ -43,15 +43,15 @@ img{
     margin: 0;
 }
 
-.accordion-panel{
+.accordion-panel {
     position: relative;
     isolation: isolate;
     flex-basis: calc((var(--_panel-padding)*2)+var(--_button-size));
-    color: white;
     overflow: hidden;
     padding: var(--_panel-padding);
     border-radius: calc(((var(--_panel-padding) * 2) + var(--_button-size)) / 2);
-}
+    transition: flex-basis 500ms !important;
+  }
 
 .accordion-panel:nth-child(1){
     --_panel-color: hsl(160, 70%, 50%);
@@ -69,8 +69,13 @@ img{
     --_panel-color: hsl(263, 70%, 50%);
 }
 
-.accordion-panel:has([aria-expanded="true"]){
+.accordion-panel:has([aria-expanded='true']){
   flex-basis: clamp(15rem, 40vh, 20rem);
+}
+
+.accordion-content > p {
+    transform: translateY(2rem);
+    opacity: 0;
 }
 
 .accordion-image{
