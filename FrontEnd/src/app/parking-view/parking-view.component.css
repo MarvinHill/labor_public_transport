@@ -1,0 +1,13 @@
+.selected-button {
+  height: 100%;
+  width: 50%;
+  background: gray;
+  color: white;
+}
+
+.unselected-button {
+  height: 100%;
+  width: 50%;
+  background: lightgray;
+  color: white;
+}

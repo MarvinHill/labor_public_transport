@@ -11,6 +11,7 @@ import {ParkingLot} from "../ParkingLot";
 })
 export class ParkingViewComponent implements OnInit{
   carParkingLots: ParkingLot[];
+  bikeParkingLots: ParkingLot[];
   http:HttpClient;
   loginService : UserLoginServiceService;
   options!: {
@@ -24,6 +25,10 @@ export class ParkingViewComponent implements OnInit{
 
   dataService: DataServiceService;
 
+  carButtonClass: string = "selected-button";
+  bikeButtonClass: string = "unselected-button";
+
+
   constructor(http:HttpClient, loginService : UserLoginServiceService,  dataService: DataServiceService){
     this.http = http;
     this.loginService = loginService;
@@ -32,18 +37,31 @@ export class ParkingViewComponent implements OnInit{
       this.carParkingLots = value;
     })
     dataService.getAllCarParking();
+
+    dataService.bikeParking.subscribe(value=> {
+      this.bikeParkingLots = value;
+    })
+    dataService.getAllBikeParking();
   }
 
   ngOnInit(): void {
-    this.name = this.carPark.name;
-    this.parkingId = this.carPark.id;
+    this.name = this.park.name;
+    this.parkingId = this.park.id;
   }
 
-  @Input() carPark: ParkingLot;
+  @Input() park: ParkingLot;
 
   name:String = "NAME";
   parkingId: number;
 
 
+  switchCar() : void {
+    this.carButtonClass = "selected-button";
+    this.bikeButtonClass = "unselected-button";
+  }
 
+  switchBike() : void {
+    this.bikeButtonClass = "selected-button";
+    this.carButtonClass = "unselected-button";
+  }
 }
