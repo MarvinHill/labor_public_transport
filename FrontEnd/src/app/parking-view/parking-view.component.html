@@ -7,34 +7,36 @@
 </div>
 
 <div>
-  <div class="container-lg">
-    <button [ngClass]="carButtonClass" (click)="switchCar()">AUTO PARKPLÄTZE</button>
-    <button [ngClass]="bikeButtonClass" (click)="switchBike()">FAHRRAD ABSTELLPLÄTZE</button>
+  <div class="container-lg" style="padding: 0;">
+    <button [ngClass]="carButtonClass" (click)="switchCar()">FÜR AUTOS</button>
+    <button [ngClass]="bikeButtonClass" (click)="switchBike()">FÜR FAHRRÄDER</button>
   </div>
 </div>
 
-
-<div class="container-lg">
-  <div class="row">
-    <ng-container *ngFor="let item of carParkingLots;">
-      <div class="col-md-6 p-3">
-        <div class="row">
-          <div class = "col-11"><app-parkingItem [carParking]="item"></app-parkingItem></div>
-        </div>
+  <div id="carParkingContent" class="content" style="display: block;">
+    <div class="container-lg">
+      <div class="row">
+        <ng-container *ngFor="let item of carParkingLots;">
+          <div class="col-md-6 p-3">
+            <div class="row">
+              <div class = "col-11"><app-parkingItem [carParking]="item"></app-parkingItem></div>
+            </div>
+          </div>
+        </ng-container>
       </div>
-    </ng-container>
+    </div>
   </div>
-</div>
 
-<div class="container-lg">
-  <div class="row">
-    <ng-container *ngFor="let item of bikeParkingLots;">
-      <div class="col-md-6 p-3">
-        <div class="row">
-          <div class = "col-11"><app-bike-parking-item [bikeParking]="item"></app-bike-parking-item></div>
-        </div>
+  <div id="bikeParkingContent" class="content">
+    <div class="container-lg">
+      <div class="row">
+        <ng-container *ngFor="let item of bikeParkingLots;">
+          <div class="col-md-6 p-3">
+            <div class="row">
+              <div class = "col-11"><app-bike-parking-item [bikeParking]="item"></app-bike-parking-item></div>
+            </div>
+          </div>
+        </ng-container>
       </div>
-    </ng-container>
+    </div>
   </div>
-</div>
-

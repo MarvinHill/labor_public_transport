@@ -28,7 +28,6 @@ export class ParkingViewComponent implements OnInit{
   carButtonClass: string = "selected-button";
   bikeButtonClass: string = "unselected-button";
 
-
   constructor(http:HttpClient, loginService : UserLoginServiceService,  dataService: DataServiceService){
     this.http = http;
     this.loginService = loginService;
@@ -58,10 +57,16 @@ export class ParkingViewComponent implements OnInit{
   switchCar() : void {
     this.carButtonClass = "selected-button";
     this.bikeButtonClass = "unselected-button";
+
+    document.getElementById("bikeParkingContent").style.display = "none";
+    document.getElementById("carParkingContent").style.display = "block";
   }
 
   switchBike() : void {
     this.bikeButtonClass = "selected-button";
     this.carButtonClass = "unselected-button";
+
+    document.getElementById("carParkingContent").style.display = "none";
+    document.getElementById("bikeParkingContent").style.display = "block";
   }
 }
