@@ -9,17 +9,15 @@ import { DataServiceService } from '../data-service.service';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-  
-  shuttleLineList: ShuttleLine[];
   items: number[];
-
+  
+  
   ngOnInit(): void {
  
     this.lineName = this.shuttleLine.lineDesignator;
     this.lineScheduleEntryList = this.shuttleLine.lineScheduleEntryList;
     this.shuttleLineID = this.shuttleLine.id;
     this.number = this.lineScheduleEntryList.length-1;
-    console.log(this.lineScheduleEntryList.length);
   }
 
 
@@ -28,6 +26,6 @@ export class TimelineComponent implements OnInit {
   lineName: string = "no line name";
   shuttleLineID: number;
   lineScheduleEntryList: LineScheduleEntry[];
+  shuttleLineList: ShuttleLine[];
   number: number; 
-  @Input() imageName: String = "train.png";
 }
