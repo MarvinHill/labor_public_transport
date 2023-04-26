@@ -39,7 +39,7 @@
 }
 
 .background-bar2 {
-  height: 20em;
+  height: 30em; /*oder 100%*/
   border-radius: 1em;
 }
 
@@ -51,4 +51,14 @@
 
 .success:hover {
   background-color: #f98ca9ec;
+}
+
+.test {
+  position:relative;
+}
+
+.test-button {
+  position: absolute;
+  bottom: 11px;
+  right:11px;
 }
