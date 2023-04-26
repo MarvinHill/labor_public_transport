@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
 import { LineScheduleEntry } from '../LineScheduleEntry';
-import { DataServiceService } from '../data-service.service';
+import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-timeline',

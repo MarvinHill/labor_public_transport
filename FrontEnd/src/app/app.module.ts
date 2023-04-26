@@ -11,7 +11,6 @@ import { MainViewComponent } from './main-view/main-view.component';
 import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
 import { HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
-import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TravelinfoComponent } from './travelinfo/travelinfo.component';
@@ -21,6 +20,8 @@ import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 
 
+import { MapComponent } from './map/map.component';
+import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
 
 
 @NgModule({
@@ -31,11 +32,11 @@ import { InfoBahnComponent } from './info-bahn/info-bahn.component';
     ShuttleViewComponent,
     MainViewComponent,
     ShuttleLineEntryComponent,
+    MapComponent,
+    ShuttleLineEntryComponent,
     AddShuttleLineComponent,
-    PublicTransportLineComponent,
-
+    MapDetailsObserverComponent,
     TimelineComponent,
-
     TravelinfoComponent,
     InfoCarouselComponent,
     InfoParkingComponent,
