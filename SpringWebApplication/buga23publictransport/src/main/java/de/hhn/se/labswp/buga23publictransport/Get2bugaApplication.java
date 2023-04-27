@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -18,10 +20,10 @@ import org.springframework.web.filter.CorsFilter;
 // security needs to be configurated and the default behaivior is a login screen
 // if security is correctly implemented
 // remove the exclude
+
 @SpringBootApplication(
-        exclude = {
-                SecurityAutoConfiguration.class})
-public class Get2bugaApplication {
+        exclude = {SecurityAutoConfiguration.class})
+public class Get2bugaApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(Get2bugaApplication.class, args);
