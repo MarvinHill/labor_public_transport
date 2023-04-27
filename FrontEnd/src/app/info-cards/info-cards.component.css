@@ -170,7 +170,7 @@ img{
 
 .accordion-icon{
     fill: var(--_panel-color);
-    background: hsl(0 0% 0% / 0.55);
+    background: hsla(0, 0%, 100%, 0.55);
     width: var(--_button-size);
     aspect-ratio: 1 / 1;
     padding: 0.75rem;
