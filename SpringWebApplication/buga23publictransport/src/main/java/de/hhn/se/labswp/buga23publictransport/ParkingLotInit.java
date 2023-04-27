@@ -664,8 +664,8 @@ public class ParkingLotInit {
             // Auskommentiert da Daten fehlen
             bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", false, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim, Germany"));
             bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", false, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park, Fahrradabstellung Haupteingang", false, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park, Fahrradabstellung Eingang Parkschale", false, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim, Germany"));
+            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", false, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", false, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim, Germany"));
         };
     }
 

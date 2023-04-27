@@ -44,18 +44,9 @@ public class ParkingLot {
         return id;
     }
 
-//    public void setArea(Polygon area) {
-//        this.area = area;
-//    }
-//
-//    public Polygon getArea() {
-//        return area;
-//    }
-
     public List<Point> getArea() {
         return this.area;
     }
-
 
     public void setGeoLocation(Point geoLocation) {
         this.geoLocation = geoLocation;
@@ -105,4 +96,11 @@ public class ParkingLot {
         return parkingType;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
 }
