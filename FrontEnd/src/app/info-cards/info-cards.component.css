@@ -40,7 +40,7 @@ img{
     gap: 1rem;
 }
 
-@media (min-width: 45em){
+@media (min-width: 35em){
     .accordion{
         flex-direction: row;
         height: 30rem;
@@ -70,7 +70,7 @@ img{
   }
 
 .accordion-panel:nth-child(1){
-    --_panel-color: hsl(160, 70%, 50%);
+    --_panel-color: hsl(325, 100%, 50%);
 }
 
 .accordion-panel:nth-child(2){
@@ -165,7 +165,7 @@ img{
 }
 
 .accordion-panel:has([aria-expanded="true"]) .accordion-image{
-    filter: brightness(0.5);
+    filter: brightness(0.4);
 }
 
 .accordion-icon{

@@ -81,3 +81,10 @@
 .is-hidden{
     opacity: 20%;
 }
+
+.carousel__image:hover{
+    filter:saturate(2);
+    cursor: pointer;
+
+}
+

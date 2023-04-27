@@ -15,7 +15,7 @@
       <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
     </div>
     <h3 class="m-3">GENERAL INFORMATION</h3>
-    <ng-container *ngIf="(window.innerWidth <= 1199) else desktopView">
+    <ng-container *ngIf="(window.innerWidth <= 990) else desktopView">
     <app-info-carousel></app-info-carousel>
     </ng-container>
     <ng-template #desktopView>

@@ -19,6 +19,9 @@ import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoCardsComponent } from './info-cards/info-cards.component';
+import { InfoParkingTextComponent } from './info-parking-text/info-parking-text.component';
+import { InfoBusTextComponent } from './info-bus-text/info-bus-text.component';
+import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component';
 
 
 
@@ -38,6 +41,9 @@ import { InfoCardsComponent } from './info-cards/info-cards.component';
     InfoBusComponent,
     InfoBahnComponent,
     InfoCardsComponent,
+    InfoParkingTextComponent,
+    InfoBusTextComponent,
+    InfoBahnTextComponent,
   ],
   imports: [
     BrowserModule,
