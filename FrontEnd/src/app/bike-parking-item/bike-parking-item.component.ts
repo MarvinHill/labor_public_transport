@@ -13,11 +13,13 @@ export class BikeParkingItemComponent implements OnInit {
   ngOnInit(): void {
 
     this.bikeParkingName = this.bikeParking.name;
-    this.parkID = this.bikeParking.id;
+    // this.parkID = this.bikeParking.id;
+    this.bikeParkingAddress = this.bikeParking.address;
   }
 
   @Input() bikeParking: ParkingLot;
   bikeParkingName: String = "NAME";
   parkID: number;
+  bikeParkingAddress: String = "ADDRESS";
 
 }
