@@ -10,4 +10,5 @@ export interface ParkingLot {
   barrierfree: boolean;
   charging: boolean;
   parkingType: ParkingType;
+  address: String;
 }
