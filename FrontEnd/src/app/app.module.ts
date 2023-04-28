@@ -9,10 +9,10 @@ import { RoutingTopBarComponent } from './routing-top-bar/routing-top-bar.compon
 import { ShuttleViewComponent } from './shuttle-view/shuttle-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
-import { PublicTransportLineComponent } from './public.transport.line/public.transport.line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TimelineComponent } from './timeline/timeline.component';
 import { TravelinfoComponent } from './travelinfo/travelinfo.component';
 import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
 import { InfoParkingComponent } from './info-parking/info-parking.component';
@@ -24,6 +24,9 @@ import { InfoBusTextComponent } from './info-bus-text/info-bus-text.component';
 import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component';
 
 
+import { MapComponent } from './map/map.component';
+import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
+
 
 @NgModule({
   declarations: [
@@ -33,8 +36,11 @@ import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component
     ShuttleViewComponent,
     MainViewComponent,
     ShuttleLineEntryComponent,
+    MapComponent,
+    ShuttleLineEntryComponent,
     AddShuttleLineComponent,
-    PublicTransportLineComponent,
+    MapDetailsObserverComponent,
+    TimelineComponent,
     TravelinfoComponent,
     InfoCarouselComponent,
     InfoParkingComponent,
@@ -44,6 +50,7 @@ import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component
     InfoParkingTextComponent,
     InfoBusTextComponent,
     InfoBahnTextComponent,
+
   ],
   imports: [
     BrowserModule,

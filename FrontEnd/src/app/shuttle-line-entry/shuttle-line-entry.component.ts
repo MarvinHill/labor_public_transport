@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ShuttleLine } from '../ShuttleLine';
+import { LineScheduleEntry } from '../LineScheduleEntry';
 
 @Component({
   selector: 'app-shuttle-line-entry',
@@ -7,14 +9,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ShuttleLineEntryComponent implements OnInit {
   ngOnInit(): void {
-    this.fromTo = this.fromStation + " - " + this.toStation
+  this.lineName = this.shuttleLine.lineDesignator;
+ // this.lineScheduleEntry = this.shuttleLine.lineScheduleEntryList;
+ // this.arrivalTime = this.lineScheduleEntry.arrivalTime;
+ // this.stationDesignator = this.lineScheduleEntry.stationDesignator;
   }
 
-  @Input() lineName : string = "no linename";
-  @Input() fromStation: string = "station1";
-  @Input() toStation: string = "station2";
-  fromTo: string = "";
-
+  @Input() shuttleLine: ShuttleLine;
+  lineName: string = "no line name";
+  arrivalTime: string = "no arrival time";
+  stationDesignator: string = "no station name";
   
+  
+
+
+
+
 
 }
