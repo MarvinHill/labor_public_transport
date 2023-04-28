@@ -83,7 +83,20 @@
   font-weight: bolder;
 }
 
-.resize-button-min {
+.locate-button-max {
+  position: absolute;
+  top: 4em;
+  right: 1em;
+  width: 2.5em;
+  height: 2.5em;
+  z-index: 1001;
+  border: solid lightgray 2px;
+  border-radius: 0.6em;
+  background: white;
+  font-weight: bolder;
+}
+
+.button-min {
   position: absolute;
   top: 1em;
   left: 1em;

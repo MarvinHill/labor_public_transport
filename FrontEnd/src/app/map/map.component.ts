@@ -20,13 +20,16 @@ export class MapComponent implements OnInit {
   protected minimized: boolean = true;
 
   mapContainerClass: string = "map-container-small-desktop";
-  resizeButtonClass: string = "resize-button-min";
+  resizeButtonClass: string = "button-min";
+  locateButtonClass: string = "button-min";
+
   private userService: UserLoginServiceService;
   private renderer: Renderer2;
 
   protected isLoggedIn: boolean = true;
   protected mapHeight: string = "10em";
 
+  userLocation = new L.LayerGroup;
   carParkingLots = new L.LayerGroup;
   carParkingLotEntrances = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
@@ -62,13 +65,16 @@ export class MapComponent implements OnInit {
 
     tiles.addTo(this.map);
 
+    this.locateUser();
+
     this.dataService.carParking.subscribe(values => {
+
       values.forEach(element => {
         this.makeCarParking(element);
       });
     })
-
     this.dataService.bikeParking.subscribe(values => {
+
       values.forEach(element => {
         this.makeBikeParking(element);
       });
@@ -77,6 +83,8 @@ export class MapComponent implements OnInit {
     this.dataService.getAllCarParking();
 
     this.dataService.getAllBikeParking();
+
+    this.map.addLayer(this.userLocation);
 
     this.map.addLayer(this.carParkingLots);
 
@@ -179,6 +187,7 @@ export class MapComponent implements OnInit {
     if (this.minimized) {
       this.mapContainerClass = "map-container-large shadow";
       this.resizeButtonClass = "resize-button-max shadow";
+      this.locateButtonClass = "locate-button-max shadow";
 
       this.minimized = false;
       this.updateHeight()
@@ -192,7 +201,8 @@ export class MapComponent implements OnInit {
     if (!this.minimized) {
       this.minimized = true;
       this.updateMobileDesktopMap();
-      this.resizeButtonClass = "resize-button-min";
+      this.resizeButtonClass = "button-min";
+      this.locateButtonClass = "button-min";
       this.updateHeight()
       this.updateWidth();
     }
@@ -247,5 +257,24 @@ export class MapComponent implements OnInit {
     else {
       this.mapHeight = (this.windowHeight - this.topBarHeight).toString() + "px";
     }
+  }
+
+  locateUser() : any {
+    const userLocationGroup = this.userLocation;
+    this.map.locate({setView: true}).on('locationfound', function(e) {
+
+      var locationIcon = L.icon({
+        iconUrl: 'assets/icon/parking/MarkerECar.png',
+        iconSize:     [45, 72], // size of the icon
+        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      });
+
+      const location = e.latlng;
+
+      userLocationGroup.clearLayers();
+      var marker = L.marker(location, {icon: locationIcon}).addTo(userLocationGroup);
+    });
+    this.userLocation = userLocationGroup;
   }
 }
