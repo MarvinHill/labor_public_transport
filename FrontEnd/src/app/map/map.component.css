@@ -85,8 +85,8 @@
 
 .locate-button-max {
   position: absolute;
-  top: 4em;
-  right: 1em;
+  top: 5em;
+  left: 0.5em;
   width: 2.5em;
   height: 2.5em;
   z-index: 1001;

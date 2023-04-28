@@ -264,7 +264,7 @@ export class MapComponent implements OnInit {
     this.map.locate({setView: true}).on('locationfound', function(e) {
 
       var locationIcon = L.icon({
-        iconUrl: 'assets/icon/parking/MarkerECar.png',
+        iconUrl: 'assets/icon/parking/MarkerBike.png',
         iconSize:     [45, 72], // size of the icon
         iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -274,6 +274,9 @@ export class MapComponent implements OnInit {
 
       userLocationGroup.clearLayers();
       var marker = L.marker(location, {icon: locationIcon}).addTo(userLocationGroup);
+       marker.on("click", function(e) {
+         marker.bindPopup("You are Here!").openPopup();
+       })
     });
     this.userLocation = userLocationGroup;
   }
