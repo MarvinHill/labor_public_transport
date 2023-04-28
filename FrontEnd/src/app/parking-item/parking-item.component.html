@@ -1,60 +1,15 @@
-<!--<section class="py-10">-->
-<!--  <div class="text-box row background-bar">-->
-<!--    <div class="mit_bild">-->
-<!--&lt;!&ndash;      <img class="parking_logo" src="assets/icon/parking_logo.svg"/>&ndash;&gt;-->
-<!--      <h5 class="fw-bold">{{carParkingName}}</h5>-->
-<!--      <p class="text-muted fw-bold" *ngIf="carParking.barrierfree === true">Barrierefrei: Ja</p>-->
-<!--      <p class="text-muted fw-bold" *ngIf="carParking.barrierfree === false">Barrierefrei: Nein</p>-->
-<!--      <p class="text-muted fw-bold" *ngIf="carParking.charging === true">Ladestationen: Ja</p>-->
-<!--      <p class="text-muted fw-bold" *ngIf="carParking.charging === false">Ladestationen: Nein</p>-->
-<!--      <p class="text-muted fw-bold" >MockUpStraße 123, 11111 Mannheim</p>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--&lt;!&ndash;      <p class="text-muted fw-bold" style="text-align: right;">{{parkID}}&ndash;&gt;-->
-
-<!--&lt;!&ndash;      <div style="text-align: right;">&ndash;&gt;-->
-<!--&lt;!&ndash;        <button type="button" class="btn success">&ndash;&gt;-->
-<!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"&ndash;&gt;-->
-<!--&lt;!&ndash;               viewBox="0 0 20 20">&ndash;&gt;-->
-<!--&lt;!&ndash;            <path fill-rule="evenodd" fill="#0677e0"&ndash;&gt;-->
-<!--&lt;!&ndash;                  d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103zM10 1.91l-4-.8v12.98l4 .8V1.91zm1 12.98 4-.8V1.11l-4 .8v12.98zm-6-.8V1.11l-4 .8v12.98l4-.8z"/>&ndash;&gt;-->
-<!--&lt;!&ndash;          </svg>&ndash;&gt;-->
-<!--&lt;!&ndash;        </button>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-
-<!--</section>-->
-
-
 <section class="py-10">
-  <div>
-    <div class="text-box row background-bar p-3">
+  <div class="row parking-text-box bc-p-p">
+    <div class="col-9 rounded-box-content">
       <h5 class="fw-bold">{{carParkingName}}</h5>
       <div class="text-muted fw-bold">
         <p *ngIf="carParking.barrierfree === true">Barrierefrei: Ja</p>
         <p *ngIf="carParking.barrierfree === false">Barrierefrei: Nein</p>
         <p *ngIf="carParking.charging === true">Ladestationen: Ja</p>
         <p *ngIf="carParking.charging === false">Ladestationen: Nein</p>
-        <p>MockUpStraße 123, 11111 Mannheim</p>
+        <p>{{carParkingAddress}}</p>
       </div>
     </div>
+    <div class="col-3 parking_logo_back rounded-box-logo"></div>
   </div>
 </section>
-
-
-<!--<section class="py-10">-->
-<!--  <div>-->
-<!--    <div class="mit_bild text-box row background-bar">-->
-<!--      <h5 class="fw-bold">{{carParkingName}}</h5>-->
-<!--      <div class="text-muted fw-bold">-->
-<!--        <p *ngIf="carParking.barrierfree === true">Barrierefrei: Ja</p>-->
-<!--        <p *ngIf="carParking.barrierfree === false">Barrierefrei: Nein</p>-->
-<!--        <p *ngIf="carParking.charging === true">Ladestationen: Ja</p>-->
-<!--        <p *ngIf="carParking.charging === false">Ladestationen: Nein</p>-->
-<!--        <p>MockUpStraße 123, 11111 Mannheim</p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->

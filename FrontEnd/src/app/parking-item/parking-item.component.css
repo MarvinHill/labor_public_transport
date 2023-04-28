@@ -1,18 +1,19 @@
 .bc-p-p {
-  background-color: #83B2E1;
+  background-color: #dcf0f1;
+}
+ .parking-text-box {
+   border-radius: 1em;
+ }
+
+ .rounded-box-content {
+   border-radius: 1em 0 0 1em;
+ }
+
+.rounded-box-logo {
+  border-radius: 0 1em 1em 0;
 }
 
-.text-box {
-  /*background: url('/assets/icon/parking_logo.svg') no-repeat right #c3d1da;*/
+.parking_logo_back {
   background: url('/assets/icon/parking_logo.svg') no-repeat right #dcf0f1;
-  /*background-color: #dcf0f1;*/
   background-size: contain;
-  border-radius: 1em;
-}
-
-.parking_logo {
-  height: 100%;
-  float: right;
-  margin-right: -0.75em;
-
 }

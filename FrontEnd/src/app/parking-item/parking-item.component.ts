@@ -14,10 +14,12 @@ export class ParkingItemComponent implements OnInit {
 
     this.carParkingName = this.carParking.name;
     this.parkID = this.carParking.id;
+    this.carParkingAddress = this.carParking.address;
   }
 
   @Input() carParking: ParkingLot;
   carParkingName: String = "NAME";
   parkID: number;
+  carParkingAddress: String = "ADDRESS";
 
 }
