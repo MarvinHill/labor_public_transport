@@ -1,17 +1,17 @@
-<section class="py-10">
-  <div class="row parking-text-box bc-p-p">
-    <div class="col-9 rounded-box-content">
+<section>
+  <div class="d-flex flex-row parking-text-box bc-p-p">
+    <div class="rounded-box-content p-3">
       <h5 class="fw-bold">{{carParkingName}}</h5>
       <div class="text-muted fw-bold">
-        <p *ngIf="carParking.barrierfree === true">Barrierefrei: Ja</p>
-        <p *ngIf="carParking.barrierfree === false">Barrierefrei: Nein</p>
-        <p *ngIf="carParking.charging === true">Ladestationen: Ja</p>
-        <p *ngIf="carParking.charging === false">Ladestationen: Nein</p>
-        <p>{{carParkingAddress}}</p>
+        <div *ngIf="carParking.barrierfree === true">Barrierefrei: Ja</div>
+        <div *ngIf="carParking.barrierfree === false">Barrierefrei: Nein</div>
+        <div *ngIf="carParking.charging === true">Ladestationen: Ja</div>
+        <div *ngIf="carParking.charging === false">Ladestationen: Nein</div>
+        <div>{{carParkingAddress}}</div>
       </div>
     </div>
-    <div class="col-3 rounded-box-logo overflow-hidden p-0">
-      <img src="assets/icon/parking_logo.svg" alt="" class="w-100 h-100">
+    <div class="rounded-box-logo overflow-hidden p-0 bc-db" style="margin-left : auto">
+      <img src="assets/icon/parking_logo.svg" alt="">
     </div>
   </div>
 </section>

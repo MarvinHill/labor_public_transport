@@ -177,7 +177,7 @@ export class MapComponent implements OnInit {
 
   maximizeMap(): void {
     if (this.minimized) {
-      this.mapContainerClass = "map-container-large";
+      this.mapContainerClass = "map-container-large shadow";
       this.resizeButtonClass = "resize-button-max shadow";
 
       this.minimized = false;
@@ -219,9 +219,9 @@ export class MapComponent implements OnInit {
 
   private updateMobileDesktopMap() {
     if ((this.innerWidth < this.breakPoint) && this.minimized) {
-      this.mapContainerClass = "map-container-small-mobile";
+      this.mapContainerClass = "map-container-small-mobile shadow";
     } else if (this.minimized) {
-      this.mapContainerClass = "map-container-small-desktop";
+      this.mapContainerClass = "map-container-small-desktop shadow";
     }
   }
 

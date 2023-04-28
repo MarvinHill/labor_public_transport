@@ -43,8 +43,8 @@
   height: 100%;
   z-index: 1000;
   border-radius: 2em 2em 0 0;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .map-container-large .map {

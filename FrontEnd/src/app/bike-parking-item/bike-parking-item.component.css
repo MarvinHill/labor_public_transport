@@ -1,17 +1,10 @@
 .bc-p-p {
   background-color: #dcf0f1;
 }
-.parking-text-box {
-  border-radius: 1em;
-}
+
 
 .rounded-box {
   border-radius: 1em;
-}
-
-.parking_logo_back {
-  background: url('/assets/icon/parking_logo.svg') no-repeat right #dcf0f1;
-  background-size: contain;
 }
 
 .min-height {
