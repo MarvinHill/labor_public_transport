@@ -12,8 +12,3 @@
 .rounded-box-logo {
   border-radius: 0 1em 1em 0;
 }
-
-.parking_logo_back {
-  background: url('/assets/icon/parking_logo.svg') no-repeat right #dcf0f1;
-  background-size: contain;
-}

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {ParkingLot} from "../ParkingLot";
+import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-parkingItem',
