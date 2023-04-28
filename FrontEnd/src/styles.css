@@ -61,3 +61,7 @@
     width: auto;
     max-height: 60vh;
 }
+
+.not-select{
+    user-select: none;
+}

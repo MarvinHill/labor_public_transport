@@ -12,8 +12,8 @@ import {ParkingLot} from "../ParkingLot";
 })
 export class DataServiceService {
 
-  //baseurl : string = 'http://194.195.245.93:8080/buga23publictransport-2.0';
-  baseurl : string = 'http://localhost:8080';
+  baseurl : string = 'http://get2buga.de';
+  //baseurl : string = 'http://localhost:8080';
 
   httpOptions = {
     headers: new HttpHeaders({
