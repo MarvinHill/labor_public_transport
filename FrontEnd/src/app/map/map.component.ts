@@ -33,6 +33,12 @@ export class MapComponent implements OnInit {
   carParkingLots = new L.LayerGroup;
   carParkingLotEntrances = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
+  layerOptions : L.Control.LayersOptions = {
+    position : "bottomright",
+  }
+  layerControl = L.control.layers(null, null, this.layerOptions);
+
+
 
   @ViewChild('container', { static: false }) container: ElementRef;
 
@@ -51,6 +57,13 @@ export class MapComponent implements OnInit {
     this.renderer = renderer;
   }
 
+  makeLayerControls(){
+    this.layerControl.addOverlay(this.userLocation, "Position");
+    this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
+    this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
+    this.layerControl.addTo(this.map);
+  }
+
   private initMap(): void {
     this.map = L.map('map', {
       center: this.centroid,
@@ -66,6 +79,9 @@ export class MapComponent implements OnInit {
     tiles.addTo(this.map);
 
     this.locateUser();
+
+    this.makeLayerControls();
+    
 
     this.dataService.carParking.subscribe(values => {
 
@@ -146,7 +162,9 @@ export class MapComponent implements OnInit {
         this.carParkingLotEntrances.remove();
       }
       else{
-        this.carParkingLotEntrances.addTo(this.map);
+        if(this.map.hasLayer(this.carParkingLots)){
+          this.carParkingLotEntrances.addTo(this.map);
+        }
       }
     }.bind(this));
   }
@@ -172,7 +190,6 @@ export class MapComponent implements OnInit {
     marker.on("click", function (e: any) {
       this.observerService.changeDisplay(bikeparking)
     }.bind(this));
-    marker.addTo(this.carParkingLots);
   }
 
   ngOnInit(): void {
@@ -264,7 +281,7 @@ export class MapComponent implements OnInit {
     this.map.locate({setView: true}).on('locationfound', function(e) {
 
       var locationIcon = L.icon({
-        iconUrl: 'assets/icon/parking/MarkerBike.png',
+        iconUrl: 'assets/icon/LocationMarker.png',
         iconSize:     [45, 72], // size of the icon
         iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
