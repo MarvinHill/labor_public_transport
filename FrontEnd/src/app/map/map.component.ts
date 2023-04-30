@@ -282,8 +282,8 @@ export class MapComponent implements OnInit {
     this.map.locate({setView: true}).on('locationfound', function(e) {
 
       var locationIcon = L.icon({
-        iconUrl: 'assets/icon/LocationMarker.png',
-        iconSize:     [45, 72], // size of the icon
+        iconUrl: 'assets/icon/wavingPerson.gif',
+        iconSize:     [60, 72], // size of the icon
         iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
         popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
