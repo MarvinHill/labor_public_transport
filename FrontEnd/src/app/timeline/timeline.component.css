@@ -1,5 +1,6 @@
 .timeline {
-  border-left: 1px solid hsl(0, 2%, 12%);
+  border-left: 0.1em solid hsl(0, 2%, 12%);
+  left: 3em;
   position: relative;
   list-style: none;
 }
@@ -10,33 +11,54 @@
 
 .timeline .timeline-item:after {
   position: absolute;
-  display: block;
-  top: 0;
-}
-
-.timeline .timeline-item:after {
-  background-color: hsl(0, 3%, 6%);
-  left: -38px;
+  background-color: #E1416D;
+  border: 0.4em;
+  left: -2.30em;
+  top: 0.25em;
   border-radius: 50%;
-  height: 11px;
-  width: 11px;
+  height:0.6em;
+  width: 0.6em;
   content: "";
 }
 
-.icon::before {
+.timeline .timeline-item1 {
+  position: relative;
+}
+
+.timeline .timeline-item1:after {
+  position: absolute;
+  background-color: #f8f3f4;
   border-color: #E1416D;
+  border-style:solid;  
+  left: -2.55em;
+  top: 0.25em;
+  border-radius: 50%;
+  height: 1.1em;
+  width: 1.1em;
+  content: "";
+}
+
+.background-bar2 {
+  height: 30em; /*oder 100%*/
+  border-radius: 1em;
 }
 
 .btn {
   border: 0.1em solid #E1416D;
   padding: 0.2em 0.3em;
-  cursor: pointer;
-}
-
-.success {
-  border-color: #E1416D;
+  background-color: #f8f3f4;
 }
 
 .success:hover {
-  background-color: #f983a2ec;
+  background-color: #f98ca9ec;
+}
+
+.test {
+  position:relative;
+}
+
+.test-button {
+  position: absolute;
+  bottom: 11px;
+  right:11px;
 }
