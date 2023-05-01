@@ -11,9 +11,10 @@ import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component
 import { InfoBusTextComponent } from './info-bus-text/info-bus-text.component';
 import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
 import { InfoParkingTextComponent } from './info-parking-text/info-parking-text.component';
-import {MapComponent} from "./map/map.component";
 import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
-
+import { MapComponent } from "./map/map.component";
+import { ParkingViewComponent } from './parking-view/parking-view.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -23,11 +24,13 @@ const routes: Routes = [
   {path:"info-parking",component: InfoParkingComponent},
   {path:"info-bahn", component: InfoBahnComponent},
   {path:"info-bus", component: InfoBusComponent},
-  {path:'map', component: MapComponent}
+  {path:'map', component: MapComponent},
+  {path:'parking', component: ParkingViewComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

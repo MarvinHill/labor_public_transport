@@ -1,8 +1,11 @@
-<div [ngClass]="mapContainerClass" id="map-container" [ngStyle]="{ 'height':this.mapHeight}">
+<div [ngClass]="mapService.mapContainerClass" id="map-container" [ngStyle]="{ 'height':mapService.mapHeight}">
   <div class="inner-container shadow">
-    <button id="resize" [ngClass]="resizeButtonClass" (click)="resizeMap()">X</button>
-    <div id="map" [ngClass] = "minimized === true ? 'map border-rounded' : 'map' " (click)="maximizeMap()" ></div>
-    <div id="sidebar" class="sidebar bc-w overscroll-auto" *ngIf="(!minimized) && (observerService.visible) " [ngStyle]="this.windowWidth < 992 ? {'height' : '30vh', 'width' : '100%'} : {'height' : '100%', 'width' : '30vw'}">
+    <button id="resize" [ngClass]="mapService.resizeButtonClass" (click)="mapService.resizeMap()">X</button>
+    <button id="locate" [ngClass]="mapService.locateButtonClass" (click)="mapService.locateUser()">
+      <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/my_location.svg" style="height: 2.5em;">
+    </button>
+    <div id="map" [ngClass] = "mapService.minimized === true ? 'map border-rounded' : 'map' " (click)="mapService.maximizeMap()" ></div>
+    <div id="sidebar" class="sidebar bc-w overscroll-auto" *ngIf="(!mapService.minimized) && (this.observerService.visible) " [ngStyle]="mapService.windowWidth < 992 ? {'height' : '30vh', 'width' : '100%'} : {'height' : '100%', 'width' : '30vw'}">
       <div class="p-2">
         <app-map-details-observer></app-map-details-observer>
       </div>
