@@ -12,3 +12,7 @@
 .rounded-box-logo {
   border-radius: 0 1em 1em 0;
 }
+
+.min-height {
+  min-height: 184px;
+}
