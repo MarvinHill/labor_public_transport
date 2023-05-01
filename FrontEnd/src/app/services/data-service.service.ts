@@ -32,7 +32,7 @@ export class DataServiceService {
   }
 
   getData() {
-    
+
     return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
     }
