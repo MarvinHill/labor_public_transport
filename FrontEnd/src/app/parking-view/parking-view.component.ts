@@ -9,7 +9,7 @@ import {ParkingLot} from "../ParkingLot";
   templateUrl: './parking-view.component.html',
   styleUrls: ['./parking-view.component.css']
 })
-export class ParkingViewComponent implements OnInit{
+export class ParkingViewComponent{
   carParkingLots: ParkingLot[];
   bikeParkingLots: ParkingLot[];
   http:HttpClient;
@@ -43,15 +43,8 @@ export class ParkingViewComponent implements OnInit{
     dataService.getAllBikeParking();
   }
 
-  ngOnInit(): void {
-    this.name = this.park.name;
-    this.parkingId = this.park.id;
-  }
-
   @Input() park: ParkingLot;
 
-  name:String = "NAME";
-  parkingId: number;
 
 
   switchCar() : void {
