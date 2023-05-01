@@ -12,15 +12,8 @@ import {ParkingLot} from "../ParkingLot";
 })
 export class DataServiceService {
 
-  //baseurl : string = 'http://get2buga.de';
-  baseurl : string = 'http://localhost:8080';
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': this.baseurl, // Hier setzen Sie die Allow-Origin-Header
-    })
-  };
+  baseurl : string = 'https://get2buga.de';
+  //baseurl : string = 'https://localhost:8080';
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
@@ -40,12 +33,12 @@ export class DataServiceService {
 
   getData() {
     
-    return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl', this.httpOptions);
+    return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
     }
 
   getAllCarParking() {
-    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all', this.httpOptions)
+    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all')
     request.subscribe(resp => {
       this.carParking.next(resp);
       console.warn(resp);
@@ -53,7 +46,7 @@ export class DataServiceService {
   }
 
   getAllBikeParking() {
-    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all', this.httpOptions)
+    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all')
     request.subscribe(resp => {
       this.bikeParking.next(resp);
       console.warn(resp);

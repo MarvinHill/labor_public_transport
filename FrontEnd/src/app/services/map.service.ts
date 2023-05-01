@@ -454,16 +454,7 @@ export class MapService{
     this.map.invalidateSize();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: { target: { innerWidth: number; }; }) {
-    this.innerWidth = event.target.innerWidth;
-    this.updateHeight();
-    this.updateWidth();
-    this.updateMobileDesktopMap();
-
-  }
-
-  private updateMobileDesktopMap() {
+  public updateMobileDesktopMap() {
     if ((this.innerWidth < this.breakPoint) && this.minimized) {
       this.mapContainerClass = "map-container-small-mobile shadow";
     } else if (this.minimized) {
@@ -471,15 +462,15 @@ export class MapService{
     }
   }
 
-  private updateHeight() {
+  public updateHeight() {
     this.computeMaxHeight();
     document.getElementById("map-container").style.height = this.mapHeight;
   }
-  private updateWidth() {
+  public updateWidth() {
     this.windowWidth = window.innerWidth
   }
 
-  private computeMaxHeight() {
+  public computeMaxHeight() {
     this.windowHeight = window.innerHeight;
     this.topBarHeight = document.getElementById("top-bar").offsetHeight;
     if (this.minimized) {

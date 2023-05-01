@@ -25,4 +25,13 @@ export class MapComponent implements OnInit{
  
     this.mapService.init(map);
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    this.mapService.innerWidth = event.target.innerWidth;
+    this.mapService.updateHeight();
+    this.mapService.updateWidth();
+    this.mapService.updateMobileDesktopMap();
+
+  }
 }
