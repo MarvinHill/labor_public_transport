@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylsheet" href="main-view.component.css">
-  </head>   
+  </head>
 
 
-<div class="container">
-    <h3 class="m-3">TRANSPORTATION</h3>
-   <div class = "row">
+  <div class="container">
+    <h3 class="m-3 not-select">TRANSPORTMÖGLICHKEITEN</h3>
+    <div class = "row">
       <div class = "col-lg-4"><app-transport-entry [text]="'Shuttles'" [imageName]="'bus.png'" [routerLink]="['/shuttle']"></app-transport-entry></div>
-      <div class = "col-lg-4"><app-transport-entry [text]="'Parkplätze'" [imageName]="'parkinglot.png'"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'Parkplätze'" [imageName]="'parkinglot.png'" [routerLink]="['/parking']"></app-transport-entry></div>
       <div class = "col-lg-4"><app-transport-entry [text]="'Bus'" [imageName]="'shuttle.png'"></app-transport-entry></div>
       <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
     </div>
-    <h3 class="m-3">GENERAL INFORMATION</h3>
+    <h3 class="m-3 not-select">ALLGEMEINE INFORMATIONEN</h3>
     <app-info-carousel></app-info-carousel>
     <div class="hidden-info">
       <h3>Hauptmenü</h3>
@@ -23,4 +23,4 @@
     </div>
   </div>
 </html>
-    
+

@@ -1,0 +1,17 @@
+<section>
+  <div class="d-flex flex-row parking-text-box bc-p-p">
+    <div class="rounded-box-content p-3">
+      <h5 class="fw-bold">{{carParkingName}}</h5>
+      <div class="text-muted fw-bold">
+        <div *ngIf="carParking.barrierfree === true">Barrierefrei: Ja</div>
+        <div *ngIf="carParking.barrierfree === false">Barrierefrei: Nein</div>
+        <div *ngIf="carParking.charging === true">Ladestationen: Ja</div>
+        <div *ngIf="carParking.charging === false">Ladestationen: Nein</div>
+        <div>{{carParkingAddress}}</div>
+      </div>
+    </div>
+    <div class="rounded-box-logo overflow-hidden p-0 bc-db" style="margin-left : auto">
+      <img src="assets/icon/parking_logo.svg" alt="">
+    </div>
+  </div>
+</section>

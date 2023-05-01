@@ -43,8 +43,8 @@
   height: 100%;
   z-index: 1000;
   border-radius: 2em 2em 0 0;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .map-container-large .map {
@@ -83,7 +83,18 @@
   font-weight: bolder;
 }
 
-.resize-button-min {
+.locate-button-max {
+  position: absolute;
+  top: 5em;
+  left: 0.5em;
+  z-index: 1001;
+  border: solid lightgray 2px;
+  border-radius: 0.6em;
+  background: white;
+  font-weight: bolder;
+}
+
+.button-min {
   position: absolute;
   top: 1em;
   left: 1em;

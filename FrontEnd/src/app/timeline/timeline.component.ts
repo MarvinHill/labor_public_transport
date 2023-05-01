@@ -13,7 +13,7 @@ export class TimelineComponent implements OnInit {
   
   
   ngOnInit(): void {
- 
+
     this.lineName = this.shuttleLine.lineDesignator;
     this.lineScheduleEntryList = this.shuttleLine.lineScheduleEntryList;
     this.shuttleLineID = this.shuttleLine.id;
