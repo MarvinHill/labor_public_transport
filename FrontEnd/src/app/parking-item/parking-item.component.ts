@@ -9,9 +9,21 @@ import { LatLng } from 'leaflet';
   templateUrl: './parking-item.component.html',
   styleUrls: ['./parking-item.component.css']
 })
-export class ParkingItemComponent {
+export class ParkingItemComponent implements OnInit {
+  carParkingLots: ParkingLot[];
+  items: number[];
+
+  ngOnInit(): void {
+
+    this.carParkingName = this.carParking.name;
+    this.parkID = this.carParking.id;
+    this.carParkingAddress = this.carParking.address;
+  }
 
   @Input() carParking: ParkingLot;
+  carParkingName: String = "NAME";
+  parkID: number;
+  carParkingAddress: String = "ADDRESS";
 
   constructor(private mapService : MapService){}
 
