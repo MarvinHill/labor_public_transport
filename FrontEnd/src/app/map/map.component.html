@@ -1,7 +1,9 @@
 <div [ngClass]="mapContainerClass" id="map-container" [ngStyle]="{ 'height':this.mapHeight}">
   <div class="inner-container shadow">
     <button id="resize" [ngClass]="resizeButtonClass" (click)="resizeMap()">X</button>
-    <button id="locate" [ngClass]="locateButtonClass" (click)="locateUser()"></button>
+    <button id="locate" [ngClass]="locateButtonClass" (click)="locateUser()">
+      <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/my_location.svg" style="height: 2.5em;">
+    </button>
     <div id="map" [ngClass] = "minimized === true ? 'map border-rounded' : 'map' " (click)="maximizeMap()" ></div>
     <div id="sidebar" class="sidebar bc-w overscroll-auto" *ngIf="(!minimized) && (observerService.visible) " [ngStyle]="this.windowWidth < 992 ? {'height' : '30vh', 'width' : '100%'} : {'height' : '100%', 'width' : '30vw'}">
       <div class="p-2">
