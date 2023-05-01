@@ -21,5 +21,4 @@ export class BikeParkingItemComponent implements OnInit {
   bikeParkingName: String = "NAME";
   parkID: number;
   bikeParkingAddress: String = "ADDRESS";
-
 }
