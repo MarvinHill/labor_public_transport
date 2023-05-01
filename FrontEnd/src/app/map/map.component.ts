@@ -6,7 +6,8 @@ import { MapDetailsObserverService } from "../services/map-details-observer.serv
 import { ParkingLot } from '../ParkingLot';
 import { ThisReceiver, verifyHostBindings } from '@angular/compiler';
 import {Point} from "leaflet";
-import { MapService } from '../map.service';
+import { MapService } from '../services/map.service';
+
 
 @Component({
   selector: 'app-map',

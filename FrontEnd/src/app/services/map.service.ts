@@ -1,9 +1,12 @@
 import { ElementRef, HostListener, Injectable, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { ParkingLot } from './ParkingLot';
-import { DataServiceService } from './services/data-service.service';
-import { MapDetailsObserverService } from './services/map-details-observer.service';
-import { UserLoginServiceService } from './services/user-login-service.service';
+import { ParkingLot } from '../ParkingLot';
+import { DataServiceService } from './data-service.service';
+import { MapDetailsObserverService } from './map-details-observer.service';
+import { UserLoginServiceService } from './user-login-service.service';
+import { LatLng } from 'leaflet';
+import { interval } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -404,6 +407,10 @@ export class MapService{
 
   init(map : L.Map): void {
     this.map = map;
+    var inter = interval(100);
+    inter.subscribe(v => {
+      this.map.invalidateSize();
+    })
     this.initMap();
     this.innerWidth = window.innerWidth;
     this.updateHeight();
@@ -508,5 +515,11 @@ export class MapService{
        })
     });
     this.userLocation = userLocationGroup;
+  }
+
+  public openAndFlyTo(pos : LatLng) : void {
+    this.maximizeMap(); 
+    this.observerService.changeVisibility(false);
+    this.map.flyTo(pos, 18);
   }
 }

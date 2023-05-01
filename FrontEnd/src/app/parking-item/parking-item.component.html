@@ -1,6 +1,6 @@
 <section>
   <div class="d-flex flex-row parking-text-box bc-p-p">
-    <div class="rounded-box-content p-3">
+    <div class="rounded-box-content p-3" (click) = "panToParkingLot()">
       <h5 class="fw-bold">{{carParking.name}}</h5>
       <div class="text-muted fw-bold">
         <div *ngIf="carParking.barrierfree === true">Barrierefrei: Ja</div>
