@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {ParkingLot} from "../ParkingLot";
+import { LatLng } from 'leaflet';
+import { MapService } from '../services/map.service';
 
 @Component({
   selector: 'app-bike-parking-item',
@@ -17,8 +19,14 @@ export class BikeParkingItemComponent implements OnInit {
     this.bikeParkingAddress = this.bikeParking.address;
   }
 
+  constructor(protected mapService : MapService){}
+
   @Input() bikeParking: ParkingLot;
   bikeParkingName: String = "NAME";
   parkID: number;
   bikeParkingAddress: String = "ADDRESS";
+
+  panToBikeParkingLot(){
+    this.mapService.openAndFlyTo(new LatLng(this.bikeParking.geoLocation.x, this.bikeParking.geoLocation.y));
+}
 }
