@@ -29,6 +29,7 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
+import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.
     ParkingViewComponent,
     ParkingItemComponent,
     BikeParkingItemComponent,
+    ConnectionTicketComponent,
   ],
   imports: [
     BrowserModule,
