@@ -9,12 +9,28 @@
 <body>
 	<header>
 		<h1>Anreise zur BUGA 23</h1>
+		<nav>
+			<ul>
+				<li class="list" [routerLink]="['/info-parking']">Auto</li>
+				<li class="list" [routerLink]="['/info-bus']">Bus </li>
+				<li class="list" [routerLink]="['/info-bahn']">Bahn </li>
+			</ul>
+		  </nav>
 	</header>
 
 	<main>
-		<app-info-parking></app-info-parking>
-		<app-info-bus></app-info-bus>
-	<app-info-bahn></app-info-bahn>
+		<header>
+			<h3>Anreise mit dem Auto</h3>
+		</header>
+		<app-info-parking-text></app-info-parking-text>
+		<header>
+			<h3>Anreise mit dem Bus</h3>
+		</header>
+		<app-info-bus-text></app-info-bus-text>
+		<header>
+			<h3>Anreise mit der Bahn</h3>
+		</header>
+		<app-info-bahn-text></app-info-bahn-text>
 	
 	
   </main>
