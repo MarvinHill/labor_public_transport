@@ -4,6 +4,7 @@ import { ParkingLot } from './ParkingLot';
 import { DataServiceService } from './services/data-service.service';
 import { MapDetailsObserverService } from './services/map-details-observer.service';
 import { UserLoginServiceService } from './services/user-login-service.service';
+import { ShuttleLineService } from './services/shuttle-line.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,6 @@ export class MapService{
   public locateButtonClass: string = "button-min";
 
   private userService: UserLoginServiceService;
-  
 
   public isLoggedIn: boolean = true;
   public mapHeight: string = "10em";
@@ -28,6 +28,7 @@ export class MapService{
   userLocation = new L.LayerGroup;
   carParkingLots = new L.LayerGroup;
   carParkingLotEntrances = new L.LayerGroup;
+  publicTransportLines = new L.LayerGroup;
   bugaArea = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
   layerOptions : L.Control.LayersOptions = {
@@ -46,7 +47,8 @@ export class MapService{
   breakPoint: number = 720;
 
 
-  constructor(userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService) {
+  constructor(userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService
+    ,  private shuttleLineService: ShuttleLineService) {
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -57,6 +59,7 @@ export class MapService{
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
+    this.layerControl.addOverlay(this.publicTransportLines, "RNV-Linien");
     this.layerControl.addTo(this.map);
   }
 
@@ -99,6 +102,8 @@ export class MapService{
     this.map.addLayer(this.bikeParkingLots);
 
     this.map.addLayer(this.bugaArea);
+
+    this.map.addLayer(this.publicTransportLines);
 
     this.map.addEventListener("click", function (e: any) {
       this.observerService.changeVisibility(false);
@@ -410,6 +415,7 @@ export class MapService{
     this.updateWidth();
     this.updateMobileDesktopMap();
     this.drawBugaArea();
+    this.shuttleLineService.initShuttleLineViewOnMap(this.publicTransportLines);
   }
 
   maximizeMap(): void {
