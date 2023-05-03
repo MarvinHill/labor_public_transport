@@ -11,7 +11,6 @@ import { Point } from 'leaflet';
 })
 export class ShuttleLineService {
   private http: HttpClient;
-  private layerGroupMarkers: L.LayerGroup = L.layerGroup();
   private lines: ShuttleLine[];
 
   constructor(http: HttpClient) {
@@ -30,7 +29,7 @@ export class ShuttleLineService {
    * 
    * @param map 
    */
-  public initShuttleLineViewOnMap(map: L.Map): void {
+  public initShuttleLineViewOnMap(layer: L.LayerGroup): void {
     this.getShuttleLines().subscribe(
       lines => {
         this.lines = lines;
@@ -38,15 +37,14 @@ export class ShuttleLineService {
           // draw the real train or shuttle line into the map
           if (line.geoLinePoints.length > 0) {
             var pl = this.getPolyLine(line);
-            pl.addTo(this.layerGroupMarkers);
+            pl.addTo(layer);
           }
 
           line.lineScheduleEntryList.forEach(entry => {
-            this.addLineStopToMap(entry);
+            this.addLineStopToMap(layer, entry);
           });
         });
       });
-    map.addLayer(this.layerGroupMarkers);
   }
 
   /**
@@ -56,7 +54,7 @@ export class ShuttleLineService {
    * @param entry 
    * @param line 
    */
-  public addLineStopToMap(entry: LineScheduleEntry): void {
+  public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry): void {
     //Todo: right icon designation for trains parkingslots and shuttle line view
     var shuttleMarkerIcon = L.icon({
       iconUrl: 'assets/image/ShuttleLineEntry.png',
@@ -72,7 +70,7 @@ export class ShuttleLineService {
       { icon: shuttleMarkerIcon }
     );
     marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
-    marker.addTo(this.layerGroupMarkers);
+    marker.addTo(layer);
   }
 
   /**
@@ -85,21 +83,21 @@ export class ShuttleLineService {
     let tpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
     var options;
     if (line.lineDesignator == "BUGA Shuttlelinie") {
-      
+
       options =
       {
-        color: line.colorHexCode, 
-        weight: 5, 
-        opacity: 1, 
+        color: line.colorHexCode,
+        weight: 5,
+        opacity: 1,
         smoothFactor: 1,
-       //  dashArray: "25 20"
+        //  dashArray: "25 20"
       };
     } else {
       options =
       {
-        color: line.colorHexCode, 
-        weight: 5, 
-        opacity: 1, 
+        color: line.colorHexCode,
+        weight: 5,
+        opacity: 1,
         moothFactor: 1
       };
 

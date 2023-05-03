@@ -1,53 +1,30 @@
-<div class="container">
-  <h3 class="m-3">TRANSPORTATION</h3>
-  <div class="row">
-  <div class="hidden-info">
-    <h3>Hauptmenü</h3>
-    <p>Klickst du eine der Transportmöglichkeiten werden genauere Informationen dazu als Liste ausgegeben.</p>
-    <img src="assets/info/image/mainMenu.png" alt="Haupt menü bild konnte nicht geladen werden."
-      class="shadow m-2 info-img-big">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylsheet" href="main-view.component.css">
+  </head>
+
+
+  <div class="container">
+    <h3 class="m-3 not-select">TRANSPORTMÖGLICHKEITEN</h3>
+    <div class = "row">
+      <div class = "col-lg-4"><app-transport-entry [text]="'Shuttles'" [imageName]="'bus.png'" [routerLink]="['/shuttle']"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'Parkplätze'" [imageName]="'parkinglot.png'" [routerLink]="['/parking']"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'Bus'" [imageName]="'shuttle.png'"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
+    </div>
+    <h3 class="m-3">GENERAL INFORMATION</h3>
+    <ng-container *ngIf="(window.innerWidth <= 990) else desktopView">
+    <app-info-carousel></app-info-carousel>
+    </ng-container>
+    <ng-template #desktopView>
+    <app-info-cards></app-info-cards>
+    </ng-template>
+    <div class="hidden-info">
+      <h3>Hauptmenü</h3>
+      <p>Klickst du eine der Transportmöglichkeiten werden genauere Informationen dazu als Liste ausgegeben.</p>
+      <img src="assets/info/image/mainMenu.png" alt="Haupt menü bild konnte nicht geladen werden." class="shadow m-2 info-img-big">
+    </div>
   </div>
-</div>
-<div class="hidden-info">
-  <h3>Bedienungsanleitung</h3>
-  <p>Du befindest dich im Startmodus hier kannst du entweder die Karte öffnen und eine der vielen Filter nutzen oder
-    auf
-    einer der Transportmöglichkeiten klicken um die Informationen in Listenform zu erhalten. Weiter unten findest du
-    weitere informationen für deine Anreiße zur Buga.</p>
-</div>
-<div class="hidden-info">
-  <h3>Bedienungsanleitung</h3>
-  <p>Du befindest dich im Startmodus hier kannst du entweder die Karte öffnen und eine der vielen Filter nutzen oder
-    auf
-    einer der Transportmöglichkeiten klicken um die Informationen in Listenform zu erhalten. Weiter unten findest du
-    weitere informationen für deine Anreiße zur Buga.</p>
-</div>
-<div class="hidden-info">
-  <h3>Bedienungsanleitung</h3>
-  <p>Du befindest dich im Startmodus hier kannst du entweder die Karte öffnen und eine der vielen Filter nutzen oder
-    auf
-    einer der Transportmöglichkeiten klicken um die Informationen in Listenform zu erhalten. Weiter unten findest du
-    weitere informationen für deine Anreiße zur Buga.</p>
-</div>
-<div class="hidden-info">
-  <h3>Bedienungsanleitung</h3>
-  <p>Du befindest dich im Startmodus hier kannst du entweder die Karte öffnen und eine der vielen Filter nutzen oder
-    auf
-    einer der Transportmöglichkeiten klicken um die Informationen in Listenform zu erhalten. Weiter unten findest du
-    weitere informationen für deine Anreiße zur Buga.</p>
-</div>
-<div class="hidden-info">
-  <h3>Bedienungsanleitung</h3>
-  <p>Du befindest dich im Startmodus hier kannst du entweder die Karte öffnen und eine der vielen Filter nutzen oder
-    auf
-    einer der Transportmöglichkeiten klicken um die Informationen in Listenform zu erhalten. Weiter unten findest du
-    weitere informationen für deine Anreiße zur Buga.</p>
-</div>
-<div class="hidden-info">
-  <h3>Bedienungsanleitung</h3>
-  <p>Du befindest dich im Startmodus hier kannst du entweder die Karte öffnen und eine der vielen Filter nutzen oder
-    auf
-    einer der Transportmöglichkeiten klicken um die Informationen in Listenform zu erhalten. Weiter unten findest du
-    weitere informationen für deine Anreiße zur Buga.</p>
-</div>
-</div>
+</html>

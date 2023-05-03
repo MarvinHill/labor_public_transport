@@ -1,5 +1,5 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { interval, Subject } from 'rxjs';
 import { ShuttleLine } from '../ShuttleLine';
@@ -12,6 +12,16 @@ import {ParkingLot} from "../ParkingLot";
 })
 export class DataServiceService {
 
+  //baseurl : string = 'http://get2buga.de';
+  baseurl : string = 'http://localhost:8080';
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': this.baseurl, // Hier setzen Sie die Allow-Origin-Header
+    })
+  };
+
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
   carParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
@@ -21,7 +31,7 @@ export class DataServiceService {
   constructor(private http:HttpClient, private router : Router ) {}
 
   update() {
-    const request = this.http.get<ShuttleLine[]>('http://localhost:8080/ptl')
+    const request = this.http.get<ShuttleLine[]>(this.baseurl + '/ptl')
     request.subscribe(resp => {
       this.lines.next(resp)
       console.warn(resp);
@@ -29,12 +39,13 @@ export class DataServiceService {
   }
 
   getData() {
-    return this.http.get<ShuttleLine[]>('http://localhost:8080/ptl');
+    
+    return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl', this.httpOptions);
     //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
     }
 
   getAllCarParking() {
-    const request = this.http.get<ParkingLot[]>('http://localhost:8080/parking/car/all')
+    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all', this.httpOptions)
     request.subscribe(resp => {
       this.carParking.next(resp);
       console.warn(resp);
@@ -42,7 +53,7 @@ export class DataServiceService {
   }
 
   getAllBikeParking() {
-    const request = this.http.get<ParkingLot[]>('http://localhost:8080/parking/bike/all')
+    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all', this.httpOptions)
     request.subscribe(resp => {
       this.bikeParking.next(resp);
       console.warn(resp);
