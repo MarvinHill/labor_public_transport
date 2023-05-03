@@ -1,34 +1,50 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.springframework.data.geo.Point;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
+@Table(name = "public_transport_line")
 public class PublicTransportLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String lineDesignator;
     private boolean hasDelay;
+    @Column(length=500000)
+    @Lob
+    private List<Point> geoLinePoints = new ArrayList<>();
+    private String colorHexCode;
 
-    @OneToMany(
-            mappedBy = "publicTransportLine",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @ManyToMany
+    @JoinTable(
+            name = "public_transport_line_line_schedule_entry",
+            joinColumns = @JoinColumn(name = "public_transport_line_id"),
+            inverseJoinColumns = @JoinColumn(name = "line_schedule_entry_id"))
     private List<LineScheduleEntry> lineScheduleEntryList = new ArrayList<>();
 
     protected PublicTransportLine() {
     }
 
-    public PublicTransportLine(String lineDesignator, boolean hasDelay, List<LineScheduleEntry> lineScheduleEntryList) {
+    public PublicTransportLine(String lineDesignator, boolean hasDelay, String colorHexCode) {
         this.lineDesignator = lineDesignator;
         this.hasDelay = hasDelay;
-        for (var entry : lineScheduleEntryList) {
-            addLineScheduleEntry(entry);
+        this.colorHexCode = colorHexCode;
+    }
+
+    public void addLineScheduleEntryList(LineScheduleEntry lineScheduleEntry) {
+        this.lineScheduleEntryList.add(lineScheduleEntry);
+        lineScheduleEntry.getPublicTransportLine().add(this);
+    }
+
+    public void removeLineScheduleEntryList(long lineScheduleEntryId) {
+        var lse = this.lineScheduleEntryList.stream()
+                .filter(l -> l.getId() == lineScheduleEntryId).findFirst().orElse(null);
+        if (lse != null) {
+            this.lineScheduleEntryList.remove(lse);
+            lse.getPublicTransportLine().remove(this);
         }
     }
 
@@ -36,20 +52,27 @@ public class PublicTransportLine {
         return id;
     }
 
-    public boolean getDelay() {
-        return hasDelay;
-    }
-
     public String getLineDesignator() {
         return lineDesignator;
     }
 
-    public List<LineScheduleEntry> getlineScheduleEntryList() {
-        return lineScheduleEntryList;
+    public boolean getDelay() {
+        return hasDelay;
     }
 
-    public void addLineScheduleEntry(LineScheduleEntry lineScheduleEntry) {
-        this.lineScheduleEntryList.add(lineScheduleEntry);
-        lineScheduleEntry.setPublicTransportLine(this);
+    public String getColorHexCode() {
+        return this.colorHexCode;
     }
+    public List<LineScheduleEntry> getLineScheduleEntryList() {
+        return this.lineScheduleEntryList;
+    }
+
+    public List<Point> getGeoLinePoints() {
+        return this.geoLinePoints;
+    }
+
+    public void setGeoLinePoints(List<Point> geoLinePoints) {
+        this.geoLinePoints = geoLinePoints;
+    }
+
 }
