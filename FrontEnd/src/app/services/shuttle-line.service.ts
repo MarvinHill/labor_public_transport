@@ -37,15 +37,16 @@ export class ShuttleLineService {
         this.lines.forEach(line => {
           // draw the real train or shuttle line into the map
           if (line.geoLinePoints.length > 0) {
-            this.drawLineToMap(map, line);
+            var pl = this.getPolyLine(line);
+            pl.addTo(this.layerGroupMarkers);
           }
 
           line.lineScheduleEntryList.forEach(entry => {
-            // add marker to the layer and add it to the map
-            this.addLineStopToMap(map, entry, line);
+            this.addLineStopToMap(entry);
           });
         });
       });
+    map.addLayer(this.layerGroupMarkers);
   }
 
   /**
@@ -55,42 +56,23 @@ export class ShuttleLineService {
    * @param entry 
    * @param line 
    */
-  public addLineStopToMap(map: L.Map, entry: LineScheduleEntry, line: ShuttleLine): void {
+  public addLineStopToMap(entry: LineScheduleEntry): void {
     //Todo: right icon designation for trains parkingslots and shuttle line view
     var shuttleMarkerIcon = L.icon({
-      iconUrl: 'assets/image/shuttle.png',
-      iconSize: [60, 60], // size of the icon
+      iconUrl: 'assets/image/ShuttleLineEntry.png',
+      iconSize: [20, 20], // size of the icon
       shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
+      iconAnchor: [10, 10], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
-    var trainMarkerIcon = L.icon({
-      iconUrl: 'assets/image/train.png',
-      iconSize: [60, 60], // size of the icon
-      shadowSize: [50, 64], // size of the shadow
-      iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
-      shadowAnchor: [4, 62],  // the same for the shadow
-      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
-
-    if (line.lineDesignator == "BUGA Shuttlelinie") {
-      let marker = new L.Marker(
-        [entry.geoLocation.x, entry.geoLocation.y],
-        { icon: shuttleMarkerIcon }
-      );
-      marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
-      marker.addTo(this.layerGroupMarkers);
-    } else {
-      let marker = new L.Marker(
-        [entry.geoLocation.x, entry.geoLocation.y],
-        { icon: trainMarkerIcon }
-      );
-      marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
-      marker.addTo(this.layerGroupMarkers);
-    }
-    map.addLayer(this.layerGroupMarkers);
+    let marker = new L.Marker(
+      [entry.geoLocation.x, entry.geoLocation.y],
+      { icon: shuttleMarkerIcon }
+    );
+    marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
+    marker.addTo(this.layerGroupMarkers);
   }
 
   /**
@@ -99,18 +81,38 @@ export class ShuttleLineService {
    * @param line 
    * @returns 
    */
-  public drawLineToMap(map: L.Map, line: ShuttleLine): L.Polyline {
-    let fpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
-    return L.polyline(fpl, { color: line.colorHexCode, weight: 5, opacity: 1, smoothFactor: 1 }).addTo(map);
+  public getPolyLine(line: ShuttleLine): L.Polyline {
+    let tpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
+    var options;
+    if (line.lineDesignator == "BUGA Shuttlelinie") {
+      
+      options =
+      {
+        color: line.colorHexCode, 
+        weight: 5, 
+        opacity: 1, 
+        smoothFactor: 1,
+       //  dashArray: "25 20"
+      };
+    } else {
+      options =
+      {
+        color: line.colorHexCode, 
+        weight: 5, 
+        opacity: 1, 
+        moothFactor: 1
+      };
+
+    }
+    return L.polyline(tpl, options);
   }
 
   private transformPolyLinePointToLatlng(point: Point[]): L.LatLng[] {
     var tranformedPolyLine: L.LatLng[] = [];
     for (let i = 0; i < point.length; i++) {
-      tranformedPolyLine.push(new L.LatLng((point[i]).y, (point[i]).x));
+      tranformedPolyLine.push(new L.LatLng((point[i]).x, (point[i]).y));
     }
     return tranformedPolyLine;
   }
-
 
 }

@@ -13,7 +13,7 @@ public class PublicTransportLine {
     private Integer id;
     private String lineDesignator;
     private boolean hasDelay;
-    @Column(length=5000)
+    @Column(length=500000)
     @Lob
     private List<Point> geoLinePoints = new ArrayList<>();
     private String colorHexCode;

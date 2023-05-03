@@ -47,7 +47,7 @@ public class LoadDatabase {
 
             var spinelliPark = new LineScheduleEntry(
                     LocalTime.now(), 0, 0, "Buga 23 Haupteingang Spinelli-Park",
-                    49.49618, 8.52258);
+                    49.49646, 8.52208);
             entryRepo.save(spinelliPark);
 
             var sapArenaSBF = new LineScheduleEntry(
@@ -152,7 +152,7 @@ public class LoadDatabase {
 
             var talStrasse = new LineScheduleEntry(
                     LocalTime.now(), 0, 0, "Tal-Straße",
-                    49.49528, 8.52479);
+                    49.4953505, 8.5249774);
             entryRepo.save(talStrasse);
 
             var abendAkademie = new LineScheduleEntry(
@@ -172,7 +172,7 @@ public class LoadDatabase {
 
             var mannheimHauptBahnHof = new LineScheduleEntry(
                     LocalTime.now(), 0, 0, "MA Hauptbahnhof",
-                    49.47908, 8.47013);
+                    49.48011, 8.46997);
             entryRepo.save(mannheimHauptBahnHof);
 
             var tattersall = new LineScheduleEntry(
@@ -256,8 +256,9 @@ public class LoadDatabase {
             entryRepo.save(wasserTurm);
 
             // Real data for the shuttle line from the BUGA entrance pdf file and openstreetmap
-            var bugaShuttlelinie = new PublicTransportLine("BUGA Shuttlelinie", false, "#4e2583");
-            //TODO: shuttle line polygon
+            var bugaShuttlelinie = new PublicTransportLine("Buga Shuttle line", false, "#4e2583");
+            var bugaShuttleLineDataFile = ResourceUtils.getFile("classpath:database/Buga Line P+R (purple_dashed).txt");
+            bugaShuttlelinie.setGeoLinePoints(LineLoader.loadLineFile(bugaShuttleLineDataFile));
             bugaShuttlelinie.addLineScheduleEntryList(sapArena);
             bugaShuttlelinie.addLineScheduleEntryList(luisenPark);
             bugaShuttlelinie.addLineScheduleEntryList(neuOstHeim);
@@ -267,9 +268,9 @@ public class LoadDatabase {
             log.info("Saving Buga Shuttle Line " + lineRepo.save(bugaShuttlelinie));
 
             // Real data for the train station of line 7 (yellow line)
-            var line7 = new PublicTransportLine("7", false, "#FFCC00");
-            var pathLine7 = ResourceUtils.getFile("classpath:database/Buga Line 7.txt");
-            line7.setGeoLinePoints(LineLoader.loadLineFile(pathLine7.getPath()));
+            var line7 = new PublicTransportLine("Buga Line 7", false, "#FFCC00");
+            var line7DataFile = ResourceUtils.getFile("classpath:database/Buga Line 7 (yellow).txt");
+            line7.setGeoLinePoints(LineLoader.loadLineFile(line7DataFile));
             line7.addLineScheduleEntryList(berlinerPlatz);
             line7.addLineScheduleEntryList(konradAdenauerBrücke);
             line7.addLineScheduleEntryList(universität);
@@ -291,27 +292,28 @@ public class LoadDatabase {
             log.info("Saving Line 7 " + lineRepo.save(line7));
 
             // Real data for buga 23 express blue line
-            var lineBuga23Express = new PublicTransportLine("Buga 23 Express", false, "#0BBBEF");
-            var path23Express = ResourceUtils.getFile("classpath:database/Buga Line 23 Express.txt");
-            lineBuga23Express.setGeoLinePoints(LineLoader.loadLineFile(path23Express.getPath()));
-            lineBuga23Express.addLineScheduleEntryList(mannheimHauptBahnHof);
-            lineBuga23Express.addLineScheduleEntryList(kunstHalle);
-            lineBuga23Express.addLineScheduleEntryList(rosenGarten);
-            lineBuga23Express.addLineScheduleEntryList(nationalTheater);
-            lineBuga23Express.addLineScheduleEntryList(theresenKrankenhaus);
-            lineBuga23Express.addLineScheduleEntryList(universitaetsKlinikum);
-            lineBuga23Express.addLineScheduleEntryList(bibienStraße);
-            lineBuga23Express.addLineScheduleEntryList(hauptFriedHof);
-            lineBuga23Express.addLineScheduleEntryList(pfeiffersWoerth);
-            lineBuga23Express.addLineScheduleEntryList(neckarPlatt);
-            lineBuga23Express.addLineScheduleEntryList(ziethenStraße);
-            lineBuga23Express.addLineScheduleEntryList(adolfDamaschkeRing);
-            lineBuga23Express.addLineScheduleEntryList(talStrasse);
-            log.info("Saving Line Buga 23 Express" + lineRepo.save(lineBuga23Express));
+            var lineBuga23 = new PublicTransportLine("Buga Line BL", false, "#0BBBEF");
+            var lineBuga23DataFile = ResourceUtils.getFile("classpath:database/Buga Line 23 (light_blue).txt");
+            lineBuga23.setGeoLinePoints(LineLoader.loadLineFile(lineBuga23DataFile));
+            lineBuga23.addLineScheduleEntryList(mannheimHauptBahnHof);
+            lineBuga23.addLineScheduleEntryList(kunstHalle);
+            lineBuga23.addLineScheduleEntryList(rosenGarten);
+            lineBuga23.addLineScheduleEntryList(nationalTheater);
+            lineBuga23.addLineScheduleEntryList(theresenKrankenhaus);
+            lineBuga23.addLineScheduleEntryList(universitaetsKlinikum);
+            lineBuga23.addLineScheduleEntryList(bibienStraße);
+            lineBuga23.addLineScheduleEntryList(hauptFriedHof);
+            lineBuga23.addLineScheduleEntryList(pfeiffersWoerth);
+            lineBuga23.addLineScheduleEntryList(neckarPlatt);
+            lineBuga23.addLineScheduleEntryList(ziethenStraße);
+            lineBuga23.addLineScheduleEntryList(adolfDamaschkeRing);
+            lineBuga23.addLineScheduleEntryList(talStrasse);
+            log.info("Saving Line Buga 23 Express" + lineRepo.save(lineBuga23));
 
             // real data for ex9 green line
-            var ex9 = new PublicTransportLine("EX9", false, "#95c23d");
-            // TODO EX9 polygon line
+            var ex9 = new PublicTransportLine("Buga Line EX9", false, "#95c23d");
+            var ex9DataFile = ResourceUtils.getFile("classpath:database/Buga Line 9 (green).txt");
+            ex9.setGeoLinePoints(LineLoader.loadLineFile(ex9DataFile));
             ex9.addLineScheduleEntryList(mannheimHauptBahnHof);
             ex9.addLineScheduleEntryList(tattersall);
             ex9.addLineScheduleEntryList(werderStrasse);
@@ -326,10 +328,10 @@ public class LoadDatabase {
             ex9.addLineScheduleEntryList(neuOstHeim);
             log.info("Saving Line EX9 " + lineRepo.save(ex9));
 
-            // real data for buga 23 bl line pink line
-            var bugaBL = new PublicTransportLine("BUGA 23 Sonderlinie BL", false, "#e6007e");
-            var pathBL = ResourceUtils.getFile("classpath:database/Buga Line 23 Express.txt");
-            bugaBL.setGeoLinePoints(LineLoader.loadLineFile(pathBL.getPath()));
+            // real data for buga bl line pink line
+            var bugaBL = new PublicTransportLine("Buga Line BL", false, "#e6007e");
+            var bugaBLDataFile = ResourceUtils.getFile("classpath:database/Buga Line BL (pink).txt");
+            bugaBL.setGeoLinePoints(LineLoader.loadLineFile(bugaBLDataFile));
             bugaBL.addLineScheduleEntryList(mannheimHauptBahnHof);
             bugaBL.addLineScheduleEntryList(tattersall);
             bugaBL.addLineScheduleEntryList(werderStrasse);
@@ -349,32 +351,35 @@ public class LoadDatabase {
             log.info("Saving Buga 23 BL line " + lineRepo.save(bugaBL));
 
             // real data for rnv bahnlinie brown line
-            var rnvBahnlinie6 = new PublicTransportLine("RNV-Bahnlinie 6", false, "966c29");
-            rnvBahnlinie6.addLineScheduleEntryList(berlinerPlatz);
-            rnvBahnlinie6.addLineScheduleEntryList(ludwigStrasse);
-            rnvBahnlinie6.addLineScheduleEntryList(ratHausLU);
-            rnvBahnlinie6.addLineScheduleEntryList(handelsHafen);
-            rnvBahnlinie6.addLineScheduleEntryList(rheinStrasse);
-            rnvBahnlinie6.addLineScheduleEntryList(ratHausMA);
-            rnvBahnlinie6.addLineScheduleEntryList(paradePlatz);
-            rnvBahnlinie6.addLineScheduleEntryList(schloss);
-            rnvBahnlinie6.addLineScheduleEntryList(universität);
-            rnvBahnlinie6.addLineScheduleEntryList(mannheimHauptBahnHof);
-            rnvBahnlinie6.addLineScheduleEntryList(tattersall);
-            rnvBahnlinie6.addLineScheduleEntryList(werderStrasse);
-            rnvBahnlinie6.addLineScheduleEntryList(pestalozziSchule);
-            rnvBahnlinie6.addLineScheduleEntryList(weberStrasse);
-            rnvBahnlinie6.addLineScheduleEntryList(planetarium);
-            rnvBahnlinie6.addLineScheduleEntryList(luisenPark);
-            rnvBahnlinie6.addLineScheduleEntryList(carlBenzStadion);
-            rnvBahnlinie6.addLineScheduleEntryList(harrLach);
-            rnvBahnlinie6.addLineScheduleEntryList(lucasCranachStrasse);
-            rnvBahnlinie6.addLineScheduleEntryList(schwindStrasse);
-            rnvBahnlinie6.addLineScheduleEntryList(neuOstHeim);
-            rnvBahnlinie6.addLineScheduleEntryList(hansThomaStr);
-            rnvBahnlinie6.addLineScheduleEntryList(maimarktGrossParkPlatz);
-            rnvBahnlinie6.addLineScheduleEntryList(sapArena);
-            rnvBahnlinie6.addLineScheduleEntryList(sapArenaSBF);
+            var bugaLine6 = new PublicTransportLine("Buga Line 6", false, "#966c29");
+            var bugaLine6DataFile = ResourceUtils.getFile("classpath:database/Buga Line 6 (brown).txt");
+            bugaLine6.setGeoLinePoints(LineLoader.loadLineFile(bugaLine6DataFile));
+            bugaLine6.addLineScheduleEntryList(berlinerPlatz);
+            bugaLine6.addLineScheduleEntryList(ludwigStrasse);
+            bugaLine6.addLineScheduleEntryList(ratHausLU);
+            bugaLine6.addLineScheduleEntryList(handelsHafen);
+            bugaLine6.addLineScheduleEntryList(rheinStrasse);
+            bugaLine6.addLineScheduleEntryList(ratHausMA);
+            bugaLine6.addLineScheduleEntryList(paradePlatz);
+            bugaLine6.addLineScheduleEntryList(schloss);
+            bugaLine6.addLineScheduleEntryList(universität);
+            bugaLine6.addLineScheduleEntryList(mannheimHauptBahnHof);
+            bugaLine6.addLineScheduleEntryList(tattersall);
+            bugaLine6.addLineScheduleEntryList(werderStrasse);
+            bugaLine6.addLineScheduleEntryList(pestalozziSchule);
+            bugaLine6.addLineScheduleEntryList(weberStrasse);
+            bugaLine6.addLineScheduleEntryList(planetarium);
+            bugaLine6.addLineScheduleEntryList(luisenPark);
+            bugaLine6.addLineScheduleEntryList(carlBenzStadion);
+            bugaLine6.addLineScheduleEntryList(harrLach);
+            bugaLine6.addLineScheduleEntryList(lucasCranachStrasse);
+            bugaLine6.addLineScheduleEntryList(schwindStrasse);
+            bugaLine6.addLineScheduleEntryList(neuOstHeim);
+            bugaLine6.addLineScheduleEntryList(hansThomaStr);
+            bugaLine6.addLineScheduleEntryList(maimarktGrossParkPlatz);
+            bugaLine6.addLineScheduleEntryList(sapArena);
+            bugaLine6.addLineScheduleEntryList(sapArenaSBF);
+            log.info("Saving Buga Line 6" + lineRepo.save(bugaLine6));
         };
     }
 }

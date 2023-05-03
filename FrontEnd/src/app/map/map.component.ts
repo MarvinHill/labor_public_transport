@@ -91,7 +91,6 @@ export class MapComponent implements OnInit {
       this.observerService.changeVisibility(false);
     }.bind(this));
 
-    console.log(this.map);
     this.shuttleService.initShuttleLineViewOnMap(this.map);
   }
 
