@@ -7,14 +7,13 @@
         {{this.lineScheduleEntryList[number].stationDesignator}}</p>
       <ul class="timeline">
         <li class="timeline-item1" style="text-align: start;">
-          <p class="fw-normal">{{this.lineScheduleEntryList[0].stationDesignator}}:
-            {{this.lineScheduleEntryList[0].arrivalTime}}</p>
+          <p class="fw-normal">{{this.lineScheduleEntryList[0].stationDesignator}}</p>
         </li>
         <li class="timeline-item"
           *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
           style="text-align: start;">
           <div *ngIf="!first && !last">
-            <p class="fw-normal">{{lineScheduleEntry.stationDesignator}}: {{lineScheduleEntry.arrivalTime}}
+            <p class="fw-normal">{{lineScheduleEntry.stationDesignator}}
             </p>
           </div>
         </li>
@@ -22,7 +21,7 @@
         *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
         style="text-align: start;">
         <div *ngIf="last">
-          <p class="fw-normal">{{lineScheduleEntry.stationDesignator}}: {{lineScheduleEntry.arrivalTime}}
+          <p class="fw-normal">{{lineScheduleEntry.stationDesignator}}
           </p>
         </div>
       </li>
