@@ -1,7 +1,8 @@
-import { Component, OnInit, Renderer2, } from '@angular/core';
+import { Component, OnInit, Renderer2, HostListener} from '@angular/core';
 import * as L from 'leaflet';
 import { MapDetailsObserverService } from "../services/map-details-observer.service";
-import { MapService } from '../map.service';
+import { MapService } from '../services/map.service';
+
 
 @Component({
   selector: 'app-map',
@@ -20,5 +21,14 @@ export class MapComponent implements OnInit{
     });
  
     this.mapService.init(map);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    this.mapService.innerWidth = event.target.innerWidth;
+    this.mapService.updateHeight();
+    this.mapService.updateWidth();
+    this.mapService.updateMobileDesktopMap();
+
   }
 }

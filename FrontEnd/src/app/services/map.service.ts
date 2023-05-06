@@ -1,10 +1,12 @@
 import { ElementRef, HostListener, Injectable, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { ParkingLot } from './ParkingLot';
-import { DataServiceService } from './services/data-service.service';
-import { MapDetailsObserverService } from './services/map-details-observer.service';
-import { UserLoginServiceService } from './services/user-login-service.service';
-import { ShuttleLineService } from './services/shuttle-line.service';
+import { LatLng } from 'leaflet';
+import { interval } from 'rxjs';
+import { ParkingLot } from '../ParkingLot';
+import { DataServiceService } from '../services/data-service.service';
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
+import { UserLoginServiceService } from '../services/user-login-service.service';
+import { ShuttleLineService } from '../services/shuttle-line.service';
 
 @Injectable({
   providedIn: 'root'
@@ -409,6 +411,10 @@ export class MapService{
 
   init(map : L.Map): void {
     this.map = map;
+    var inter = interval(100);
+    inter.subscribe(v => {
+      this.map.invalidateSize();
+    })
     this.initMap();
     this.innerWidth = window.innerWidth;
     this.updateHeight();
@@ -453,16 +459,7 @@ export class MapService{
     this.map.invalidateSize();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: { target: { innerWidth: number; }; }) {
-    this.innerWidth = event.target.innerWidth;
-    this.updateHeight();
-    this.updateWidth();
-    this.updateMobileDesktopMap();
-
-  }
-
-  private updateMobileDesktopMap() {
+  public updateMobileDesktopMap() {
     if ((this.innerWidth < this.breakPoint) && this.minimized) {
       this.mapContainerClass = "map-container-small-mobile shadow";
     } else if (this.minimized) {
@@ -470,15 +467,15 @@ export class MapService{
     }
   }
 
-  private updateHeight() {
+  public updateHeight() {
     this.computeMaxHeight();
     document.getElementById("map-container").style.height = this.mapHeight;
   }
-  private updateWidth() {
+  public updateWidth() {
     this.windowWidth = window.innerWidth
   }
 
-  private computeMaxHeight() {
+  public computeMaxHeight() {
     this.windowHeight = window.innerHeight;
     this.topBarHeight = document.getElementById("top-bar").offsetHeight;
     if (this.minimized) {
@@ -514,5 +511,11 @@ export class MapService{
        })
     });
     this.userLocation = userLocationGroup;
+  }
+
+  public openAndFlyTo(pos : LatLng) : void {
+    this.maximizeMap(); 
+    this.observerService.changeVisibility(false);
+    this.map.flyTo(pos, 18);
   }
 }
