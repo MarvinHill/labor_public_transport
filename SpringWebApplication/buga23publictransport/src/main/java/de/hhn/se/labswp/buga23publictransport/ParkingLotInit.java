@@ -9,6 +9,8 @@ import de.hhn.se.labswp.buga23publictransport.persistence.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -669,4 +671,13 @@ public class ParkingLotInit {
         };
     }
 
+    @Bean
+    @Scheduled(cron = "0 15 * * *")
+    CommandLineRunner updateParkingCapacity(ParkingCapacityRepository capacityRepo) {
+
+        return args -> {
+
+            //capacityRepo.save(new ParkingCapacity(name, freeParkingspaces));
+        };
+    }
 }
