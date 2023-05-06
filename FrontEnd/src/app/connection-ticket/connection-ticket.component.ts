@@ -17,7 +17,7 @@ hideText() {
 }
 
 redirectToTicket() {
-  window.location.href = 'https://tickets.buga23.de/shop?shopid=103&wes=4140e717103&nextstate=5';
+  window.location.href = 'https://www.dbregiobus-bawue.de/tickets/BUGA-Kombiticket';
 }
 
 }

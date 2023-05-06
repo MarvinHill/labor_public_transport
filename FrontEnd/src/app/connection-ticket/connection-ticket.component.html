@@ -3,9 +3,32 @@
 
     <img [src]="'assets/image/ConnectionTicket.png'" (click)="toggleText()">
     <p *ngIf="show" class="text">Entdecke die Bundesgartenschau 2023 in Mannheim und nutze das Kombi-Tickets für Tages- oder 2-Tageskarten, um bequem und klimaneutral mit Bus & Bahn anzureisen!  Es gilt für Hin- und Rückfahrt im VRN-Gebiet und zusätzlich gibt es drei Sonderlinien. Die beiden Veranstaltungsbereiche sind durch eine Seilbahn verbunden und gut ans ÖPNV-Netz angebunden.
-    <button (click)="redirectToTicket()" class="ticket-button">
-        Jetzt Kombi-Ticket sichern!
+        <br>
+        <br>
+    <button (click)="redirectToTicket()" class="ticket-button">Jetzt Kombi-Ticket sichern!
     </button>
     </p>
-
 </div>
+
+<div class="container">
+    <div class="list">
+    
+      <ul>
+        <li>Eintritt zur BUGA</li>
+        <li>gültig im Nahverkehr</li>
+        <li>bis zu 3 eigene Kinder mitnehmen</li>
+      </ul>
+    </div>
+    <div class="image">
+      
+      <img [src]="'assets/image/ConnectionTicket.png'">
+    </div>
+    <div class="button">
+      
+      <button (click)="redirectToTicket()" class="ticket-button">
+        Jetzt Kombi-Ticket sichern!
+    </button>
+
+    </div>
+  </div>
+

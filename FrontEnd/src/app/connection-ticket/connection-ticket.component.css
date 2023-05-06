@@ -7,14 +7,125 @@
     max-width: 100%;
     height: auto;
   }
-  @media screen and (min-width: 780px) {
-    .img {
-      background-image: url('/assets/image/Schiene.png');
-      background-size: 35vh;
-      background-repeat: repeat-x;
-    }
+
+  @media screen and (min-width: 990px) {
+  .img{
+    display: none;
   }
 
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .list{
+    flex: 1;
+    padding: 10px;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .list li {
+    list-style: none;
+    text-align: left;
+  }
+
+  .list li::before {
+    content: "\2713";
+    color: green;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .image {
+    flex: 1;
+    padding: 10px;
+    background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button {
+    flex: 1;
+    padding: 10px;
+    background-color: #d9d9d9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+    
+  }
+
+  @media screen and (min-width: 774px) {
+    .img{
+      display: none;
+    }
+  
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .list{
+      flex: 1;
+      padding: 10px;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .list li {
+      list-style: none;
+      text-align: left;
+    }
+  
+    .list li::before {
+      content: "\2713";
+      color: green;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    img{
+     max-width: 100%;
+    }
+  
+    .image {
+      flex: 1;
+      padding: 10px;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .button {
+      flex: 1;
+      padding: 10px;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+      
+    }
+
+    @media screen and (max-width: 774px) {
+    .img{
+      display: flexbox;
+    }
+    .container{
+      display: none;
+      background-color: #e4446c;
+    }
+    }
 
  p {
   background-color: rgb(235, 235, 235);
@@ -25,10 +136,10 @@
   max-width: 400px;
   margin: 0 auto;
  
-}
+  }
 
+  
 button{
-  margin-top: 2vh;
   width: 70%;
   background-color: #e4446c;
   border: none;
