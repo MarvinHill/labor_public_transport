@@ -14,7 +14,7 @@
       <div class = "col-lg-4"><app-transport-entry [text]="'Bus'" [imageName]="'shuttle.png'"></app-transport-entry></div>
       <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
     </div>
-    <h3 class="m-3">GENERAL INFORMATION</h3>
+    <h3 class="m-3">INFORMATIONEN</h3>
     <ng-container *ngIf="(window.innerWidth <= 990) else desktopView">
     <app-info-carousel></app-info-carousel>
     </ng-container>
@@ -26,7 +26,7 @@
       <p>Klickst du eine der Transportmöglichkeiten werden genauere Informationen dazu als Liste ausgegeben.</p>
       <img src="assets/info/image/mainMenu.png" alt="Haupt menü bild konnte nicht geladen werden." class="shadow m-2 info-img-big">
     </div>
-    <h3 class="m-3">BUGA Verbundticket</h3>
+    <h3 class="m-3">BUGA CONNECTION TICKET</h3>
     <app-connection-ticket></app-connection-ticket>
   </div>
 </html>
