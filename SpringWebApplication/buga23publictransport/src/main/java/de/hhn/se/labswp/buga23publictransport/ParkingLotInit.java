@@ -609,7 +609,8 @@ public class ParkingLotInit {
 
         Point gbgParkhausGeoLocation = new Point(49.49601366187759, 8.523294843921164);
         List<Point> gbgParkhausEntrances = new ArrayList<>();
-        gbgParkhausEntrances.add(new Point(49.495924211038776, 8.52290047470197));
+        gbgParkhausEntrances.add(new Point(49.4960071, 8.5235418));
+        gbgParkhausEntrances.add(new Point(49.4960071, 8.5235418));
         List<Point> gbgParkhausPoly = new ArrayList<>();
         gbgParkhausPoly.add(new Point(49.4960379, 8.5238637));
         gbgParkhausPoly.add(new Point(49.4960071, 8.5235418));
@@ -682,13 +683,13 @@ public class ParkingLotInit {
         };
     }
 
-    @Bean
-    @Scheduled(cron = "0 15 * * *")
-    CommandLineRunner updateParkingCapacity(ParkingCapacityRepository capacityRepo) {
-
-        return args -> {
-
-            //capacityRepo.save(new ParkingCapacity(name, freeParkingspaces));
-        };
-    }
+//    @Bean
+//    @Scheduled(cron = "0 15 * * *")
+//    CommandLineRunner updateParkingCapacity(ParkingCapacityRepository capacityRepo) {
+//
+//        return args -> {
+//
+//            //capacityRepo.save(new ParkingCapacity(name, freeParkingspaces));
+//        };
+//    }
 }
