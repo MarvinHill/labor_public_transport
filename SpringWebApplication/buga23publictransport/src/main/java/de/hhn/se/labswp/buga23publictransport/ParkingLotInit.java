@@ -607,6 +607,17 @@ public class ParkingLotInit {
         roggenPoly.add(new Point(49.5270621, 8.4805870));
         roggenPoly.add(new Point(49.5275639, 8.4799765));
 
+        Point gbgParkhausGeoLocation = new Point(49.49601366187759, 8.523294843921164);
+        List<Point> gbgParkhausEntrances = new ArrayList<>();
+        gbgParkhausEntrances.add(new Point(49.495924211038776, 8.52290047470197));
+        List<Point> gbgParkhausPoly = new ArrayList<>();
+        gbgParkhausPoly.add(new Point(49.4960379, 8.5238637));
+        gbgParkhausPoly.add(new Point(49.4960071, 8.5235418));
+        gbgParkhausPoly.add(new Point(49.4959951, 8.5234165));
+        gbgParkhausPoly.add(new Point(49.4954181, 8.5235474));
+        gbgParkhausPoly.add(new Point(49.4954609, 8.5239946));
+        gbgParkhausPoly.add(new Point(49.4960379, 8.5238637));
+
         //Fahrad
         Point luisenparkHaupteingangGeoLocation = new Point(49.4789910, 8.4965408);
         List<Point> luisenparkHaupteingangEntrances = new ArrayList<>();
@@ -662,8 +673,8 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, false, ParkingType.CAR, "Neckarvorlandstraße 56, 68159 Mannheim"));
             carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, false, ParkingType.CAR, "N7 17, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR, "Am Roggenplatz, 68305 Mannheim"));
+            carRepo.save(new CarParkingLot(gbgParkhausGeoLocation, gbgParkhausPoly, gbgParkhausEntrances, "GBG-Parkhaus", true, false, ParkingType.CAR, "Spinelli-Platz 2, 68259 Mannheim"));
 
-            // Auskommentiert da Daten fehlen
             bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim"));
             bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", true, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim"));
             bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim"));
