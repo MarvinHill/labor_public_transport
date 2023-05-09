@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import * as L from 'leaflet';
 import { Point } from 'leaflet';
+import { DataServiceService } from './data-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,8 @@ export class ShuttleLineService {
   private http: HttpClient;
   private lines: ShuttleLine[];
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private dataService : DataServiceService) {
     this.http = http;
-  }
-
-  public getShuttleLines(): Observable<ShuttleLine[]> {
-    return this.http.get<ShuttleLine[]>('http://localhost:8080/ptl');
-  }
-
-  public getShuttleLine(id: number): Observable<ShuttleLine> {
-    return this.http.get<ShuttleLine>('http://localhost:8080/ptl/' + id);
   }
 
   /**
@@ -30,7 +23,7 @@ export class ShuttleLineService {
    * @param map 
    */
   public initShuttleLineViewOnMap(layer: L.LayerGroup): void {
-    this.getShuttleLines().subscribe(
+    this.dataService.getShuttleLines().subscribe(
       lines => {
         this.lines = lines;
         this.lines.forEach(line => {
