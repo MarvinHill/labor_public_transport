@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,6 +30,7 @@ import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
 import { ImpressumComponent } from './impressum/impressum.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -67,6 +68,12 @@ import { ImpressumComponent } from './impressum/impressum.component';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

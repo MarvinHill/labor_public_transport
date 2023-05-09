@@ -1,7 +1,7 @@
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, Subject } from 'rxjs';
+import { interval, Observable, Subject } from 'rxjs';
 import { ShuttleLine } from '../ShuttleLine';
 import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
@@ -12,8 +12,8 @@ import {ParkingLot} from "../ParkingLot";
 })
 export class DataServiceService {
 
-  //baseurl : string = 'https://get2buga.de';
-  baseurl : string = 'http://localhost:8080';
+  baseurl : string = 'https://get2buga.de';
+  //baseurl : string = 'http://localhost:8080';
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
@@ -29,6 +29,14 @@ export class DataServiceService {
       this.lines.next(resp)
       console.warn(resp);
     });
+  }
+
+  public getShuttleLines(): Observable<ShuttleLine[]> {
+    return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
+  }
+
+  public getShuttleLine(id: number): Observable<ShuttleLine> {
+    return this.http.get<ShuttleLine>(this.baseurl + '/ptl' + id);
   }
 
   getData() {

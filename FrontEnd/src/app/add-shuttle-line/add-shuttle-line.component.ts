@@ -28,10 +28,5 @@ export class AddShuttleLineComponent {
     line.hasDelay = false;
     line.id = 0;
     line.lineScheduleEntryList = [];
-
-    const toPost = this.http.post('http://localhost:8080/ptl', line);
-    toPost.subscribe(val => {
-      this.dataService.update();
-    })
   }
 }
