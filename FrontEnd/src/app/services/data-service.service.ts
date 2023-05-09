@@ -12,8 +12,8 @@ import {ParkingLot} from "../ParkingLot";
 })
 export class DataServiceService {
 
-  //baseurl : string = 'https://get2buga.de';
-  baseurl : string = 'http://localhost:8080';
+  baseurl : string = 'https://get2buga.de';
+  //baseurl : string = 'http://localhost:8080';
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
