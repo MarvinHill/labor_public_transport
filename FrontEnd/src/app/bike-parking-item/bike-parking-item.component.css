@@ -8,5 +8,6 @@
 }
 
 .min-height {
-  min-height: 96px;
+  /*min-height: 96px;*/
+  min-height: 176px;
 }

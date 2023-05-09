@@ -29,6 +29,7 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
+import { ImpressumComponent } from './impressum/impressum.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 
@@ -58,6 +59,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ParkingViewComponent,
     ParkingItemComponent,
     BikeParkingItemComponent,
+    ImpressumComponent,
   ],
   imports: [
     BrowserModule,
