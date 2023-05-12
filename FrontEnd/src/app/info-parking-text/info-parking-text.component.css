@@ -12,7 +12,7 @@
 }
 
 .box:hover {
-  box-shadow: #e4446c 0px 10px 20px;
+  box-shadow: #e4446c 0px 0px 5px;
 }
 
 .container {

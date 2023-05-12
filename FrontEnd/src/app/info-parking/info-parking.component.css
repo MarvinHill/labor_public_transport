@@ -5,18 +5,20 @@ body {
 }
 
 .header-content{
-  max-width: 80%;
-  display: flex;
+  max-width: 100%;
+  display: flexbox;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 header {
   background-color: #e4446c;
   color: #fff;
   padding: 20px;
-  display: flex;
+  display: flexbox;
   justify-content: center;
+  text-align: center;
   border-radius: 2rem;
   font-size: 1.8rem;
 }
@@ -43,7 +45,7 @@ nav li a {
 main {
   margin: 0 auto;
   list-style-type: square;
-  max-width: 40%;
+  max-width: 60%;
   justify-content: center;
   align-items: center;
 }
