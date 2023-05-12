@@ -5,6 +5,7 @@ import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntryRepo;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLine;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLineRepo;
 
+import java.io.File;
 import java.sql.Array;
 import java.time.LocalTime;
 
@@ -151,7 +152,7 @@ public class LoadDatabase {
             entryRepo.save(adolfDamaschkeRing);
 
             var talStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Tal-Straße",
+                    LocalTime.now(), 0, 0, "Talstraße",
                     49.4953505, 8.5249774);
             entryRepo.save(talStrasse);
 
@@ -269,7 +270,7 @@ public class LoadDatabase {
 
             // Real data for the train station of line 7 (yellow line)
             var line7 = new PublicTransportLine("Buga Line 7", false, "#FFCC00");
-            var line7DataFile = ResourceUtils.getFile("classpath:database/Buga Line 7 (yellow).txt");
+            File line7DataFile = ResourceUtils.getFile("classpath:database/Buga Line 7 (yellow).txt");
             line7.setGeoLinePoints(LineLoader.loadLineFile(line7DataFile));
             line7.addLineScheduleEntryList(berlinerPlatz);
             line7.addLineScheduleEntryList(konradAdenauerBrücke);
@@ -292,7 +293,7 @@ public class LoadDatabase {
             log.info("Saving Line 7 " + lineRepo.save(line7));
 
             // Real data for buga 23 express blue line
-            var lineBuga23 = new PublicTransportLine("Buga Line BL", false, "#0BBBEF");
+            var lineBuga23 = new PublicTransportLine("Buga Line BS", false, "#0BBBEF");
             var lineBuga23DataFile = ResourceUtils.getFile("classpath:database/Buga Line 23 (light_blue).txt");
             lineBuga23.setGeoLinePoints(LineLoader.loadLineFile(lineBuga23DataFile));
             lineBuga23.addLineScheduleEntryList(mannheimHauptBahnHof);
@@ -301,12 +302,12 @@ public class LoadDatabase {
             lineBuga23.addLineScheduleEntryList(nationalTheater);
             lineBuga23.addLineScheduleEntryList(theresenKrankenhaus);
             lineBuga23.addLineScheduleEntryList(universitaetsKlinikum);
-            lineBuga23.addLineScheduleEntryList(bibienStraße);
-            lineBuga23.addLineScheduleEntryList(hauptFriedHof);
-            lineBuga23.addLineScheduleEntryList(pfeiffersWoerth);
-            lineBuga23.addLineScheduleEntryList(neckarPlatt);
-            lineBuga23.addLineScheduleEntryList(ziethenStraße);
-            lineBuga23.addLineScheduleEntryList(adolfDamaschkeRing);
+            //lineBuga23.addLineScheduleEntryList(bibienStraße);
+            //lineBuga23.addLineScheduleEntryList(hauptFriedHof);
+            //lineBuga23.addLineScheduleEntryList(pfeiffersWoerth);
+            //lineBuga23.addLineScheduleEntryList(neckarPlatt);
+            //lineBuga23.addLineScheduleEntryList(ziethenStraße);
+            //lineBuga23.addLineScheduleEntryList(adolfDamaschkeRing);
             lineBuga23.addLineScheduleEntryList(talStrasse);
             log.info("Saving Line Buga 23 Express" + lineRepo.save(lineBuga23));
 
