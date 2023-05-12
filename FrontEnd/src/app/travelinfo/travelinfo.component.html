@@ -7,31 +7,88 @@
 
 </head>
 <body>
+	<main>
 	<header>
 		<h1>Anreise zur BUGA 23</h1>
+		<div class="header-content">
 		<nav>
 			<ul>
-				<li class="list" [routerLink]="['/info-parking']">Auto</li>
+				<li class="list" [routerLink]="['/info-parking']">Parken</li>
 				<li class="list" [routerLink]="['/info-bus']">Bus </li>
 				<li class="list" [routerLink]="['/info-bahn']">Bahn </li>
 			</ul>
 		  </nav>
+		</div>
 	</header>
+		<div class="container">
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Öffnungszeiten</h2>
+			  <p>
+				Der Einlass an den Haupteingängen (jeweils Nord und Süd) auf Spinelli und im Luisenpark ist von 9:00 bis 19:00 Uhr möglich.Zu bestimmten Abendveranstaltungen werden die Öffnungs- und Einlasszeiten der BUGA 23 bis 30 Minuten nach Veranstaltungsbeginn verlängert. Die Seilbahn fährt täglich von 9:00 - 22:00 Uhr.
+				Das Gelände ist bei Einbruch der Dunkelheit über die offiziellen Ausgänge zu verlassen. Die Nachtsperrzeit beginnt bei Spätveranstaltungen 30 Minuten nach Veranstaltungsende.
+			  </p>
+			  <button (click)="redirectToParkOrdnung()" class="my-button" >
+				Parkordnung
+			</button>
+			</div>
+		  </div>
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Ticketpreise</h2>
+			  <table>
+				<thead>
+				  <tr>
+					<th></th> <!-- Leerzelle für die Row-Überschriften-Spalte -->
+					<th>Kinder</th>
+					<th>Junge Erwachsene</th>
+					<th>Erwachsene</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<th>Tageskarten</th>
+					<td>Frei</td>
+					<td>11,00€</td>
+					<td>28,00€</td>
+				  </tr>
+				  <tr>
+					<th>Zweitageskarten</th>
+					<td>Frei</td>
+					<td>17,00€</td>
+					<td>43,00€</td>
+				  </tr>
+				  <tr>
+					<th>Dauerkarten</th>
+					<td>Frei</td>
+					<td>65,00€</td>
+					<td>145,00€</td>
+				  </tr>
+				</tbody>
+			  </table>
+			  <br>
+			  <button (click)="redirectToTicketShop()" class="my-button" >
+				Ticketshop
+			</button>
+			</div>
+		  </div>
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Barrierefreiheit und Mobilitätsverleih</h2>
+			  <p>Die BUGA 23 soll ein Erlebnis für alle Menschen sein. Um dieses Ziel zu erreichen, arbeiten die Veranstalter*innen daran, Barrieren zu erkennen und bestmöglich abzubauen.
 
-	<main>
-		<header>
-			<h3>Anreise mit dem Auto</h3>
-		</header>
-		<app-info-parking-text></app-info-parking-text>
-		<header>
-			<h3>Anreise mit dem Bus</h3>
-		</header>
-		<app-info-bus-text></app-info-bus-text>
-		<header>
-			<h3>Anreise mit der Bahn</h3>
-		</header>
-		<app-info-bahn-text></app-info-bahn-text>
+				Im Folgenden finden Sie Informationen zu den Maßnahmen, die bereits getroffen wurden, um Ihren Besuch auf der BUGA 23 möglichst barrierefrei zu gestalten.</p>
+				
+				<button (click)="redirectToBarrierefreiheit()" class="my-button" >
+					Barrierefreiheit & Mobilitätsverleih
+				</button>
+			</div>
+		  </div>
+		
+	  
+		</div>
+	
 	
 	
   </main>
-  </body>
+</body>
