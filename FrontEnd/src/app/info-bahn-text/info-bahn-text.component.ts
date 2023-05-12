@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./info-bahn-text.component.css']
 })
 export class InfoBahnTextComponent {
+  redirectToTicketPage() {
+    window.location.href = 'https://www.rnv-online.de/fahrtinfo/buga23/';
+  }
 
 }
