@@ -4,21 +4,21 @@
     <title>Bus Info</title>
   </head>
   <body>
+    <main>
     <header>
-      <h1>Bus und Shuttle Informationen</h1>
-      <nav>
-        <ul>
+        <h1>Bus und Shuttle</h1>
+        <div class="header-content">
+        <nav>
+          <ul>
             <li class="list" [routerLink]="['/travelinfo']">Allg. Infos </li>
             <li class="list" [routerLink]="['/info-parking']">Parken</li>
-            <li class="list" [routerLink]="['/info-bus']">Bus und Shuttle</li>
+            <li class="list" [routerLink]="['/info-bus']">Bus</li>
             <li class="list" [routerLink]="['/info-bahn']">Bahn </li>    
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+      </div>
     </header>
-    <main>
-      <app-info-bus-text></app-info-bus-text>
-    </main>
-  
+  </main>
+    <app-info-bus-text></app-info-bus-text>
   </body>
 </html>
-
