@@ -6,6 +6,7 @@ import { LineScheduleEntry } from '../LineScheduleEntry';
 import * as L from 'leaflet';
 import { Point } from 'leaflet';
 import { DataServiceService } from './data-service.service';
+import { MapService } from './map.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,21 +23,27 @@ export class ShuttleLineService {
    * 
    * @param map 
    */
-  public initShuttleLineViewOnMap(layer: L.LayerGroup): void {
+  public initShuttleLineViewOnMap(layers, service : MapService) {
     this.dataService.getShuttleLines().subscribe(
       lines => {
+        
         this.lines = lines;
         this.lines.forEach(line => {
+          var layer = [new L.LayerGroup, ""];
           // draw the real train or shuttle line into the map
           if (line.geoLinePoints.length > 0) {
             var pl = this.getPolyLine(line);
-            pl.addTo(layer);
+            pl.addTo(layer[0] as L.LayerGroup);
           }
 
           line.lineScheduleEntryList.forEach(entry => {
-            this.addLineStopToMap(layer, entry);
+            this.addLineStopToMap(layer[0] as L.LayerGroup, entry);
           });
+          
+          layer[1] = line.lineDesignator;
+          layers.push(layer);
         });
+        service.initMap();
       });
   }
 

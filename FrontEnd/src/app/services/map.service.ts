@@ -30,7 +30,7 @@ export class MapService{
   userLocation = new L.LayerGroup;
   carParkingLots = new L.LayerGroup;
   carParkingLotEntrances = new L.LayerGroup;
-  publicTransportLines = new L.LayerGroup;
+  publicTransportLines = [];
   bugaArea = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
   layerOptions : L.Control.LayersOptions = {
@@ -61,11 +61,13 @@ export class MapService{
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
-    this.layerControl.addOverlay(this.publicTransportLines, "RNV-Linien");
+    this.publicTransportLines.forEach(entry => {
+      this.layerControl.addOverlay(entry[0], entry[1]);
+    });
     this.layerControl.addTo(this.map);
   }
 
-  private initMap(): void {
+  public initMap(): void {
     
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -105,7 +107,9 @@ export class MapService{
 
     this.map.addLayer(this.bugaArea);
 
-    this.map.addLayer(this.publicTransportLines);
+    this.publicTransportLines.forEach(entry => {
+      this.map.addLayer(entry[0]);
+    });
 
     this.map.addEventListener("click", function (e: any) {
       this.observerService.changeVisibility(false);
@@ -415,13 +419,12 @@ export class MapService{
     inter.subscribe(v => {
       this.map.invalidateSize();
     })
-    this.initMap();
+    this.shuttleLineService.initShuttleLineViewOnMap(this.publicTransportLines, this);
     this.innerWidth = window.innerWidth;
     this.updateHeight();
     this.updateWidth();
     this.updateMobileDesktopMap();
     this.drawBugaArea();
-    this.shuttleLineService.initShuttleLineViewOnMap(this.publicTransportLines);
   }
 
   maximizeMap(): void {
