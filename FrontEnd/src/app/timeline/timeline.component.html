@@ -8,13 +8,13 @@
         <div style="overflow-x: hidden; overflow-y: auto;" class="height">
           <ul class="timeline">
             <li class="timeline-item1" style="text-align: start;">
-              <p class="fw-normal">{{this.lineScheduleEntryList[0].stationDesignator}}</p>
+              <p class="fw-normal">{{this.lineScheduleEntryList[0].stationDesignator}} <br> {{formateTime(this.lineScheduleEntryList[0].arrivalTime)}}</p>
             </li>
             <li class="timeline-item"
               *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
               style="text-align: start;">
               <div *ngIf="!first && !last">
-                <p class="fw-normal">{{lineScheduleEntry.stationDesignator}}
+                <p class="fw-normal">{{lineScheduleEntry.stationDesignator}} <br> {{formateTime(this.lineScheduleEntry.arrivalTime)}}
                 </p>
               </div>
             </li>
@@ -22,7 +22,7 @@
             *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
             style="text-align: start;">
             <div *ngIf="last">
-              <p class="fw-normal">{{lineScheduleEntry.stationDesignator}}
+              <p class="fw-normal">{{lineScheduleEntry.stationDesignator}} <br> {{formateTime(this.lineScheduleEntry.arrivalTime)}}
               </p>
             </div>
           </li>

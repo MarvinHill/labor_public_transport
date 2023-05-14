@@ -28,4 +28,15 @@ export class TimelineComponent implements OnInit {
   lineScheduleEntryList: LineScheduleEntry[];
   shuttleLineList: ShuttleLine[];
   number: number; 
+
+
+  formateTime(str : string){
+    var tokens : string[] = str.split(":");
+    var hour : string = tokens[0].trim();
+    var min : string = tokens[1].trim();
+
+    return `${hour}:${min}`;
+  }
+
+
 }
