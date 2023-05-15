@@ -1,15 +1,15 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.sound.sampled.Line;
 import org.springframework.data.geo.Point;
+
+import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "station")
@@ -20,8 +20,9 @@ public class Station {
   private Point geoLocation;
   private String stationDesignator;
 
-  @OneToMany
-  private ArrayList<LineScheduleEntry> lineScheduleEntries;
+  @OneToMany( mappedBy="station")
+  @JsonBackReference
+  private List<LineScheduleEntry> lineScheduleEntries;
 
   public Station() {}
 
@@ -37,7 +38,7 @@ public class Station {
     return geoLocation;
   }
 
-  public ArrayList<LineScheduleEntry> getLineScheduleEntries() {
+  public List<LineScheduleEntry> getLineScheduleEntries() {
     return lineScheduleEntries;
   }
 
@@ -50,7 +51,7 @@ public class Station {
   }
 
   public void setLineScheduleEntries(
-      ArrayList<LineScheduleEntry> lineScheduleEntries) {
+      List<LineScheduleEntry> lineScheduleEntries) {
     this.lineScheduleEntries = lineScheduleEntries;
   }
 }
