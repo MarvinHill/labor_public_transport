@@ -5,6 +5,8 @@ import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntryRepo;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLine;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLineRepo;
 
+import de.hhn.se.labswp.buga23publictransport.persistence.Station;
+import de.hhn.se.labswp.buga23publictransport.persistence.StationRepo;
 import java.io.File;
 import java.sql.Array;
 import java.time.LocalTime;
@@ -27,233 +29,328 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(PublicTransportLineRepo lineRepo, LineScheduleEntryRepo entryRepo) {
+    CommandLineRunner initDatabase(PublicTransportLineRepo lineRepo, LineScheduleEntryRepo entryRepo, StationRepo stationRepo) {
         return args -> {
             log.info("Preloading Database Entries");
             log.info("Preloading stops for public transport lines and shuttles");
+
+            Station hansThomaStrStation = new Station(49.47496, 8.52439, "Hans-Thoma-Str.");
+            Station neuOstHeimStation = new Station(49.4774967, 8.5228445, "Neuostheim");
+            Station luisenParkStation = new Station(49.47887, 8.49640, "Luisenpark");
+            Station spinelliParkStation = new Station(49.49646, 8.52208, "Buga 23 Haupteingang Spinelli-Park");
+            Station sapArenaSBFStation = new Station(49.4598771, 8.5171520, "SAP Arena S-Bf (MA-Arena/Maimarkt)");
+            Station maimarktGrossParkPlatzStation = new Station(49.4685232, 8.5220630, "Maimarkt (P+R Großparkplatz)");
+            Station sapArenaStation = new Station(49.4648353, 8.5204035, "SAP-Arena");
+            Station berlinerPlatzStation = new Station(49.4799380, 8.4507645, "Berliner Platz");
+            Station konradAdenauerBrückeStation = new Station(49.4824621, 8.4586681, "Konrad-Adenauer-Brücke");
+            Station universitätStation = new Station(49.48166, 8.46537, "Universität");
+            Station schlossStation = new Station(49.48489, 8.46354, "Schloss");
+            Station paradePlatzStation = new Station(49.48749, 8.46688, "Paradeplatz");
+            Station marktPlatzStation = new Station(49.48943, 8.46782, "Marktplatz");
+            Station akademieStation = new Station(49.48943, 8.46782, "Abendakademie");
+            Station gewerkschaftHausStation = new Station(49.4904423, 8.4753833, "Gewerkschafthaus");
+            Station nationalTheaterStation = new Station(49.48765, 8.47819, "Nationaltheater");
+            Station theresenKrankenhausStation = new Station(49.48991, 8.48091, "Theresen-Krankenhaus");
+            Station universitaetsKlinikumStation = new Station(49.49363, 8.48423, "Universitätsklinikum");
+            Station bibienStraßeStation = new Station(49.49464, 8.48861, "Bibienastraße");
+            Station hauptFriedHofStation = new Station(49.49078, 8.49127, "Hauptfriedhof");
+            Station pfeiffersWoerthStation = new Station(49.48948, 8.50141, "Pfeifferswörth");
+            Station neckarPlattStation = new Station(49.48892, 8.51182, "Neckarplatt");
+            Station ziethenStraßeStation = new Station(49.49043, 8.51926, "Ziethenstraße");
+            Station adolfDamaschkeRingStation = new Station(49.49359, 8.52103, "Adolf-Damaschke-Ring");
+            Station talStrasseStation = new Station(49.4953505, 8.5249774, "Talstraße");
+            Station abendAkademieStation = new Station(49.49171, 8.46993, "Abendakademie");
+            Station kunstHalleStation = new Station(49.48309, 8.47335, "Kunsthalle");
+            Station rosenGartenStation = new Station(49.48555, 8.47556, "Rosengarten");
+            Station mannheimHauptBahnHofStation = new Station(49.48011, 8.46997, "MA Hauptbahnhof");
+            Station tattersallStation = new Station(49.48174, 8.47320, "Tattersall");
+            Station werderStrasseStation = new Station(9.48073, 8.47791, "Werderstr.");
+            Station pestalozziSchuleStation = new Station(49.47893, 8.48185, "Pestalozzischule");
+            Station weberStrasseStation = new Station(49.47662, 8.48524, "Weberstraße");
+            Station planetariumStation = new Station(49.47659, 8.48985, "Planetarium");
+            Station carlBenzStadionStation = new Station(49.47782, 8.50181, "Carl-Benz-Stadion");
+            Station harrLachStation = new Station(49.47809, 8.50640, "Harrlach");
+            Station lucasCranachStrasseStation = new Station(49.47842, 8.51274, "Lucas-Cranach-Str.");
+            Station schwindStrasseStation = new Station(49.47834, 8.51856, "Schwindstraße");
+            Station ludwigStrasseStation = new Station(49.4832, 8.4482, "Ludwigstraße");
+            Station ratHausLUStation = new Station(49.48517, 8.44339, "LU Rathaus");
+            Station handelsHafenStation = new Station(49.49179, 8.45373, "Handelshafen");
+            Station rheinStrasseStation = new Station(49.49087, 8.45800, "Rheinstraße");
+            Station ratHausMAStation = new Station(49.48914, 8.46246, "MA Rathaus/rem");
+            Station strohMarktStation = new Station(49.48621, 8.46999, "Strohmarkt");
+            Station wasserTurmStation = new Station(49.48487, 8.47339, "Wasserturm");
+
+
+            stationRepo.saveAllAndFlush(List.of(
+                hansThomaStrStation,
+                neuOstHeimStation,
+                luisenParkStation,
+                spinelliParkStation,
+                sapArenaSBFStation,
+                maimarktGrossParkPlatzStation,
+                sapArenaStation,
+                berlinerPlatzStation,
+                konradAdenauerBrückeStation,
+                universitätStation,
+                schlossStation,
+                paradePlatzStation,
+                marktPlatzStation,
+                akademieStation,
+                gewerkschaftHausStation,
+                nationalTheaterStation,
+                theresenKrankenhausStation,
+                universitaetsKlinikumStation,
+                bibienStraßeStation,
+                hauptFriedHofStation,
+                pfeiffersWoerthStation,
+                neckarPlattStation,
+                ziethenStraßeStation,
+                adolfDamaschkeRingStation,
+                talStrasseStation,
+                abendAkademieStation,
+                kunstHalleStation,
+                rosenGartenStation,
+                mannheimHauptBahnHofStation,
+                tattersallStation,
+                werderStrasseStation,
+                pestalozziSchuleStation,
+                weberStrasseStation,
+                planetariumStation,
+                carlBenzStadionStation,
+                harrLachStation,
+                lucasCranachStrasseStation,
+                schwindStrasseStation,
+                ludwigStrasseStation,
+                ratHausLUStation,
+                handelsHafenStation,
+                rheinStrasseStation,
+                ratHausMAStation,
+                strohMarktStation,
+                wasserTurmStation
+                )
+            );
+
             var hansThomaStr = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Hans-Thoma-Str.",
-                    49.47496, 8.52439);
+                    LocalTime.now(), 0, 0, hansThomaStrStation);
             entryRepo.save(hansThomaStr);
 
             var neuOstHeim = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Neuostheim",
-                    49.4774967, 8.5228445);
+                    LocalTime.now(), 0, 0,neuOstHeimStation);
             entryRepo.save(neuOstHeim);
 
             var luisenPark = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Luisenpark",
-                    49.47887, 8.49640);
+                    LocalTime.now(), 0, 0,
+                luisenParkStation);
             entryRepo.save(luisenPark);
 
             var spinelliPark = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Buga 23 Haupteingang Spinelli-Park",
-                    49.49646, 8.52208);
+                    LocalTime.now(), 0, 0,
+                spinelliParkStation);
             entryRepo.save(spinelliPark);
 
             var sapArenaSBF = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "SAP Arena S-Bf (MA-Arena/Maimarkt)",
-                    49.4598771, 8.5171520);
+                    LocalTime.now(), 0, 0,
+                sapArenaSBFStation);
             entryRepo.save(sapArenaSBF);
 
             var maimarktGrossParkPlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Maimarkt (P+R Großparkplatz)",
-                    49.4685232, 8.5220630);
+                    LocalTime.now(), 0, 0,
+                maimarktGrossParkPlatzStation);
             entryRepo.save(maimarktGrossParkPlatz);
 
             var sapArena = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "SAP-Arena",
-                    49.4648353, 8.5204035);
+                    LocalTime.now(), 0, 0,
+                sapArenaStation);
             entryRepo.save(sapArena);
 
             var berlinerPlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Berliner Platz",
-                    49.4799380, 8.4507645);
+                    LocalTime.now(), 0, 0,
+                berlinerPlatzStation);
             entryRepo.save(berlinerPlatz);
 
             var konradAdenauerBrücke = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Konrad-Adenauer-Brücke",
-                    49.4824621, 8.4586681);
+                    LocalTime.now(), 0, 0,
+                konradAdenauerBrückeStation);
             entryRepo.save(konradAdenauerBrücke);
 
             var universität = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Universität",
-                    49.48166, 8.46537);
+                    LocalTime.now(), 0, 0,
+                universitätStation);
             entryRepo.save(universität);
 
             var schloss = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Schloss",
-                    49.48489, 8.46354);
+                    LocalTime.now(), 0, 0,
+                schlossStation);
             entryRepo.save(schloss);
 
             var paradePlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Paradeplatz",
-                    49.48749, 8.46688);
+                    LocalTime.now(), 0, 0,
+                paradePlatzStation);
             entryRepo.save(paradePlatz);
 
             var marktPlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Marktplatz",
-                    49.48943, 8.46782);
+                    LocalTime.now(), 0, 0,
+                marktPlatzStation);
             entryRepo.save(marktPlatz);
 
             var akademie = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Abendakademie",
-                    49.48943, 8.46782);
+                    LocalTime.now(), 0, 0,
+                akademieStation);
             entryRepo.save(akademie);
 
             var gewerkschaftHaus = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Gewerkschafthaus",
-                    49.4904423, 8.4753833);
+                    LocalTime.now(), 0, 0,
+                gewerkschaftHausStation);
             entryRepo.save(gewerkschaftHaus);
 
             var nationalTheater = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Nationaltheater",
-                    49.48765, 8.47819);
+                    LocalTime.now(), 0, 0,
+                    nationalTheaterStation);
             entryRepo.save(nationalTheater);
 
             var theresenKrankenhaus = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Theresen-Krankenhaus",
-                    49.48991, 8.48091);
+                    LocalTime.now(), 0, 0,
+                theresenKrankenhausStation);
             entryRepo.save(theresenKrankenhaus);
 
             var universitaetsKlinikum = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Universitätsklinikum",
-                    49.49363, 8.48423);
+                    LocalTime.now(), 0, 0,
+                universitaetsKlinikumStation);
             entryRepo.save(universitaetsKlinikum);
 
             var bibienStraße = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Bibienastraße",
-                    49.49464, 8.48861);
+                    LocalTime.now(), 0, 0,
+                bibienStraßeStation);
             entryRepo.save(bibienStraße);
 
             var hauptFriedHof = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Hauptfriedhof",
-                    49.49078, 8.49127);
+                    LocalTime.now(), 0, 0,
+                hauptFriedHofStation);
             entryRepo.save(hauptFriedHof);
 
             var pfeiffersWoerth = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Pfeifferswörth",
-                    49.48948, 8.50141);
+                    LocalTime.now(), 0, 0,
+                pfeiffersWoerthStation);
             entryRepo.save(pfeiffersWoerth);
 
             var neckarPlatt = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Neckarplatt",
-                    49.48892, 8.51182);
+                    LocalTime.now(), 0, 0,
+                neckarPlattStation);
             entryRepo.save(neckarPlatt);
 
             var ziethenStraße = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Ziethenstraße",
-                    49.49043, 8.51926);
+                    LocalTime.now(), 0, 0,
+                ziethenStraßeStation);
             entryRepo.save(ziethenStraße);
 
             var adolfDamaschkeRing = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Adolf-Damaschke-Ring",
-                    49.49359, 8.52103);
+                    LocalTime.now(), 0, 0,
+                adolfDamaschkeRingStation);
             entryRepo.save(adolfDamaschkeRing);
 
             var talStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Talstraße",
-                    49.4953505, 8.5249774);
+                    LocalTime.now(), 0, 0,
+                talStrasseStation);
             entryRepo.save(talStrasse);
 
             var abendAkademie = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Abendakademie",
-                    49.49171, 8.46993);
+                    LocalTime.now(), 0, 0,
+                abendAkademieStation);
             entryRepo.save(abendAkademie);
 
             var kunstHalle = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Kunsthalle",
-                    49.48309, 8.47335);
+                    LocalTime.now(), 0, 0,
+                kunstHalleStation);
             entryRepo.save(kunstHalle);
 
             var rosenGarten = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Rosengarten",
-                    49.48555, 8.47556);
+                    LocalTime.now(), 0, 0,
+                rosenGartenStation);
             entryRepo.save(rosenGarten);
 
             var mannheimHauptBahnHof = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "MA Hauptbahnhof",
-                    49.48011, 8.46997);
+                    LocalTime.now(), 0, 0,
+                mannheimHauptBahnHofStation);
             entryRepo.save(mannheimHauptBahnHof);
 
             var tattersall = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Tattersall",
-                    49.48174, 8.47320);
+                    LocalTime.now(), 0, 0,
+                tattersallStation);
             entryRepo.save(tattersall);
 
             var werderStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Werderstr.",
-                    49.48073, 8.47791);
+                    LocalTime.now(), 0, 0,
+                werderStrasseStation);
             entryRepo.save(werderStrasse);
 
             var pestalozziSchule = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Pestalozzischule",
-                    49.47893, 8.48185);
+                    LocalTime.now(), 0, 0,
+                pestalozziSchuleStation);
             entryRepo.save(pestalozziSchule);
 
             var weberStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Weberstraße",
-                    49.47662, 8.48524);
+                    LocalTime.now(), 0, 0,
+                weberStrasseStation);
             entryRepo.save(weberStrasse);
 
             var planetarium = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Planetarium",
-                    49.47659, 8.48985);
+                    LocalTime.now(), 0, 0,
+                planetariumStation);
             entryRepo.save(planetarium);
 
             var carlBenzStadion = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Carl-Benz-Stadion",
-                    49.47782, 8.50181);
+                    LocalTime.now(), 0, 0,
+                carlBenzStadionStation);
             entryRepo.save(carlBenzStadion);
 
             var harrLach = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Harrlach",
-                    49.47809, 8.50640);
+                    LocalTime.now(), 0, 0,
+                harrLachStation);
             entryRepo.save(harrLach);
 
             var lucasCranachStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Lucas-Cranach-Str.",
-                    49.47842, 8.51274);
+                    LocalTime.now(), 0, 0,
+                lucasCranachStrasseStation);
             entryRepo.save(lucasCranachStrasse);
 
             var schwindStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Schwindstraße",
-                    49.47834, 8.51856);
+                    LocalTime.now(), 0, 0,
+                schwindStrasseStation);
             entryRepo.save(schwindStrasse);
 
             var ludwigStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Ludwigstraße",
-                    49.4832, 8.4482);
+                    LocalTime.now(), 0, 0,
+                ludwigStrasseStation);
             entryRepo.save(ludwigStrasse);
 
             var ratHausLU = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "LU Rathaus",
-                    49.48517, 8.44339);
+                    LocalTime.now(), 0, 0,
+                ratHausLUStation);
             entryRepo.save(ratHausLU);
 
             var handelsHafen = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Handelshafen",
-                    49.49179, 8.45373);
+                    LocalTime.now(), 0, 0,
+                handelsHafenStation);
             entryRepo.save(handelsHafen);
 
             var rheinStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Rheinstraße",
-                    49.49087, 8.45800);
+                    LocalTime.now(), 0, 0,
+                rheinStrasseStation);
             entryRepo.save(rheinStrasse);
 
             var ratHausMA = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "MA Rathaus/rem",
-                    49.48914, 8.46246);
+                    LocalTime.now(), 0, 0,
+                ratHausMAStation);
             entryRepo.save(ratHausMA);
 
             var strohMarkt = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Strohmarkt",
-                    49.48621, 8.46999);
+                    LocalTime.now(), 0, 0,
+                strohMarktStation);
             entryRepo.save(strohMarkt);
 
             var wasserTurm = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, "Wasserturm",
-                    49.48487, 8.47339);
+                    LocalTime.now(), 0, 0,
+                wasserTurmStation);
             entryRepo.save(wasserTurm);
 
             // Real data for the shuttle line from the BUGA entrance pdf file and openstreetmap

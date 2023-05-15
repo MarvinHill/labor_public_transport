@@ -21,12 +21,12 @@ public class LineScheduleEntry {
     private LocalTime arrivalTime;
     private int waitTime;
     private int delay;
-    private String stationDesignator;
-    private Point geoLocation;
+
+    @ManyToOne
+    private Station station;
 
     @ManyToMany(mappedBy = "lineScheduleEntryList")
     private List<PublicTransportLine> publicTransportLines = new ArrayList<>();
-
     public LineScheduleEntry() {
     }
 
@@ -34,14 +34,11 @@ public class LineScheduleEntry {
             LocalTime arrivalTime,
             int waitTime,
             int delay,
-            String stationDesignator,
-            double longitude,
-            double latitude) {
+            Station station) {
         this.arrivalTime = arrivalTime;
         this.waitTime = waitTime;
         this.delay = delay;
-        this.stationDesignator = stationDesignator;
-        this.geoLocation = new Point(longitude, latitude);
+        this.station = station;
     }
 
     public Long getId() {
@@ -60,8 +57,8 @@ public class LineScheduleEntry {
         return this.arrivalTime;
     }
 
-    public String getStationDesignator() {
-        return this.stationDesignator;
+    public Station getStation() {
+        return station;
     }
 
     public void addPublicTransportLine(PublicTransportLine ptl) {
@@ -77,7 +74,7 @@ public class LineScheduleEntry {
         this.publicTransportLines = publicTransportLines;
 
     }
-    public Point getGeoLocation() {
-        return this.geoLocation;
+    public void setStation(Station station) {
+        this.station = station;
     }
 }
