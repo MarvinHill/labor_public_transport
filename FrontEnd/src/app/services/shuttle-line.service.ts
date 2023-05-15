@@ -66,10 +66,10 @@ export class ShuttleLineService {
     });
 
     let marker = new L.Marker(
-      [entry.geoLocation.x, entry.geoLocation.y],
+      [entry.station.geoLocation.x, entry.station.geoLocation.y],
       { icon: shuttleMarkerIcon }
     );
-    marker.bindPopup("<span>" + entry.stationDesignator + "</span>").openPopup();
+    marker.bindPopup("<span>" + entry.station.stationDesignator + "</span>").openPopup();
     marker.addTo(layer);
   }
 

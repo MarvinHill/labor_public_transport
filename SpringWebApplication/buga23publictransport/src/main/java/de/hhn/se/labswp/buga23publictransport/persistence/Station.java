@@ -1,6 +1,7 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,10 +21,6 @@ public class Station {
   private Point geoLocation;
   private String stationDesignator;
 
-  @OneToMany( mappedBy="station")
-  @JsonBackReference
-  private List<LineScheduleEntry> lineScheduleEntries;
-
   public Station() {}
 
   public Station(double longitude, double latitude, String stationDesignator ) {
@@ -38,20 +35,11 @@ public class Station {
     return geoLocation;
   }
 
-  public List<LineScheduleEntry> getLineScheduleEntries() {
-    return lineScheduleEntries;
-  }
-
   public void setGeoLocation(Point geoLocation) {
     this.geoLocation = geoLocation;
   }
 
   public void setStationDesignator(String stationDesignator) {
     this.stationDesignator = stationDesignator;
-  }
-
-  public void setLineScheduleEntries(
-      List<LineScheduleEntry> lineScheduleEntries) {
-    this.lineScheduleEntries = lineScheduleEntries;
   }
 }
