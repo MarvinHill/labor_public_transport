@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ParkingLot } from '../ParkingLot';
+import { ShuttleLine } from '../ShuttleLine';
 import { ObserverState } from '../ObserverState';
 import { RnvLine } from '../RnvLine';
 
@@ -21,15 +22,20 @@ export class MapDetailsObserverService {
     if("parkingType" in data){
       this.show = ObserverState.PARKING;
       this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    if("lineDesignator" in data){
+      this.show = ObserverState.SHUTTLE;
+      this.data = <ShuttleLine> data;
+      this.changeVisibility(true);
+      return;
     }
     else{
-      this.visible = false;
+      this.changeVisibility(false);
       this.show = ObserverState.NOTHING;
+      return;
     }
-
-
-    this.changeVisibility(true);
-
   }
 
   changeVisibility(visibility : boolean){

@@ -22,6 +22,7 @@ export class TimelineComponent implements OnInit {
 
 
   @Input() shuttleLine: ShuttleLine;
+  @Input() restrictSize : boolean = true;
 
   lineName: string = "no line name";
   shuttleLineID: number;

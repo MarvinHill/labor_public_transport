@@ -5,7 +5,7 @@
       <h5 class="fs-5 fw-bold">{{lineName}}</h5>
       <p class="fst-italic" style="text-align: right;">{{this.lineScheduleEntryList[0].station.stationDesignator}} -
         {{this.lineScheduleEntryList[number].station.stationDesignator}}</p>
-        <div style="overflow-x: hidden; overflow-y: auto;" class="height">
+        <div style="overflow-x: hidden; overflow-y: auto;" class="height" [class.height] = "restrictSize === true">
           <ul class="timeline">
             <li class="timeline-item1" style="text-align: start;">
               <p class="fw-normal">{{this.lineScheduleEntryList[0].station.stationDesignator}} <br> {{formateTime(this.lineScheduleEntryList[0].arrivalTime)}}</p>

@@ -7,6 +7,8 @@ import * as L from 'leaflet';
 import { Point } from 'leaflet';
 import { DataServiceService } from './data-service.service';
 import { MapService } from './map.service';
+import { MapDetailsObserverComponent } from '../map-details-observer/map-details-observer.component';
+import { MapDetailsObserverService } from './map-details-observer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class ShuttleLineService {
   private http: HttpClient;
   private lines: ShuttleLine[];
 
-  constructor(http: HttpClient, private dataService : DataServiceService) {
+  constructor(http: HttpClient, private dataService : DataServiceService, private observerService : MapDetailsObserverService) {
     this.http = http;
   }
 
@@ -34,10 +36,14 @@ export class ShuttleLineService {
           if (line.geoLinePoints.length > 0) {
             var pl = this.getPolyLine(line);
             pl.addTo(layer[0] as L.LayerGroup);
+            pl.on("click", function (e: any) {   
+              console.warn(line);       
+              this.observerService.changeDisplay(line)
+            }.bind(this));
           }
 
           line.lineScheduleEntryList.forEach(entry => {
-            this.addLineStopToMap(layer[0] as L.LayerGroup, entry);
+            this.addLineStopToMap(layer[0] as L.LayerGroup, entry, line);
           });
           
           layer[1] = line.lineDesignator;
@@ -54,7 +60,7 @@ export class ShuttleLineService {
    * @param entry 
    * @param line 
    */
-  public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry): void {
+  public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry, line : ShuttleLine): void {
     //Todo: right icon designation for trains parkingslots and shuttle line view
     var shuttleMarkerIcon = L.icon({
       iconUrl: 'assets/image/ShuttleLineEntry.png',
@@ -69,6 +75,9 @@ export class ShuttleLineService {
       [entry.station.geoLocation.x, entry.station.geoLocation.y],
       { icon: shuttleMarkerIcon }
     );
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(line)
+    }.bind(this));
     marker.bindPopup("<span>" + entry.station.stationDesignator + "</span>").openPopup();
     marker.addTo(layer);
   }
@@ -98,7 +107,7 @@ export class ShuttleLineService {
         color: line.colorHexCode,
         weight: 5,
         opacity: 1,
-        moothFactor: 1
+        smoothFactor: 1
       };
 
     }
