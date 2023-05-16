@@ -25,7 +25,7 @@ export class MapDetailsObserverService {
       this.changeVisibility(true);
       return;
     }
-    if("lineDesignator" in data){
+    else if("lineDesignator" in data){     
       this.show = ObserverState.SHUTTLE;
       this.data = <ShuttleLine> data;
       this.changeVisibility(true);
@@ -39,6 +39,7 @@ export class MapDetailsObserverService {
   }
 
   changeVisibility(visibility : boolean){
+        console.warn("changed visibility to " + visibility);
         this.visible = visibility;
   }
 
@@ -46,3 +47,7 @@ export class MapDetailsObserverService {
     this.visible = !this.visible;
   }
 }
+function detectChanges() {
+  throw new Error('Function not implemented.');
+}
+

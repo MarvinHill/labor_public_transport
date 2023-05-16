@@ -36,7 +36,8 @@ export class ShuttleLineService {
           if (line.geoLinePoints.length > 0) {
             var pl = this.getPolyLine(line);
             pl.addTo(layer[0] as L.LayerGroup);
-            pl.on("click", function (e: any) {   
+            pl.on("click", function (e: any) { 
+              console.warn("Line");
               console.warn(line);       
               this.observerService.changeDisplay(line)
             }.bind(this));
@@ -76,6 +77,8 @@ export class ShuttleLineService {
       { icon: shuttleMarkerIcon }
     );
     marker.on("click", function (e: any) {
+      console.warn("Marker");
+      console.warn(line);
       this.observerService.changeDisplay(line)
     }.bind(this));
     marker.bindPopup("<span>" + entry.station.stationDesignator + "</span>").openPopup();
@@ -95,6 +98,7 @@ export class ShuttleLineService {
 
       options =
       {
+        bubblingMouseEvents : false,
         color: line.colorHexCode,
         weight: 5,
         opacity: 1,
@@ -104,6 +108,7 @@ export class ShuttleLineService {
     } else {
       options =
       {
+        bubblingMouseEvents : false,
         color: line.colorHexCode,
         weight: 5,
         opacity: 1,
