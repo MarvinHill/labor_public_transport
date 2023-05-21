@@ -51,27 +51,27 @@
 				<tbody>
 				  <tr>
 					<th>Tageskarten</th>
-					<td>Frei</td>
-					<td>11,00€</td>
-					<td>28,00€</td>
-					<td>25,00€</td>
-					<td>18,00€</td>
+					<td>{{ preisService.getPreisTagesKarten('kinder') }}</td>
+					<td>{{ preisService.getPreisTagesKarten('jungeErwachsene') }}€</td>
+					<td>{{ preisService.getPreisTagesKarten('erwachsene') }}€</td>
+					<td>{{ preisService.getPreisTagesKarten('gruppen') }}€</td>
+					<td>{{ preisService.getPreisTagesKarten('beguenstigte') }}€</td>
 				  </tr>
 				  <tr>
 					<th>Zweitageskarten*</th>
-					<td>Frei</td>
-					<td>17,00€</td>
-					<td>43,00€</td>
-					<td>38,00€</td>
-					<td>28,00€</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('kinder') }}</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('jungeErwachsene') }}€</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('erwachsene') }}€</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('gruppen') }}€</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('beguenstigte') }}€</td>
 				  </tr>
 				  <tr>
 					<th>Dauerkarten</th>
-					<td>Frei</td>
-					<td>65,00€</td>
-					<td>145,00€</td>
-					<td>-</td>
-					<td>95,00€</td>
+					<td>{{ preisService.getPreisDauerkarten('kinder') }}</td>
+					<td>{{ preisService.getPreisDauerkarten('jungeErwachsene') }}€</td>
+					<td>{{ preisService.getPreisDauerkarten('erwachsene') }}€</td>
+					<td>{{ preisService.getPreisDauerkarten('gruppen') }}</td>
+					<td>{{ preisService.getPreisDauerkarten('beguenstigte') }}€</td>
 				  </tr>
 				</tbody>
 			  </table>

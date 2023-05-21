@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { PreisService } from './preis.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TransportEntryComponent } from './transport-entry/transport-entry.component';
@@ -30,6 +31,7 @@ import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
+
 
 
 @NgModule({
@@ -68,7 +70,7 @@ import { ConnectionTicketComponent } from './connection-ticket/connection-ticket
     FormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [PreisService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { PreisService } from '../preis.service';
 
 @Component({
   selector: 'app-travelinfo',
@@ -17,4 +18,6 @@ export class TravelinfoComponent {
   redirectToBarrierefreiheit () {
     window.location.href = 'https://www.buga23.de/besuch-service/barrierefreiheit-mobilitaetsverleih/';
   } 
+
+  constructor(@Inject(PreisService) public preisService : PreisService){}
 }
