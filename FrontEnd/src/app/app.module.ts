@@ -29,35 +29,37 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
+import {ParkingItemCapacityComponent} from "./parking-item-capacity/parking-item-capacity.component";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TransportEntryComponent,
-    RoutingTopBarComponent,
-    ShuttleViewComponent,
-    MainViewComponent,
-    ShuttleLineEntryComponent,
-    MapComponent,
-    ShuttleLineEntryComponent,
-    AddShuttleLineComponent,
-    MapDetailsObserverComponent,
-    TimelineComponent,
-    TravelinfoComponent,
-    InfoCarouselComponent,
-    InfoParkingComponent,
-    InfoBusComponent,
-    InfoBahnComponent,
-    InfoCardsComponent,
-    InfoParkingTextComponent,
-    InfoBusTextComponent,
-    InfoBahnTextComponent,
+    declarations: [
+        AppComponent,
+        TransportEntryComponent,
+        RoutingTopBarComponent,
+        ShuttleViewComponent,
+        MainViewComponent,
+        ShuttleLineEntryComponent,
+        MapComponent,
+        ShuttleLineEntryComponent,
+        AddShuttleLineComponent,
+        MapDetailsObserverComponent,
+        TimelineComponent,
+        TravelinfoComponent,
+        InfoCarouselComponent,
+        InfoParkingComponent,
+        InfoBusComponent,
+        InfoBahnComponent,
+        InfoCardsComponent,
+        InfoParkingTextComponent,
+        InfoBusTextComponent,
+        InfoBahnTextComponent,
 
-    ParkingViewComponent,
-    ParkingItemComponent,
-    BikeParkingItemComponent,
-  ],
+        ParkingViewComponent,
+        ParkingItemComponent,
+        BikeParkingItemComponent,
+        ParkingItemCapacityComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,0 +1,180 @@
+.tag-container::-webkit-scrollbar {
+  display: none;
+}
+
+.all::-webkit-scrollbar {
+  display: none;
+  position: fixed;
+  left: 0; top: 0;
+}
+
+.auslastungsGrafik::-webkit-scrollbar {
+  display: none;
+}
+
+.white-font {
+  color: black;
+}
+
+.bc-p-p {
+  background-color: white;
+}
+
+.rounded-box {
+  border-radius: 1em;
+  overflow-x: auto;
+}
+
+.tag-container {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tags {
+  display: inline-block;
+}
+
+.tag {
+  color: white;
+  background-color: #0677e0;
+  border-radius: 24px;
+  height: auto;
+  padding: 0.3em 1em;
+  margin-right: 0.5em;
+  display: inline-block;
+}
+
+/* PLATZHALTER-TAG FÜR ITEMS OHNE TAGS*/
+.tag-halter {
+  color: white;
+  background-color: white;
+  border-radius: 24px;
+  height: auto;
+  padding: 0.3em 1em;
+  margin-right: 0.5em;
+  display: inline-block;
+}
+
+.line-vertical {
+  background-color: #0677e0;
+  border-radius: 99px;
+  margin-left:  0.2rem;
+  margin-right: 0.2rem;
+  /* Breite der einzelnen Linien */
+  padding-right: 0.6rem;
+}
+
+.funf20 {
+  height: 25%;
+}
+
+.funfzig {
+  height: 50%;
+}
+
+.funf70 {
+  height: 75%;
+}
+
+.hundert {
+  height: 100%;
+}
+
+.auslastungsGrafik{
+  height: 96%;
+  display: flex;
+  padding: 0.3rem;
+  align-items: baseline;
+  overflow-x: auto;
+}
+
+.shadow {
+  box-shadow: 7px 7px;
+}
+
+.col-grafik {
+  flex: 0 0 auto;
+  width: 33.33333333%;
+}
+.col-content {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+
+
+  /* Ab 1200px */
+  @media (min-width: 1200px) {
+    .tag-container {
+      font-size: 1rem;
+    }
+    .col-grafik {
+      flex: 0 0 auto;
+      width: 33.33333333%;
+    }
+    .col-content {
+      flex: 0 0 auto;
+      width: 66.66666667%;
+    }
+  }
+
+  /* Ab 980px */
+  @media (min-width: 980px) and (max-width: 1199px) {
+    .tag-container {
+      font-size: 0.8rem;
+    }
+    .col-grafik {
+      flex: 0 0 auto;
+      width: 41.66666667%;
+    }
+    .col-content {
+      flex: 0 0 auto;
+      width: 58.33333333%;
+    }
+  }
+
+  /* Ab 768px */
+  @media (min-width: 768px) and (max-width: 979px) {
+    .tag-container {
+      font-size: 0.7rem;
+    }
+    .col-grafik {
+      flex: 0 0 auto;
+      width: 41.66666667%;
+    }
+    .col-content {
+      flex: 0 0 auto;
+      width: 58.33333333%;
+    }
+  }
+
+  /* Ab 480px */
+  @media (min-width: 480px) and (max-width: 767px) {
+    .tag-container {
+      font-size: 0.6rem;
+    }
+    .col-grafik {
+      flex: 0 0 auto;
+      width: 41.66666667%;
+    }
+    .col-content {
+      flex: 0 0 auto;
+      width: 58.33333333%;
+    }
+  }
+
+  /* Unter 480px */
+  @media (max-width: 479px) {
+    .tag-container {
+      font-size: 0.5rem;
+    }
+    .col-grafik {
+      flex: 0 0 auto;
+      width: 41.66666667%;
+    }
+    .col-content {
+      flex: 0 0 auto;
+      width: 58.33333333%;
+    }
+  }

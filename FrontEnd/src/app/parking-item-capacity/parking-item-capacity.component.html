@@ -1,0 +1,23 @@
+<section>
+  <div class="all shadow white-font row bc-p-p rounded-box">
+
+    <div class="content col-content white-font rounded-box-content p-3">
+      <h5 class="fw-bold headline-size">{{parkingName}}</h5>
+      <p class="white-font">{{parkingAddress}}</p>
+      <div class="tag-container">
+        <li class="tag" *ngIf="parking.barrierfree === true">Barrierefrei</li>
+        <li class="tag" *ngIf="parking.charging === true">Ladestationen</li>
+        <li class="tag-halter" *ngIf="parking.charging === false && parking.barrierfree === false">.</li>
+      </div>
+    </div>
+
+    <div class="col-grafik">
+      <div class="auslastungsGrafik">
+        <ng-container *ngFor="let index of auslastungen; index as i">
+          <span class="line-vertical " [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+</section>
