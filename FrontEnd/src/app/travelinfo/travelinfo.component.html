@@ -36,13 +36,16 @@
 		  <div class="box-wrapper">
 			<div class="box">
 			  <h2>Ticketpreise</h2>
+			  <div class="table-container">
 			  <table>
 				<thead>
 				  <tr>
 					<th></th> <!-- Leerzelle für die Row-Überschriften-Spalte -->
-					<th>Kinder</th>
+					<th>Kinder**</th>
 					<th>Junge Erwachsene</th>
 					<th>Erwachsene</th>
+					<th>Gruppen</th>
+					<th>Begünstigte***</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -51,22 +54,39 @@
 					<td>Frei</td>
 					<td>11,00€</td>
 					<td>28,00€</td>
+					<td>25,00€</td>
+					<td>18,00€</td>
 				  </tr>
 				  <tr>
-					<th>Zweitageskarten</th>
+					<th>Zweitageskarten*</th>
 					<td>Frei</td>
 					<td>17,00€</td>
 					<td>43,00€</td>
+					<td>38,00€</td>
+					<td>28,00€</td>
 				  </tr>
 				  <tr>
 					<th>Dauerkarten</th>
 					<td>Frei</td>
 					<td>65,00€</td>
 					<td>145,00€</td>
+					<td>-</td>
+					<td>95,00€</td>
 				  </tr>
 				</tbody>
 			  </table>
-			  <br>
+			</div>
+			<footer>
+				<b>Kinder</b> bis einschließlich 14 Jahre,
+				<b>Junge Erwachsene</b> 15-24 Jahre,
+				<b>Erwachsene</b> ab 25 Jahre
+				und
+				<b>Gruppen</b> ab 12 Personen
+				<br>
+				Weitere Informationen unten
+			  </footer>
+			  
+			  
 			  <button (click)="redirectToTicketShop()" class="my-button" >
 				Ticketshop
 			</button>
@@ -84,11 +104,14 @@
 				</button>
 			</div>
 		  </div>
-		
-	  
+		  <footer>* Der Eintritt muss an zwei aufeinanderfolgenden Tagen erfolgen.
+			** bis 14 Jahre, maßgeblich ist das Alter am 14. April 2023. Kinder im Alter bis 14 Jahren haben nur in Begleitung einer volljährigen Aufsichtsperson Zutritt. Für den Zutritt bedarf es einer 0,00€ Karte.
+			*** Diese Ermäßigung steht Personen zu, auf die Folgendes zutrifft und die dies mit einem Nachweis belegen können:
+			
+			Behinderung ab GdB 50, bei Merkmal B oder H im Behindertenausweis ist die Begleitperson frei
+			Bezug von ALG II bzw. Hartz IV nach SGB II
+			Bezug von Hilfe zum Lebensunterhalt oder Grundsicherung im Alter nach SGB XII
+			Bezug von Grundsicherung bei voller Erwerbsminderung nach SGB XII</footer>
 		</div>
-	
-	
-	
   </main>
 </body>
