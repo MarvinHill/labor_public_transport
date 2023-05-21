@@ -16,5 +16,5 @@ export class TravelinfoComponent {
 
   redirectToBarrierefreiheit () {
     window.location.href = 'https://www.buga23.de/besuch-service/barrierefreiheit-mobilitaetsverleih/';
-  }
+  } 
 }
