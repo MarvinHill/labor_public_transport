@@ -1,7 +1,7 @@
 <section>
   <div class="all shadow white-font row bc-p-p rounded-box">
 
-    <div class="content col-content white-font rounded-box-content p-3">
+      <div class="content white-font rounded-box-content p-3" [ngClass]="{'col-md-12': auslastungen.length === 0, 'col-content': auslastungen.length > 0}">
       <h5 class="fw-bold headline-size">{{parkingName}}</h5>
       <p class="white-font">{{parkingAddress}}</p>
       <div class="tag-container">
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="col-grafik">
+    <div class="col-grafik" *ngIf="auslastungen.length !== 0">
       <div class="auslastungsGrafik">
         <ng-container *ngFor="let index of auslastungen; index as i">
           <span class="line-vertical " [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
