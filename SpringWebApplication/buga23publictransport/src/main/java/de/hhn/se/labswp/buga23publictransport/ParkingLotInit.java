@@ -648,7 +648,7 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(d5GeoLocation, d5Poly, d5Entrances, "D5 Reiß-Museum, Tiefgarage", true, true, ParkingType.CAR, "D5, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(g1GeoLocation, g1Poly, g1Entrances, "G1 Marktplatz, Tiefgarage", false, true, ParkingType.CAR, "G1 1, 68159 Mannheim"));
             carRepo.save(new CarParkingLot(h6GeoLocation, h6Poly, h6Entrances, "H6, Tiefgarage", false, false, ParkingType.CAR, "H6 1, 68159 Mannheim"));
-            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1 , Tiefgarage", true, false, ParkingType.CAR, "Willy-Brandt-Platz 5, 68161 Mannheim"));
+            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1, Tiefgarage", true, false, ParkingType.CAR, "Willy-Brandt-Platz 5, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(p2GeoLocation, p2Poly, p2Entrances, "Hauptbahnhof P2, Parkhaus", true, false, ParkingType.CAR, "Heinrich-von-Stephan-Straße 6, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(p3GeoLocation, p3Poly, p3Entrances, "Hauptbahnhof P3, Parkhaus", true, true,ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim"));
             carRepo.save(new CarParkingLot(p5GeoLocation, p5Poly, p5Entrances, "Hauptbahnhof P5, Parkhaus", true, true, ParkingType.CAR, "Glücksteinallee 9, 68163 Mannheim"));
