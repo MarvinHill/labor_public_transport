@@ -1,4 +1,4 @@
-import { NgIfContext } from '@angular/common';
+import { NgIfContext, Location } from '@angular/common';
 import { Component, ElementRef, HostListener, Inject, TemplateRef } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { IfStmt } from '@angular/compiler';
@@ -43,7 +43,7 @@ export class RoutingTopBarComponent {
     this.innerWidth = event.target.innerWidth;
   }
 
-  constructor(userService: UserLoginServiceService, router: Router) {
+  constructor(userService: UserLoginServiceService, router: Router, private location : Location) {
     this.userService = userService;
     this.router = router;
 
@@ -85,6 +85,10 @@ export class RoutingTopBarComponent {
   switchInfoWindow() {
     this.infoWindow = !this.infoWindow;
     this.update = true;
+  }
+
+  goBack(){
+      this.location.back();
   }
 
 }

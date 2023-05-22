@@ -9,10 +9,9 @@
   <div class="container">
     <h3 class="m-3 not-select">TRANSPORTMÖGLICHKEITEN</h3>
     <div class = "row">
-      <div class = "col-lg-4"><app-transport-entry [text]="'Shuttles'" [imageName]="'bus.png'" [routerLink]="['/shuttle']"></app-transport-entry></div>
-      <div class = "col-lg-4"><app-transport-entry [text]="'Parkplätze'" [imageName]="'parkinglot.png'" [routerLink]="['/parking']"></app-transport-entry></div>
-      <div class = "col-lg-4"><app-transport-entry [text]="'Bus'" [imageName]="'shuttle.png'"></app-transport-entry></div>
-      <div class = "col-lg-4"><app-transport-entry [text]="'Zug'" [imageName]="'train.png'"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'Shuttles'" [imageName]="'bus.webp'" [routerLink]="['/shuttle']"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'Parkplätze'" [imageName]="'parkinglot.webp'" [routerLink]="['/parking']"></app-transport-entry></div>
+      <div class = "col-lg-4"><app-transport-entry [text]="'ÖPNV'" [imageName]="'shuttle.webp'"></app-transport-entry></div>
     </div>
     <h3 class="m-3">INFORMATIONEN</h3>
     <ng-container *ngIf="(window.innerWidth <= 990) else desktopView">
@@ -30,4 +29,3 @@
     <app-connection-ticket></app-connection-ticket>
   </div>
 </html>
-
