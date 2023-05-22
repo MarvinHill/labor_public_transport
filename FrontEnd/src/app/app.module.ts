@@ -1,6 +1,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { PreisService } from './preis.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +34,7 @@ import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 import { ImpressumComponent } from './impressum/impressum.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+
 
 
 @NgModule({
@@ -62,6 +63,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ParkingViewComponent,
     ParkingItemComponent,
     BikeParkingItemComponent,
+    ImpressumComponent,
+    ConnectionTicketComponent
   ],
   imports: [
     BrowserModule,
