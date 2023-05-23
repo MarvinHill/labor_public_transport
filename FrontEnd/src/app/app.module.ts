@@ -1,7 +1,9 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { PreisService } from './preis.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TransportEntryComponent } from './transport-entry/transport-entry.component';
@@ -29,8 +31,10 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
+import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
+
 import { ImpressumComponent } from './impressum/impressum.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+
 
 
 @NgModule({
@@ -60,6 +64,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ParkingItemComponent,
     BikeParkingItemComponent,
     ImpressumComponent,
+    ConnectionTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
-  providers: [],
+  providers: [PreisService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

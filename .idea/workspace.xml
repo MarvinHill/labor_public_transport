@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="386a7795-9acd-40c9-9a85-edccf2723f83" name="Changes" comment="" />
+    <list default="true" id="386a7795-9acd-40c9-9a85-edccf2723f83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/connection-ticket/connection-ticket.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/connection-ticket/connection-ticket.component.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,7 +20,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
@@ -45,6 +48,7 @@
       <option name="presentableId" value="Default" />
       <updated>1679482668511</updated>
       <workItem from="1679482671815" duration="28000" />
+      <workItem from="1683485947715" duration="17000" />
     </task>
     <servers />
   </component>

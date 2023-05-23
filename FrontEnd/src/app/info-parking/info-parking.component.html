@@ -4,18 +4,24 @@
     <title>Parken</title>
   </head>
   <body>
+    <main>
     <header>
-      <h1>Parken mit dem Auto</h1>
-      <nav>
-        <ul>
+      
+        <h1>Parken mit dem Auto</h1>
+        <div class="header-content">
+        <nav>
+          <ul>
             <li class="list" [routerLink]="['/travelinfo']">Allg. Infos </li>
-            <li class="list" [routerLink]="['/info-bahn']">Bahn </li>
-            <li class="list" [routerLink]="['/info-bus']">Bus </li>
-        </ul>
-      </nav>
+            <li class="list" [routerLink]="['/info-parking']">Parken</li>
+            <li class="list" [routerLink]="['/info-bus']">Bus</li>
+            <li class="list" [routerLink]="['/info-bahn']">Bahn </li>    
+          </ul>
+        </nav>
+      </div>
     </header>
+  </main>
+
     <app-info-parking-text></app-info-parking-text>
   
   </body>
 </html>
-
