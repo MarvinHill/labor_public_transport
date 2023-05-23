@@ -1,18 +1,25 @@
 <body>
-    <main>
-        <section>
-          <h2>Anreise mit dem ÖPNV:</h2>
+    <div class="container">
+      <div class="box-wrapper">
+        <div class="box">
+          <h2>Anreise mit ÖPNV via Mannheim Hauptbahnhof</h2>
           <p>Bei Anreise mit den öffentlichen Verkehrsmitteln über den Hauptbahnhof Mannheim nutzen Sie bitte die Straßenbahn-Sonderlinie „BUGA-Express“ zum Spinelligelände. Übrigens: Bei den Tages- und Zweitageskarten ist der ÖPNV im gesamten VRN-Gebiet bereits inkludiert!</p>
+        </div>
+      </div>
+      <div class="box-wrapper">
+        <div class="box">
           <h2>Anreise innerhalb BaWü</h2>
-          <p>Für die Anreise innerhalb Baden-Württembergs gibt es im bwtarif das „Kombiticket BUGA 23“.  Das Kombiticket ist ab 1.4.23 an den Fahrkartenautomaten der DB im Bahnhof für 40 € sowie am DB-Ticketschalter mit Beratung für 2 € mehr und unter bw-ticket.de erhältlich. Außerdem wird es im Ticketshop der BUGA 23 angeboten.</p>
-          <button class="my-button">
-              <a href="https://www.rnv-online.de/fahrtinfo/buga23/" class="my-button">Anreise mit der RNV
-                </a>
-            </button>
-        </section>
+          <p>Für die Anreise innerhalb Baden-Württembergs gibt es im bwtarif das „Kombiticket BUGA 23“.  Das Kombiticket ist ab sofort an den Fahrkartenautomaten der DB im Bahnhof für {{ preisService.getpreisBaWueTicket('amAutomat') }}€ sowie am DB-Ticketschalter mit Beratung für {{ preisService.getpreisBaWueTicket('amTicketschalter') }}€ und unter bw-ticket.de erhältlich. Außerdem wird es im Ticketshop der BUGA 23 angeboten.</p>
+          <button (click)="redirectToTicketPage()" class="my-button" >
+            Anreise mit dem RNV
+        </button>
+        </div>
+      </div>
+      
+      <footer>
+        Sämtliche rnv-Bahn- und -Buslinien, mit denen die beiden BUGA 23-Haltestellen Talstraße und Luisenpark/Technoseum erreichbar sind, sind in Fahrtrichtung BUGA 23 jeweils mit einem zusätzlichen Piktogramm auf den Haltestellenschildern gekennzeichnet. Für die BUGA 23-Sonderlinien BS (BUGA 23-Express), BL (BUGA 23 Luisenparklinie) und P+R (Shuttlebus) wurden zudem separate Linienschilder installiert. Somit ist auch beim unmittelbaren Zustieg an den Haltestellen eine einfache Orientierung gewährleistet. An den Umsteige- und Ausstiegshaltestellen MA Hauptbahnhof, SAP Arena S-Bf, Talstraße, BUGA 23 Haupteingang Spinelli-Park sowie Luisenpark/Technoseum ermöglichen weitere Wegweiser ein sicheres Auffinden der BUGA 23-Zugänge und -Linien.
+    </footer>
+    </div>
+   
+  </body>
   
-          <footer>
-              Sämtliche rnv-Bahn- und -Buslinien, mit denen die beiden BUGA 23-Haltestellen Talstraße und Luisenpark/Technoseum erreichbar sind, sind in Fahrtrichtung BUGA 23 jeweils mit einem zusätzlichen Piktogramm auf den Haltestellenschildern gekennzeichnet. Für die BUGA 23-Sonderlinien BS (BUGA 23-Express), BL (BUGA 23 Luisenparklinie) und P+R (Shuttlebus) wurden zudem separate Linienschilder installiert. Somit ist auch beim unmittelbaren Zustieg an den Haltestellen eine einfache Orientierung gewährleistet. An den Umsteige- und Ausstiegshaltestellen MA Hauptbahnhof, SAP Arena S-Bf, Talstraße, BUGA 23 Haupteingang Spinelli-Park sowie Luisenpark/Technoseum ermöglichen weitere Wegweiser ein sicheres Auffinden der BUGA 23-Zugänge und -Linien.
-          </footer>
-      </main>
-</body>

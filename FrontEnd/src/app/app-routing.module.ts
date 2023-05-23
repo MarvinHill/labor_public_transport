@@ -15,6 +15,9 @@ import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-ent
 import { MapComponent } from "./map/map.component";
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ImpressumComponent } from './impressum/impressum.component';
+import { PreisService } from './preis.service';
+import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -25,7 +28,10 @@ const routes: Routes = [
   {path:"info-bahn", component: InfoBahnComponent},
   {path:"info-bus", component: InfoBusComponent},
   {path:'map', component: MapComponent},
-  {path:'parking', component: ParkingViewComponent}
+  {path:'parking', component: ParkingViewComponent},
+  {path: 'connection-ticket', component: ConnectionTicketComponent},
+  {path: 'PreisService', component: PreisService},
+  {path:'impressum', component: ImpressumComponent}
 ];
 
 @NgModule({

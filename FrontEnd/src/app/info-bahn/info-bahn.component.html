@@ -4,18 +4,21 @@
     <title>Bahn Info</title>
   </head>
   <body>
+    <main>
     <header>
-      <h1>Bus und Shuttle Informationen</h1>
-      <nav>
-        <ul>
-        <li class="list" [routerLink]="['/travelinfo']">Allg. Infos </li>
-        <li class="list" [routerLink]="['/info-bus']">Bus </li>
-        <li class="list" [routerLink]="['/info-parking']">Parken mit dem Auto </li>
-        </ul>
-      </nav>
+        <h1>Bahn und ÖPNV</h1>
+        <div class="header-content">
+        <nav>
+          <ul>
+            <li class="list" [routerLink]="['/travelinfo']">Allg. Infos </li>
+            <li class="list" [routerLink]="['/info-parking']">Parken</li>
+            <li class="list" [routerLink]="['/info-bus']">Bus</li>
+            <li class="list" [routerLink]="['/info-bahn']">Bahn </li>    
+          </ul>
+        </nav>
+      </div>
     </header>
+  </main>
     <app-info-bahn-text></app-info-bahn-text>
-  
   </body>
 </html>
-

@@ -1,5 +1,7 @@
 package de.hhn.se.labswp.buga23publictransport.presentation;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import de.hhn.se.labswp.buga23publictransport.LoadDatabase;
 import de.hhn.se.labswp.buga23publictransport.business.LineScheduleService;
 import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntry;
@@ -7,6 +9,7 @@ import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntryRepo;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLine;
 import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLineRepo;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.LazyInitializationException;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/api")
 public class PublicTransportLineController {
     @Autowired
     LineScheduleService lineScheduleServiceImpl;

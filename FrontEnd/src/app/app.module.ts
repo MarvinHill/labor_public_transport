@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { PreisService } from './preis.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TransportEntryComponent } from './transport-entry/transport-entry.component';
@@ -30,36 +32,42 @@ import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
 import {ParkingItemCapacityComponent} from "./parking-item-capacity/parking-item-capacity.component";
+import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
+
+import { ImpressumComponent } from './impressum/impressum.component';
+
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        TransportEntryComponent,
-        RoutingTopBarComponent,
-        ShuttleViewComponent,
-        MainViewComponent,
-        ShuttleLineEntryComponent,
-        MapComponent,
-        ShuttleLineEntryComponent,
-        AddShuttleLineComponent,
-        MapDetailsObserverComponent,
-        TimelineComponent,
-        TravelinfoComponent,
-        InfoCarouselComponent,
-        InfoParkingComponent,
-        InfoBusComponent,
-        InfoBahnComponent,
-        InfoCardsComponent,
-        InfoParkingTextComponent,
-        InfoBusTextComponent,
-        InfoBahnTextComponent,
+  declarations: [
+    AppComponent,
+    TransportEntryComponent,
+    RoutingTopBarComponent,
+    ShuttleViewComponent,
+    MainViewComponent,
+    ShuttleLineEntryComponent,
+    MapComponent,
+    ShuttleLineEntryComponent,
+    AddShuttleLineComponent,
+    MapDetailsObserverComponent,
+    TimelineComponent,
+    TravelinfoComponent,
+    InfoCarouselComponent,
+    InfoParkingComponent,
+    InfoBusComponent,
+    InfoBahnComponent,
+    InfoCardsComponent,
+    InfoParkingTextComponent,
+    InfoBusTextComponent,
+    InfoBahnTextComponent,
 
+        ParkingItemCapacityComponent,
         ParkingViewComponent,
         ParkingItemComponent,
         BikeParkingItemComponent,
-        ParkingItemCapacityComponent,
-    ],
+        ImpressumComponent,
+        ConnectionTicketComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -67,8 +75,14 @@ import {ParkingItemCapacityComponent} from "./parking-item-capacity/parking-item
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
-  providers: [],
+  providers: [PreisService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

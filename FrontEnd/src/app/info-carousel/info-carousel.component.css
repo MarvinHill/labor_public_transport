@@ -17,7 +17,6 @@
     height: 100%;
     position: relative;
     overflow: hidden;
-
 }
 
 .carousel__track{
@@ -88,3 +87,6 @@
 
 }
 
+body{
+    margin-bottom: 6vh;
+}

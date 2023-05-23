@@ -21,11 +21,10 @@
             <img src="assets/icon/googleMaps.svg" alt="google maps">
         </div>
     </div>
-
 </div>
 <div *ngIf="observerService.show === ObserverState.RNV">RNV Details {{observerService.data}} </div>
 <div *ngIf="observerService.show === ObserverState.SHUTTLE">
-    <app-shuttle-line-entry></app-shuttle-line-entry>
+    <app-timeline [shuttleLine]="observerService.data" [restrictSize]="false"></app-timeline>
 </div>
 <div *ngIf="observerService.show === ObserverState.NOTHING">
     <p>Keine Details für dieses Objekt.</p>

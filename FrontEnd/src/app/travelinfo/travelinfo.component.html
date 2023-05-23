@@ -7,31 +7,111 @@
 
 </head>
 <body>
+	<main>
 	<header>
 		<h1>Anreise zur BUGA 23</h1>
+		<div class="header-content">
 		<nav>
 			<ul>
-				<li class="list" [routerLink]="['/info-parking']">Auto</li>
+				<li class="list" [routerLink]="['/info-parking']">Parken</li>
 				<li class="list" [routerLink]="['/info-bus']">Bus </li>
 				<li class="list" [routerLink]="['/info-bahn']">Bahn </li>
 			</ul>
 		  </nav>
+		</div>
 	</header>
+		<div class="container">
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Öffnungszeiten</h2>
+			  <p>
+				Der Einlass an den Haupteingängen (jeweils Nord und Süd) auf Spinelli und im Luisenpark ist von 9:00 bis 19:00 Uhr möglich.Zu bestimmten Abendveranstaltungen werden die Öffnungs- und Einlasszeiten der BUGA 23 bis 30 Minuten nach Veranstaltungsbeginn verlängert. Die Seilbahn fährt täglich von 9:00 - 22:00 Uhr.
+				Das Gelände ist bei Einbruch der Dunkelheit über die offiziellen Ausgänge zu verlassen. Die Nachtsperrzeit beginnt bei Spätveranstaltungen 30 Minuten nach Veranstaltungsende.
+			  </p>
+			  <button (click)="redirectToParkOrdnung()" class="my-button" >
+				Parkordnung
+			</button>
+			</div>
+		  </div>
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Ticketpreise</h2>
+			  <div class="table-container">
+			  <table>
+				<thead>
+				  <tr>
+					<th></th> <!-- Leerzelle für die Row-Überschriften-Spalte -->
+					<th>Kinder**</th>
+					<th>Junge Erwachsene</th>
+					<th>Erwachsene</th>
+					<th>Gruppen</th>
+					<th>Begünstigte***</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<th>Tageskarten</th>
+					<td>{{ preisService.getPreisTagesKarten('kinder') }}</td>
+					<td>{{ preisService.getPreisTagesKarten('jungeErwachsene') }}€</td>
+					<td>{{ preisService.getPreisTagesKarten('erwachsene') }}€</td>
+					<td>{{ preisService.getPreisTagesKarten('gruppen') }}€</td>
+					<td>{{ preisService.getPreisTagesKarten('beguenstigte') }}€</td>
+				  </tr>
+				  <tr>
+					<th>Zweitageskarten*</th>
+					<td>{{ preisService.getPreisZweiTagesKarten('kinder') }}</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('jungeErwachsene') }}€</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('erwachsene') }}€</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('gruppen') }}€</td>
+					<td>{{ preisService.getPreisZweiTagesKarten('beguenstigte') }}€</td>
+				  </tr>
+				  <tr>
+					<th>Dauerkarten</th>
+					<td>{{ preisService.getPreisDauerkarten('kinder') }}</td>
+					<td>{{ preisService.getPreisDauerkarten('jungeErwachsene') }}€</td>
+					<td>{{ preisService.getPreisDauerkarten('erwachsene') }}€</td>
+					<td>{{ preisService.getPreisDauerkarten('gruppen') }}</td>
+					<td>{{ preisService.getPreisDauerkarten('beguenstigte') }}€</td>
+				  </tr>
+				</tbody>
+			  </table>
+			</div>
+			<footer>
+				<b>Kinder</b> bis einschließlich 14 Jahre,
+				<b>Junge Erwachsene</b> 15-24 Jahre,
+				<b>Erwachsene</b> ab 25 Jahre
+				und
+				<b>Gruppen</b> ab 12 Personen
+				<br>
+				Weitere Informationen unten
+			  </footer>
+			  
+			  
+			  <button (click)="redirectToTicketShop()" class="my-button" >
+				Ticketshop
+			</button>
+			</div>
+		  </div>
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Barrierefreiheit und Mobilitätsverleih</h2>
+			  <p>Die BUGA 23 soll ein Erlebnis für alle Menschen sein. Um dieses Ziel zu erreichen, arbeiten die Veranstalter*innen daran, Barrieren zu erkennen und bestmöglich abzubauen.
 
-	<main>
-		<header>
-			<h3>Anreise mit dem Auto</h3>
-		</header>
-		<app-info-parking-text></app-info-parking-text>
-		<header>
-			<h3>Anreise mit dem Bus</h3>
-		</header>
-		<app-info-bus-text></app-info-bus-text>
-		<header>
-			<h3>Anreise mit der Bahn</h3>
-		</header>
-		<app-info-bahn-text></app-info-bahn-text>
-	
-	
+				Im Folgenden finden Sie Informationen zu den Maßnahmen, die bereits getroffen wurden, um Ihren Besuch auf der BUGA 23 möglichst barrierefrei zu gestalten.</p>
+				
+				<button (click)="redirectToBarrierefreiheit()" class="my-button" >
+					Barrierefreiheit & Mobilitätsverleih
+				</button>
+			</div>
+		  </div>
+		  <footer>* Der Eintritt muss an zwei aufeinanderfolgenden Tagen erfolgen.
+			** bis 14 Jahre, maßgeblich ist das Alter am 14. April 2023. Kinder im Alter bis 14 Jahren haben nur in Begleitung einer volljährigen Aufsichtsperson Zutritt. Für den Zutritt bedarf es einer 0,00€ Karte.
+			*** Diese Ermäßigung steht Personen zu, auf die Folgendes zutrifft und die dies mit einem Nachweis belegen können:
+			
+			Behinderung ab GdB 50, bei Merkmal B oder H im Behindertenausweis ist die Begleitperson frei
+			Bezug von ALG II bzw. Hartz IV nach SGB II
+			Bezug von Hilfe zum Lebensunterhalt oder Grundsicherung im Alter nach SGB XII
+			Bezug von Grundsicherung bei voller Erwerbsminderung nach SGB XII</footer>
+		</div>
   </main>
-  </body>
+</body>
