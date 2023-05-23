@@ -17,8 +17,11 @@
     <div class="container-lg">
       <div class="row">
         <ng-container *ngFor="let item of carParkingLots;">
-          <div class="p-3 col-md-6">
-            <app-parkingItem [carParking]="item"></app-parkingItem> 
+          <div class="col-md-6 padding-own">
+<!--            <div class="row">-->
+            <div>
+              <div class = "col-12"><app-parkingItemCapacity [parking]="item"></app-parkingItemCapacity></div>
+            </div>
           </div>
         </ng-container>
       </div>
@@ -31,7 +34,7 @@
         <ng-container *ngFor="let item of bikeParkingLots;">
           <div class="col-md-6 p-3">
             <div class="row">
-              <div class = "col-12"><app-bike-parking-item [bikeParking]="item"></app-bike-parking-item></div>
+              <div class = "col-12"><app-parkingItemCapacity [parking]="item"></app-parkingItemCapacity></div>
             </div>
           </div>
         </ng-container>

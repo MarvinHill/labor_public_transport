@@ -9,6 +9,8 @@ import de.hhn.se.labswp.buga23publictransport.persistence.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -605,6 +607,18 @@ public class ParkingLotInit {
         roggenPoly.add(new Point(49.5270621, 8.4805870));
         roggenPoly.add(new Point(49.5275639, 8.4799765));
 
+        Point gbgParkhausGeoLocation = new Point(49.49601366187759, 8.523294843921164);
+        List<Point> gbgParkhausEntrances = new ArrayList<>();
+        gbgParkhausEntrances.add(new Point(49.4960071, 8.5235418));
+        gbgParkhausEntrances.add(new Point(49.4960071, 8.5235418));
+        List<Point> gbgParkhausPoly = new ArrayList<>();
+        gbgParkhausPoly.add(new Point(49.4960379, 8.5238637));
+        gbgParkhausPoly.add(new Point(49.4960071, 8.5235418));
+        gbgParkhausPoly.add(new Point(49.4959951, 8.5234165));
+        gbgParkhausPoly.add(new Point(49.4954181, 8.5235474));
+        gbgParkhausPoly.add(new Point(49.4954609, 8.5239946));
+        gbgParkhausPoly.add(new Point(49.4960379, 8.5238637));
+
         //Fahrad
         Point luisenparkHaupteingangGeoLocation = new Point(49.4789910, 8.4965408);
         List<Point> luisenparkHaupteingangEntrances = new ArrayList<>();
@@ -634,7 +648,7 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(d5GeoLocation, d5Poly, d5Entrances, "D5 Reiß-Museum, Tiefgarage", true, true, ParkingType.CAR, "D5, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(g1GeoLocation, g1Poly, g1Entrances, "G1 Marktplatz, Tiefgarage", false, true, ParkingType.CAR, "G1 1, 68159 Mannheim"));
             carRepo.save(new CarParkingLot(h6GeoLocation, h6Poly, h6Entrances, "H6, Tiefgarage", false, false, ParkingType.CAR, "H6 1, 68159 Mannheim"));
-            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1 , Tiefgarage", true, false, ParkingType.CAR, "Willy-Brandt-Platz 5, 68161 Mannheim"));
+            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1, Tiefgarage", true, false, ParkingType.CAR, "Willy-Brandt-Platz 5, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(p2GeoLocation, p2Poly, p2Entrances, "Hauptbahnhof P2, Parkhaus", true, false, ParkingType.CAR, "Heinrich-von-Stephan-Straße 6, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(p3GeoLocation, p3Poly, p3Entrances, "Hauptbahnhof P3, Parkhaus", true, true,ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim"));
             carRepo.save(new CarParkingLot(p5GeoLocation, p5Poly, p5Entrances, "Hauptbahnhof P5, Parkhaus", true, true, ParkingType.CAR, "Glücksteinallee 9, 68163 Mannheim"));
@@ -660,13 +674,22 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, false, ParkingType.CAR, "Neckarvorlandstraße 56, 68159 Mannheim"));
             carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, false, ParkingType.CAR, "N7 17, 68161 Mannheim"));
             carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR, "Am Roggenplatz, 68305 Mannheim"));
+            carRepo.save(new CarParkingLot(gbgParkhausGeoLocation, gbgParkhausPoly, gbgParkhausEntrances, "GBG-Parkhaus", true, false, ParkingType.CAR, "Spinelli-Platz 2, 68259 Mannheim"));
 
-            // Auskommentiert da Daten fehlen
-            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", false, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", false, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", false, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", false, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", true, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim"));
         };
     }
 
+//    @Bean
+//    @Scheduled(cron = "0 15 * * *")
+//    CommandLineRunner updateParkingCapacity(ParkingCapacityRepository capacityRepo) {
+//
+//        return args -> {
+//
+//            //capacityRepo.save(new ParkingCapacity(name, freeParkingspaces));
+//        };
+//    }
 }
