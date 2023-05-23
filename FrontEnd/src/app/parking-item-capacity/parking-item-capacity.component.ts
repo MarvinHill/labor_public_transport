@@ -2,6 +2,8 @@ import { NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {ParkingLot} from "../ParkingLot";
 import {ParkingType} from "../ParkingType";
+import {MapService} from "../services/map.service";
+import {LatLng} from "leaflet";
 
 @Component({
   selector: 'app-parkingItemCapacity',
@@ -30,5 +32,11 @@ export class ParkingItemCapacityComponent implements OnInit {
 
   // auslastungen: number[] = [50, 100, 75, 25, 25, 75, 50, 100, 9, 11, 10];
   auslastungen: number[] = [];
+
+  constructor(private mapService : MapService){}
+
+  panToParkingLot(){
+    this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y));
+  }
 
 }
