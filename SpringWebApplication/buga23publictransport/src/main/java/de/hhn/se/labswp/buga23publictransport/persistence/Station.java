@@ -18,21 +18,27 @@ public class Station {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  private Long rnvID;
   private Point geoLocation;
   private String stationDesignator;
-
   public Station() {}
 
-  public Station(double longitude, double latitude, String stationDesignator ) {
+  public Station(double longitude, double latitude, String stationDesignator, long rnvID ) {
     this.geoLocation = new Point(longitude, latitude);
     this.stationDesignator = stationDesignator;
+    this.rnvID = rnvID;
   }
 
   public String getStationDesignator() {
     return stationDesignator;
   }
+
   public Point getGeoLocation() {
     return geoLocation;
+  }
+  public Long getRnvID() {
+    return rnvID;
   }
 
   public void setGeoLocation(Point geoLocation) {

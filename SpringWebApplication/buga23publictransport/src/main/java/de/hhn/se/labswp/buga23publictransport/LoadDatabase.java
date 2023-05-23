@@ -34,51 +34,51 @@ public class LoadDatabase {
             log.info("Preloading Database Entries");
             log.info("Preloading stops for public transport lines and shuttles");
 
-            Station hansThomaStrStation = new Station(49.47496, 8.52439, "Hans-Thoma-Str.");
-            Station neuOstHeimStation = new Station(49.4774967, 8.5228445, "Neuostheim");
-            Station luisenParkStation = new Station(49.47887, 8.49640, "Luisenpark");
-            Station spinelliParkStation = new Station(49.49646, 8.52208, "Buga 23 Haupteingang Spinelli-Park");
-            Station sapArenaSBFStation = new Station(49.4598771, 8.5171520, "SAP Arena S-Bf (MA-Arena/Maimarkt)");
-            Station maimarktGrossParkPlatzStation = new Station(49.4685232, 8.5220630, "Maimarkt (P+R Großparkplatz)");
-            Station sapArenaStation = new Station(49.4648353, 8.5204035, "SAP-Arena");
-            Station berlinerPlatzStation = new Station(49.4799380, 8.4507645, "Berliner Platz");
-            Station konradAdenauerBrückeStation = new Station(49.4824621, 8.4586681, "Konrad-Adenauer-Brücke");
-            Station universitätStation = new Station(49.48166, 8.46537, "Universität");
-            Station schlossStation = new Station(49.48489, 8.46354, "Schloss");
-            Station paradePlatzStation = new Station(49.48749, 8.46688, "Paradeplatz");
-            Station marktPlatzStation = new Station(49.48943, 8.46782, "Marktplatz");
-            Station akademieStation = new Station(49.48943, 8.46782, "Abendakademie");
-            Station gewerkschaftHausStation = new Station(49.4904423, 8.4753833, "Gewerkschafthaus");
-            Station nationalTheaterStation = new Station(49.48765, 8.47819, "Nationaltheater");
-            Station theresenKrankenhausStation = new Station(49.48991, 8.48091, "Theresen-Krankenhaus");
-            Station universitaetsKlinikumStation = new Station(49.49363, 8.48423, "Universitätsklinikum");
-            Station bibienStraßeStation = new Station(49.49464, 8.48861, "Bibienastraße");
-            Station hauptFriedHofStation = new Station(49.49078, 8.49127, "Hauptfriedhof");
-            Station pfeiffersWoerthStation = new Station(49.48948, 8.50141, "Pfeifferswörth");
-            Station neckarPlattStation = new Station(49.48892, 8.51182, "Neckarplatt");
-            Station ziethenStraßeStation = new Station(49.49043, 8.51926, "Ziethenstraße");
-            Station adolfDamaschkeRingStation = new Station(49.49359, 8.52103, "Adolf-Damaschke-Ring");
-            Station talStrasseStation = new Station(49.4953505, 8.5249774, "Talstraße");
-            Station abendAkademieStation = new Station(49.49171, 8.46993, "Abendakademie");
-            Station kunstHalleStation = new Station(49.48309, 8.47335, "Kunsthalle");
-            Station rosenGartenStation = new Station(49.48555, 8.47556, "Rosengarten");
-            Station mannheimHauptBahnHofStation = new Station(49.48011, 8.46997, "MA Hauptbahnhof");
-            Station tattersallStation = new Station(49.48174, 8.47320, "Tattersall");
-            Station werderStrasseStation = new Station(9.48073, 8.47791, "Werderstr.");
-            Station pestalozziSchuleStation = new Station(49.47893, 8.48185, "Pestalozzischule");
-            Station weberStrasseStation = new Station(49.47662, 8.48524, "Weberstraße");
-            Station planetariumStation = new Station(49.47659, 8.48985, "Planetarium");
-            Station carlBenzStadionStation = new Station(49.47782, 8.50181, "Carl-Benz-Stadion");
-            Station harrLachStation = new Station(49.47809, 8.50640, "Harrlach");
-            Station lucasCranachStrasseStation = new Station(49.47842, 8.51274, "Lucas-Cranach-Str.");
-            Station schwindStrasseStation = new Station(49.47834, 8.51856, "Schwindstraße");
-            Station ludwigStrasseStation = new Station(49.4832, 8.4482, "Ludwigstraße");
-            Station ratHausLUStation = new Station(49.48517, 8.44339, "LU Rathaus");
-            Station handelsHafenStation = new Station(49.49179, 8.45373, "Handelshafen");
-            Station rheinStrasseStation = new Station(49.49087, 8.45800, "Rheinstraße");
-            Station ratHausMAStation = new Station(49.48914, 8.46246, "MA Rathaus/rem");
-            Station strohMarktStation = new Station(49.48621, 8.46999, "Strohmarkt");
-            Station wasserTurmStation = new Station(49.48487, 8.47339, "Wasserturm");
+            Station hansThomaStrStation = new Station(49.47496, 8.52439, "Hans-Thoma-Str.", 2518);
+            Station neuOstHeimStation = new Station(49.4774967, 8.5228445, "Neuostheim",2522);
+            Station luisenParkStation = new Station(49.47887, 8.49640, "Luisenpark", 2429);
+            Station spinelliParkStation = new Station(49.49646, 8.52208, "Buga 23 Haupteingang Spinelli-Park",4046);
+            Station sapArenaSBFStation = new Station(49.4598771, 8.5171520, "SAP Arena S-Bf (MA-Arena/Maimarkt)", 3894);
+            Station maimarktGrossParkPlatzStation = new Station(49.4685232, 8.5220630, "Maimarkt (P+R Großparkplatz)", 2520);
+            Station sapArenaStation = new Station(49.4648353, 8.5204035, "SAP-Arena", 2847);
+            Station berlinerPlatzStation = new Station(49.4799380, 8.4507645, "Berliner Platz", 2066);
+            Station konradAdenauerBrückeStation = new Station(49.4824621, 8.4586681, "Konrad-Adenauer-Brücke",2426);
+            Station universitätStation = new Station(49.48166, 8.46537, "Universität", 2471);
+            Station schlossStation = new Station(49.48489, 8.46354, "Schloss",2462);
+            Station paradePlatzStation = new Station(49.48749, 8.46688, "Paradeplatz", 2451);
+            Station marktPlatzStation = new Station(49.48943, 8.46782, "Marktplatz",2438);
+            Station akademieStation = new Station(49.48943, 8.46782, "Abendakademie",6005); // Todo - check if akademiestraße is the same
+            Station gewerkschaftHausStation = new Station(49.4904423, 8.4753833, "Gewerkschafthaus",2412);
+            Station nationalTheaterStation = new Station(49.48765, 8.47819, "Nationaltheater",2444);
+            Station theresenKrankenhausStation = new Station(49.48991, 8.48091, "Theresen-Krankenhaus", 5543);
+            Station universitaetsKlinikumStation = new Station(49.49363, 8.48423, "Universitätsklinikum", 5544);
+            Station bibienStraßeStation = new Station(49.49464, 8.48861, "Bibienastraße",2398);
+            Station hauptFriedHofStation = new Station(49.49078, 8.49127, "Hauptfriedhof", 2418);
+            Station pfeiffersWoerthStation = new Station(49.48948, 8.50141, "Pfeifferswörth",2464);
+            Station neckarPlattStation = new Station(49.48892, 8.51182, "Neckarplatt",2320);
+            Station ziethenStraßeStation = new Station(49.49043, 8.51926, "Ziethenstraße",2325);
+            Station adolfDamaschkeRingStation = new Station(49.49359, 8.52103, "Adolf-Damaschke-Ring",2311);
+            Station talStrasseStation = new Station(49.4953505, 8.5249774, "Talstraße", 2324);
+            Station abendAkademieStation = new Station(49.49171, 8.46993, "Abendakademie",2447);
+            Station kunstHalleStation = new Station(49.48309, 8.47335, "Kunsthalle", 5542);
+            Station rosenGartenStation = new Station(49.48555, 8.47556, "Rosengarten",2459);
+            Station mannheimHauptBahnHofStation = new Station(49.48011, 8.46997, "MA Hauptbahnhof", 2417);
+            Station tattersallStation = new Station(49.48174, 8.47320, "Tattersall",2466);
+            Station werderStrasseStation = new Station(9.48073, 8.47791, "Werderstr.", 2477);
+            Station pestalozziSchuleStation = new Station(49.47893, 8.48185, "Pestalozzischule",2452);
+            Station weberStrasseStation = new Station(49.47662, 8.48524, "Weberstraße", 2476);
+            Station planetariumStation = new Station(49.47659, 8.48985, "Planetarium",2453 );
+            Station carlBenzStadionStation = new Station(49.47782, 8.50181, "Carl-Benz-Stadion",2523);
+            Station harrLachStation = new Station(49.47809, 8.50640, "Harrlach",2515);
+            Station lucasCranachStrasseStation = new Station(49.47842, 8.51274, "Lucas-Cranach-Str.",2519);
+            Station schwindStrasseStation = new Station(49.47834, 8.51856, "Schwindstraße",2524);
+            Station ludwigStrasseStation = new Station(49.4832, 8.4482, "Ludwigstraße", 2089);
+            Station ratHausLUStation = new Station(49.48517, 8.44339, "LU Rathaus", 2096);
+            Station handelsHafenStation = new Station(49.49179, 8.45373, "Handelshafen", 2416);
+            Station rheinStrasseStation = new Station(49.49087, 8.45800, "Rheinstraße",2458);
+            Station ratHausMAStation = new Station(49.48914, 8.46246, "MA Rathaus/rem", 6041);
+            Station strohMarktStation = new Station(49.48621, 8.46999, "Strohmarkt", 2465);
+            Station wasserTurmStation = new Station(49.48487, 8.47339, "Wasserturm", 2475);
 
 
             stationRepo.saveAllAndFlush(List.of(
@@ -354,7 +354,7 @@ public class LoadDatabase {
             entryRepo.save(wasserTurm);
 
             // Real data for the shuttle line from the BUGA entrance pdf file and openstreetmap
-            var bugaShuttlelinie = new PublicTransportLine("Buga Shuttle line", false, "#4e2583");
+            var bugaShuttlelinie = new PublicTransportLine("Buga Shuttle line", false, "#4e2583", "450-P+R");
             var bugaShuttleLineDataFile = ResourceUtils.getFile("classpath:database/Buga Line P+R (purple_dashed).txt");
             bugaShuttlelinie.setGeoLinePoints(LineLoader.loadLineFile(bugaShuttleLineDataFile));
             bugaShuttlelinie.addLineScheduleEntryList(sapArena);
@@ -366,7 +366,7 @@ public class LoadDatabase {
             log.info("Saving Buga Shuttle Line " + lineRepo.save(bugaShuttlelinie));
 
             // Real data for the train station of line 7 (yellow line)
-            var line7 = new PublicTransportLine("Buga Line 7", false, "#FFCC00");
+            var line7 = new PublicTransportLine("Buga Line 7", false, "#FFCC00", "107-7");
             File line7DataFile = ResourceUtils.getFile("classpath:database/Buga Line 7 (yellow).txt");
             line7.setGeoLinePoints(LineLoader.loadLineFile(line7DataFile));
             line7.addLineScheduleEntryList(berlinerPlatz);
@@ -390,7 +390,7 @@ public class LoadDatabase {
             log.info("Saving Line 7 " + lineRepo.save(line7));
 
             // Real data for buga 23 express blue line
-            var lineBuga23 = new PublicTransportLine("Buga Line BS", false, "#0BBBEF");
+            var lineBuga23 = new PublicTransportLine("Buga Line BS", false, "#0BBBEF", "250-BS");
             var lineBuga23DataFile = ResourceUtils.getFile("classpath:database/Buga Line 23 (light_blue).txt");
             lineBuga23.setGeoLinePoints(LineLoader.loadLineFile(lineBuga23DataFile));
             lineBuga23.addLineScheduleEntryList(mannheimHauptBahnHof);
@@ -409,7 +409,7 @@ public class LoadDatabase {
             log.info("Saving Line Buga 23 Express" + lineRepo.save(lineBuga23));
 
             // real data for ex9 green line
-            var ex9 = new PublicTransportLine("Buga Line EX9", false, "#95c23d");
+            var ex9 = new PublicTransportLine("Buga Line EX9", false, "#95c23d", ""); // 509-9, 9-9 // Todo - Nachchecken
             var ex9DataFile = ResourceUtils.getFile("classpath:database/Buga Line 9 (green).txt");
             ex9.setGeoLinePoints(LineLoader.loadLineFile(ex9DataFile));
             ex9.addLineScheduleEntryList(mannheimHauptBahnHof);
@@ -427,7 +427,7 @@ public class LoadDatabase {
             log.info("Saving Line EX9 " + lineRepo.save(ex9));
 
             // real data for buga bl line pink line
-            var bugaBL = new PublicTransportLine("Buga Line BL", false, "#e6007e");
+            var bugaBL = new PublicTransportLine("Buga Line BL", false, "#e6007e", "251-BL");
             var bugaBLDataFile = ResourceUtils.getFile("classpath:database/Buga Line BL (pink).txt");
             bugaBL.setGeoLinePoints(LineLoader.loadLineFile(bugaBLDataFile));
             bugaBL.addLineScheduleEntryList(mannheimHauptBahnHof);
@@ -449,7 +449,7 @@ public class LoadDatabase {
             log.info("Saving Buga 23 BL line " + lineRepo.save(bugaBL));
 
             // real data for rnv bahnlinie brown line
-            var bugaLine6 = new PublicTransportLine("Buga Line 6", false, "#966c29");
+            var bugaLine6 = new PublicTransportLine("Buga Line 6", false, "#966c29", "6-6A");
             var bugaLine6DataFile = ResourceUtils.getFile("classpath:database/Buga Line 6 (brown).txt");
             bugaLine6.setGeoLinePoints(LineLoader.loadLineFile(bugaLine6DataFile));
             bugaLine6.addLineScheduleEntryList(berlinerPlatz);

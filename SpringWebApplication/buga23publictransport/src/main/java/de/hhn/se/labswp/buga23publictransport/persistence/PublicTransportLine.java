@@ -11,6 +11,8 @@ public class PublicTransportLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    String rnvId;
     private String lineDesignator;
     private boolean hasDelay;
     @Column(length=500000)
@@ -28,10 +30,11 @@ public class PublicTransportLine {
     protected PublicTransportLine() {
     }
 
-    public PublicTransportLine(String lineDesignator, boolean hasDelay, String colorHexCode) {
+    public PublicTransportLine(String lineDesignator, boolean hasDelay, String colorHexCode, String rnvID) {
         this.lineDesignator = lineDesignator;
         this.hasDelay = hasDelay;
         this.colorHexCode = colorHexCode;
+        this.rnvId = rnvID;
     }
 
     public void addLineScheduleEntryList(LineScheduleEntry lineScheduleEntry) {
