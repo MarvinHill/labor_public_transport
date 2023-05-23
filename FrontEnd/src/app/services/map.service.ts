@@ -115,7 +115,7 @@ export class MapService{
       this.observerService.changeVisibility(false);
     }.bind(this));
 
-  }
+  }s
 
   makeCarParking(parkinglot: ParkingLot) {
     var parkingIcon = L.icon({
@@ -193,6 +193,7 @@ export class MapService{
       var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], {icon: parkingIcon}).addTo(this.bikeParkingLots);
     }
     marker.on("click", function (e: any) {
+      console.warn("Hide Obeserver");
       this.observerService.changeDisplay(bikeparking)
     }.bind(this));
   }
