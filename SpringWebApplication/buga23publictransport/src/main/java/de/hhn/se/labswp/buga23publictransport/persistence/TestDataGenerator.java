@@ -29,7 +29,7 @@ public class TestDataGenerator {
 
 
     ParkingLot parkingLot = new ParkingLot();
-    parkingLot.setArea(polygon);
+    //parkingLot.setArea(polygon);
 
     repository.save(parkingLot);
   }

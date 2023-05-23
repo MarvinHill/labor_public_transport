@@ -1,0 +1,34 @@
+<div class="carousel">
+    <button class="carousel__button carousel__button--left is-hidden">
+        <img src="https://cdn-icons-png.flaticon.com/512/60/60775.png" alt="">
+    </button>
+  
+    <div class="carousel__track-container">
+    
+      <ul class="carousel__track">
+        <li class="carousel__slide current-slide"[routerLink]="['/travelinfo']">
+        <img class="carousel__image" [src]="'assets/image/info-slide.webp'" alt="Info Icon">
+          </li>
+        <li class="carousel__slide"[routerLink]="['/info-bus']">
+          <img class="carousel__image" [src]="'assets/image/info-bus.webp'" alt="Bus Icon">
+        </li>
+        <li class="carousel__slide" [routerLink]="['/info-parking']">
+          <img class="carousel__image" [src]="'assets/image/info-parking.webp'" alt="Auto Icon">
+        </li>
+        <li class="carousel__slide" [routerLink]="['/info-bahn']">
+          <img class="carousel__image" [src]="'assets/image/info-train.webp'" alt=Zug Icon>
+        </li>
+      </ul>
+    </div>
+
+    <button class="carousel__button carousel__button--right">
+      <img src="https://cdn-icons-png.flaticon.com/512/60/60758.png" alt="">
+    </button>
+
+    <div class="carousel__nav">
+      <button class="carousel__indicator current-slide"></button>
+      <button class="carousel__indicator"></button>
+      <button class="carousel__indicator"></button>
+      <button class="carousel__indicator"></button>
+    </div>
+  </div>

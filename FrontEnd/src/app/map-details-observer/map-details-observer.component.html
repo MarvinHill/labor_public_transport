@@ -1,0 +1,32 @@
+<div *ngIf="observerService.show === ObserverState.PARKING" class="row">
+    <div class="col text-center">
+        <img class="m-4" src="assets/icon/parkingIcon.svg" alt="parking-icon">
+        <h2>{{observerService.data.name}}</h2>
+        <div class="my-2">
+            <p *ngIf="observerService.data.barrierfree" class="p-0 m-0">
+                Barrierefrei : ja
+            </p>
+            <p *ngIf="!observerService.data.barrierfree" class="p-0 m-0">
+                Barrierefrei : nein
+            </p>
+            <p *ngIf="observerService.data.charging" class="p-0 m-0">
+                Ladestationen : ja
+            </p>
+            <p *ngIf="!observerService.data.charging" class="p-0 m-0">
+                Ladestationen : nein
+            </p>
+        </div>
+        <div role="button" class="google-routing-button" style="margin-left: auto; margin-right: auto; width: 25%;"
+            (click)="openMaps();">
+            <img src="assets/icon/googleMaps.svg" alt="google maps">
+        </div>
+    </div>
+
+</div>
+<div *ngIf="observerService.show === ObserverState.RNV">RNV Details {{observerService.data}} </div>
+<div *ngIf="observerService.show === ObserverState.SHUTTLE">
+    <app-shuttle-line-entry></app-shuttle-line-entry>
+</div>
+<div *ngIf="observerService.show === ObserverState.NOTHING">
+    <p>Keine Details für dieses Objekt.</p>
+</div>

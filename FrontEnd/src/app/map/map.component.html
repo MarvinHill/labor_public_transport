@@ -1,0 +1,84 @@
+<div [ngClass]="mapService.mapContainerClass" id="map-container" [ngStyle]="{ 'height':mapService.mapHeight}">
+  <div class="inner-container shadow">
+    <button id="resize" [ngClass]="mapService.resizeButtonClass" (click)="mapService.resizeMap()">X</button>
+    <button id="locate" [ngClass]="mapService.locateButtonClass" (click)="mapService.locateUser()">
+      <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/my_location.svg" style="height: 2.5em;">
+    </button>
+    <div id="map" [ngClass] = "mapService.minimized === true ? 'map border-rounded' : 'map' " (click)="mapService.maximizeMap()" ></div>
+    <div id="sidebar" class="sidebar bc-w overscroll-auto" *ngIf="(!mapService.minimized) && (this.observerService.visible) " [ngStyle]="mapService.windowWidth < 992 ? {'height' : '30vh', 'width' : '100%'} : {'height' : '100%', 'width' : '30vw'}">
+      <div class="p-2">
+        <app-map-details-observer></app-map-details-observer>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden-info">
+  <h3>Karte</h3>
+  <p>Die Karte zeigt immer was du gerade brauchst du kannst sie manuell filtern oder über die in der App verteilte Kartenicons.</p>
+  <div>
+    <h5>Karte öffnen</h5>
+    <p>Die Karte kann über einen Klick auf die minimierte Karte auf die Höhe des Bildschirms maximiert werden.</p>
+    <img src="assets/info/video/openMap.gif" alt="Die Erklärung konnte nicht geladen werden." class="shadow m-2 info-gif-big">
+  </div>
+  <div>
+    <h5>Karte schließen</h5>
+    <p>Die Karte kann, über den sich am rechten oberen Rand befindenden Schließenknopf, minimiert werden.</p>
+    <img src="assets/info/video/closeMap.gif" alt="Die Erklärung konnte nicht geladen werden." class="shadow m-2 info-gif-big">
+  </div>
+  <div>
+    <h5> Symbol Legende</h5>
+    <div class="row p-2">
+      <div class="col-4 text-center"><img src="assets\icon\parking\Entrance.png" alt="" style="height: 3em;"></div>
+      <div class="col-8">
+        <h6>Auto Einfahrt</h6>
+        <p> Einfahrten zu dem Parkplatz, es kann mehere davon geben. Diese sind nur  zu sehen wenn man in der Karte näher heranzoomed.</p>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-4 text-center">
+        <img src="assets\icon\parking\MarkerCar.png" alt="" style="height: 5em;">
+      </div>
+      <div class="col-8">
+        <h6>Auto Parkplatz</h6>
+        <p> Ein ganz normaler Parkplatz oder Parkhaus. Das Symbol makiert die Mitte der Anlage. Für Infos für die Zufahrten bitte auf die ensprechenden Symbole auf der Karte achten.</p>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-4 text-center">
+        <img src="assets\icon\parking\MarkerECar.png" alt="" style="height: 5em;">
+      </div>
+      <div class="col-8">
+        <h6>E-Auto Parkplatz</h6>
+        <p>Auto Parkplatz mit Ladestationen für E-Autos.</p>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-4 text-center">
+        <img src="assets\icon\parking\MarkerBike.png" alt="" style="height: 5em;">
+      </div>
+      <div class="col-8">
+        <h6>Fahrrad Parkplatz</h6>
+        <p> Ein Ort wo man sein Fahrrad sicher abstellen kann.</p>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-4 text-center">
+        <img src="assets\icon\wavingPerson.gif" alt="" style="height: 5em;">
+      </div>
+      <div class="col-8">
+        <h6>Position</h6>
+        <p>Marker der deine eigene Position makiert, erscheint nur wenn du die Berechtigungen für GPS aktiviert hast.</p>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-4 text-center">
+        <img src="assets\info\image\buga.png" alt="" style="height: 5em;">
+      </div>
+      <div class="col-8">
+        <h6>Bundesgartenschau</h6>
+        <p>Gebiet der Bundesgartenschau, Spinelli und Luisenpark. Die Linie dazwischen makiert die Seilbahn zwischen den Bereichen.</p>
+      </div>
+    </div>
+  </div>
+</div>

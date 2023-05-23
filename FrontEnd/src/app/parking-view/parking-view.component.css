@@ -1,0 +1,22 @@
+.selected-button {
+  height: 100%;
+  width: 50%;
+  background: #0627a0;
+  color: white;
+  border: none;
+}
+
+.unselected-button {
+  height: 100%;
+  width: 50%;
+  background: #c5d3ec;
+  color: white;
+  border: none;
+}
+
+.content {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+

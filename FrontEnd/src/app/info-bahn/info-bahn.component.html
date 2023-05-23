@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bahn Info</title>
+  </head>
+  <body>
+    <header>
+      <h1>Bus und Shuttle Informationen</h1>
+      <nav>
+        <ul>
+        <li class="list" [routerLink]="['/travelinfo']">Allg. Infos </li>
+        <li class="list" [routerLink]="['/info-bus']">Bus </li>
+        <li class="list" [routerLink]="['/info-parking']">Parken mit dem Auto </li>
+        </ul>
+      </nav>
+    </header>
+    <app-info-bahn-text></app-info-bahn-text>
+  
+  </body>
+</html>
+

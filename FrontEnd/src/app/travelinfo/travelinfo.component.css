@@ -1,0 +1,299 @@
+/* Allgemeine Formatierung */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  background-image: url('https://img.freepik.com/free-vector/white-abstract-background_23-2148817572.jpg');
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-position: auto;
+  background-blend-mode: darken;
+  
+}
+  
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+  list-style-type: square;
+}
+
+nav li a {
+  color: #fff;
+  text-decoration: none;
+  list-style-type: square;
+}
+
+.list{
+  cursor: pointer;
+}
+
+.list:hover {
+  text-decoration: underline;
+  }
+p mark {
+  display: inline-block;
+  padding: 5px;
+  border: 2px solid #e3446b;
+  background-color: #e3446b;
+  border-radius: 5px;
+}
+
+/* Header */
+header {
+  background-color: #e1416d;
+  color: #fff;
+  text-align: center;
+  padding: 1vh;
+
+  
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3em;
+}
+
+header h3 {
+  margin: 0;
+  font-size: 1.5em;
+  color: white;
+  text-decoration: empty;
+  
+}
+
+/* Hauptinhalt */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+}
+
+/* Abschnitte */
+section {
+  margin-bottom: 40px;
+
+}
+
+/* Überschriften */
+h2 {
+  font-size: 2em;
+  color: #e1416d;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* Textinhalt */
+p {
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Anreise-Methoden */
+.anreise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.anreise h2 {
+  font-size: 2.5em;
+  color: #e1416d;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.anreise p {
+  text-align: center;
+}
+
+/* ÖPNV-Anreise */
+.anreise-oev {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.anreise-oev h3 {
+  font-size: 1.5em;
+  color: #e1416d;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Auto-Anreise */
+.anreise-auto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.anreise-auto h3 {
+  font-size: 1.5em;
+  color: #e1416d;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Wohnmobil-Anreise */
+.anreise-wohnmobil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.anreise-wohnmobil h3 {
+  font-size: 1.5em;
+  color: #e1416d;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Fahrrad-Anreise */
+.anreise-fahrrad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.anreise-fahrrad h3 {
+  font-size: 1
+  .5em;
+color: #e1416d;
+margin-top: 0;
+margin-bottom: 20px;
+text-align: center;
+}
+
+/* Footer */
+footer {
+background-color: #e1416d;
+color: #fff;
+text-align: center;
+padding: 20px;
+position: absolute;
+bottom: 0;
+width: 100%;
+}
+
+footer p {
+margin: 0;
+}
+
+/* Desktop Formatierung */
+@media only screen and (min-width: 768px) {
+body {
+font-size: 30px;
+}
+main {
+padding-top: 2vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+max-width: 80%;
+}
+section {
+width: 100%;
+max-width: 100%;
+}
+h2 {
+text-align: center;
+}
+}
+
+
+
+/* Mobile Formatierung */
+@media (max-width: 767px) {
+  p {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Tablet Formatierung */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+body {
+font-size: 18px;
+}
+main {
+padding-top: 80px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+section {
+width: 100%;
+max-width: 800px;
+}
+h2 {
+text-align: center;
+}
+}
+
+/* Zentrierung */
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+/* Header-Logo */
+header img {
+display: block;
+margin: 0 auto;
+}
+
+/* Überschriften Abstand */
+h2:not(:first-of-type) {
+margin-top: 60px;
+}
+
+/* Desktop Ansicht zentrieren */
+@media only screen and (min-width: 768px) {
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+}

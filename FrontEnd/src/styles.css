@@ -3,6 +3,14 @@
     background-color: #ECF4E5;
 }
 
+.bc-b {
+  background-color: #0677e0;
+}
+
+.bc-db {
+    background-color:#154889;
+}
+
 .bc-p{
     background-color: #E1416D;
 }
@@ -24,4 +32,46 @@
 
 .tc-p{
     color: #E1416D;
+}
+
+.hidden-info{
+    display: none;
+}
+.info{
+    display: block;
+}
+.info-gif-big{
+    height:30em;
+    width: auto;
+    max-height: 60vh;
+}
+.info-gif-small{
+    height:15em;
+    width: auto;
+    max-height: 60vh;
+}
+
+.info-img-big{
+    height:30em;
+    width: auto;
+    max-height: 60vh;
+}
+.info-img-small{
+    height:15em;
+    width: auto;
+    max-height: 60vh;
+}
+
+.not-select{
+    user-select: none;
+}
+
+.leaflet-control-layers-toggle{ 
+    width:auto;
+    background-position:3px 50% ;
+    padding:3px;
+    padding-left:36px;
+    text-decoration:none;
+    line-height:36px;
+
 }
