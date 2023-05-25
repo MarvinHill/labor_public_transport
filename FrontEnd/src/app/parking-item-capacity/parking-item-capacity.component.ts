@@ -4,6 +4,7 @@ import {ParkingLot} from "../ParkingLot";
 import {ParkingType} from "../ParkingType";
 import {MapService} from "../services/map.service";
 import {LatLng} from "leaflet";
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
 
 @Component({
   selector: 'app-parkingItemCapacity',
@@ -33,10 +34,11 @@ export class ParkingItemCapacityComponent implements OnInit {
   // auslastungen: number[] = [50, 100, 75, 25, 25, 75, 50, 100, 9, 11, 10];
   auslastungen: number[] = [];
 
-  constructor(private mapService : MapService){}
+  constructor(private mapService : MapService, private observerService : MapDetailsObserverService){}
 
   panToParkingLot(){
-    this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y));
+    this.observerService.changeDisplay(this.parking);
+    this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y)); 
   }
 
 }

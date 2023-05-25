@@ -29,8 +29,8 @@ export class ParkingItemComponent implements OnInit {
   constructor(private mapService : MapService, private observerService : MapDetailsObserverService){}
 
   panToParkingLot(){
-      this.mapService.openAndFlyTo(new LatLng(this.carParking.geoLocation.x, this.carParking.geoLocation.y));
-      this.observerService.changeDisplay(this.carParking)
+    this.observerService.changeDisplay(this.carParking);
+    this.mapService.openAndFlyTo(new LatLng(this.carParking.geoLocation.x, this.carParking.geoLocation.y)); 
   }
 
 }
