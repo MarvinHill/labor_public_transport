@@ -21,9 +21,6 @@ import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoCardsComponent } from './info-cards/info-cards.component';
-import { InfoParkingTextComponent } from './info-parking-text/info-parking-text.component';
-import { InfoBusTextComponent } from './info-bus-text/info-bus-text.component';
-import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component';
 
 
 import { MapComponent } from './map/map.component';
@@ -31,7 +28,7 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
-import {ParkingItemCapacityComponent} from "./parking-item-capacity/parking-item-capacity.component";
+import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-item-capacity.component";
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 import { ImpressumComponent } from './impressum/impressum.component';
@@ -57,16 +54,13 @@ import { ImpressumComponent } from './impressum/impressum.component';
     InfoBusComponent,
     InfoBahnComponent,
     InfoCardsComponent,
-    InfoParkingTextComponent,
-    InfoBusTextComponent,
-    InfoBahnTextComponent,
 
-        ParkingItemCapacityComponent,
-        ParkingViewComponent,
-        ParkingItemComponent,
-        BikeParkingItemComponent,
-        ImpressumComponent,
-        ConnectionTicketComponent,
+    ParkingItemCapacityComponent,
+    ParkingViewComponent,
+    ParkingItemComponent,
+    BikeParkingItemComponent,
+    ImpressumComponent,
+    ConnectionTicketComponent,
   ],
   imports: [
     BrowserModule,

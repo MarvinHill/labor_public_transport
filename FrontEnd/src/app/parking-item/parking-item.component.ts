@@ -3,6 +3,7 @@ import {ParkingLot} from "../ParkingLot";
 import { DataServiceService } from '../services/data-service.service';
 import { MapService } from '../services/map.service';
 import { LatLng } from 'leaflet';
+import {MapDetailsObserverService} from "../services/map-details-observer.service";
 
 @Component({
   selector: 'app-parkingItem',
@@ -25,10 +26,11 @@ export class ParkingItemComponent implements OnInit {
   parkID: number;
   carParkingAddress: String = "ADDRESS";
 
-  constructor(private mapService : MapService){}
+  constructor(private mapService : MapService, private observerService : MapDetailsObserverService){}
 
   panToParkingLot(){
       this.mapService.openAndFlyTo(new LatLng(this.carParking.geoLocation.x, this.carParking.geoLocation.y));
+      this.observerService.changeDisplay(this.carParking)
   }
 
 }
