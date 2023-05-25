@@ -68,7 +68,7 @@ export class MapService{
   }
 
   public initMap(): void {
-    
+
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -430,21 +430,23 @@ export class MapService{
 
   maximizeMap(): void {
     if (this.minimized) {
+      this.minimized = false;
+
+      this.layerControl.addTo(this.map);
       this.mapContainerClass = "map-container-large shadow";
       this.resizeButtonClass = "resize-button-max shadow";
       this.locateButtonClass = "locate-button-max shadow";
-
-      this.minimized = false;
       this.updateHeight()
       this.updateWidth();
     }
     this.map.invalidateSize();
-
   }
 
   minimizeMap(): void {
     if (!this.minimized) {
       this.minimized = true;
+
+      this.map.removeControl(this.layerControl);
       this.updateMobileDesktopMap();
       this.resizeButtonClass = "button-min";
       this.locateButtonClass = "button-min";
@@ -518,7 +520,7 @@ export class MapService{
   }
 
   public openAndFlyTo(pos : LatLng) : void {
-    this.maximizeMap(); 
+    this.maximizeMap();
     this.observerService.changeVisibility(false);
     this.map.flyTo(pos, 18);
   }
