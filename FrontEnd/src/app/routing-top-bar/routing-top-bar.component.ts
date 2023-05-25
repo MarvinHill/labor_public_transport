@@ -5,6 +5,8 @@ import { IfStmt } from '@angular/compiler';
 import { interval, timer } from 'rxjs';
 import { Router, NavigationEnd, RouterFeature } from '@angular/router';
 import { UserLoginServiceService } from '../services/user-login-service.service';
+import { MapService } from '../services/map.service';
+
 
 
 @Component({
@@ -26,6 +28,7 @@ import { UserLoginServiceService } from '../services/user-login-service.service'
 })
 export class RoutingTopBarComponent {
   userService: UserLoginServiceService;
+  mapService: MapService;
   public innerWidth: number = 500;
   desktop: TemplateRef<NgIfContext<boolean>>;
   mobile: TemplateRef<NgIfContext<boolean>>;
@@ -43,8 +46,9 @@ export class RoutingTopBarComponent {
     this.innerWidth = event.target.innerWidth;
   }
 
-  constructor(userService: UserLoginServiceService, router: Router, private location : Location) {
+  constructor(userService: UserLoginServiceService, mapService: MapService, router: Router, private location : Location) {
     this.userService = userService;
+    this.mapService = mapService;
     this.router = router;
 
     const source = interval(200);
@@ -88,7 +92,14 @@ export class RoutingTopBarComponent {
   }
 
   goBack(){
+    if (!this.mapService.minimized) {
+      this.mapService.minimizeMap();
+    } else if (!(window.location.href.substring(window.location.href.lastIndexOf('/') + 1) === "main")) {
       this.location.back();
+    }
   }
 
+  minimizeMap() {
+    this.mapService.minimizeMap();
+  }
 }
