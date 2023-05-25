@@ -1,34 +1,34 @@
 <!-- Section: Timeline -->
-<section >
+<section>
   <div class="row p-3">
     <div class="text-box bc-g round p-3">
       <h5 class="fs-5 fw-bold">{{lineName}}</h5>
       <p class="fst-italic" style="text-align: right;">{{this.lineScheduleEntryList[0].station.stationDesignator}} -
         {{this.lineScheduleEntryList[number].station.stationDesignator}}</p>
-        <div style="overflow-x: hidden; overflow-y: auto;" class="height" [class.height] = "restrictSize === true">
-          <ul class="timeline">
-            <li class="timeline-item1" style="text-align: start;">
-              <p class="fw-normal">{{this.lineScheduleEntryList[0].station.stationDesignator}} <br> {{formateTime(this.lineScheduleEntryList[0].arrivalTime)}}</p>
-            </li>
-            <li class="timeline-item"
-              *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
-              style="text-align: start;">
-              <div *ngIf="!first && !last">
-                <p class="fw-normal">{{lineScheduleEntry.station.stationDesignator}} <br> {{formateTime(this.lineScheduleEntry.arrivalTime)}}
-                </p>
-              </div>
-            </li>
-            <li class="timeline-item1"
+      <div style="overflow-x: hidden; overflow-y: auto;" class="height" [class.height]="restrictSize === true">
+        <ul class="timeline">
+          <li class="timeline-item1" style="text-align: start;">
+            <p class="fw-normal">{{this.lineScheduleEntryList[0].station.stationDesignator}} <br> </p>
+          </li>
+          <li class="timeline-item"
             *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
             style="text-align: start;">
-            <div *ngIf="last">
-              <p class="fw-normal">{{lineScheduleEntry.station.stationDesignator}} <br> {{formateTime(this.lineScheduleEntry.arrivalTime)}}
+            <div *ngIf="!first && !last">
+              <p class="fw-normal">{{lineScheduleEntry.station.stationDesignator}} <br>
               </p>
             </div>
           </li>
-          </ul>
-        </div>      
+          <li class="timeline-item1"
+            *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
+            style="text-align: start;">
+            <div *ngIf="last">
+              <p class="fw-normal">{{lineScheduleEntry.station.stationDesignator}} <br>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
 </section>
 <!-- Section: Timeline -->
