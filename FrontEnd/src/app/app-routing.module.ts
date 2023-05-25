@@ -6,12 +6,7 @@ import { TravelinfoComponent } from './travelinfo/travelinfo.component';
 import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
-import { InfoCardsComponent } from './info-cards/info-cards.component';
-import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component';
-import { InfoBusTextComponent } from './info-bus-text/info-bus-text.component';
-import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
-import { InfoParkingTextComponent } from './info-parking-text/info-parking-text.component';
-import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
+
 import { MapComponent } from "./map/map.component";
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
