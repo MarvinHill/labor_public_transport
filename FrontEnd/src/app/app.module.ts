@@ -31,7 +31,7 @@ import { MapDetailsObserverComponent } from './map-details-observer/map-details-
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
-import {ParkingItemCapacityComponent} from "./parking-item-capacity/parking-item-capacity.component";
+import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-item-capacity.component";
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 import { ImpressumComponent } from './impressum/impressum.component';
@@ -61,12 +61,12 @@ import { ImpressumComponent } from './impressum/impressum.component';
     InfoBusTextComponent,
     InfoBahnTextComponent,
 
-        ParkingItemCapacityComponent,
-        ParkingViewComponent,
-        ParkingItemComponent,
-        BikeParkingItemComponent,
-        ImpressumComponent,
-        ConnectionTicketComponent,
+    ParkingItemCapacityComponent,
+    ParkingViewComponent,
+    ParkingItemComponent,
+    BikeParkingItemComponent,
+    ImpressumComponent,
+    ConnectionTicketComponent,
   ],
   imports: [
     BrowserModule,
