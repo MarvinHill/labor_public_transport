@@ -11,7 +11,7 @@ export class ShuttleSearchService implements SearchProvider{
 
   constructor(private dataService : DataServiceService) { }
   async search(target: string): Promise<ShuttleLine[]> {
-    console.warn("Shuttle searching " + target);
+    
     var request = this.dataService.getShuttleLines();
 
     return new Promise<ShuttleLine[]>(

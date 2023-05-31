@@ -12,9 +12,6 @@ import { SearchProvider } from '../SearchProvider';
 export class SearchService {
 
   public maximized : boolean = true;
-  public matchingResults : Searchable[];
-  public matchingResultsCategorized : Map<string, Searchable[]>;
-  private providers : SearchProvider[];
   public loading : boolean = false;
 
   constructor(
@@ -24,20 +21,9 @@ export class SearchService {
     ) {
     }
 
-  textSearch(searchValue: string): void {
-    searchValue = searchValue?.toLowerCase();
+  async search(searchValue : string) : Promise<Searchable[]> {
     this.loading = true;
-    this.search(searchValue).then(value => {
-      this.matchingResults = value.flat();
-      this.matchingResultsCategorized =  this.returnWithType();
-      console.warn("Matching Results");
-      console.warn(this.matchingResults); 
-      this.loading = false;
-    });
-  }
-
-  private async search(searchValue : string) : Promise<Searchable[]> {
-    console.warn("Search " + searchValue);
+    searchValue = searchValue?.toLowerCase();
     
     if(searchValue == null){
       searchValue = "";
@@ -60,8 +46,6 @@ export class SearchService {
       //infoSearch
       );
 
-      console.warn("Result ");
-      console.warn(searchResult);
       return searchResult;
   }
 
@@ -79,20 +63,6 @@ export class SearchService {
 
   public flipVisibility(){
     this.maximized = !this.maximized;
-  }
-
-
-  returnWithType() : Map<string, Searchable[]> {
-    var searchResults : Map<string, Searchable[]> = new Map<string, Searchable[]>();
-    
-    this.matchingResults.forEach(element => {
-      if(!searchResults.has(element.category)){
-        searchResults.set(element.category, []);
-      }  
-      searchResults.get(element.category)?.push(element);
-    });
-
-    return searchResults;
   }
 
 }

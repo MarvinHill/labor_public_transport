@@ -27,7 +27,6 @@ export class DataServiceService {
     const request = this.http.get<ShuttleLine[]>(this.baseurl + '/ptl')
     request.subscribe(resp => {
       this.lines.next(resp)
-      console.warn(resp);
     });
   }
 
@@ -49,7 +48,6 @@ export class DataServiceService {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all')
     request.subscribe(resp => {
       this.carParking.next(resp);
-      console.warn(resp);
     })
   }
 
@@ -57,7 +55,6 @@ export class DataServiceService {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all')
     request.subscribe(resp => {
       this.bikeParking.next(resp);
-      console.warn(resp);
     })
   }
 

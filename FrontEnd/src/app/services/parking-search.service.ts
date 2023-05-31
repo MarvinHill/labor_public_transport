@@ -11,7 +11,6 @@ export class ParkingSearchService implements SearchProvider{
 
   constructor(private dataService : DataServiceService) { }
   async search(target: string): Promise<ParkingLot[]> {
-    console.warn("Parking searching");
     
     var request = this.dataService.getAllParking();
 
