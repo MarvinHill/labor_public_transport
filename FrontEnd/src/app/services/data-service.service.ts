@@ -61,6 +61,11 @@ export class DataServiceService {
     })
   }
 
+  getAllParking() {
+    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/all')
+    return request;
+  }
+
   openMapExternal(from : string, to : string){
     window.open(`https://www.google.de/maps/dir/${from}/${to}/`);
   }

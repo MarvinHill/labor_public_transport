@@ -1,0 +1,36 @@
+#searchContainer{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1203;
+}
+#searchResultList{
+    overflow-y: auto;
+    height: 70vh;
+    width: 100%;
+}
+
+#searchContainerContent{
+    z-index: 1204;
+}
+
+@keyframes fadeIn {
+    0% { backdrop-filter: blur(50px) opacity(0); }
+    100% { backdrop-filter: blur(50px) opacity(1); }
+  }
+
+
+.glass {
+    background-color: rgba(0, 0, 0, 0.521);
+    backdrop-filter: blur(50px) opacity(1);
+    animation-name: fadeIn;
+    animation-duration: 0.25s;
+
+}
+#cancel-button{
+    margin-left: auto;
+    margin-right: 0;
+    width: fit-content;
+}
