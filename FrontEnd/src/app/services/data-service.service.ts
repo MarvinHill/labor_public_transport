@@ -6,6 +6,7 @@ import { ShuttleLine } from '../ShuttleLine';
 import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
 import {ParkingLot} from "../ParkingLot";
+import {ParkingCapacity} from "../ParkingCapacity";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,8 @@ export class DataServiceService {
   carParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
 
   bikeParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
+
+  parkingCapacity: Subject<ParkingCapacity[]> =new Subject<ParkingCapacity[]>();
 
   constructor(private http:HttpClient, private router : Router ) {}
 
@@ -57,6 +60,14 @@ export class DataServiceService {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all')
     request.subscribe(resp => {
       this.bikeParking.next(resp);
+      console.warn(resp);
+    })
+  }
+
+  getAllParkingCapacity() {
+    const request = this.http.get<ParkingCapacity[]>(this.baseurl + '/capacity/all')
+    request.subscribe(resp => {
+      this.parkingCapacity.next(resp);
       console.warn(resp);
     })
   }

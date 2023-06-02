@@ -2,7 +2,9 @@ import { NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {ParkingLot} from "../ParkingLot";
 import {ParkingType} from "../ParkingType";
+import {ParkingCapacity} from "../ParkingCapacity";
 import {MapService} from "../services/map.service";
+import {DataServiceService} from "../services/data-service.service";
 import {LatLng} from "leaflet";
 
 @Component({
@@ -13,6 +15,7 @@ import {LatLng} from "leaflet";
 export class ParkingItemCapacityComponent implements OnInit {
   carParkingLots: ParkingLot[];
   bikeParkingLots: ParkingLot[];
+  parkingCapacity: ParkingCapacity[];
   items: number[];
 
   ngOnInit(): void {
@@ -21,6 +24,13 @@ export class ParkingItemCapacityComponent implements OnInit {
     this.parkingID = this.parking.id;
     this.parkingAddress = this.parking.address;
 
+
+    this.dataService.parkingCapacity.subscribe(value=> {
+      this.parkingCapacity = value;
+    })
+    this.dataService.getAllParkingCapacity();
+
+    this.calculateCapacity();
   }
 
   @Input() parking: ParkingLot;
@@ -30,13 +40,16 @@ export class ParkingItemCapacityComponent implements OnInit {
 
   protected readonly ParkingType = ParkingType;
 
-  // auslastungen: number[] = [50, 100, 75, 25, 25, 75, 50, 100, 9, 11, 10];
+  //auslastungen: number[] = [50, 100, 75, 25, 25, 75, 50, 100, 9, 11, 10];
   auslastungen: number[] = [];
 
-  constructor(private mapService : MapService){}
+  constructor(private mapService : MapService, private dataService : DataServiceService){}
 
   panToParkingLot(){
     this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y));
   }
 
+  calculateCapacity() {
+
+  }
 }

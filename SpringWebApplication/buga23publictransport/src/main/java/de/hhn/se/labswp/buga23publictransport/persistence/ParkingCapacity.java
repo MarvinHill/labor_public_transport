@@ -17,14 +17,14 @@ public class ParkingCapacity {
 
     private int freeParkingspaces;
 
-    private LocalDateTime time;
+    private String dateTime;
 
     public ParkingCapacity() {}
 
-    public ParkingCapacity(String name, int freeParkingspaces, LocalDateTime time) {
+    public ParkingCapacity(String name, int freeParkingspaces, String dateTime) {
         this.name = name;
         this.freeParkingspaces = freeParkingspaces;
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     public void setId(int id) {this.id = id;}
@@ -36,6 +36,6 @@ public class ParkingCapacity {
     public void setFreeParkingspaces(int freeParkingspaces) {this.freeParkingspaces = freeParkingspaces;}
     public int getFreeParkingspaces() {return this.freeParkingspaces;}
 
-    public void setTime(LocalDateTime time) {this.time = time;}
-    public LocalDateTime getTime() {return this.time;}
+    public void setTime(String dateTime) {this.dateTime = dateTime;}
+    public String getTime() {return this.dateTime;}
 }
