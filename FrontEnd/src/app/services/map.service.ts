@@ -33,6 +33,7 @@ export class MapService{
   publicTransportLines = [];
   bugaArea = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
+  entrances = new L.LayerGroup;
   layerOptions : L.Control.LayersOptions = {
     position : "bottomright",
   }
@@ -61,6 +62,7 @@ export class MapService{
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
+    this.layerControl.addOverlay(this.entrances, "Eingänge");
     this.publicTransportLines.forEach(entry => {
       this.layerControl.addOverlay(entry[0], entry[1]);
     });
@@ -106,6 +108,8 @@ export class MapService{
     this.map.addLayer(this.bikeParkingLots);
 
     this.map.addLayer(this.bugaArea);
+
+    this.map.addLayer(this.entrances)
 
     this.publicTransportLines.forEach(entry => {
       this.map.addLayer(entry[0]);
@@ -412,6 +416,18 @@ export class MapService{
     L.polyline(cableCarLine, {color: '#e1416d'}).addTo(this.bugaArea);
 
   }
+  makeEntrances(){
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/Entrance.png',
+      iconSize:     [45, 72], // size of the icon
+      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+  var haupteingangLuisenpark = L.marker([49.47938, 8.49609], {icon: entranceIcon}).addTo(this.entrances);
+  var eingangFernmeldeturm = L.marker([49.48643, 8.49230], {icon: entranceIcon}).addTo(this.entrances);
+  var haupteingangSpinellipark = L.marker([49.49772, 8.52095], {icon: entranceIcon}).addTo(this.entrances);
+  var eingangParkschale = L.marker([49.502722, 8.518795], {icon: entranceIcon}).addTo(this.entrances);
+  }
 
   init(map : L.Map): void {
     this.map = map;
@@ -425,6 +441,7 @@ export class MapService{
     this.updateWidth();
     this.updateMobileDesktopMap();
     this.drawBugaArea();
+    this.makeEntrances();
   }
 
   maximizeMap(): void {
@@ -524,3 +541,5 @@ export class MapService{
     this.map.flyTo(pos, 18);
   }
 }
+
+
