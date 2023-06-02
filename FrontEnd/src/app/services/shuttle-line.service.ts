@@ -26,7 +26,7 @@ export class ShuttleLineService {
    * @param map 
    */
   public initShuttleLineViewOnMap(layers, service : MapService) {
-    this.dataService.getShuttleLines().subscribe(
+    this.dataService.getShuttleLines().then(
       lines => {
         
         this.lines = lines;

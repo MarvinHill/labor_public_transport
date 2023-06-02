@@ -16,7 +16,7 @@ export class ShuttleSearchService implements SearchProvider{
 
     return new Promise<ShuttleLine[]>(
       resolve => {
-        request.pipe(take(1)).subscribe(
+        request.then(
           (data:ShuttleLine[]) => {
             data = data.filter(value => {
               if(data == null){

@@ -6,6 +6,7 @@ import { ShuttleLine } from '../ShuttleLine';
 import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
 import {ParkingLot} from "../ParkingLot";
+import { DataCache } from '../DataCache';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,13 @@ export class DataServiceService {
     });
   }
 
-  public getShuttleLines(): Observable<ShuttleLine[]> {
-    return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
+  shuttleLineCache : DataCache<ShuttleLine> = new DataCache<ShuttleLine>();
+  public getShuttleLines(): Promise<ShuttleLine[]> {
+    const request = this.shuttleLineCache.pipeRequest(()=>{
+      return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
+    });
+
+    return request;    
   }
 
   public getShuttleLine(id: number): Observable<ShuttleLine> {
@@ -39,7 +45,6 @@ export class DataServiceService {
   }
 
   getData() {
-
     return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
     }
@@ -58,8 +63,11 @@ export class DataServiceService {
     })
   }
 
+  parkingCache : DataCache<ParkingLot> = new DataCache<ParkingLot>();
   getAllParking() {
-    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/all')
+    const request = this.parkingCache.pipeRequest(()=>{
+      return this.http.get<ParkingLot[]>(this.baseurl + '/parking/all');
+    });
     return request;
   }
 

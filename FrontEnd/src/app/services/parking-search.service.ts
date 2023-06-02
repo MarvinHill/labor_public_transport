@@ -10,13 +10,14 @@ import { DataServiceService } from './data-service.service';
 export class ParkingSearchService implements SearchProvider{
 
   constructor(private dataService : DataServiceService) { }
+
   async search(target: string): Promise<ParkingLot[]> {
     
     var request = this.dataService.getAllParking();
 
     return new Promise<ParkingLot[]>(
       resolve => {
-        request.pipe(take(1)).subscribe(
+        request.then(
           (data:ParkingLot[]) => {
             data = data.filter(value => {
               if(value?.name?.toLowerCase().includes(target)){
@@ -29,7 +30,7 @@ export class ParkingSearchService implements SearchProvider{
             });
             data.forEach(element => {
               element.category = "Parkplätze"
-              element.displayText = element.name;
+              element.displayText = element.name; 
               element.routingLocation = "/parking"
             });
               resolve(data);
