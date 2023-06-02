@@ -12,9 +12,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 
-
 @RestController
-public class TokenAccess {
+public class RNV {
     private static final String client_api_url = "https://graphql-sandbox-dds.rnv-online.de/";
     private static final String tenantID = "87cd3c4f-1e0a-4350-889e-3969cd4616c9";
     private static final String OAuth_URL = "https://login.microsoftonline.com/tenant/oauth2/token";
@@ -29,10 +28,7 @@ public class TokenAccess {
 
     private static String currentValidAccessToken;
 
-    @GetMapping(
-            value = "/get_access_token"
-    )
-    public static String getAccessToken() throws Exception {
+    public static void getAccessToken() throws Exception {
         // refresh the token if the remaining access_token time is less or equal 60 seconds
         if (expiresIn <= REMAINING_REFRESH_TIME) {
             // insert the tenantID into the url server address
@@ -64,11 +60,8 @@ public class TokenAccess {
             expiresIn -= elapsedTime;
         }
         elapsedTimeStamp = System.currentTimeMillis();
-        System.out.println(accessToken);
-        return accessToken;
     }
 
-    @GetMapping("/test")
     static public String callRNV(String graphQLQuery) throws IOException {
         try {
             getAccessToken();

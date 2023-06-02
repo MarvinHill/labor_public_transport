@@ -1,7 +1,7 @@
 # Returns all journey from the given hasafid
 # needs to be filtered with lines ...
 {
- # station id 2444 Nationaltheater
+# e.g. station id 2444 Nationaltheater
   station(id: "rnv_hasaf_station_id") {
     hafasID
     longName
