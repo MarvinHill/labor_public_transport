@@ -1,4 +1,4 @@
-import { Observable, lastValueFrom } from "rxjs";
+import { Observable, firstValueFrom, lastValueFrom } from "rxjs";
 
 const MILLISECOND_PER_SECOND = 1000;
 const SECOND_PER_MINUTE = 60;
@@ -20,10 +20,14 @@ export class DataCache<T> {
     public async pipeRequest<A extends Function>(func : A ) : Promise<T[]>{
 
         if(this.lastRequestDate == null){
-            await this.doRequestAndResetDate<A>(func);
+            await this.doRequestAndResetDate<A>(func).then(values => {
+                this.dataCache = values;
+            });
         }
         if((new Date().valueOf() - this.lastRequestDate.valueOf()) > this.cacheTimeInMin  * SECOND_PER_MINUTE * MILLISECOND_PER_SECOND){
-            await this.doRequestAndResetDate<A>(func);
+            await this.doRequestAndResetDate<A>(func).then(values => {
+                this.dataCache = values;
+            });
         }
 
         return new Promise<T[]>((resolve, reject) => {
@@ -34,8 +38,6 @@ export class DataCache<T> {
 
     private async doRequestAndResetDate<A extends Function>(func: A) : Promise<T[]>{
         this.lastRequestDate = new Date();
-        return func().subscribe((value) => {
-            this.dataCache = value;
-        }).first().toPromise();
+        return firstValueFrom(func());
     }
 }

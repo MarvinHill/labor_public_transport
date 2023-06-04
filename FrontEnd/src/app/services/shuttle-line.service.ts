@@ -27,10 +27,11 @@ export class ShuttleLineService {
    */
   public initShuttleLineViewOnMap(layers, service : MapService) {
     this.dataService.getShuttleLines().then(
-      lines => {
-        
+      (lines : ShuttleLine[]) => {
+  
         this.lines = lines;
-        this.lines.forEach(line => {
+        console.warn(lines);
+        this.lines?.forEach(line => {
           var layer = [new L.LayerGroup, ""];
           // draw the real train or shuttle line into the map
           if (line.geoLinePoints.length > 0) {

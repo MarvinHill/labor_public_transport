@@ -36,7 +36,6 @@ export class DataServiceService {
     const request = this.shuttleLineCache.pipeRequest(()=>{
       return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     });
-
     return request;    
   }
 
