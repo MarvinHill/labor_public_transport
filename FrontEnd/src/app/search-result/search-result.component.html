@@ -1,5 +1,5 @@
 <div class="p-1">
-    <div class="d-flex shadow bc-w rounded p-1">
+    <div class="d-flex shadow bc-w rounded p-1" (click)="this.searchService.switchViewTo(this.item);">
         <p id="display-text">{{item.displayText}}</p>
         <img src="" alt="" id="click-icon" class="ml-auto">
     </div>

@@ -1,4 +1,4 @@
-import { Injectable, ElementRef,ViewChild } from '@angular/core';
+import { Injectable, ElementRef,ViewChild, Renderer2 } from '@angular/core';
 import { ShuttleSearchService } from './shuttle-search.service';
 import { InfoSearchService } from './info-search.service';
 import { ParkingSearchService } from './parking-search.service';
@@ -6,6 +6,8 @@ import { Searchable } from '../Searchable';
 import { ShuttleLine } from '../ShuttleLine';
 import { ParkingLot } from '../ParkingLot';
 import { SearchProvider } from '../SearchProvider';
+import { Router } from '@angular/router';
+import { MapService } from './map.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +20,8 @@ export class SearchService {
     private parkingSearchProvider: ParkingSearchService, 
     private shuttleLineSearchProvider: ShuttleSearchService, 
     private infoSearchProvider: InfoSearchService,
+    private mapService : MapService,
+    private router : Router
     ) {
     }
 
@@ -63,6 +67,19 @@ export class SearchService {
 
   public flipVisibility(){
     this.maximized = !this.maximized;
+  }
+
+  public switchViewTo(target : Searchable) : void {
+      this.router.navigateByUrl(target.routingLocation);
+      this.minimize();
+      this.mapService.minimizeMap();
+
+
+      setTimeout(() => {
+        var element = document.getElementById(target.displayText);
+        element?.scrollIntoView({ block: "center" });
+        console.warn("ran");
+      },2000);
   }
 
 }

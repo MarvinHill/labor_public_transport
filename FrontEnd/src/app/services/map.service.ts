@@ -50,7 +50,7 @@ export class MapService{
   breakPoint: number = 720;
 
 
-  constructor(private searchService : SearchService ,userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService
+  constructor(userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService
     ,  private shuttleLineService: ShuttleLineService) {
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {

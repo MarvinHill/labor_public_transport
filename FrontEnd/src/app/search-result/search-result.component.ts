@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Searchable } from '../Searchable';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-search-result',
@@ -8,4 +9,6 @@ import { Searchable } from '../Searchable';
 })
 export class SearchResultComponent {
   @Input() item : Searchable;
+
+  constructor(protected searchService : SearchService){}
 }
