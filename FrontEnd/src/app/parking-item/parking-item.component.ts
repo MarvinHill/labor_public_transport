@@ -15,7 +15,6 @@ export class ParkingItemComponent implements OnInit {
   items: number[];
 
   ngOnInit(): void {
-
     this.carParkingName = this.carParking.name;
     this.parkID = this.carParking.id;
     this.carParkingAddress = this.carParking.address;
@@ -30,7 +29,7 @@ export class ParkingItemComponent implements OnInit {
 
   panToParkingLot(){
     this.observerService.changeDisplay(this.carParking);
-    this.mapService.openAndFlyTo(new LatLng(this.carParking.geoLocation.x, this.carParking.geoLocation.y)); 
+    this.mapService.openAndFlyTo(new LatLng(this.carParking.geoLocation.x, this.carParking.geoLocation.y));
   }
 
 }
