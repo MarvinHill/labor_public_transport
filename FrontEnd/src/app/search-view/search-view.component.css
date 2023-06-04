@@ -17,14 +17,14 @@
 }
 
 @keyframes fadeIn {
-    0% { backdrop-filter: blur(50px) opacity(0); }
-    100% { backdrop-filter: blur(50px) opacity(1); }
+    0% { backdrop-filter: blur(10px) opacity(0); }
+    100% { backdrop-filter: blur(10px) opacity(1); }
   }
 
 
 .glass {
     background-color: rgba(0, 0, 0, 0.521);
-    backdrop-filter: blur(50px) opacity(1);
+    backdrop-filter: blur(10px) opacity(1);
     animation-name: fadeIn;
     animation-duration: 0.25s;
 

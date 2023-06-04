@@ -13,7 +13,7 @@ import { MapService } from './map.service';
 })
 export class SearchService {
 
-  public maximized : boolean = true;
+  public maximized : boolean = false;
   public loading : boolean = false;
 
   constructor(
