@@ -8,8 +8,20 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
+
+    private final Set<String> SUPPORTED_LINES = Set.of(
+            "7",
+            "6",
+            "9",
+            "BL",
+            "BS",
+            "P+R"
+    );
 
     public TimeStopInfoDeserializer() {
         this(null);
@@ -34,15 +46,20 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
         for (var i = 0; i < totalCount; i++) {
             var element = elements.next();
 
+            var lineGroup = element.get("line").get("lineGroup").get("label").asText();
+            // skips not supported lines from the json
+            if (!SUPPORTED_LINES.contains(lineGroup)) {
+                continue;
+            }
+
             var timeInfo = new TimeStopInfo.TimeInfo();
-            //TODO filter here not supported line groups
-            timeInfo.lineGroup = element.get("line").get("lineGroup").get("label").asText();
+            timeInfo.lineGroup = lineGroup;
 
             var stops = element.get("stops").elements().next();
             timeInfo.plannedDeparture = stops.get("plannedDeparture").get("isoString").asText();
             timeInfo.realtimeDeparture = stops.get("realtimeDeparture").get("isoString").asText();
 
-            timeStopInfo.timeInfo.add(i, timeInfo);
+            timeStopInfo.timeInfo.add(timeInfo);
         }
 
         return timeStopInfo;

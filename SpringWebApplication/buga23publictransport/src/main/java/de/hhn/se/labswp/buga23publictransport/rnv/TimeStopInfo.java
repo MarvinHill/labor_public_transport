@@ -3,12 +3,13 @@ package de.hhn.se.labswp.buga23publictransport.rnv;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonDeserialize(using = TimeStopInfoDeserializer.class)
 public class TimeStopInfo {
     String hasafID;
-    List<TimeInfo> timeInfo;
+    List<TimeInfo> timeInfo = new ArrayList<>();
 
     public TimeStopInfo() {
 
