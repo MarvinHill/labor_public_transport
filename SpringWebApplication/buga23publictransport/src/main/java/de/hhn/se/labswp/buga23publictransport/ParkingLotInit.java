@@ -11,8 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @Configuration
 public class ParkingLotInit {
@@ -682,14 +685,4 @@ public class ParkingLotInit {
             bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim"));
         };
     }
-
-//    @Bean
-//    @Scheduled(cron = "0 15 * * *")
-//    CommandLineRunner updateParkingCapacity(ParkingCapacityRepository capacityRepo) {
-//
-//        return args -> {
-//
-//            //capacityRepo.save(new ParkingCapacity(name, freeParkingspaces));
-//        };
-//    }
 }

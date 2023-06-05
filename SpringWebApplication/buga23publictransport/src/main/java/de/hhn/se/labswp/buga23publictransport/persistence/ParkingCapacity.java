@@ -2,6 +2,7 @@ package de.hhn.se.labswp.buga23publictransport.persistence;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
@@ -10,8 +11,8 @@ import java.time.LocalDateTime;
 public class ParkingCapacity {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
@@ -27,7 +28,7 @@ public class ParkingCapacity {
         this.dateTime = dateTime;
     }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(long id) {this.id = id;}
     public long getId() {return this.id;}
 
     public void setName(String name) {this.name = name;}

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ParkingCapacityRepository extends JpaRepository<LineScheduleEntry, Long> {
+public interface ParkingCapacityRepository extends JpaRepository<ParkingCapacity, Long> {
 }
