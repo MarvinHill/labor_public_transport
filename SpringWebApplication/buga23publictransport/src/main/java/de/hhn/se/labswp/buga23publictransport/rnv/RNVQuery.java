@@ -27,8 +27,7 @@ public class RNVQuery {
         var response = RNV.callRNV(query);
 
         ObjectMapper mapper = new ObjectMapper();
-        TimeStopInfo timeStop = mapper.readValue(response, TimeStopInfo.class);
-        return timeStop;
+        return mapper.readValue(response, TimeStopInfo.class);
     }
 
 

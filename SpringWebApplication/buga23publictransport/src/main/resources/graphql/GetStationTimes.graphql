@@ -25,6 +25,7 @@
             realtimeDeparture {
               isoString
             }
+            destinationLabel
           }
         }
       }

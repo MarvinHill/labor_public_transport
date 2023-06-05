@@ -35,6 +35,7 @@ public class TimeStopInfo {
         String lineGroup;
         String plannedDeparture;
         String realtimeDeparture;
+        String destinationLabel;
 
         public TimeInfo() {
         }
@@ -61,6 +62,14 @@ public class TimeStopInfo {
 
         public String getRealtimeDeparture() {
             return realtimeDeparture;
+        }
+
+        public String getDestinationLabel() {
+            return destinationLabel;
+        }
+
+        public void setDestinationLabel(String destinationLabel) {
+            this.destinationLabel = destinationLabel;
         }
     }
 }
