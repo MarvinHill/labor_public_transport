@@ -7,6 +7,7 @@ import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
 import {ParkingLot} from "../ParkingLot";
 import { DataCache } from '../DataCache';
+import { MapLocation } from '../MapLocation';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,15 @@ export class DataServiceService {
   //baseurl : string = 'https://get2buga.de/api';
   baseurl : string = 'http://localhost:8080/api';
 
+  private mapLocatorApiURL : string = "https://nominatim.openstreetmap.org/search";
+
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
   carParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
 
   bikeParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
+
+  
 
   constructor(private http:HttpClient, private router : Router ) {}
 
@@ -75,5 +80,30 @@ export class DataServiceService {
   }
   openMapExternalWithDestPosition(lat : string, lon : string){
       window.open(`https://www.google.de/maps/dir//${lat},${lon}/`);
+  }
+
+  private mapApiLastCalled : Date;
+
+  mapLocatorCache : DataCache<MapLocation> = new DataCache<MapLocation>();
+  public getMapLocations(searchValue : string) : Promise<MapLocation[]>{
+
+          return new Promise((resolve) => {
+            this.http.get<MapLocation[]>(this.mapLocatorApiURL, {
+              params : {
+                "q" : searchValue
+              }
+            }).subscribe(values => {
+              if((new Date().valueOf() - this.mapApiLastCalled?.valueOf()) < 2000){
+                setTimeout(()=>{
+                  resolve(values);
+                  this.mapApiLastCalled = new Date();
+                },2000)
+              }
+              else{
+                resolve(values);
+                this.mapApiLastCalled = new Date();
+              }
+            });
+          });
   }
 }
