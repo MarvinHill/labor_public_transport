@@ -18,7 +18,6 @@ export class MapDetailsObserverService {
   constructor() { }
 
   changeDisplay(data){
-
     if("parkingType" in data){
       this.show = ObserverState.PARKING;
       this.data = <ParkingLot> data;

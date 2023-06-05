@@ -13,8 +13,8 @@ import {ParkingCapacity} from "../ParkingCapacity";
 })
 export class DataServiceService {
 
-  baseurl : string = 'https://get2buga.de/api';
-  //baseurl : string = 'http://localhost:8080/api';
+  //baseurl : string = 'https://get2buga.de/api';
+  baseurl : string = 'http://localhost:8080/api';
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 

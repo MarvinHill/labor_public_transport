@@ -193,7 +193,6 @@ export class MapService{
       var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], {icon: parkingIcon}).addTo(this.bikeParkingLots);
     }
     marker.on("click", function (e: any) {
-      console.warn("Hide Obeserver");
       this.observerService.changeDisplay(bikeparking)
     }.bind(this));
   }
@@ -521,7 +520,7 @@ export class MapService{
 
   public openAndFlyTo(pos : LatLng) : void {
     this.maximizeMap();
-    this.observerService.changeVisibility(false);
+    //this.observerService.changeVisibility(false);
     this.map.flyTo(pos, 18);
   }
 }
