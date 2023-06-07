@@ -8,6 +8,8 @@ import { ParkingLot } from '../ParkingLot';
 import { SearchProvider } from '../SearchProvider';
 import { Router } from '@angular/router';
 import { MapService } from './map.service';
+import {Injector} from "@angular/core";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,13 +18,18 @@ export class SearchService {
   public maximized : boolean = false;
   public loading : boolean = false;
 
-  constructor(
-    private parkingSearchProvider: ParkingSearchService, 
-    private shuttleLineSearchProvider: ShuttleSearchService, 
-    private infoSearchProvider: InfoSearchService,
-    private mapService : MapService,
-    private router : Router
+  private parkingSearchProvider: ParkingSearchService;
+  private shuttleLineSearchProvider: ShuttleSearchService;
+  private infoSearchProvider: InfoSearchService;
+
+  constructor( 
+    private injector : Injector
     ) {
+      setTimeout(() => { 
+        this.parkingSearchProvider = injector.get(ParkingSearchService); 
+        this.shuttleLineSearchProvider = injector.get(ShuttleSearchService); 
+        this.infoSearchProvider = injector.get(InfoSearchService); 
+      });
     }
 
   async search(searchValue : string) : Promise<Searchable[]> {
@@ -35,19 +42,15 @@ export class SearchService {
 
     var searchResult = [];
 
-    var parkingSearch
-    var shuttleSearch
-    //var infoSearch
-
-    parkingSearch = await this.parkingSearchProvider.search(searchValue);
-    shuttleSearch = await this.shuttleLineSearchProvider.search(searchValue)
-    //this.infoSearchProvider.search(searchValue);
+    var parkingSearch = await this.parkingSearchProvider.search(searchValue);
+    var shuttleSearch = await this.shuttleLineSearchProvider.search(searchValue);
+    var infoSearch = await this.infoSearchProvider.search(searchValue);
     
     
     searchResult.push(
       parkingSearch, 
-      shuttleSearch, 
-      //infoSearch
+      shuttleSearch,  
+      infoSearch
       );
 
       return searchResult;
@@ -68,18 +71,4 @@ export class SearchService {
   public flipVisibility(){
     this.maximized = !this.maximized;
   }
-
-  public switchViewTo(target : Searchable) : void {
-      this.router.navigateByUrl(target.routingLocation);
-      this.minimize();
-      this.mapService.minimizeMap();
-
-
-      setTimeout(() => {
-        var element = document.getElementById(target.displayText);
-        element?.scrollIntoView({ block: "center" });
-        console.warn("ran");
-      },2000);
-  }
-
 }

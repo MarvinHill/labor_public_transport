@@ -17,4 +17,19 @@
             <app-search-category *ngFor="let item of this.cachedSearchResults.keys()" [category]="item" [items]="this.cachedSearchResults.get(item)"></app-search-category>
         </div>
     </div>
+    <div *ngIf="this.notLoaded">
+        <div id="searchTravelinfo" class="loader">
+            <app-travelinfo></app-travelinfo>
+        </div>
+        <div id="searchParking" class="loader">
+            <app-info-parking></app-info-parking>
+        </div>
+        <div id="searchBus" class="loader">
+            <app-info-bus></app-info-bus>
+        </div>
+        <div id="searchPublicTransport" class="loader">
+            <app-info-bahn></app-info-bahn>
+        </div>
+    </div>
+   
 </div>

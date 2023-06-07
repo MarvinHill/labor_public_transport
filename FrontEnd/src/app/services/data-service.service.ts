@@ -81,29 +81,5 @@ export class DataServiceService {
   openMapExternalWithDestPosition(lat : string, lon : string){
       window.open(`https://www.google.de/maps/dir//${lat},${lon}/`);
   }
-
-  private mapApiLastCalled : Date;
-
-  mapLocatorCache : DataCache<MapLocation> = new DataCache<MapLocation>();
-  public getMapLocations(searchValue : string) : Promise<MapLocation[]>{
-
-          return new Promise((resolve) => {
-            this.http.get<MapLocation[]>(this.mapLocatorApiURL, {
-              params : {
-                "q" : searchValue
-              }
-            }).subscribe(values => {
-              if((new Date().valueOf() - this.mapApiLastCalled?.valueOf()) < 2000){
-                setTimeout(()=>{
-                  resolve(values);
-                  this.mapApiLastCalled = new Date();
-                },2000)
-              }
-              else{
-                resolve(values);
-                this.mapApiLastCalled = new Date();
-              }
-            });
-          });
-  }
+  
 }

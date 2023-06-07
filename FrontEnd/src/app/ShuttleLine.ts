@@ -3,9 +3,9 @@ import { Point } from "leaflet";
 import { Searchable } from "./Searchable";
 
 export class ShuttleLine implements Searchable{
+    searchAction: Function;
     category: string;
     displayText: string;
-    routingLocation: string;
     id: number;
     lineDesignator: string;
     hasDelay: boolean;

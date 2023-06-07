@@ -3,35 +3,38 @@ import { SearchProvider } from '../SearchProvider';
 import { DataServiceService } from './data-service.service';
 import { ShuttleLine } from '../ShuttleLine';
 import { take } from 'rxjs/operators';
+import { SearchService } from './search.service';
+import { Router } from '@angular/router';
+import { MapService } from './map.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ShuttleSearchService implements SearchProvider{
+export class ShuttleSearchService implements SearchProvider {
 
-  constructor(private dataService : DataServiceService) { }
+  constructor(private dataService: DataServiceService, private router : Router, private mapService : MapService, private searchService : SearchService) { }
   async search(target: string): Promise<ShuttleLine[]> {
-    
+
     var request = this.dataService.getShuttleLines();
 
     return new Promise<ShuttleLine[]>(
       resolve => {
         request.then(
-          (data:ShuttleLine[]) => {
+          (data: ShuttleLine[]) => {
             data = data.filter(value => {
-              if(data == null){
+              if (data == null) {
                 return false;
               }
-              if(value.lineDesignator?.toLowerCase().includes(target)){
+              if (value.lineDesignator?.toLowerCase().includes(target)) {
                 return true;
               }
               var childMatched = false;
               value.lineScheduleEntryList.forEach(element => {
-                if(element?.station?.stationDesignator?.toLowerCase().includes(target)){
+                if (element?.station?.stationDesignator?.toLowerCase().includes(target)) {
                   childMatched = true;
                 }
               });
-              if(childMatched){
+              if (childMatched) {
                 return true;
               }
 
@@ -40,10 +43,20 @@ export class ShuttleSearchService implements SearchProvider{
             data.forEach(element => {
               element.category = "Shuttle-Linien"
               element.displayText = element.lineDesignator;
-              element.routingLocation = "/shuttle"
+              element.searchAction = () => {
+                var local = "/shuttle"
+                this.router.navigateByUrl(local);
+                this.searchService.minimize();
+                this.mapService.minimizeMap();
+                setTimeout(() => {
+                  var el = document.getElementById(element.displayText);
+                  el?.scrollIntoView({ block: "center" });
+                  console.warn("ran");
+                }, 2000);
+              };
             });
-              resolve(data);
-       });
+            resolve(data);
+          });
       }
     );
   }
