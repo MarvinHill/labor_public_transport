@@ -84,14 +84,109 @@
 
 .locate-button-max {
   position: absolute;
-  top: 0.5em;
-  left: 0.5em;
-  z-index: 1001;
+  top: 7em;
+  right: 0.5em;
+  width: 3.5em;
+  height: 3em;
   border: solid lightgray 2px;
   border-radius: 0.6em;
   background: white;
+  z-index: 1001;
   font-weight: bolder;
 }
+
+.buga-back-button-max {
+  position: absolute;
+  top: 11em;
+  right: 0.5em;
+  width: 3.5em;
+  height: 3em;
+  border: solid lightgray 2px;
+  border-radius: 0.6em;
+  background: white;
+  z-index: 1001;
+  font-weight: bolder;
+}
+
+
+.blase {
+  position: absolute;
+  top: 11.5em;
+  right: 4em;
+  height: 2em;
+  padding: 0 0.5em;
+  border: solid lightgray 2px;
+  border-radius: 0.6em;
+  background: white;
+  z-index: 1001;
+}
+
+
+
+/* close button for the speech-bubble */
+.speech-bubble-close {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  border: none;
+  margin-left: 0.3em;
+  margin-top: -0.3em;
+  padding: 0.3em;
+  position: absolute;
+  margin-right: 0.3em;
+}
+
+/* rectangle for the speech bubble */
+.speech-bubble {
+  position: absolute;
+  top: 11.5em;
+  right: 5em;
+  height: 2em;
+  padding-right: 2em;
+  padding-left: 0.75em;
+  padding-top: 0.2em;
+  border-radius: 0.6em;
+  background: lightgray;
+  z-index: 1001;
+}
+
+/* shape of the triangle with point to the right for the speech bubble */
+.speech-bubble.acenter::before {
+  clip-path: polygon(0 12.5%, 100% 50%, 0 87.5%);
+}
+
+/* position/width/height for the triangle with the point to the right for the speech bubble */
+.speech-bubble.pright::before {
+  width: 1.5em;
+  height: 2em;
+  left: calc(100% - 0.3em);
+  top: calc(100% - 50% - 1em);
+}
+
+/* other properties for the triangle */
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  border-radius: 0.6em;
+  background: lightgray;
+  z-index: 1001;
+}
+
+.speech-bubble-min {
+  display: none;
+  content: '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .button-min {
   position: absolute;
