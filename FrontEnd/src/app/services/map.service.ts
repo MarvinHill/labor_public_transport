@@ -8,10 +8,7 @@ import { MapDetailsObserverService } from '../services/map-details-observer.serv
 import { UserLoginServiceService } from '../services/user-login-service.service';
 import { ShuttleLineService } from '../services/shuttle-line.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MapComponent} from "../map/map.component";
 import 'bootstrap/dist/js/bootstrap.min.js';
-import { AfterViewInit } from '@angular/core';
-
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +41,6 @@ export class MapService{
     position : "bottomright",
   }
   layerControl = L.control.layers(null, null, this.layerOptions);
-
 
 
   @ViewChild('container', { static: false }) container: ElementRef;
