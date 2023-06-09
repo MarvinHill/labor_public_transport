@@ -5,17 +5,28 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Configuration
+@Component
 public class LoadCapacity {
     ParkingCapacityRepository capacityRepo;
 
-    @Scheduled(cron = "0 15 * * * ?")
-    private void updateParkingCapacity() {
+    @Bean
+    CommandLineRunner initializeRepo(ParkingCapacityRepository capacityRepo) {
+        this.capacityRepo = capacityRepo;
+        return null;
+    }
+
+    @Bean
+    @Scheduled(cron = "0 0 * * * ?")
+    public void updateParkingCapacity() {
         String webInfo = CapacityReader.getWebInfo();
         String currentTime = LocalDateTime.now().toString();
+
+        System.out.println("Funktion aufgerufen um " + currentTime);
 
         for (int i = 0; i < 24; i++) {
             webInfo = webInfo.substring(CapacityReader.nextNGreater(webInfo, 5));
