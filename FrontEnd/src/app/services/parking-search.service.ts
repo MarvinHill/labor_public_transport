@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
 })
 export class ParkingSearchService implements SearchProvider{
 
+  public searchService : SearchService;
   constructor(
     private dataService : DataServiceService,
     private mapService : MapService,
-    private router : Router,
-    private searchService : SearchService
+    private router : Router
     ) { }
   async search(target: string): Promise<ParkingLot[]> {
     
@@ -55,4 +55,5 @@ export class ParkingSearchService implements SearchProvider{
       }
     );
   }
+
 }

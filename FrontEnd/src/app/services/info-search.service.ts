@@ -12,13 +12,15 @@ import { MapService } from './map.service';
 })
 export class InfoSearchService implements SearchProvider{
 
+  public searchService : SearchService;
+
   // Intended to be set from another component
   public travel : string;
   public parking : string;
   public bus : string;
   public publicTransport : string;
 
-  constructor(private window : Window,private router : Router, private searchService : SearchService, private mapService : MapService ) { }
+  constructor(private router : Router, private mapService : MapService ) { }
   search(target: string): Searchable[] {
     if(
       this.checkNotInitialized(this.travel)||
@@ -32,25 +34,47 @@ export class InfoSearchService implements SearchProvider{
       
       var results : Searchable[] = [];
       if(this.travel.toLowerCase().includes(target)){
-        this.initializeValues("Allgemeine Informationen",target,"/travelinfo",results);
+        this.travel.split(" ").forEach(value => {
+          if(value.includes(target)){
+            this.initializeValues("Allgemeine Informationen",value,target,"/travelinfo",results);
+          }
+        });
+        
       }
       if(this.parking.toLowerCase().includes(target)){
-        this.initializeValues("Parken Informationen",target,"/info-parking",results);
+        this.parking.split(" ").forEach(value => {
+          if(value.includes(target)){
+            this.initializeValues("Parken Informationen",value,target,"/info-parking",results);
+          }
+        })
+        
       }
       if(this.bus.toLowerCase().includes(target)){
-        this.initializeValues("Bus Informationen",target,"/info-bus",results);
+        this.bus.split(" ").forEach(value => {
+          if(value.includes(target)){
+            this.initializeValues("Bus Informationen",value,target,"/info-bus",results);
+          }
+        })
       }
       if(this.publicTransport.toLowerCase().includes(target)){
-        this.initializeValues("Bahn Informationen",target,"/info-bahn",results);        
+        this.publicTransport.split(" ").forEach(value => {
+          if(value.includes(target)){
+            this.initializeValues("Bahn Informationen",value,target,"/info-bahn",results); 
+          } 
+        })      
       }
 
       return results;
   }
 
-  private initializeValues(category : string, displayText : string, url : string, results : Searchable[]){
+  private initializeValues(category : string, foundIn : string, displayText : string, url : string, results : Searchable[]){
     var searchResult : InfoSearchResult = new InfoSearchResult();
+    var LENGTH : number = 50
+    if(foundIn.length > LENGTH){
+      foundIn = foundIn.substring(0,LENGTH-1);
+    }
     searchResult.category = category;
-    searchResult.displayText = `"${displayText}" gefunden`;
+    searchResult.displayText = `"${displayText}" in "${foundIn}" gefunden`;
     searchResult.searchAction = () => {
         this.router.navigateByUrl(url);
         this.searchService.minimize();

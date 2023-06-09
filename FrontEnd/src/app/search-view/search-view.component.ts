@@ -19,11 +19,10 @@ protected notLoaded: boolean = true;
 searchResults : Searchable[] ;
 
 ngAfterViewInit(): void {
-  this.infoSearchProvider.travel = document.getElementById("searchTravelinfo").innerHTML;
-  this.infoSearchProvider.parking = document.getElementById("searchParking").innerHTML;
-  this.infoSearchProvider.bus = document.getElementById("searchBus").innerHTML;
-  this.infoSearchProvider.publicTransport = document.getElementById("searchPublicTransport").innerHTML;
-  console.warn(this.infoSearchProvider.travel);
+  this.infoSearchProvider.travel = document.getElementById("searchTravelinfo").innerText;
+  this.infoSearchProvider.parking = document.getElementById("searchParking").innerText;
+  this.infoSearchProvider.bus = document.getElementById("searchBus").innerText;
+  this.infoSearchProvider.publicTransport = document.getElementById("searchPublicTransport").innerText;
   
 }
 

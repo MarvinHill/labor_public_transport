@@ -12,7 +12,9 @@ import { MapService } from './map.service';
 })
 export class ShuttleSearchService implements SearchProvider {
 
-  constructor(private dataService: DataServiceService, private router : Router, private mapService : MapService, private searchService : SearchService) { }
+  public searchService : SearchService;
+
+  constructor(private dataService: DataServiceService, private router : Router, private mapService : MapService) { }
   async search(target: string): Promise<ShuttleLine[]> {
 
     var request = this.dataService.getShuttleLines();
