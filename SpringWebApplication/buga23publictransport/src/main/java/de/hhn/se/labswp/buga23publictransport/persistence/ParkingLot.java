@@ -23,7 +23,9 @@ public class ParkingLot {
     ParkingType parkingType;    // 1 = bike, 2 = car, 3 = bus
     String address;
 
-    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address) {
+    int maxCapacity;
+
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, int maxCapacity) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -32,6 +34,7 @@ public class ParkingLot {
         this.charging = charging;
         this.parkingType = parkingType;
         this.address = address;
+        this.maxCapacity = maxCapacity;
     }
 
     public ParkingLot() { }
@@ -102,5 +105,13 @@ public class ParkingLot {
 
     public String getAddress() {
         return this.address;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public int getMaxCapacity() {
+        return this.maxCapacity;
     }
 }
