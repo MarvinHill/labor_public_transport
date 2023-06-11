@@ -6,6 +6,8 @@ import { ShuttleLine } from '../ShuttleLine';
 import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
 import {ParkingLot} from "../ParkingLot";
+import { DataCache } from '../DataCache';
+import { MapLocation } from '../MapLocation';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +17,15 @@ export class DataServiceService {
   //baseurl : string = 'https://get2buga.de/api';
   baseurl : string = 'http://localhost:8080/api';
 
+  private mapLocatorApiURL : string = "https://nominatim.openstreetmap.org/search";
+
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
   carParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
 
   bikeParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
+
+  
 
   constructor(private http:HttpClient, private router : Router ) {}
 
@@ -27,12 +33,15 @@ export class DataServiceService {
     const request = this.http.get<ShuttleLine[]>(this.baseurl + '/ptl')
     request.subscribe(resp => {
       this.lines.next(resp)
-      console.warn(resp);
     });
   }
 
-  public getShuttleLines(): Observable<ShuttleLine[]> {
-    return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
+  shuttleLineCache : DataCache<ShuttleLine> = new DataCache<ShuttleLine>();
+  public getShuttleLines(): Promise<ShuttleLine[]> {
+    const request = this.shuttleLineCache.pipeRequest(()=>{
+      return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
+    });
+    return request;    
   }
 
   public getShuttleLine(id: number): Observable<ShuttleLine> {
@@ -40,7 +49,6 @@ export class DataServiceService {
   }
 
   getData() {
-
     return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
     }
@@ -49,7 +57,6 @@ export class DataServiceService {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all')
     request.subscribe(resp => {
       this.carParking.next(resp);
-      console.warn(resp);
     })
   }
 
@@ -57,8 +64,15 @@ export class DataServiceService {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all')
     request.subscribe(resp => {
       this.bikeParking.next(resp);
-      console.warn(resp);
     })
+  }
+
+  parkingCache : DataCache<ParkingLot> = new DataCache<ParkingLot>();
+  getAllParking() {
+    const request = this.parkingCache.pipeRequest(()=>{
+      return this.http.get<ParkingLot[]>(this.baseurl + '/parking/all');
+    });
+    return request;
   }
 
   openMapExternal(from : string, to : string){
@@ -67,4 +81,5 @@ export class DataServiceService {
   openMapExternalWithDestPosition(lat : string, lon : string){
       window.open(`https://www.google.de/maps/dir//${lat},${lon}/`);
   }
+  
 }

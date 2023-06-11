@@ -7,6 +7,7 @@ import { DataServiceService } from '../services/data-service.service';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { UserLoginServiceService } from '../services/user-login-service.service';
 import { ShuttleLineService } from '../services/shuttle-line.service';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -115,7 +116,7 @@ export class MapService{
       this.observerService.changeVisibility(false);
     }.bind(this));
 
-  }s
+  }
 
   makeCarParking(parkinglot: ParkingLot) {
     var parkingIcon = L.icon({

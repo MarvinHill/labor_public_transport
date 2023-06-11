@@ -1,11 +1,12 @@
 import { NgIfContext, Location } from '@angular/common';
-import { Component, ElementRef, HostListener, Inject, TemplateRef } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, TemplateRef, ViewChild } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { IfStmt } from '@angular/compiler';
 import { interval, timer } from 'rxjs';
 import { Router, NavigationEnd, RouterFeature } from '@angular/router';
 import { UserLoginServiceService } from '../services/user-login-service.service';
 import { MapService } from '../services/map.service';
+import { SearchService } from '../services/search.service';
 
 
 
@@ -46,7 +47,7 @@ export class RoutingTopBarComponent {
     this.innerWidth = event.target.innerWidth;
   }
 
-  constructor(userService: UserLoginServiceService, mapService: MapService, router: Router, private location : Location) {
+  constructor(userService: UserLoginServiceService, mapService: MapService, router: Router, private location : Location, protected searchService : SearchService) {
     this.userService = userService;
     this.mapService = mapService;
     this.router = router;

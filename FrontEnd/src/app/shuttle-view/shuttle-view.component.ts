@@ -39,7 +39,6 @@ export class ShuttleViewComponent{
   }
 
   delete(item: number){
-      console.warn("Delete id: " + item);
     
       const deletePost = this.http.delete('http://localhost:8080/ptl/' + item)
       deletePost.subscribe(val => {
