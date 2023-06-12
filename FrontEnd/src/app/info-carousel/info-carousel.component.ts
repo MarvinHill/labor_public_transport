@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-info-carousel',
@@ -82,8 +82,7 @@ export class InfoCarouselComponent implements AfterViewInit {
       hideShowArrows(slides, prevButton, nextButton, targetIndex);
      
      
-    });
+    }); 
 
   }
-
 }
