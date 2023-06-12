@@ -26,19 +26,18 @@ export class ShuttleLineService {
    * @param map 
    */
   public initShuttleLineViewOnMap(layers, service : MapService) {
-    this.dataService.getShuttleLines().subscribe(
-      lines => {
-        
+    this.dataService.getShuttleLines().then(
+      (lines : ShuttleLine[]) => {
+  
         this.lines = lines;
-        this.lines.forEach(line => {
+        console.warn(lines);
+        this.lines?.forEach(line => {
           var layer = [new L.LayerGroup, ""];
           // draw the real train or shuttle line into the map
           if (line.geoLinePoints.length > 0) {
             var pl = this.getPolyLine(line);
             pl.addTo(layer[0] as L.LayerGroup);
-            pl.on("click", function (e: any) { 
-              console.warn("Line");
-              console.warn(line);       
+            pl.on("click", function (e: any) {     
               this.observerService.changeDisplay(line)
             }.bind(this));
           }
@@ -77,8 +76,6 @@ export class ShuttleLineService {
       { icon: shuttleMarkerIcon }
     );
     marker.on("click", function (e: any) {
-      console.warn("Marker");
-      console.warn(line);
       this.observerService.changeDisplay(line)
     }.bind(this));
     marker.bindPopup("<span>" + entry.station.stationDesignator + "</span>").openPopup();

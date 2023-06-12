@@ -1,0 +1,4 @@
+<p class="text-white pt-2">{{category}}</p>
+<div id="category-items" class="border-top border-white pt-1">
+    <app-search-result *ngFor="let item of this.items" [item] = "item"></app-search-result>
+</div>

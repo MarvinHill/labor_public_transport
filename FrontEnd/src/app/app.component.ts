@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SearchService } from './services/search.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-[x: string]: string;
-  title = 'FrontEnd';
+  title = 'Get2Buga';
+
+  constructor(protected searchService : SearchService){}
 }

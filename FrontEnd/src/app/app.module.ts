@@ -33,6 +33,9 @@ import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-it
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 import { ImpressumComponent } from './impressum/impressum.component';
+import { SearchViewComponent } from './search-view/search-view.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchCategoryComponent } from './search-category/search-category.component';
 
 
 
@@ -55,13 +58,15 @@ import { ImpressumComponent } from './impressum/impressum.component';
     InfoBusComponent,
     InfoBahnComponent,
     InfoCardsComponent,
-
     ParkingItemCapacityComponent,
     ParkingViewComponent,
     ParkingItemComponent,
     BikeParkingItemComponent,
     ImpressumComponent,
     ConnectionTicketComponent,
+    SearchViewComponent,
+    SearchResultComponent,
+    SearchCategoryComponent,
   ],
   imports: [
     BrowserModule,

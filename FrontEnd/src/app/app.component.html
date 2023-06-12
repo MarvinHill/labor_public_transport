@@ -3,4 +3,5 @@
 <div id="content">
     <router-outlet></router-outlet>
 </div>
+<app-search-view *ngIf="this.searchService.maximized"></app-search-view>
 <div style="height: 12em"></div>
