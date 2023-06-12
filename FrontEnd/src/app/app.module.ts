@@ -21,7 +21,8 @@ import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoCardsComponent } from './info-cards/info-cards.component';
-
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MapComponent } from './map/map.component';
 import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
@@ -74,6 +75,8 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
+    AppRoutingModule,BrowserModule,BrowserAnimationsModule, FormsModule,ReactiveFormsModule,MatButtonModule,MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

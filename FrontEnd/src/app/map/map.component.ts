@@ -19,7 +19,7 @@ export class MapComponent implements OnInit{
       zoom: 15,
       zoomControl: false
     });
- 
+
     this.mapService.init(map);
   }
 
@@ -29,6 +29,5 @@ export class MapComponent implements OnInit{
     this.mapService.updateHeight();
     this.mapService.updateWidth();
     this.mapService.updateMobileDesktopMap();
-
   }
 }

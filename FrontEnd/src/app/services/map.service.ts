@@ -7,6 +7,8 @@ import { DataServiceService } from '../services/data-service.service';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { UserLoginServiceService } from '../services/user-login-service.service';
 import { ShuttleLineService } from '../services/shuttle-line.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import { SearchService } from './search.service';
 
 @Injectable({
@@ -22,6 +24,8 @@ export class MapService{
   public mapContainerClass: string = "map-container-small-desktop";
   public resizeButtonClass: string = "button-min";
   public locateButtonClass: string = "button-min";
+  public bugaBackButtonClass: string = "button-min";
+  public speechBubbleClass: string = "speech-bubble-min";
 
   private userService: UserLoginServiceService;
 
@@ -42,8 +46,9 @@ export class MapService{
   layerControl = L.control.layers(null, null, this.layerOptions);
 
 
-
   @ViewChild('container', { static: false }) container: ElementRef;
+  @ViewChild('bugaBackButton', { static: false }) bugaBackButton: ElementRef;
+
 
   windowHeight: number;
   windowWidth: number;
@@ -51,9 +56,8 @@ export class MapService{
   public innerWidth: number = 1000;
   breakPoint: number = 720;
 
-
   constructor(userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService
-    ,  private shuttleLineService: ShuttleLineService) {
+    ,  private shuttleLineService: ShuttleLineService, private snackbar: MatSnackBar) {
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -125,6 +129,7 @@ export class MapService{
       this.observerService.changeVisibility(false);
     }.bind(this));
 
+    this.detectMapMovement();
   }
 
   makeCarParking(parkinglot: ParkingLot) {
@@ -433,13 +438,13 @@ export class MapService{
   var eingangFernmeldeturm = L.marker([49.48643, 8.49230], {icon: entranceIcon}).addTo(this.entrances);
   var haupteingangSpinellipark = L.marker([49.49772, 8.52095], {icon: entranceIcon}).addTo(this.entrances);
   var eingangParkschale = L.marker([49.502722, 8.518795], {icon: entranceIcon}).addTo(this.entrances);
-  
+
   haupteingangLuisenpark.bindPopup("<b>Haupteingang Luisenpark</b> <br> Einlass: 9 - 19 Uhr").openPopup();
   eingangFernmeldeturm.bindPopup("<b>Eingang Fernmeldeturm</b> <br> Einlass: 9 - 19 Uhr");
   haupteingangSpinellipark.bindPopup("<b>Haupteingang Spinellipark</b> <br> Einlass: 9 - 19 Uhr");
   eingangParkschale.bindPopup("<b>Eingang Parkschale</b> <br> Einlass: 9 - 19 Uhr");
 
-  
+
   }
 
   makeExits(){
@@ -484,6 +489,8 @@ export class MapService{
       this.mapContainerClass = "map-container-large shadow";
       this.resizeButtonClass = "resize-button-max shadow";
       this.locateButtonClass = "locate-button-max shadow";
+      this.bugaBackButtonClass = "buga-back-button-max shadow";
+      this.speechBubbleClass = "speech-bubble pright acenter";
       this.updateHeight()
       this.updateWidth();
     }
@@ -498,6 +505,8 @@ export class MapService{
       this.updateMobileDesktopMap();
       this.resizeButtonClass = "button-min";
       this.locateButtonClass = "button-min";
+      this.bugaBackButtonClass = "button-min";
+      this.speechBubbleClass = "speech-bubble-min button-min";
       this.updateHeight()
       this.updateWidth();
     }
@@ -565,6 +574,42 @@ export class MapService{
        })
     });
     this.userLocation = userLocationGroup;
+  }
+
+  moveToBuga() : any {
+    /* visual output for the user, letting him know that he is already at the Buga */
+    if(this.map.getCenter().lat >= 49.49021061654624 && this.map.getCenter().lat <= 49.49127559245556 && this.map.getCenter().lng >= 8.508478545177866 && this.map.getCenter().lng <= 8.510290295871553) {
+      this.snackbar.open("Du bist bereits an der Buga", 'Schließen', {
+        verticalPosition: 'bottom',
+      });
+    }
+    /* move to the Buga */
+    else {
+      this.map.setView(new LatLng(49.4906602, 8.5092189), 14);
+    }
+  }
+
+  /* boolean value for the button to hide the speech-bubble */
+  xPressed: boolean = false;
+
+  detectMapMovement(): void {
+    this.map.on('move', () => {
+      /* check if the user is near the Buga */
+      if(this.map.getCenter().lat >= 49.36289598710729 && this.map.getCenter().lat <= 49.615075626689 && this.map.getCenter().lng >= 8.299441337585451 && this.map.getCenter().lng <= 8.695807456970217) {
+        /* hide speech-bubble */
+        document.getElementById('speech-bubble-id').style.display = 'none';
+        this.xPressed = false;
+      }
+      /* show speech-bubble */
+      else if(!this.xPressed) {
+        document.getElementById('speech-bubble-id').style.display = 'block';
+      }
+    });
+  }
+
+  hideContainer() {
+      document.getElementById('speech-bubble-id').style.display = 'none';
+      this.xPressed = true;
   }
 
   public openAndFlyTo(pos : LatLng) : void {
