@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit, HostListener } from '@angular/core';
 import {Router} from '@angular/router';
-import * as bootstrap from 'bootstrap';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-main-view',

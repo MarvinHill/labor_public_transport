@@ -1,0 +1,35 @@
+<div id="searchContainer" class="p-3 not-select" [class.glass]="this.searchService.maximized == true">
+    <div class="container ">
+        <div id="searchTopBar">
+            <div class="p-2">
+                <div type="button" id="cancel-button" class="text-white not-select p-3" (click)="this.searchService.minimize()"
+                    *ngIf="this.searchService.maximized == true">Abbrechen</div>
+            </div>
+            <div class="p-3" style="width : 100%">
+                <input type="search" class="form-control" id="search-input" placeholder="Suchen..." autocomplete="off" spellcheck="false" (input)="this.textSearch($any($event.target).value)" (click)="this.searchService.maximize()">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status" *ngIf="this.searchService.loading == true"></div>
+          </div>
+        <p *ngIf="this.cachedSearchResults?.size == 0 && !this.searchService.loading" class="text-white">Es wurde leider nichts gefunden, versuche eine andere Eingabe</p>
+        <div id="searchResultList" *ngIf="this.searchService.loading == false" >
+            <app-search-category *ngFor="let item of this.cachedSearchResults.keys()" [category]="item" [items]="this.cachedSearchResults.get(item)"></app-search-category>
+        </div>
+    </div>
+    <div *ngIf="this.notLoaded">
+        <div id="searchTravelinfo" class="loader">
+            <app-travelinfo></app-travelinfo>
+        </div>
+        <div id="searchParking" class="loader">
+            <app-info-parking></app-info-parking>
+        </div>
+        <div id="searchBus" class="loader">
+            <app-info-bus></app-info-bus>
+        </div>
+        <div id="searchPublicTransport" class="loader">
+            <app-info-bahn></app-info-bahn>
+        </div>
+    </div>
+   
+</div>

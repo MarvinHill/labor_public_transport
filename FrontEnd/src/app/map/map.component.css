@@ -1,6 +1,6 @@
 .map-container-large {
  position: fixed;
- z-index: 1000;
+ z-index: 100;
  bottom: 0;
  left: 0;
  max-width: 100%;
@@ -19,7 +19,7 @@
   margin: 1em;
   border-radius: 1em;
   border-style: none;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .border-rounded{
@@ -29,7 +29,7 @@
 .inner-container{
   position: relative;
   margin: 0;
-  z-index: 1000;
+  z-index: 100;
   border-radius: 2em;
   width: 100%;
   height: 100%;
@@ -41,7 +41,7 @@
   left: 0;
   width: 85%;
   height: 100%;
-  z-index: 1000;
+  z-index: 100;
   border-radius: 2em 2em 0 0;
   margin-left: 7.5%;
 }
@@ -60,7 +60,7 @@
 
 #map {
   height: 100%;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .bootstrap-container{
@@ -75,7 +75,7 @@
   right: 1em;
   width: 2.5em;
   height: 2.5em;
-  z-index: 1001;
+  z-index: 1305;
   border: solid lightgray 2px;
   border-radius: 0.6em;
   background: white;
@@ -86,7 +86,7 @@
   position: absolute;
   top: 0.5em;
   left: 0.5em;
-  z-index: 1001;
+  z-index: 1305;
   border: solid lightgray 2px;
   border-radius: 0.6em;
   background: white;
@@ -105,7 +105,7 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  z-index: 10001;
+  z-index: 100;
   overflow-y: scroll;
   overflow-x: hidden;
 }
