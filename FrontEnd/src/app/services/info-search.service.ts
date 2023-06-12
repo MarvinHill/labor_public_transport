@@ -35,7 +35,7 @@ export class InfoSearchService implements SearchProvider{
       var results : Searchable[] = [];
       if(this.travel.toLowerCase().includes(target)){
         this.travel.split(" ").forEach(value => {
-          if(value.includes(target)){
+          if(value.toLowerCase().includes(target)){
             this.initializeValues("Allgemeine Informationen",value,target,"/travelinfo",results);
           }
         });
@@ -43,7 +43,7 @@ export class InfoSearchService implements SearchProvider{
       }
       if(this.parking.toLowerCase().includes(target)){
         this.parking.split(" ").forEach(value => {
-          if(value.includes(target)){
+          if(value.toLowerCase().includes(target)){
             this.initializeValues("Parken Informationen",value,target,"/info-parking",results);
           }
         })
@@ -51,14 +51,14 @@ export class InfoSearchService implements SearchProvider{
       }
       if(this.bus.toLowerCase().includes(target)){
         this.bus.split(" ").forEach(value => {
-          if(value.includes(target)){
+          if(value.toLowerCase().includes(target)){
             this.initializeValues("Bus Informationen",value,target,"/info-bus",results);
           }
         })
       }
       if(this.publicTransport.toLowerCase().includes(target)){
         this.publicTransport.split(" ").forEach(value => {
-          if(value.includes(target)){
+          if(value.toLowerCase().includes(target)){
             this.initializeValues("Bahn Informationen",value,target,"/info-bahn",results); 
           } 
         })      
