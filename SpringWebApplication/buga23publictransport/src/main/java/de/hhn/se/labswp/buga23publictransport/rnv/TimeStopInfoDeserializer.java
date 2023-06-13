@@ -33,15 +33,15 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
 
     // see https://www.rnv-online.de/media/rnv-online.de/Sonstige_Seiten/Kampagnen/Bundesgartenschau/Mit_der_rnv_zur_BUGA_23.pdf
     // for more information for the destinations. -> till now everything points to one direction.
-    private final Map<String, String> DESTINATION_MAP = new HashMap<>();
+    private final Map<String, String> DESTINATION_MAP_TO_BUGA = new HashMap<>();
 
     public TimeStopInfoDeserializer() {
         this(null);
-        DESTINATION_MAP.put("7", "Vogelstang");
-        DESTINATION_MAP.put("BS", "Vogelstang");
-        DESTINATION_MAP.put("6", "SAP Arena S-Bf");
-        DESTINATION_MAP.put("BL", "SAP Arena S-Bf");
-        DESTINATION_MAP.put("9", "Neuostheim");
+        DESTINATION_MAP_TO_BUGA.put("7", "Vogelstang");
+        DESTINATION_MAP_TO_BUGA.put("BS", "Vogelstang");
+        DESTINATION_MAP_TO_BUGA.put("6", "SAP Arena S-Bf");
+        DESTINATION_MAP_TO_BUGA.put("BL", "SAP Arena S-Bf");
+        DESTINATION_MAP_TO_BUGA.put("9", "Neuostheim");
     }
 
     public TimeStopInfoDeserializer(Class<TimeStopInfo> t) {
@@ -52,17 +52,23 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
     public TimeStopInfo deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         JsonNode node = jp.getCodec().readTree(jp);
 
+        var cursor = node.get("data").get("station").get("journeys").get("cursor").asText();
+        System.out.println(cursor);
+
         var timeStopInfo = new TimeStopInfo();
         timeStopInfo.hasafID = node.get("data").get("station").get("hafasID").asText();
+        timeStopInfo.cursor = cursor;
 
         int totalCount = node.get("data").get("station").get("journeys").get("totalCount").asInt();
         timeStopInfo.timeInfo = new ArrayList<>(totalCount);
 
         var elements = node.get("data").get("station").get("journeys").get("elements").elements();
 
-        for (var i = 0; i < totalCount; i++) {
-            var element = elements.next();
+        if (!elements.hasNext()) {
+            return timeStopInfo;
+        }
 
+        for (var element = elements.next(); elements.hasNext(); element = elements.next()) {
             // skips not supported lines from the json
             var lineGroup = element.get("line").get("lineGroup").get("label").asText();
             if (!SUPPORTED_LINES.contains(lineGroup)) {
@@ -84,7 +90,7 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
             }
 
             // TODO: Filter right direction here
-            if (DESTINATION_MAP.get(timeInfo.lineGroup) == null) {
+            if (DESTINATION_MAP_TO_BUGA.get(timeInfo.lineGroup) == null) {
                 continue;
             }
 

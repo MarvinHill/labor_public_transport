@@ -6,7 +6,7 @@
     hafasID
     longName
     # start time here 2023-05-30T12:27:36Z
-    journeys(startTime: "rnv_start_time", first: 50, endTime: "rnv_end_time") {
+    journeys(startTime: "rnv_start_time", first: 50, endTime: "rnv_end_time", after: "rnv_cursor") {
       totalCount
       cursor
       elements {

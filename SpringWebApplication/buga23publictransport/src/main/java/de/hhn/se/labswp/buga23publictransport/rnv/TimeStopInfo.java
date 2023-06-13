@@ -8,11 +8,20 @@ import java.util.List;
 
 @JsonDeserialize(using = TimeStopInfoDeserializer.class)
 public class TimeStopInfo {
+    String cursor;
     String hasafID;
     List<TimeInfo> timeInfo = new ArrayList<>();
 
     public TimeStopInfo() {
 
+    }
+
+    public String getCursor() {
+        return cursor;
+    }
+
+    public void setCursor(String cursor) {
+        this.cursor = cursor;
     }
 
     public String getHasafID() {
@@ -32,6 +41,7 @@ public class TimeStopInfo {
     }
 
     public static class TimeInfo {
+
         String lineGroup;
         String plannedDeparture;
         String realtimeDeparture;
@@ -39,6 +49,7 @@ public class TimeStopInfo {
 
         public TimeInfo() {
         }
+
 
         public void setLineGroup(String lineGroup) {
             this.lineGroup = lineGroup;

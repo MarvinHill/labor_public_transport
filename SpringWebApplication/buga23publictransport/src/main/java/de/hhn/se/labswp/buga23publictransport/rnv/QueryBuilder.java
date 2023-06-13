@@ -5,13 +5,13 @@ import java.io.*;
 public class QueryBuilder {
     public static String RNVStationId = "rnv_hasaf_station_id"; // hasafID of the station
     public static String RNVStartTime = "rnv_start_time"; // when is the departure time of the station
+    public static String RNVEndTime = "rnv_end_time"; // midnight of today to get all stations
+    public static String RNVCursor = "rnv_cursor"; // cursor for paging
     private String query;
     private final File queryFile;
-
     public QueryBuilder(File queryFile) {
         this.queryFile = queryFile;
     }
-
     public QueryBuilder buildRawQuery() {
         StringBuilder body = new StringBuilder();
         try (var reader = new BufferedReader(new FileReader(queryFile))) {
