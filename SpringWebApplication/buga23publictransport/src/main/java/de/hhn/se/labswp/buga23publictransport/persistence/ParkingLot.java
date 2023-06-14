@@ -22,8 +22,9 @@ public class ParkingLot {
     boolean charging;
     ParkingType parkingType;    // 1 = bike, 2 = car, 3 = bus
     String address;
+    boolean employeeParking;
 
-    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address) {
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -32,6 +33,7 @@ public class ParkingLot {
         this.charging = charging;
         this.parkingType = parkingType;
         this.address = address;
+        this.employeeParking = employeeParking;
     }
 
     public ParkingLot() { }
@@ -103,4 +105,13 @@ public class ParkingLot {
     public String getAddress() {
         return this.address;
     }
+
+    public void setEmployeeParking(boolean employeeParking) {
+        this.employeeParking = employeeParking;
+    }
+
+    public boolean getEmployeeParking() {
+        return employeeParking;
+    }
+
 }
