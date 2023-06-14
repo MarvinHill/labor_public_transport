@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
-
 import { ShuttleLine } from '../ShuttleLine';
 import { DataServiceService } from '../services/data-service.service';
 

@@ -16,10 +16,10 @@ import { InfoSearchService } from './info-search.service';
 })
 export class SearchService {
 
-  public maximized : boolean = false;
-  public loading : boolean = false;
+  public maximized  = false;
+  public loading  = false;
 
-  constructor( 
+  constructor(
     private parkingSearchProvider : ParkingSearchService,
     private shuttleLineSearchProvider: ShuttleSearchService,
     private infoSearchProvider: InfoSearchService,
@@ -28,24 +28,24 @@ export class SearchService {
   async search(searchValue : string) : Promise<Searchable[]> {
     this.loading = true;
     searchValue = searchValue?.toLowerCase();
-    
+
     if(searchValue == null){
       searchValue = "";
     }
 
-    var searchResult = [];
+    const searchResult = [];
 
     this.parkingSearchProvider.searchService = this;
-    var parkingSearch = await this.parkingSearchProvider.search(searchValue);
+    const parkingSearch = await this.parkingSearchProvider.search(searchValue);
     this.shuttleLineSearchProvider.searchService = this;
-    var shuttleSearch = await this.shuttleLineSearchProvider.search(searchValue);
+    const shuttleSearch = await this.shuttleLineSearchProvider.search(searchValue);
     this.infoSearchProvider.searchService = this;
-    var infoSearch = await this.infoSearchProvider.search(searchValue);
-    
-    
+    const infoSearch = await this.infoSearchProvider.search(searchValue);
+
+
     searchResult.push(
-      parkingSearch, 
-      shuttleSearch,  
+      parkingSearch,
+      shuttleSearch,
       infoSearch
       );
 

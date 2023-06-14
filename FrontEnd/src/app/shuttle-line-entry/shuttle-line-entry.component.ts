@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
-import { LineScheduleEntry } from '../LineScheduleEntry';
 
 @Component({
   selector: 'app-shuttle-line-entry',
@@ -16,7 +15,7 @@ export class ShuttleLineEntryComponent implements OnInit {
   }
 
   @Input() shuttleLine: ShuttleLine;
-  lineName: string = "no line name";
-  arrivalTime: string = "no arrival time";
-  stationDesignator: string = "no station name";
+  lineName = "no line name";
+  arrivalTime = "no arrival time";
+  stationDesignator = "no station name";
 }

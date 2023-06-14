@@ -8,8 +8,8 @@ import { Searchable } from '../Searchable';
 })
 export class SearchCategoryComponent {
 
-  @Input() category : string = "";
+  @Input() category  = "";
   @Input() items : Searchable[] = [];
-  
+
 
 }

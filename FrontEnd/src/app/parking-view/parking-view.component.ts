@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {UserLoginServiceService} from "../services/user-login-service.service";
 import {DataServiceService} from "../services/data-service.service";
 import {ParkingLot} from "../ParkingLot";
 
@@ -13,7 +12,6 @@ export class ParkingViewComponent implements OnInit{
   carParkingLots: ParkingLot[];
   bikeParkingLots: ParkingLot[];
   http:HttpClient;
-  loginService : UserLoginServiceService;
   options!: {
     headers?: HttpHeaders | { [header: string]: string | string[]; };
     observe?: 'body' | 'events' | 'response';
@@ -25,12 +23,11 @@ export class ParkingViewComponent implements OnInit{
 
   dataService: DataServiceService;
 
-  carButtonClass: string = "selected-button";
-  bikeButtonClass: string = "unselected-button";
+  carButtonClass = "selected-button";
+  bikeButtonClass = "unselected-button";
 
-  constructor(http:HttpClient, loginService : UserLoginServiceService,  dataService: DataServiceService){
+  constructor(http:HttpClient, dataService: DataServiceService){
     this.http = http;
-    this.loginService = loginService;
     this.dataService = dataService;
     dataService.carParking.subscribe(value=> {
       this.carParkingLots = value;
@@ -50,7 +47,7 @@ export class ParkingViewComponent implements OnInit{
 
   @Input() park: ParkingLot;
 
-  name:String = "NAME";
+  name = "NAME";
   parkingId: number;
 
 

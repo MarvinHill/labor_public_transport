@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
 import { LineScheduleEntry } from '../LineScheduleEntry';
-import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-timeline',
@@ -14,21 +13,21 @@ export class TimelineComponent implements OnInit,OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.setUp();
   }
-  
-  
+
+
   ngOnInit(): void {
     this.setUp();
   }
 
 
   @Input() shuttleLine: ShuttleLine;
-  @Input() restrictSize : boolean = true;
+  @Input() restrictSize  = true;
 
-  lineName: string = "no line name";
+  lineName = "no line name";
   shuttleLineID: number;
   lineScheduleEntryList: LineScheduleEntry[];
   shuttleLineList: ShuttleLine[];
-  number: number; 
+  number: number;
 
 
   private setUp() {
@@ -39,9 +38,9 @@ export class TimelineComponent implements OnInit,OnChanges {
   }
 
   formateTime(str : string){
-    var tokens : string[] = str.split(":");
-    var hour : string = tokens[0].trim();
-    var min : string = tokens[1].trim();
+    const tokens : string[] = str.split(":");
+    const hour : string = tokens[0].trim();
+    const min : string = tokens[1].trim();
 
     return `${hour}:${min}`;
   }

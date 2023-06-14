@@ -19,8 +19,8 @@ export class ParkingSearchService implements SearchProvider{
     private router : Router
     ) { }
   async search(target: string): Promise<ParkingLot[]> {
-    
-    var request = this.dataService.getAllParking();
+
+    const request = this.dataService.getAllParking();
 
     return new Promise<ParkingLot[]>(
       resolve => {
@@ -37,14 +37,14 @@ export class ParkingSearchService implements SearchProvider{
             });
             data.forEach(element => {
               element.category = "Parkplätze"
-              element.displayText = element.name; 
+              element.displayText = element.name;
               element.searchAction = () => {
-                var local = "/parking"
+                const local = "/parking"
                 this.router.navigateByUrl(local);
                 this.searchService.minimize();
                 this.mapService.minimizeMap();
                 setTimeout(() => {
-                  var el = document.getElementById(element.displayText);
+                  const el = document.getElementById(element.displayText);
                   el?.scrollIntoView({ block: "center" });
                   console.warn("ran");
                 },2000);

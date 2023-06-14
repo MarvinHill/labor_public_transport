@@ -21,9 +21,9 @@ export class ParkingItemComponent implements OnInit {
   }
 
   @Input() carParking: ParkingLot;
-  carParkingName: String = "NAME";
+  carParkingName = "NAME";
   parkID: number;
-  carParkingAddress: String = "ADDRESS";
+  carParkingAddress = "ADDRESS";
 
   constructor(private mapService : MapService, private observerService : MapDetailsObserverService){}
 

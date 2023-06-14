@@ -22,9 +22,9 @@ export class BikeParkingItemComponent implements OnInit {
   constructor(protected mapService : MapService){}
 
   @Input() bikeParking: ParkingLot;
-  bikeParkingName: String = "NAME";
+  bikeParkingName = "NAME";
   parkID: number;
-  bikeParkingAddress: String = "ADDRESS";
+  bikeParkingAddress = "ADDRESS";
 
   panToBikeParkingLot(){
     this.mapService.openAndFlyTo(new LatLng(this.bikeParking.geoLocation.x, this.bikeParking.geoLocation.y));
