@@ -23,7 +23,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MapComponent } from './map/map.component';
 import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
 import { ParkingViewComponent } from './parking-view/parking-view.component';
-import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
 import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-item-capacity.component";
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 import { ImpressumComponent } from './impressum/impressum.component';
@@ -51,7 +50,6 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     InfoCardsComponent,
     ParkingItemCapacityComponent,
     ParkingViewComponent,
-    BikeParkingItemComponent,
     ImpressumComponent,
     ConnectionTicketComponent,
     SearchViewComponent,
