@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import de.hhn.se.labswp.buga23publictransport.rnv.persistence.TimeInfo;
+import de.hhn.se.labswp.buga23publictransport.rnv.persistence.TimeStopInfo;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -51,16 +53,13 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
     @Override
     public TimeStopInfo deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         JsonNode node = jp.getCodec().readTree(jp);
-
         var cursor = node.get("data").get("station").get("journeys").get("cursor").asText();
-        System.out.println(cursor);
-
         var timeStopInfo = new TimeStopInfo();
-        timeStopInfo.hasafID = node.get("data").get("station").get("hafasID").asText();
-        timeStopInfo.cursor = cursor;
+        timeStopInfo.setHasafID(node.get("data").get("station").get("hafasID").asText());
+        timeStopInfo.setCursor(cursor);
 
         int totalCount = node.get("data").get("station").get("journeys").get("totalCount").asInt();
-        timeStopInfo.timeInfo = new ArrayList<>(totalCount);
+        timeStopInfo.setTimeInfo(new ArrayList<>(totalCount));
 
         var elements = node.get("data").get("station").get("journeys").get("elements").elements();
 
@@ -75,7 +74,7 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
                 continue;
             }
 
-            var timeInfo = new TimeStopInfo.TimeInfo();
+            var timeInfo = new TimeInfo();
             timeInfo.lineGroup = lineGroup;
 
             var stops = element.get("stops").elements().next();
@@ -94,7 +93,7 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
                 continue;
             }
 
-            timeStopInfo.timeInfo.add(timeInfo);
+            timeStopInfo.getTimeInfo().add(timeInfo);
         }
 
         return timeStopInfo;
