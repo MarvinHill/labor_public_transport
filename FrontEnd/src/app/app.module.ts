@@ -10,7 +10,6 @@ import { RoutingTopBarComponent } from './routing-top-bar/routing-top-bar.compon
 import { ShuttleViewComponent } from './shuttle-view/shuttle-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { HttpClientModule} from '@angular/common/http';
-import { AddShuttleLineComponent } from './add-shuttle-line/add-shuttle-line.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TravelinfoComponent } from './travelinfo/travelinfo.component';
@@ -24,7 +23,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MapComponent } from './map/map.component';
 import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
 import { ParkingViewComponent } from './parking-view/parking-view.component';
-import { ParkingItemComponent } from './parking-item/parking-item.component';
 import { BikeParkingItemComponent } from './bike-parking-item/bike-parking-item.component';
 import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-item-capacity.component";
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
@@ -43,7 +41,6 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     ShuttleViewComponent,
     MainViewComponent,
     MapComponent,
-    AddShuttleLineComponent,
     MapDetailsObserverComponent,
     TimelineComponent,
     TravelinfoComponent,
@@ -54,7 +51,6 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     InfoCardsComponent,
     ParkingItemCapacityComponent,
     ParkingViewComponent,
-    ParkingItemComponent,
     BikeParkingItemComponent,
     ImpressumComponent,
     ConnectionTicketComponent,
