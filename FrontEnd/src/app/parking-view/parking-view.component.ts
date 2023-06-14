@@ -11,7 +11,6 @@ import {ParkingLot} from "../ParkingLot";
 })
 export class ParkingViewComponent implements OnInit{
   carParkingLots: ParkingLot[];
-  bikeParkingLots: ParkingLot[];
   http:HttpClient;
   loginService : UserLoginServiceService;
   options!: {
@@ -25,9 +24,6 @@ export class ParkingViewComponent implements OnInit{
 
   dataService: DataServiceService;
 
-  carButtonClass: string = "selected-button";
-  bikeButtonClass: string = "unselected-button";
-
   constructor(http:HttpClient, loginService : UserLoginServiceService,  dataService: DataServiceService){
     this.http = http;
     this.loginService = loginService;
@@ -36,11 +32,6 @@ export class ParkingViewComponent implements OnInit{
       this.carParkingLots = value;
     })
     dataService.getAllCarParking();
-
-    dataService.bikeParking.subscribe(value=> {
-      this.bikeParkingLots = value;
-    })
-    dataService.getAllBikeParking();
   }
 
   ngOnInit(): void {
@@ -53,20 +44,4 @@ export class ParkingViewComponent implements OnInit{
   name:String = "NAME";
   parkingId: number;
 
-
-  switchCar() : void {
-    this.carButtonClass = "selected-button";
-    this.bikeButtonClass = "unselected-button";
-
-    document.getElementById("bikeParkingContent").style.display = "none";
-    document.getElementById("carParkingContent").style.display = "block";
-  }
-
-  switchBike() : void {
-    this.bikeButtonClass = "selected-button";
-    this.carButtonClass = "unselected-button";
-
-    document.getElementById("carParkingContent").style.display = "none";
-    document.getElementById("bikeParkingContent").style.display = "block";
-  }
 }

@@ -1,13 +1,9 @@
-.bc-p-p {
-  background-color: #dcf0f1;
+.content {
+  display: none;
+  height: 100%;
+  width: 100%;
 }
 
-
-.rounded-box {
-  border-radius: 1em;
-}
-
-.min-height {
-  /*min-height: 96px;*/
-  min-height: 176px;
+.padding-own {
+  padding: 0.5rem 1rem;
 }
