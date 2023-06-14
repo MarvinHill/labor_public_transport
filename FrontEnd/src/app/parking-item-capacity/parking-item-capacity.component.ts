@@ -17,13 +17,14 @@ export class ParkingItemCapacityComponent implements OnInit {
   bikeParkingLots: ParkingLot[];
   parkingCapacity: ParkingCapacity[];
   items: number[];
+  totalParkingspaces: number;
 
   ngOnInit(): void {
 
     this.parkingName = this.parking.name;
     this.parkingID = this.parking.id;
     this.parkingAddress = this.parking.address;
-
+    this.totalParkingspaces = this.parking.maxCapacity;
 
     this.dataService.parkingCapacity.subscribe(value=> {
       this.parkingCapacity = value;
@@ -50,6 +51,19 @@ export class ParkingItemCapacityComponent implements OnInit {
   }
 
   calculateCapacity() {
+    if(this.totalParkingspaces != 0) {
+      this.auslastungen[2] = 100;
+      this.parkingCapacity.forEach((element: ParkingCapacity) => {
+        this.auslastungen[3] = 100;
+        if(element.name === this.parkingName) {
+          this.auslastungen[0] = this.calculatePercentage(element.freeParkingspaces);
+          this.auslastungen[1] = 100;
+        }
+      })
+    }
+  }
 
+  calculatePercentage(currentFreeSpaces: number) {
+    return (this.totalParkingspaces - currentFreeSpaces) / (this.totalParkingspaces / 100);
   }
 }

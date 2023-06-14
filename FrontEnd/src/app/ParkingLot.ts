@@ -11,4 +11,5 @@ export interface ParkingLot {
   charging: boolean;
   parkingType: ParkingType;
   address: String;
+  maxCapacity: number;
 }

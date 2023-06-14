@@ -5,8 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.time.LocalDateTime;
-
 @Entity
 public class ParkingCapacity {
 
@@ -20,12 +18,15 @@ public class ParkingCapacity {
 
     private String dateTime;
 
+    private String weekday;
+
     public ParkingCapacity() {}
 
-    public ParkingCapacity(String name, int freeParkingspaces, String dateTime) {
+    public ParkingCapacity(String name, int freeParkingspaces, String dateTime, String weekday) {
         this.name = name;
         this.freeParkingspaces = freeParkingspaces;
         this.dateTime = dateTime;
+        this.weekday = weekday;
     }
 
     public void setId(long id) {this.id = id;}
@@ -33,10 +34,14 @@ public class ParkingCapacity {
 
     public void setName(String name) {this.name = name;}
     public String getName() {return this.name;}
-
     public void setFreeParkingspaces(int freeParkingspaces) {this.freeParkingspaces = freeParkingspaces;}
     public int getFreeParkingspaces() {return this.freeParkingspaces;}
-
     public void setTime(String dateTime) {this.dateTime = dateTime;}
     public String getTime() {return this.dateTime;}
+    public void setWeekday(String weekday) {
+        this.weekday = weekday;
+    }
+    public String getWeekday() {
+        return weekday;
+    }
 }
