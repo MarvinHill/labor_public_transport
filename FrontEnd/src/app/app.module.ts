@@ -36,6 +36,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchViewComponent } from './search-view/search-view.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchCategoryComponent } from './search-category/search-category.component';
+import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
 
 
 
@@ -67,6 +68,7 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     SearchViewComponent,
     SearchResultComponent,
     SearchCategoryComponent,
+    PublicTransportViewComponent,
   ],
   imports: [
     BrowserModule,
