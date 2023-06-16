@@ -1,11 +1,12 @@
-<div class="d-flex sticky-top align-items-center bc-w" id="top-bar">
+<div class="d-flex flex-wrap sticky-top align-items-center bc-w" id="top-bar">
     <div class="m-2">
         <img role = "button" class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/arrow_back_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;" (click)="goBack()">
     </div>
     <h2 class="m-2 not-select" [routerLink]="['/main']" role="button" (click) = "minimizeMap()">Get2Buga</h2>
-    <a class="text-muted" style="margin-left: auto;" [routerLink]="['impressum']" (click) = "minimizeMap()">Impressum</a>
+    <a class="text-muted px-3" style="margin-left: auto;" [routerLink]="['impressum']" (click) = "minimizeMap()">Impressum</a>
+    <img role = "button" src="assets/icon/search_FILL0_wght400_GRAD0_opsz48.svg" alt="search" style="height: 2em;" (click)="this.searchService.maximize()">
     <div class="p-2 my-auto position-relative" >
-        <img role = "button" class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/info_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2.5em;" (click)="switchInfoWindow()">
+        <img role = "button" class="not-select p-1material-symbols-outlined icon-info" src="assets/icon/info_FILL0_wght400_GRAD0_opsz48.svg" style="height: 2em;" (click)="switchInfoWindow()">
         <div class="info-window rounded-4 bc-w shadow" style="max-width: 100vw; width: 30em;" @fadeIn *ngIf="this.infoWindow">
             <div style="width: 100%; height: 100%;" id="info-container" class="p-2"></div>
         </div>

@@ -1,11 +1,12 @@
 import { NgStyle } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {ParkingLot} from "../ParkingLot";
 import {ParkingType} from "../ParkingType";
 import {ParkingCapacity} from "../ParkingCapacity";
 import {MapService} from "../services/map.service";
 import {DataServiceService} from "../services/data-service.service";
 import {LatLng} from "leaflet";
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
 
 @Component({
   selector: 'app-parkingItemCapacity',
@@ -20,11 +21,13 @@ export class ParkingItemCapacityComponent implements OnInit {
   items: number[];
   totalParkingspaces: number;
 
-  ngOnInit(): void {
+  public screenWidth: any;
 
+  ngOnInit(): void {
     this.parkingName = this.parking.name;
     this.parkingID = this.parking.id;
     this.parkingAddress = this.parking.address;
+    this.screenWidth = window.innerWidth;
     this.totalParkingspaces = this.parking.maxCapacity;
 
     this.calculateCapacity();
@@ -49,7 +52,14 @@ export class ParkingItemCapacityComponent implements OnInit {
   }
 
   panToParkingLot(){
+    this.observerService.changeDisplay(this.parking);
     this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y));
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    this.screenWidth = window.innerWidth;
+    console.log(this.screenWidth);
   }
 
   calculateCapacity() {

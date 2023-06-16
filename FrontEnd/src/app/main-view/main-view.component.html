@@ -7,13 +7,13 @@
 
 
   <div class="container">
-    <h3 class="m-3 not-select">TRANSPORTMÖGLICHKEITEN</h3>
+    <h3 class="m-3 not-select">TRANSPORTMÖGLICHKEITEN </h3>
     <div class = "row">
       <div class = "col-lg-4"><app-transport-entry [text]="'Shuttles'" [imageName]="'bus.webp'" [routerLink]="['/shuttle']"></app-transport-entry></div>
       <div class = "col-lg-4"><app-transport-entry [text]="'Parkplätze'" [imageName]="'parkinglot.webp'" [routerLink]="['/parking']"></app-transport-entry></div>
       <div class = "col-lg-4"><app-transport-entry [text]="'ÖPNV'" [imageName]="'shuttle.webp'" [routerLink]="['/shuttle']"></app-transport-entry></div>
     </div>
-    <h3 class="m-3">INFORMATIONEN</h3>
+    <h3 class="m-3" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Einfach passendes Bild wählen und schnell zur entsprechenden Info gelangen!">INFORMATIONEN</h3>
     <ng-container *ngIf="(window.innerWidth <= 990) else desktopView">
     <app-info-carousel></app-info-carousel>
     </ng-container>
@@ -29,3 +29,4 @@
     <app-connection-ticket></app-connection-ticket>
   </div>
 </html>
+

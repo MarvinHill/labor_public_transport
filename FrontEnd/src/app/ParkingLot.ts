@@ -1,15 +1,16 @@
 import {Point} from "leaflet";
 import { ParkingType } from "./ParkingType";
+import { Searchable } from "./Searchable";
 
-export interface ParkingLot {
+export interface ParkingLot extends Searchable {
   id: number;
   geoLocation: Point;
   area: Array<Point>;
   entrance: Array<Point>;
-  name: String;
+  name: string;
   barrierfree: boolean;
   charging: boolean;
   parkingType: ParkingType;
-  address: String;
+  address: string;
   maxCapacity: number;
 }

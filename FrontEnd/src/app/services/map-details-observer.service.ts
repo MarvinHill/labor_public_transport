@@ -38,7 +38,6 @@ export class MapDetailsObserverService {
   }
 
   changeVisibility(visibility : boolean){
-        console.warn("changed visibility to " + visibility);
         this.visible = visibility;
   }
 

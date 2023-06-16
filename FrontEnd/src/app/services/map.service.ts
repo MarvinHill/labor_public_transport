@@ -7,6 +7,9 @@ import { DataServiceService } from '../services/data-service.service';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { UserLoginServiceService } from '../services/user-login-service.service';
 import { ShuttleLineService } from '../services/shuttle-line.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +24,8 @@ export class MapService{
   public mapContainerClass: string = "map-container-small-desktop";
   public resizeButtonClass: string = "button-min";
   public locateButtonClass: string = "button-min";
+  public bugaBackButtonClass: string = "button-min";
+  public speechBubbleClass: string = "speech-bubble-min";
 
   private userService: UserLoginServiceService;
 
@@ -33,14 +38,17 @@ export class MapService{
   publicTransportLines = [];
   bugaArea = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
+  entrances = new L.LayerGroup;
+  exits = new L.LayerGroup;
   layerOptions : L.Control.LayersOptions = {
     position : "bottomright",
   }
   layerControl = L.control.layers(null, null, this.layerOptions);
 
 
-
   @ViewChild('container', { static: false }) container: ElementRef;
+  @ViewChild('bugaBackButton', { static: false }) bugaBackButton: ElementRef;
+
 
   windowHeight: number;
   windowWidth: number;
@@ -48,9 +56,8 @@ export class MapService{
   public innerWidth: number = 1000;
   breakPoint: number = 720;
 
-
   constructor(userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService
-    ,  private shuttleLineService: ShuttleLineService) {
+    ,  private shuttleLineService: ShuttleLineService, private snackbar: MatSnackBar) {
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
@@ -61,6 +68,8 @@ export class MapService{
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
+    this.layerControl.addOverlay(this.entrances, "Eingänge");
+    this.layerControl.addOverlay(this.exits, "Ausgänge")
     this.publicTransportLines.forEach(entry => {
       this.layerControl.addOverlay(entry[0], entry[1]);
     });
@@ -107,6 +116,11 @@ export class MapService{
 
     this.map.addLayer(this.bugaArea);
 
+    this.map.addLayer(this.entrances)
+
+    this.map.addLayer(this.exits);
+    this.map.removeLayer(this.exits); // Default = wird nicht angezeigt
+
     this.publicTransportLines.forEach(entry => {
       this.map.addLayer(entry[0]);
     });
@@ -115,7 +129,8 @@ export class MapService{
       this.observerService.changeVisibility(false);
     }.bind(this));
 
-  }s
+    this.detectMapMovement();
+  }
 
   makeCarParking(parkinglot: ParkingLot) {
     var parkingIcon = L.icon({
@@ -412,6 +427,43 @@ export class MapService{
     L.polyline(cableCarLine, {color: '#e1416d'}).addTo(this.bugaArea);
 
   }
+  makeEntrances(){
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/Entrance.png',
+      iconSize:     [45, 72], // size of the icon
+      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+  var haupteingangLuisenpark = L.marker([49.47938, 8.49609], {icon: entranceIcon}).addTo(this.entrances);
+  var eingangFernmeldeturm = L.marker([49.48643, 8.49230], {icon: entranceIcon}).addTo(this.entrances);
+  var haupteingangSpinellipark = L.marker([49.49772, 8.52095], {icon: entranceIcon}).addTo(this.entrances);
+  var eingangParkschale = L.marker([49.502722, 8.518795], {icon: entranceIcon}).addTo(this.entrances);
+
+  haupteingangLuisenpark.bindPopup("<b>Haupteingang Luisenpark</b> <br> Einlass: 9 - 19 Uhr").openPopup();
+  eingangFernmeldeturm.bindPopup("<b>Eingang Fernmeldeturm</b> <br> Einlass: 9 - 19 Uhr");
+  haupteingangSpinellipark.bindPopup("<b>Haupteingang Spinellipark</b> <br> Einlass: 9 - 19 Uhr");
+  eingangParkschale.bindPopup("<b>Eingang Parkschale</b> <br> Einlass: 9 - 19 Uhr");
+
+
+  }
+
+  makeExits(){
+    var exitIcon = L.icon({
+      iconUrl: 'assets/icon/Exit.png',
+      iconSize:     [45, 72], // size of the icon
+      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+  var ausgangOttoBeckStraße = L.marker([49.484908, 8.488246], {icon: exitIcon}).addTo(this.exits);
+  var ausgangFichtestraße = L.marker([49.483051, 8.491305], {icon: exitIcon}).addTo(this.exits);
+  var ausgangAmOberenLuisenpark = L.marker([49.479891, 8.494275], {icon: exitIcon}).addTo(this.exits);
+  var ausgangPaulMartinUfer = L.marker([49.483305, 8.501183], {icon: exitIcon}).addTo(this.exits);
+  var ausgangSpinelliPark = L.marker([49.497048, 8.520173], {icon: exitIcon}).addTo(this.exits);
+  //var ausgangKantineIris = L.marker([49.497885, 8.520818], {icon: exitIcon}).addTo(this.exits);
+  var ausgangNeuerBugaWeg = L.marker([49.498066, 8.522661], {icon: exitIcon}).addTo(this.exits);
+  var ausgangWachenheimerStraße = L.marker([49.502006, 8.515099], {icon: exitIcon}).addTo(this.exits);
+
+  }
 
   init(map : L.Map): void {
     this.map = map;
@@ -425,6 +477,8 @@ export class MapService{
     this.updateWidth();
     this.updateMobileDesktopMap();
     this.drawBugaArea();
+    this.makeEntrances();
+    this.makeExits();
   }
 
   maximizeMap(): void {
@@ -435,6 +489,8 @@ export class MapService{
       this.mapContainerClass = "map-container-large shadow";
       this.resizeButtonClass = "resize-button-max shadow";
       this.locateButtonClass = "locate-button-max shadow";
+      this.bugaBackButtonClass = "buga-back-button-max shadow";
+      this.speechBubbleClass = "speech-bubble pright acenter";
       this.updateHeight()
       this.updateWidth();
     }
@@ -449,6 +505,8 @@ export class MapService{
       this.updateMobileDesktopMap();
       this.resizeButtonClass = "button-min";
       this.locateButtonClass = "button-min";
+      this.bugaBackButtonClass = "button-min";
+      this.speechBubbleClass = "speech-bubble-min button-min";
       this.updateHeight()
       this.updateWidth();
     }
@@ -518,9 +576,47 @@ export class MapService{
     this.userLocation = userLocationGroup;
   }
 
+  moveToBuga() : any {
+    /* visual output for the user, letting him know that he is already at the Buga */
+    if(this.map.getCenter().lat >= 49.49021061654624 && this.map.getCenter().lat <= 49.49127559245556 && this.map.getCenter().lng >= 8.508478545177866 && this.map.getCenter().lng <= 8.510290295871553) {
+      this.snackbar.open("Du bist bereits an der Buga", 'Schließen', {
+        verticalPosition: 'bottom',
+      });
+    }
+    /* move to the Buga */
+    else {
+      this.map.setView(new LatLng(49.4906602, 8.5092189), 14);
+    }
+  }
+
+  /* boolean value for the button to hide the speech-bubble */
+  xPressed: boolean = false;
+
+  detectMapMovement(): void {
+    this.map.on('move', () => {
+      /* check if the user is near the Buga */
+      if(this.map.getCenter().lat >= 49.36289598710729 && this.map.getCenter().lat <= 49.615075626689 && this.map.getCenter().lng >= 8.299441337585451 && this.map.getCenter().lng <= 8.695807456970217) {
+        /* hide speech-bubble */
+        document.getElementById('speech-bubble-id').style.display = 'none';
+        this.xPressed = false;
+      }
+      /* show speech-bubble */
+      else if(!this.xPressed) {
+        document.getElementById('speech-bubble-id').style.display = 'block';
+      }
+    });
+  }
+
+  hideContainer() {
+      document.getElementById('speech-bubble-id').style.display = 'none';
+      this.xPressed = true;
+  }
+
   public openAndFlyTo(pos : LatLng) : void {
     this.maximizeMap();
     //this.observerService.changeVisibility(false);
     this.map.flyTo(pos, 18);
   }
 }
+
+

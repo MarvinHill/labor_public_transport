@@ -21,7 +21,8 @@ import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoCardsComponent } from './info-cards/info-cards.component';
-
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MapComponent } from './map/map.component';
 import { MapDetailsObserverComponent } from './map-details-observer/map-details-observer.component';
@@ -32,6 +33,9 @@ import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-it
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 import { ImpressumComponent } from './impressum/impressum.component';
+import { SearchViewComponent } from './search-view/search-view.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchCategoryComponent } from './search-category/search-category.component';
 
 
 
@@ -54,13 +58,15 @@ import { ImpressumComponent } from './impressum/impressum.component';
     InfoBusComponent,
     InfoBahnComponent,
     InfoCardsComponent,
-
     ParkingItemCapacityComponent,
     ParkingViewComponent,
     ParkingItemComponent,
     BikeParkingItemComponent,
     ImpressumComponent,
     ConnectionTicketComponent,
+    SearchViewComponent,
+    SearchResultComponent,
+    SearchCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,8 @@ import { ImpressumComponent } from './impressum/impressum.component';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
+    AppRoutingModule,BrowserModule,BrowserAnimationsModule, FormsModule,ReactiveFormsModule,MatButtonModule,MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
