@@ -68,7 +68,6 @@ export class DataServiceService {
     const request = this.http.get<ParkingCapacity[]>(this.baseurl + '/capacity/all')
     request.subscribe(resp => {
       this.parkingCapacity.next(resp);
-      console.warn(resp);
     })
   }
 

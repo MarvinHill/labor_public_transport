@@ -670,13 +670,13 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 1500));
             carRepo.save(new CarParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 1500));
             carRepo.save(new CarParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 1500));
-            carRepo.save(new CarParkingLot(cityAirportGeoLocation, cityAirportPoly, cityAirportEntrances, "City Airport, Parkhaus", false, false, ParkingType.CAR, "Seckenheimer Landstraße 170, 68163 Mannheim", 158));
-            carRepo.save(new CarParkingLot(p4GeoLocation, p4Poly, p4Entrances, "Hauptbahnhof P4, Parkplatz", false, true, ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim", 42));
-            carRepo.save(new CarParkingLot(lortzingblockGeoLocation, lortzingblockPoly, lortzingblockEntrances, "Lortzingblock, Parkhaus", true, false, ParkingType.CAR, "Waldhofstraße 25, 68169 Mannheim", 228));
-            carRepo.save(new CarParkingLot(marchivumGeoLocation, marchivumPoly, marchivumEntrances, "Marchivum, Parkplatz", false, true, ParkingType.CAR, "Bunsenstraße, 68169 Mannheim", 40));
-            carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, false, ParkingType.CAR, "Neckarvorlandstraße 56, 68159 Mannheim", 104));
-            carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, false, ParkingType.CAR, "N7 17, 68161 Mannheim", 152));
-            carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR, "Am Roggenplatz, 68305 Mannheim", 62));
+            carRepo.save(new CarParkingLot(cityAirportGeoLocation, cityAirportPoly, cityAirportEntrances, "City Airport, Parkhaus", false, false, ParkingType.CAR, "Seckenheimer Landstraße 170, 68163 Mannheim", 0));
+            carRepo.save(new CarParkingLot(p4GeoLocation, p4Poly, p4Entrances, "Hauptbahnhof P4, Parkplatz", false, true, ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim", 0));
+            carRepo.save(new CarParkingLot(lortzingblockGeoLocation, lortzingblockPoly, lortzingblockEntrances, "Lortzingblock, Parkhaus", true, false, ParkingType.CAR, "Waldhofstraße 25, 68169 Mannheim", 0));
+            carRepo.save(new CarParkingLot(marchivumGeoLocation, marchivumPoly, marchivumEntrances, "Marchivum, Parkplatz", false, true, ParkingType.CAR, "Bunsenstraße, 68169 Mannheim", 0));
+            carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, false, ParkingType.CAR, "Neckarvorlandstraße 56, 68159 Mannheim", 0));
+            carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, false, ParkingType.CAR, "N7 17, 68161 Mannheim", 0));
+            carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR, "Am Roggenplatz, 68305 Mannheim", 0));
             carRepo.save(new CarParkingLot(gbgParkhausGeoLocation, gbgParkhausPoly, gbgParkhausEntrances, "GBG-Parkhaus", true, false, ParkingType.CAR, "Spinelli-Platz 2, 68259 Mannheim", 0));
 
             bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim", 0));

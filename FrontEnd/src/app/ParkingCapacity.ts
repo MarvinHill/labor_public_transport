@@ -3,4 +3,5 @@ export interface ParkingCapacity {
   name: String;
   freeParkingspaces: number;
   dateTime: String;
+  weekday: String;
 }

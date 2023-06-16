@@ -36,8 +36,8 @@ public class ParkingCapacity {
     public String getName() {return this.name;}
     public void setFreeParkingspaces(int freeParkingspaces) {this.freeParkingspaces = freeParkingspaces;}
     public int getFreeParkingspaces() {return this.freeParkingspaces;}
-    public void setTime(String dateTime) {this.dateTime = dateTime;}
-    public String getTime() {return this.dateTime;}
+    public void setDateTime(String dateTime) {this.dateTime = dateTime;}
+    public String getDateTime() {return this.dateTime;}
     public void setWeekday(String weekday) {
         this.weekday = weekday;
     }

@@ -15,7 +15,8 @@ import {LatLng} from "leaflet";
 export class ParkingItemCapacityComponent implements OnInit {
   carParkingLots: ParkingLot[];
   bikeParkingLots: ParkingLot[];
-  parkingCapacity: ParkingCapacity[];
+  parkingCapacityAll: ParkingCapacity[];
+  parkingCapacityThis: ParkingCapacity[];
   items: number[];
   totalParkingspaces: number;
 
@@ -25,11 +26,6 @@ export class ParkingItemCapacityComponent implements OnInit {
     this.parkingID = this.parking.id;
     this.parkingAddress = this.parking.address;
     this.totalParkingspaces = this.parking.maxCapacity;
-
-    this.dataService.parkingCapacity.subscribe(value=> {
-      this.parkingCapacity = value;
-    })
-    this.dataService.getAllParkingCapacity();
 
     this.calculateCapacity();
   }
@@ -41,10 +37,16 @@ export class ParkingItemCapacityComponent implements OnInit {
 
   protected readonly ParkingType = ParkingType;
 
-  //auslastungen: number[] = [50, 100, 75, 25, 25, 75, 50, 100, 9, 11, 10];
   auslastungen: number[] = [];
 
-  constructor(private mapService : MapService, private dataService : DataServiceService){}
+  constructor(private mapService : MapService, private dataService : DataServiceService){
+    this.dataService.parkingCapacity.subscribe(value=> {
+      this.parkingCapacityAll = value;
+    })
+    this.dataService.getAllParkingCapacity();
+
+    this.parkingCapacityThis = [];
+  }
 
   panToParkingLot(){
     this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y));
@@ -52,12 +54,31 @@ export class ParkingItemCapacityComponent implements OnInit {
 
   calculateCapacity() {
     if(this.totalParkingspaces != 0) {
-      this.auslastungen[2] = 100;
-      this.parkingCapacity.forEach((element: ParkingCapacity) => {
-        this.auslastungen[3] = 100;
-        if(element.name === this.parkingName) {
-          this.auslastungen[0] = this.calculatePercentage(element.freeParkingspaces);
-          this.auslastungen[1] = 100;
+      this.parkingCapacityAll.forEach(parkingCapacity => {
+        if(parkingCapacity.name.includes(this.parkingName.replace(/\s/g, "").split(',')[0].concat(','))) {
+          this.parkingCapacityThis.push(parkingCapacity);
+        }
+      })
+
+      this.parkingCapacityThis.forEach(parkingCapacity => {
+        const dbString: string = parkingCapacity.dateTime.toString();
+        const dbDateTime = new Date(Date.parse(dbString));
+        const currentDateTime = new Date();
+
+        if((dbDateTime.getFullYear() === currentDateTime.getFullYear()) && (dbDateTime.getMonth() === currentDateTime.getMonth())
+         && (dbDateTime.getDate() === currentDateTime.getDate())) {
+          if(dbDateTime.getHours() === currentDateTime.getHours() -3) {
+            this.auslastungen[0] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
+          }
+          if(dbDateTime.getHours() === currentDateTime.getHours() -2) {
+            this.auslastungen[1] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
+          }
+          if(dbDateTime.getHours() === currentDateTime.getHours() -1) {
+            this.auslastungen[2] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
+          }
+          if(dbDateTime.getHours() === currentDateTime.getHours()) {
+            this.auslastungen[3] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
+          }
         }
       })
     }
