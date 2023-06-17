@@ -23,14 +23,26 @@ export class ParkingItemCapacityComponent implements OnInit {
 
   public screenWidth: any;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.parkingName = this.parking.name;
     this.parkingID = this.parking.id;
     this.parkingAddress = this.parking.address;
     this.screenWidth = window.innerWidth;
     this.totalParkingspaces = this.parking.maxCapacity;
 
+    await this.fetchParkingCapacity();
+
     this.calculateCapacity();
+  }
+
+  async fetchParkingCapacity(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.dataService.parkingCapacity.subscribe(value => {
+        this.parkingCapacityAll = value;
+        resolve();
+      });
+      this.dataService.getAllParkingCapacity();
+    });
   }
 
   @Input() parking: ParkingLot;
@@ -43,11 +55,6 @@ export class ParkingItemCapacityComponent implements OnInit {
   auslastungen: number[] = [];
 
   constructor(private mapService : MapService, private dataService : DataServiceService, private observerService : MapDetailsObserverService){
-    this.dataService.parkingCapacity.subscribe(value=> {
-      this.parkingCapacityAll = value;
-    })
-    this.dataService.getAllParkingCapacity();
-
     this.parkingCapacityThis = [];
   }
 
@@ -63,11 +70,12 @@ export class ParkingItemCapacityComponent implements OnInit {
   }
 
   calculateCapacity() {
-    if(this.totalParkingspaces != 0) {
+    if((this.totalParkingspaces != 0)) {
       this.parkingCapacityAll.forEach(parkingCapacity => {
-        if(parkingCapacity.name.includes(this.parkingName.replace(/\s/g, "").split(',')[0].concat(','))) {
+        if(parkingCapacity.name.includes(this.parkingName.replace(/\s/g, "").split(',')[0])) {
           this.parkingCapacityThis.push(parkingCapacity);
         }
+
       })
 
       this.parkingCapacityThis.forEach(parkingCapacity => {
