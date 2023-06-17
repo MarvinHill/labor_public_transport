@@ -42,7 +42,7 @@ export class ParkingItemCapacityComponent implements OnInit {
 
   auslastungen: number[] = [];
 
-  constructor(private mapService : MapService, private dataService : DataServiceService){
+  constructor(private mapService : MapService, private dataService : DataServiceService, private observerService : MapDetailsObserverService){
     this.dataService.parkingCapacity.subscribe(value=> {
       this.parkingCapacityAll = value;
     })
