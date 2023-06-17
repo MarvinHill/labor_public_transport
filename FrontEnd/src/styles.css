@@ -97,6 +97,7 @@
 }
 
 .legend-entry {
+    pointer-events: none;
     color: #ffffff;
     width: 45px;
     height: 25px;
