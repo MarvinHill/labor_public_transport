@@ -32,6 +32,7 @@ import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-it
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 
 import { ImpressumComponent } from './impressum/impressum.component';
+import { LineLegendComponent } from './line-legend/line-legend.component';
 
 
 
@@ -61,6 +62,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
     BikeParkingItemComponent,
     ImpressumComponent,
     ConnectionTicketComponent,
+    LineLegendComponent,
   ],
   imports: [
     BrowserModule,

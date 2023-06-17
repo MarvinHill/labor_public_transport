@@ -1,75 +1,107 @@
 /* You can add global styles to this file, and also import other style files */
-.bc-g{
+.bc-g {
     background-color: #ECF4E5;
 }
 
 .bc-b {
-  background-color: #0677e0;
+    background-color: #0677e0;
 }
 
 .bc-db {
-    background-color:#154889;
+    background-color: #154889;
 }
 
-.bc-p{
+.bc-p {
     background-color: #E1416D;
 }
 
-.bc-dg{
+.bc-dg {
     background-color: #678C47;
 }
 
-.bc-w{
-    background-color: #ffffff;
-}
-.bc-w{
+.bc-w {
     background-color: #ffffff;
 }
 
-.bc-lp{
+.bc-w {
+    background-color: #ffffff;
+}
+
+.bc-lp {
     background-color: #FFDCF7;
 }
 
-.tc-p{
+.tc-p {
     color: #E1416D;
 }
 
-.hidden-info{
+.hidden-info {
     display: none;
 }
-.info{
+
+.info {
     display: block;
 }
-.info-gif-big{
-    height:30em;
-    width: auto;
-    max-height: 60vh;
-}
-.info-gif-small{
-    height:15em;
+
+.info-gif-big {
+    height: 30em;
     width: auto;
     max-height: 60vh;
 }
 
-.info-img-big{
-    height:auto;
+.info-gif-small {
+    height: 15em;
+    width: auto;
+    max-height: 60vh;
+}
+
+.info-img-big {
+    height: auto;
     width: 95%;
 }
-.info-img-small{
-    height:auto;
+
+.info-img-small {
+    height: auto;
     width: 50%;
 }
 
-.not-select{
+.not-select {
     user-select: none;
 }
 
-.leaflet-control-layers-toggle{ 
-    width:auto;
-    background-position:3px 50% ;
-    padding:3px;
-    padding-left:36px;
-    text-decoration:none;
-    line-height:36px;
+.leaflet-control-layers-toggle {
+    width: auto;
+    background-position: 3px 50%;
+    padding: 3px;
+    padding-left: 36px;
+    text-decoration: none;
+    line-height: 36px;
 
+}
+
+.legend-info {
+    width: 42px;
+    height: 165px;
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.legend {
+    line-height: 25px;
+    width: 60px;
+    color: #555;
+}
+
+.legend-entry {
+    color: #ffffff;
+    width: 45px;
+    height: 25px;
+    float: left;
+    margin-right: 8px;
+    text-align: center;
+    vertical-align: middle;
 }

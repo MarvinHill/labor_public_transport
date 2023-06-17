@@ -7,11 +7,12 @@ import { DataServiceService } from '../services/data-service.service';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { UserLoginServiceService } from '../services/user-login-service.service';
 import { ShuttleLineService } from '../services/shuttle-line.service';
+import { LineLegendComponent } from '../line-legend/line-legend.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MapService{
+export class MapService {
 
   private map: L.Map;
   public centroid: L.LatLngExpression = [49.485, 8.5];
@@ -33,8 +34,8 @@ export class MapService{
   publicTransportLines = [];
   bugaArea = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
-  layerOptions : L.Control.LayersOptions = {
-    position : "bottomright",
+  layerOptions: L.Control.LayersOptions = {
+    position: "bottomright",
   }
   layerControl = L.control.layers(null, null, this.layerOptions);
 
@@ -50,14 +51,14 @@ export class MapService{
 
 
   constructor(userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService
-    ,  private shuttleLineService: ShuttleLineService) {
+    , private shuttleLineService: ShuttleLineService) {
     this.userService = userService;
     this.userService.isLoggedIn.subscribe(value => {
       this.isLoggedIn = value;
     });
   }
 
-  makeLayerControls(){
+  makeLayerControls() {
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
@@ -115,33 +116,33 @@ export class MapService{
       this.observerService.changeVisibility(false);
     }.bind(this));
 
-  }s
+  } s
 
   makeCarParking(parkinglot: ParkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerCar.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    if(parkinglot.charging === true){
+    if (parkinglot.charging === true) {
       parkingIcon = L.icon({
         iconUrl: 'assets/icon/parking/MarkerECar.png',
-        iconSize:     [45, 72], // size of the icon
-        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconSize: [45, 72], // size of the icon
+        iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
     }
-    if(parkinglot.area.length > 0) {
+    if (parkinglot.area.length > 0) {
       var arr = [];
       for (var i = 0; i < parkinglot.area.length; i++) {
         arr.push([parkinglot.area.at(i).x, parkinglot.area.at(i).y]);
       }
-      var poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.carParkingLots);
-      var marker = L.marker(poly.getCenter(), {icon:parkingIcon});
+      var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.carParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon });
     }
     else {
-      var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], {icon:parkingIcon});
+      var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], { icon: parkingIcon });
     }
 
     marker.on("click", function (e: any) {
@@ -151,23 +152,23 @@ export class MapService{
 
     var entranceIcon = L.icon({
       iconUrl: 'assets/icon/parking/Entrance.png',
-      iconSize:     [15, 15], // size of the icon
-      iconAnchor:   [7.5, 7.5], // point of the icon which will correspond to marker's location
-      popupAnchor:  [7.5, 15] // point from which the popup should open relative to the iconAnchor
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
     });
 
-    if(parkinglot.entrance.length > 0) {
+    if (parkinglot.entrance.length > 0) {
       for (var i = 0; i < parkinglot.entrance.length; i++) {
-        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
+        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
       }
     }
 
-    this.map.on("zoomend", function(e){
-      if(this.map.getZoom() < 16 ){
+    this.map.on("zoomend", function (e) {
+      if (this.map.getZoom() < 16) {
         this.carParkingLotEntrances.remove();
       }
-      else{
-        if(this.map.hasLayer(this.carParkingLots)){
+      else {
+        if (this.map.hasLayer(this.carParkingLots)) {
           this.carParkingLotEntrances.addTo(this.map);
         }
       }
@@ -177,20 +178,20 @@ export class MapService{
   makeBikeParking(bikeparking: ParkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerBike.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    if(bikeparking.area.length > 0) {
+    if (bikeparking.area.length > 0) {
       var arr = [];
-      for(var i = 0; i < bikeparking.area.length; i++) {
+      for (var i = 0; i < bikeparking.area.length; i++) {
         arr.push([bikeparking.area.at(i).x, bikeparking.area.at(i).y]);
       }
-      var poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.bikeParkingLots);
-      var marker = L.marker(poly.getCenter(), {icon : parkingIcon}).addTo(this.bikeParkingLots);
+      var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.bikeParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon }).addTo(this.bikeParkingLots);
     }
     else {
-      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], {icon: parkingIcon}).addTo(this.bikeParkingLots);
+      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], { icon: parkingIcon }).addTo(this.bikeParkingLots);
     }
     marker.on("click", function (e: any) {
       this.observerService.changeDisplay(bikeparking)
@@ -324,7 +325,7 @@ export class MapService{
       [49.48045330000, 8.49416330000],
       [49.48034150000, 8.49376110000]
     ];
-    L.polygon(luisenParkPoly, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polygon(luisenParkPoly, { color: '#e1416d' }).addTo(this.bugaArea);
 
     var spinelliParkPoly: [number, number][] = [
       [49.49853330000, 8.51280300000],
@@ -393,7 +394,7 @@ export class MapService{
       [49.49850190000, 8.51232290000],
       [49.49853330000, 8.51280300000]
     ];
-    L.polygon(spinelliParkPoly, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polygon(spinelliParkPoly, { color: '#e1416d' }).addTo(this.bugaArea);
 
     var cableCarLine: [number, number][] = [
       [49.4827573, 8.4998941],
@@ -409,17 +410,18 @@ export class MapService{
       [49.4960904, 8.5198828],
       [49.4962948, 8.5201892]
     ];
-    L.polyline(cableCarLine, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polyline(cableCarLine, { color: '#e1416d' }).addTo(this.bugaArea);
 
   }
 
-  init(map : L.Map): void {
+  init(map: L.Map): void {
     this.map = map;
     var inter = interval(100);
     inter.subscribe(v => {
       this.map.invalidateSize();
     })
     this.shuttleLineService.initShuttleLineViewOnMap(this.publicTransportLines, this);
+    new LineLegendComponent().addToMap(map);
     this.innerWidth = window.innerWidth;
     this.updateHeight();
     this.updateWidth();
@@ -496,29 +498,29 @@ export class MapService{
     }
   }
 
-  locateUser() : any {
+  locateUser(): any {
     const userLocationGroup = this.userLocation;
-    this.map.locate({setView: true}).on('locationfound', function(e) {
+    this.map.locate({ setView: true }).on('locationfound', function (e) {
 
       var locationIcon = L.icon({
         iconUrl: 'assets/icon/wavingPerson.gif',
-        iconSize:     [60, 72], // size of the icon
-        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconSize: [60, 72], // size of the icon
+        iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
 
       const location = e.latlng;
 
       userLocationGroup.clearLayers();
-      var marker = L.marker(location, {icon: locationIcon}).addTo(userLocationGroup);
-       marker.on("click", function(e) {
-         marker.bindPopup("You are Here!").openPopup();
-       })
+      var marker = L.marker(location, { icon: locationIcon }).addTo(userLocationGroup);
+      marker.on("click", function (e) {
+        marker.bindPopup("You are Here!").openPopup();
+      })
     });
     this.userLocation = userLocationGroup;
   }
 
-  public openAndFlyTo(pos : LatLng) : void {
+  public openAndFlyTo(pos: LatLng): void {
     this.maximizeMap();
     //this.observerService.changeVisibility(false);
     this.map.flyTo(pos, 18);
