@@ -1,14 +1,12 @@
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { interval, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ShuttleLine } from '../ShuttleLine';
-import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
 import { ParkingLot } from "../ParkingLot";
 import { TimeStopInfo } from '../TimeStopInfo';
 import { DataCache } from '../DataCache';
-import { MapLocation } from '../MapLocation';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +15,6 @@ export class DataServiceService {
 
   //baseurl : string = 'https://get2buga.de/api';
   baseurl: string = 'http://localhost:8080/api';
-
-  private mapLocatorApiURL : string = "https://nominatim.openstreetmap.org/search";
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
