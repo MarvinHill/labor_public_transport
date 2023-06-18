@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import { DataServiceService } from '../services/data-service.service';
@@ -8,7 +8,8 @@ import { RnvStopEvent } from '../RnvStopEvent';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+  styleUrls: ['./timeline.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimelineComponent implements OnInit,OnChanges {
   items: number[];
