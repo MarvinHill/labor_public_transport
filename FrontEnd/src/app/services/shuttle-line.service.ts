@@ -146,8 +146,7 @@ export class ShuttleLineService {
 
     // here new function for line points
     var lineSections = [];
-
-    // saves very magnitude in the lineSections array
+    // saves every magnitude in the lineSections array
     for (var i = 0; i < tpl.length - 1; i++) {
       // first point
       var x1 = tpl[i].lat;
@@ -157,7 +156,7 @@ export class ShuttleLineService {
       var x2 = tpl[i + 1].lat;
       var y2 = tpl[i + 1].lng;
 
-      // subtracted new vector
+      // subtracted new vector 
       var newX = x2 - x1;
       var newY = y2 - y1;
 
@@ -166,34 +165,47 @@ export class ShuttleLineService {
       lineSections[i] = mag;
     }
 
+    // setting for the distance for each label on the map
+    const maxDistance = 0.006;
+    var currentDistance = 0;
+
+    // iterate over all sections
     for (let i = 0; i < lineSections.length; i++) {
-      let markerPos = [tpl[i].lat, tpl[i].lng] as L.LatLngTuple;
-      if (i % 2 == 0) {
-        switch (line.lineDesignator) {
-          case ("P+R"):
-            L.marker(markerPos, { icon: ShuttleLineService.IconP_R }).addTo(layer);
-            break;
+      // accumulate the current distance
+      currentDistance += lineSections[i];
 
-          case ("7"):
-            L.marker(markerPos, { icon: ShuttleLineService.Icon7 }).addTo(layer);
-            break;
+      // when we overstep the max Distance
+      if (currentDistance > maxDistance) {
+        // current point
+        var x1 = tpl[i].lat;
+        var y1 = tpl[i].lng;
 
-          case ("BS"):
-            L.marker(markerPos, { icon: ShuttleLineService.IconBS }).addTo(layer);
-            break;
+        // next point
+        var x2 = tpl[i + 1].lat;
+        var y2 = tpl[i + 1].lng;
 
-          case ("9"):
-            L.marker(markerPos, { icon: ShuttleLineService.Icon9 }).addTo(layer);
-            break;
+        // subtracted new vector
+        var newX = x2 - x1;
+        var newY = y2 - y1;
 
-          case ("BL"):
-            L.marker(markerPos, { icon: ShuttleLineService.IconBL }).addTo(layer);
-            break;
+        // magnitude of the vector
+        var mag = Math.sqrt(Math.pow(newX, 2) + Math.pow(newY, 2));
 
-          case ("6"):
-            L.marker(markerPos, { icon: ShuttleLineService.Icon6 }).addTo(layer);
-            break;
-        }
+        // normalize vector
+        var newXnormalized = newX / mag;
+        var newYnormalized = newY / mag;
+
+        // go further with the remaining distance
+        var overhead = currentDistance - maxDistance;
+
+        // go back to the origin of the vector
+        var endPosX = x1 + newXnormalized * overhead;
+        var endPosY = y1 + newYnormalized * overhead;
+
+        this.setLabelAt(line, [endPosX, endPosY] as L.LatLngTuple, layer);
+
+        // var remainingMagnitude = Math.sqrt(Math.pow(overhead, 2) + Math.pow(overhead, 2));
+        currentDistance = 0;
       }
     }
 
@@ -206,5 +218,34 @@ export class ShuttleLineService {
       tranformedPolyLine.push(new L.LatLng((point[i]).x, (point[i]).y));
     }
     return tranformedPolyLine;
+  }
+
+  private setLabelAt(line: ShuttleLine, pos: L.LatLngTuple, layer: L.LayerGroup) {
+    switch (line.lineDesignator) {
+      case ("P+R"):
+        L.marker(pos, { icon: ShuttleLineService.IconP_R }).addTo(layer);
+        break;
+
+      case ("7"):
+        L.marker(pos, { icon: ShuttleLineService.Icon7 }).addTo(layer);
+        break;
+
+      case ("BS"):
+        L.marker(pos, { icon: ShuttleLineService.IconBS }).addTo(layer);
+        break;
+
+      case ("9"):
+        L.marker(pos, { icon: ShuttleLineService.Icon9 }).addTo(layer);
+        break;
+
+      case ("BL"):
+        L.marker(pos, { icon: ShuttleLineService.IconBL }).addTo(layer);
+        break;
+
+      case ("6"):
+        L.marker(pos, { icon: ShuttleLineService.Icon6 }).addTo(layer);
+        break;
+    }
+
   }
 }
