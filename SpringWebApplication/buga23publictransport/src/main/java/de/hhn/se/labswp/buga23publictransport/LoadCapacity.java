@@ -48,7 +48,6 @@ public class LoadCapacity extends Thread{
             }
 
             int waitTime = ((59 - LocalDateTime.now().getMinute()) * 60000) + ((60 - LocalDateTime.now().getSecond()) * 1000);
-            System.out.println(waitTime + "ist die wartezeit");
             try {
                 sleep(waitTime);
             } catch (InterruptedException e) {

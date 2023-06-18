@@ -1,0 +1,5 @@
+<div class = auslastungsGrafik>
+  <ng-container *ngFor="let index of auslastungen; index as i">
+    <span class="line-vertical " [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
+  </ng-container>
+</div>

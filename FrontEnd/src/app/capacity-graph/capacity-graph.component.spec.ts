@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParkingItemComponent } from './parking-item.component';
+import { CapacityGraphComponent } from './capacity-graph.component';
 
-describe('ParkingItemComponent', () => {
-  let component: ParkingItemComponent;
-  let fixture: ComponentFixture<ParkingItemComponent>;
+describe('CapacityGraphComponent', () => {
+  let component: CapacityGraphComponent;
+  let fixture: ComponentFixture<CapacityGraphComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ParkingItemComponent ]
+      declarations: [ CapacityGraphComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ParkingItemComponent);
+    fixture = TestBed.createComponent(CapacityGraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

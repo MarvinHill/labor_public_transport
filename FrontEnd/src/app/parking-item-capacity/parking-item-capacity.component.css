@@ -56,17 +56,6 @@
   display: inline-block;
 }
 
-.line-vertical {
-  background-color: #0677e0;
-  border-radius: 99px;
-  margin-left:  0.2rem;
-  margin-right: 0.2rem;
-  align-self: flex-end;
-  /* Breite der einzelnen Linien */
-  padding-right: 0.6rem;
-  margin-top: auto;
-}
-
 .funf20 {
   height: 25%;
 }
@@ -81,14 +70,6 @@
 
 .hundert {
   height: 100%;
-}
-
-.auslastungsGrafik{
-  height: 96%;
-  display: flex;
-  padding: 0.3rem;
-  align-items: baseline;
-  overflow-x: auto;
 }
 
 .shadow-own {

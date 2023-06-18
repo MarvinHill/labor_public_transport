@@ -36,6 +36,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchViewComponent } from './search-view/search-view.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchCategoryComponent } from './search-category/search-category.component';
+import { CapacityGraphComponent } from './capacity-graph/capacity-graph.component';
 
 
 
@@ -67,6 +68,7 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     SearchViewComponent,
     SearchResultComponent,
     SearchCategoryComponent,
+    CapacityGraphComponent,
   ],
   imports: [
     BrowserModule,

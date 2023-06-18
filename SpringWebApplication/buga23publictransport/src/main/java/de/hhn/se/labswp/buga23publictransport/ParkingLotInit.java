@@ -659,8 +659,8 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(kunsthalleGeoLocation, kunsthallePoly, kunsthalleEntrances, "Kunsthalle, Tiefgarage", true, true, ParkingType.CAR, "Friedrichsplatz 5, 68165 Mannheim", 406));
             carRepo.save(new CarParkingLot(klinikumP3GeoLocation, klinikumP3Poly, klinikumP3Entrances, "Klinikum P3, Parkplatz", false, false, ParkingType.CAR, "Theodor-Kutzer-Ufer 4, 68167 Mannheim", 313));
             carRepo.save(new CarParkingLot(m4aGeoLocation, m4aPoly, m4aEntrances, "M4a, Parkplatz", false, false, ParkingType.CAR, "M4a, 68161 Mannheim", 68));
-            carRepo.save(new CarParkingLot(n1GeoLocation, n1Poly, n1Entrances, "N1, Parkhaus", true, true, ParkingType.CAR, "N1 3, 68161 Mannheim", 441));
-            carRepo.save(new CarParkingLot(n2GeoLocation, n2Poly, n2Entrances, "N2 Stadthaus, Parkhaus", true, true, ParkingType.CAR, "N2 14, 68161 Mannheim", 286));
+            carRepo.save(new CarParkingLot(n1GeoLocation, n1Poly, n1Entrances, "N1, Parkhaus", true, true, ParkingType.CAR, "N1 3, 68161 Mannheim", 727));
+            carRepo.save(new CarParkingLot(n2GeoLocation, n2Poly, n2Entrances, "N2 Stadthaus, Parkhaus", true, true, ParkingType.CAR, "N2 14, 68161 Mannheim", 727));
             carRepo.save(new CarParkingLot(n6KomfortGeoLocation, n6KomfortPoly, n6KomfortEntrances, "N6 Komforthaus, Parkhaus", false, false, ParkingType.CAR, "N6 3, 68161 Mannheim", 201));
             carRepo.save(new CarParkingLot(n6StandardGeoLocation, n6StandardPoly, n6StandardEntrances, "N6 Standardhaus, Parkhaus", true, true, ParkingType.CAR, "N6 3, 68161 Mannheim", 298));
             carRepo.save(new CarParkingLot(u2GeoLocation, u2Poly, u2Entrances, "U2, Tiefgarage", true, true, ParkingType.CAR, "Herschelplatz, 68161 Mannheim", 190));
