@@ -49,7 +49,10 @@ export class CapacityGraphComponent implements OnInit{
   calculateCapacity() {
     if((this.totalParkingspaces != 0)) {
       this.parkingCapacityAll.forEach(parkingCapacity => {
-        if(parkingCapacity.name.includes(this.parkingName.replace(/\s/g, "").split(',')[0])) {
+        if(parkingCapacity.name === "SAPArenaP6-P8,Parkplatz" && ((this.parkingName === "SAP Arena P6, Parkplatz") ||
+          (this.parkingName === "SAP Arena P7, Parkplatz") || (this.parkingName === "SAP Arena P8, Parkplatz"))) {
+          this.parkingCapacityThis.push(parkingCapacity);
+        } else if(parkingCapacity.name.includes(this.parkingName.replace(/\s/g, "").split(',')[0])) {
           this.parkingCapacityThis.push(parkingCapacity);
         }
       })
@@ -109,11 +112,17 @@ export class CapacityGraphComponent implements OnInit{
       this.auslastungen[8] = this.calculatePercentage(this.calculateMedian(capacitySameDayHour5));
       this.auslastungen[9] = this.calculatePercentage(this.calculateMedian(capacitySameDayHour6));
 
+
+      //this.auslastungen = [50,55,60,65,70,75,60,50,40,50];
     }
   }
 
   calculatePercentage(currentFreeSpaces: number) {
-    return (this.totalParkingspaces - currentFreeSpaces) / (this.totalParkingspaces / 100);
+    const percent = (this.totalParkingspaces - currentFreeSpaces) / (this.totalParkingspaces / 100);
+    if (percent === 0) {
+      return 1;
+    }
+    return percent;
   }
 
   parseWeekday(dbEntryDay: String): number {
