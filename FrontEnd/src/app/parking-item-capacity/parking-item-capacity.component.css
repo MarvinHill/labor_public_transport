@@ -55,6 +55,10 @@
   margin-right: 0.5em;
   display: inline-block;
 }
+.graph-location {
+  right: 0;
+  top: 0;
+}
 
 .funf20 {
   height: 25%;

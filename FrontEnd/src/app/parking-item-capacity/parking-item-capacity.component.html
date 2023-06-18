@@ -10,6 +10,8 @@
         <li class="tag-halter" *ngIf="parking.charging === false && parking.barrierfree === false && screenWidth > 767">.</li>
       </div>
     </div>
-    <div class = "col-12"><app-capacity-graph [parking]="parking"></app-capacity-graph></div>
+    <div class="graph-location">
+      <div><app-capacity-graph [parking]="parking"></app-capacity-graph></div>
+    </div>
   </div>
 </section>
