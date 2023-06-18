@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
 import { DataServiceService } from '../services/data-service.service';
 import { UserLoginServiceService } from '../user-login-service.service';
+import { TransportType } from '../TransportType';
 
 @Component({
   selector: 'app-public-transport-view',
@@ -18,7 +19,9 @@ export class PublicTransportViewComponent {
 
     this.dataService = dataService;
     dataService.lines.subscribe(value=> {
-      this.shuttleLineList = value;
+      this.shuttleLineList = value.filter(value => {
+      return value.transportType === TransportType[TransportType.Train];
+      });
     })
     dataService.update()
   }

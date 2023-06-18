@@ -5,7 +5,7 @@ import { TransportType } from "./TransportType";
 
 export class ShuttleLine implements Searchable{
     searchAction: Function;
-    transportType: TransportType;
+    transportType: string;
     category: string;
     displayText: string;
     id: number;
