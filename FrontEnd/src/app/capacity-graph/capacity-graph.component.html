@@ -1,7 +1,25 @@
 <div class="container-of-all">
+  <div class="header-font fw-bold">Auslastung:</div>
   <div class="graph">
     <ng-container *ngFor="let index of auslastungen; index as i">
-      <span class="line-vertical" [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
+      <ng-container *ngIf="i < 3">
+        <span class="line-vertical color-past" [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
+      </ng-container>
+      <ng-container *ngIf="i === 3">
+        <span class="line-vertical color-now" [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
+      </ng-container>
+      <ng-container *ngIf="i > 3">
+        <span class="line-vertical color-forecast" [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
+      </ng-container>
     </ng-container>
+  </div>
+  <div class="scale-container">
+    <div class="time-container scale-font">13:00</div>
+    <div class="time-container scale-font"></div>
+    <div class="time-container scale-font">15:00</div>
+    <div class="time-container scale-font"></div>
+    <div class="time-container scale-font">17:00</div>
+    <div class="time-container scale-font"></div>
+    <div class="time-container scale-font">19:00</div>
   </div>
 </div>

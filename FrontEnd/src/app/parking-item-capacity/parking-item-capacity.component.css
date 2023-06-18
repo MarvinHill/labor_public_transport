@@ -23,12 +23,14 @@
 .rounded-box {
   border-radius: 1em;
   overflow-x: auto;
+  height: auto;
 }
 
 .tag-container {
   width: 100%;
   overflow-x: auto;
   white-space: nowrap;
+  padding-bottom: 0.5em;
 }
 
 .tags {

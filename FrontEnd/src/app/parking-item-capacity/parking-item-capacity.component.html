@@ -4,12 +4,18 @@
     <div class="content white-font rounded-box-content p-3 col-content">
       <h5 class="fw-bold headline-size">{{parkingName}}</h5>
       <p class="white-font">{{parkingAddress}}</p>
-      <div class="tag-container">
+      <div class="tag-container" *ngIf="screenWidth > 767">
         <li class="tag" *ngIf="parking.barrierfree === true">Barrierefrei</li>
         <li class="tag" *ngIf="parking.charging === true">Ladestationen</li>
         <li class="tag-halter" *ngIf="parking.charging === false && parking.barrierfree === false && screenWidth > 767">.</li>
       </div>
     </div>
     <div class="col-grafik"><app-capacity-graph [parking]="parking"></app-capacity-graph></div>
+    <div class="tag-container" *ngIf="screenWidth < 767">
+      <li class="tag" *ngIf="parking.barrierfree === true">Barrierefrei</li>
+      <li class="tag" *ngIf="parking.charging === true">Ladestationen</li>
+      <li class="tag-halter" *ngIf="parking.charging === false && parking.barrierfree === false && screenWidth > 767">.</li>
+    </div>
   </div>
+
 </section>
