@@ -37,6 +37,8 @@ import { SearchViewComponent } from './search-view/search-view.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchCategoryComponent } from './search-category/search-category.component';
 import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
+import { LineLegendComponent } from './line-legend/line-legend.component';
+import { TimeDisplayComponent } from './time-display/time-display.component';
 
 
 
@@ -69,6 +71,8 @@ import { PublicTransportViewComponent } from './public-transport-view/public-tra
     SearchResultComponent,
     SearchCategoryComponent,
     PublicTransportViewComponent,
+    LineLegendComponent,
+    TimeDisplayComponent,
   ],
   imports: [
     BrowserModule,
