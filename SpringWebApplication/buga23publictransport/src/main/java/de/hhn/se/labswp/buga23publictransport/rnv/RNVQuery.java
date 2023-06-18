@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
+
+import static java.time.temporal.ChronoUnit.HOURS;
 
 @RestController
 public class RNVQuery {
@@ -25,7 +28,7 @@ public class RNVQuery {
                 .buildRawQuery()
                 .replaceData(QueryBuilder.RNVStationId, hasafId)
                 .replaceData(QueryBuilder.RNVStartTime, getNow())
-                .replaceData(QueryBuilder.RNVEndTime, getMidnight())
+                .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
                 .replaceData("\"", "\\\"")              // transforms " -> \"
                 .build();
 
@@ -44,7 +47,7 @@ public class RNVQuery {
                     .buildRawQuery()
                     .replaceData(QueryBuilder.RNVStationId, hasafId)
                     .replaceData(QueryBuilder.RNVStartTime, getNow())
-                    .replaceData(QueryBuilder.RNVEndTime, getMidnight())
+                    .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
                     .replaceData(QueryBuilder.RNVCursor, tsi.getCursor())
                     .replaceData("\"", "\\\"")              // transforms " -> \"
                     .build();
@@ -67,11 +70,10 @@ public class RNVQuery {
         return finalInfo;
     }
 
-    private static String getMidnight() {
-        LocalTime midnight = LocalTime.of(23, 59, 59);
-        LocalDate today = LocalDate.now(ZoneId.of("Europe/Berlin"));
-        LocalDateTime todayMidnight = LocalDateTime.of(today, midnight);
-        return todayMidnight.format(DateTimeFormatter.ISO_DATE_TIME);
+    private static String get4HOffset() {
+        var now = Instant.now();
+        now.plus(4, HOURS);
+        return now.toString();
     }
 
     private static String getNow() {
