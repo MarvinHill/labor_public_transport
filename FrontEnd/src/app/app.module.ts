@@ -33,6 +33,7 @@ import { ConnectionTicketComponent } from './connection-ticket/connection-ticket
 
 import { ImpressumComponent } from './impressum/impressum.component';
 import { LineLegendComponent } from './line-legend/line-legend.component';
+import { TimeDisplayComponent } from './time-display/time-display.component';
 
 
 
@@ -63,6 +64,7 @@ import { LineLegendComponent } from './line-legend/line-legend.component';
     ImpressumComponent,
     ConnectionTicketComponent,
     LineLegendComponent,
+    TimeDisplayComponent,
   ],
   imports: [
     BrowserModule,
