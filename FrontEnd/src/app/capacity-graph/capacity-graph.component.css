@@ -52,6 +52,7 @@
 }
 
 .time-container {
+  border-top: 0.2em solid #0627a0;
   width: 30%;
   margin-left: -5%;
   text-align: center;
