@@ -20,6 +20,9 @@
             (click)="openMaps();">
             <img src="assets/icon/googleMaps.svg" alt="google maps">
         </div>
+      <div class="graph-container">
+        <div class="graph"><app-capacity-graph [parking]="observerService.data"></app-capacity-graph></div>
+      </div>
     </div>
 </div>
 <div *ngIf="observerService.show === ObserverState.RNV">RNV Details {{observerService.data}} </div>
