@@ -1,11 +1,8 @@
 package de.hhn.se.labswp.buga23publictransport;
 
 import de.hhn.se.labswp.buga23publictransport.persistence.*;
-import de.hhn.se.labswp.buga23publictransport.rnv.RNVQuery;
 
 import java.io.File;
-import java.sql.Array;
-import java.time.LocalTime;
 
 import de.hhn.se.labswp.buga23publictransport.util.LineLoader;
 import org.slf4j.LoggerFactory;
@@ -15,9 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
 
-import javax.sound.sampled.Line;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Configuration
@@ -77,280 +71,145 @@ public class LoadDatabase {
             Station wasserTurmStation = new Station(49.48487, 8.47339, "Wasserturm", 2475);
 
 
-            stationRepo.saveAllAndFlush(List.of(
-                            hansThomaStrStation,
-                            neuOstHeimStation,
-                            luisenParkStation,
-                            spinelliParkStation,
-                            sapArenaSBFStation,
-                            maimarktGrossParkPlatzStation,
-                            sapArenaStation,
-                            berlinerPlatzStation,
-                            konradAdenauerBrückeStation,
-                            universitätStation,
-                            schlossStation,
-                            paradePlatzStation,
-                            marktPlatzStation,
-                            akademieStation,
-                            gewerkschaftHausStation,
-                            nationalTheaterStation,
-                            theresenKrankenhausStation,
-                            universitaetsKlinikumStation,
-                            bibienStraßeStation,
-                            hauptFriedHofStation,
-                            pfeiffersWoerthStation,
-                            neckarPlattStation,
-                            ziethenStraßeStation,
-                            adolfDamaschkeRingStation,
-                            talStrasseStation,
-                            abendAkademieStation,
-                            kunstHalleStation,
-                            rosenGartenStation,
-                            mannheimHauptBahnHofStation,
-                            tattersallStation,
-                            werderStrasseStation,
-                            pestalozziSchuleStation,
-                            weberStrasseStation,
-                            planetariumStation,
-                            carlBenzStadionStation,
-                            harrLachStation,
-                            lucasCranachStrasseStation,
-                            schwindStrasseStation,
-                            ludwigStrasseStation,
-                            ratHausLUStation,
-                            handelsHafenStation,
-                            rheinStrasseStation,
-                            ratHausMAStation,
-                            strohMarktStation,
-                            wasserTurmStation
-                    )
-            );
+            stationRepo.saveAllAndFlush(List.of(hansThomaStrStation, neuOstHeimStation, luisenParkStation, spinelliParkStation, sapArenaSBFStation, maimarktGrossParkPlatzStation, sapArenaStation, berlinerPlatzStation, konradAdenauerBrückeStation, universitätStation, schlossStation, paradePlatzStation, marktPlatzStation, akademieStation, gewerkschaftHausStation, nationalTheaterStation, theresenKrankenhausStation, universitaetsKlinikumStation, bibienStraßeStation, hauptFriedHofStation, pfeiffersWoerthStation, neckarPlattStation, ziethenStraßeStation, adolfDamaschkeRingStation, talStrasseStation, abendAkademieStation, kunstHalleStation, rosenGartenStation, mannheimHauptBahnHofStation, tattersallStation, werderStrasseStation, pestalozziSchuleStation, weberStrasseStation, planetariumStation, carlBenzStadionStation, harrLachStation, lucasCranachStrasseStation, schwindStrasseStation, ludwigStrasseStation, ratHausLUStation, handelsHafenStation, rheinStrasseStation, ratHausMAStation, strohMarktStation, wasserTurmStation));
 
-            var hansThomaStr = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, hansThomaStrStation);
+            var hansThomaStr = new LineScheduleEntry(hansThomaStrStation);
             entryRepo.save(hansThomaStr);
 
-            var neuOstHeim = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0, neuOstHeimStation);
+            var neuOstHeim = new LineScheduleEntry(neuOstHeimStation);
             entryRepo.save(neuOstHeim);
 
-            var luisenPark = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    luisenParkStation);
+            var luisenPark = new LineScheduleEntry(luisenParkStation);
             entryRepo.save(luisenPark);
 
-            var spinelliPark = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    spinelliParkStation);
+            var spinelliPark = new LineScheduleEntry(spinelliParkStation);
             entryRepo.save(spinelliPark);
 
-            var sapArenaSBF = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    sapArenaSBFStation);
+            var sapArenaSBF = new LineScheduleEntry(sapArenaSBFStation);
             entryRepo.save(sapArenaSBF);
 
-            var maimarktGrossParkPlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    maimarktGrossParkPlatzStation);
+            var maimarktGrossParkPlatz = new LineScheduleEntry(maimarktGrossParkPlatzStation);
             entryRepo.save(maimarktGrossParkPlatz);
 
-            var sapArena = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    sapArenaStation);
+            var sapArena = new LineScheduleEntry(sapArenaStation);
             entryRepo.save(sapArena);
 
-            var berlinerPlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    berlinerPlatzStation);
+            var berlinerPlatz = new LineScheduleEntry(berlinerPlatzStation);
             entryRepo.save(berlinerPlatz);
 
-            var konradAdenauerBrücke = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    konradAdenauerBrückeStation);
+            var konradAdenauerBrücke = new LineScheduleEntry(konradAdenauerBrückeStation);
             entryRepo.save(konradAdenauerBrücke);
 
-            var universität = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    universitätStation);
+            var universität = new LineScheduleEntry(universitätStation);
             entryRepo.save(universität);
 
-            var schloss = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    schlossStation);
+            var schloss = new LineScheduleEntry(schlossStation);
             entryRepo.save(schloss);
 
-            var paradePlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    paradePlatzStation);
+            var paradePlatz = new LineScheduleEntry(paradePlatzStation);
             entryRepo.save(paradePlatz);
 
-            var marktPlatz = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    marktPlatzStation);
+            var marktPlatz = new LineScheduleEntry(marktPlatzStation);
             entryRepo.save(marktPlatz);
 
-            var akademie = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    akademieStation);
+            var akademie = new LineScheduleEntry(akademieStation);
             entryRepo.save(akademie);
 
-            var gewerkschaftHaus = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    gewerkschaftHausStation);
+            var gewerkschaftHaus = new LineScheduleEntry(gewerkschaftHausStation);
             entryRepo.save(gewerkschaftHaus);
 
-            var nationalTheater = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    nationalTheaterStation);
+            var nationalTheater = new LineScheduleEntry(nationalTheaterStation);
             entryRepo.save(nationalTheater);
 
-            var theresenKrankenhaus = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    theresenKrankenhausStation);
+            var theresenKrankenhaus = new LineScheduleEntry(theresenKrankenhausStation);
             entryRepo.save(theresenKrankenhaus);
 
-            var universitaetsKlinikum = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    universitaetsKlinikumStation);
+            var universitaetsKlinikum = new LineScheduleEntry(universitaetsKlinikumStation);
             entryRepo.save(universitaetsKlinikum);
 
-            var bibienStraße = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    bibienStraßeStation);
+            var bibienStraße = new LineScheduleEntry(bibienStraßeStation);
             entryRepo.save(bibienStraße);
 
-            var hauptFriedHof = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    hauptFriedHofStation);
+            var hauptFriedHof = new LineScheduleEntry(hauptFriedHofStation);
             entryRepo.save(hauptFriedHof);
 
-            var pfeiffersWoerth = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    pfeiffersWoerthStation);
+            var pfeiffersWoerth = new LineScheduleEntry(pfeiffersWoerthStation);
             entryRepo.save(pfeiffersWoerth);
 
-            var neckarPlatt = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    neckarPlattStation);
+            var neckarPlatt = new LineScheduleEntry(neckarPlattStation);
             entryRepo.save(neckarPlatt);
 
-            var ziethenStraße = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    ziethenStraßeStation);
+            var ziethenStraße = new LineScheduleEntry(ziethenStraßeStation);
             entryRepo.save(ziethenStraße);
 
-            var adolfDamaschkeRing = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    adolfDamaschkeRingStation);
+            var adolfDamaschkeRing = new LineScheduleEntry(adolfDamaschkeRingStation);
             entryRepo.save(adolfDamaschkeRing);
 
-            var talStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    talStrasseStation);
+            var talStrasse = new LineScheduleEntry(talStrasseStation);
             entryRepo.save(talStrasse);
 
-            var abendAkademie = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    abendAkademieStation);
+            var abendAkademie = new LineScheduleEntry(abendAkademieStation);
             entryRepo.save(abendAkademie);
 
-            var kunstHalle = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    kunstHalleStation);
+            var kunstHalle = new LineScheduleEntry(kunstHalleStation);
             entryRepo.save(kunstHalle);
 
-            var rosenGarten = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    rosenGartenStation);
+            var rosenGarten = new LineScheduleEntry(rosenGartenStation);
             entryRepo.save(rosenGarten);
 
-            var mannheimHauptBahnHof = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    mannheimHauptBahnHofStation);
+            var mannheimHauptBahnHof = new LineScheduleEntry(mannheimHauptBahnHofStation);
             entryRepo.save(mannheimHauptBahnHof);
 
-            var tattersall = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    tattersallStation);
+            var tattersall = new LineScheduleEntry(tattersallStation);
             entryRepo.save(tattersall);
 
-            var werderStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    werderStrasseStation);
+            var werderStrasse = new LineScheduleEntry(werderStrasseStation);
             entryRepo.save(werderStrasse);
 
-            var pestalozziSchule = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    pestalozziSchuleStation);
+            var pestalozziSchule = new LineScheduleEntry(pestalozziSchuleStation);
             entryRepo.save(pestalozziSchule);
 
-            var weberStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    weberStrasseStation);
+            var weberStrasse = new LineScheduleEntry(weberStrasseStation);
             entryRepo.save(weberStrasse);
 
-            var planetarium = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    planetariumStation);
+            var planetarium = new LineScheduleEntry(planetariumStation);
             entryRepo.save(planetarium);
 
-            var carlBenzStadion = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    carlBenzStadionStation);
+            var carlBenzStadion = new LineScheduleEntry(carlBenzStadionStation);
             entryRepo.save(carlBenzStadion);
 
-            var harrLach = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    harrLachStation);
+            var harrLach = new LineScheduleEntry(harrLachStation);
             entryRepo.save(harrLach);
 
-            var lucasCranachStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    lucasCranachStrasseStation);
+            var lucasCranachStrasse = new LineScheduleEntry(lucasCranachStrasseStation);
             entryRepo.save(lucasCranachStrasse);
 
-            var schwindStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    schwindStrasseStation);
+            var schwindStrasse = new LineScheduleEntry(schwindStrasseStation);
             entryRepo.save(schwindStrasse);
 
-            var ludwigStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    ludwigStrasseStation);
+            var ludwigStrasse = new LineScheduleEntry(ludwigStrasseStation);
             entryRepo.save(ludwigStrasse);
 
-            var ratHausLU = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    ratHausLUStation);
+            var ratHausLU = new LineScheduleEntry(ratHausLUStation);
             entryRepo.save(ratHausLU);
 
-            var handelsHafen = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    handelsHafenStation);
+            var handelsHafen = new LineScheduleEntry(handelsHafenStation);
             entryRepo.save(handelsHafen);
 
-            var rheinStrasse = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    rheinStrasseStation);
+            var rheinStrasse = new LineScheduleEntry(rheinStrasseStation);
             entryRepo.save(rheinStrasse);
 
-            var ratHausMA = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    ratHausMAStation);
+            var ratHausMA = new LineScheduleEntry(ratHausMAStation);
             entryRepo.save(ratHausMA);
 
-            var strohMarkt = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    strohMarktStation);
+            var strohMarkt = new LineScheduleEntry(strohMarktStation);
             entryRepo.save(strohMarkt);
 
-            var wasserTurm = new LineScheduleEntry(
-                    LocalTime.now(), 0, 0,
-                    wasserTurmStation);
+            var wasserTurm = new LineScheduleEntry(wasserTurmStation);
             entryRepo.save(wasserTurm);
 
             // Real data for the shuttle line from the BUGA entrance pdf file and openstreetmap
-            var bugaShuttlelinie = new PublicTransportLine("P+R", false, "#4e2583", TransportType.Shuttle);
+            var bugaShuttlelinie = new PublicTransportLine("P+R", "#4e2583", TransportType.Shuttle);
             var bugaShuttleLineDataFile = ResourceUtils.getFile("classpath:database/Buga Line P+R (purple_dashed).txt");
             bugaShuttlelinie.setGeoLinePoints(LineLoader.loadLineFile(bugaShuttleLineDataFile));
             bugaShuttlelinie.addLineScheduleEntryList(sapArena);
@@ -362,7 +221,7 @@ public class LoadDatabase {
             log.info("Saving Buga Shuttle Line " + lineRepo.save(bugaShuttlelinie));
 
             // Real data for the train station of line 7 (yellow line)
-            var line7 = new PublicTransportLine("7", false, "#FFCC00", TransportType.Train);
+            var line7 = new PublicTransportLine("7", "#FFCC00", TransportType.Train);
             File line7DataFile = ResourceUtils.getFile("classpath:database/Buga Line 7 (yellow).txt");
             line7.setGeoLinePoints(LineLoader.loadLineFile(line7DataFile));
             line7.addLineScheduleEntryList(berlinerPlatz);
@@ -386,7 +245,7 @@ public class LoadDatabase {
             log.info("Saving Line 7 " + lineRepo.save(line7));
 
             // Real data for buga 23 express blue line
-            var lineBuga23 = new PublicTransportLine("BS", false, "#0BBBEF", TransportType.Train);
+            var lineBuga23 = new PublicTransportLine("BS", "#0BBBEF", TransportType.Train);
             var lineBuga23DataFile = ResourceUtils.getFile("classpath:database/Buga Line 23 (light_blue).txt");
             lineBuga23.setGeoLinePoints(LineLoader.loadLineFile(lineBuga23DataFile));
             lineBuga23.addLineScheduleEntryList(mannheimHauptBahnHof);
@@ -395,17 +254,11 @@ public class LoadDatabase {
             lineBuga23.addLineScheduleEntryList(nationalTheater);
             lineBuga23.addLineScheduleEntryList(theresenKrankenhaus);
             lineBuga23.addLineScheduleEntryList(universitaetsKlinikum);
-            //lineBuga23.addLineScheduleEntryList(bibienStraße);
-            //lineBuga23.addLineScheduleEntryList(hauptFriedHof);
-            //lineBuga23.addLineScheduleEntryList(pfeiffersWoerth);
-            //lineBuga23.addLineScheduleEntryList(neckarPlatt);
-            //lineBuga23.addLineScheduleEntryList(ziethenStraße);
-            //lineBuga23.addLineScheduleEntryList(adolfDamaschkeRing);
             lineBuga23.addLineScheduleEntryList(talStrasse);
             log.info("Saving Line Buga 23 Express" + lineRepo.save(lineBuga23));
 
             // real data for ex9 green line
-            var ex9 = new PublicTransportLine("9", false, "#95c23d", TransportType.Train);
+            var ex9 = new PublicTransportLine("9", "#95c23d", TransportType.Train);
             var ex9DataFile = ResourceUtils.getFile("classpath:database/Buga Line 9 (green).txt");
             ex9.setGeoLinePoints(LineLoader.loadLineFile(ex9DataFile));
             ex9.addLineScheduleEntryList(mannheimHauptBahnHof);
@@ -423,7 +276,7 @@ public class LoadDatabase {
             log.info("Saving Line EX9 " + lineRepo.save(ex9));
 
             // real data for buga bl line pink line
-            var bugaBL = new PublicTransportLine("BL", false, "#e6007e", TransportType.Train);
+            var bugaBL = new PublicTransportLine("BL", "#e6007e", TransportType.Train);
             var bugaBLDataFile = ResourceUtils.getFile("classpath:database/Buga Line BL (pink).txt");
             bugaBL.setGeoLinePoints(LineLoader.loadLineFile(bugaBLDataFile));
             bugaBL.addLineScheduleEntryList(mannheimHauptBahnHof);
@@ -445,7 +298,7 @@ public class LoadDatabase {
             log.info("Saving Buga 23 BL line " + lineRepo.save(bugaBL));
 
             // real data for rnv bahnlinie brown line
-            var bugaLine6 = new PublicTransportLine("6", false, "#966c29", TransportType.Train);
+            var bugaLine6 = new PublicTransportLine("6", "#966c29", TransportType.Train);
             var bugaLine6DataFile = ResourceUtils.getFile("classpath:database/Buga Line 6 (brown).txt");
             bugaLine6.setGeoLinePoints(LineLoader.loadLineFile(bugaLine6DataFile));
             bugaLine6.addLineScheduleEntryList(berlinerPlatz);

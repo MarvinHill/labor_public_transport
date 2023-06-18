@@ -13,7 +13,6 @@ public class PublicTransportLine {
     private Integer id;
     String rnvId;
     private String lineDesignator;
-    private boolean hasDelay;
     @Column(length = 500000)
     @Lob
     private List<Point> geoLinePoints = new ArrayList<>();
@@ -33,11 +32,9 @@ public class PublicTransportLine {
 
     public PublicTransportLine(
             String lineDesignator,
-            boolean hasDelay,
             String colorHexCode,
             TransportType transportType) {
         this.lineDesignator = lineDesignator;
-        this.hasDelay = hasDelay;
         this.colorHexCode = colorHexCode;
         this.transportType = transportType;
     }
@@ -62,10 +59,6 @@ public class PublicTransportLine {
 
     public String getLineDesignator() {
         return lineDesignator;
-    }
-
-    public boolean getDelay() {
-        return hasDelay;
     }
 
     public String getColorHexCode() {
