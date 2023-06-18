@@ -16,6 +16,8 @@ export class CapacityGraphComponent implements OnInit{
   parkingCapacityThis: ParkingCapacity[];
   items: number[];
   totalParkingspaces: number;
+  currentDateTime = new Date();
+
 
   async ngOnInit(): Promise<void> {
     this.parkingName = this.parking.name;
@@ -62,40 +64,39 @@ export class CapacityGraphComponent implements OnInit{
       this.parkingCapacityThis.forEach(parkingCapacity => {
         const dbString: string = parkingCapacity.dateTime.toString();
         const dbDateTime = new Date(Date.parse(dbString));
-        const currentDateTime = new Date();
 
-        if((dbDateTime.getFullYear() === currentDateTime.getFullYear()) && (dbDateTime.getMonth() === currentDateTime.getMonth()) && (dbDateTime.getDate() === currentDateTime.getDate())) {
-          if(dbDateTime.getHours() === currentDateTime.getHours() -3) {
+        if((dbDateTime.getFullYear() === this.currentDateTime.getFullYear()) && (dbDateTime.getMonth() === this.currentDateTime.getMonth()) && (dbDateTime.getDate() === this.currentDateTime.getDate())) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() -3) {
             this.auslastungen[0] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours() -2) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() -2) {
             this.auslastungen[1] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours() -1) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() -1) {
             this.auslastungen[2] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours()) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours()) {
             this.auslastungen[3] = this.calculatePercentage(parkingCapacity.freeParkingspaces);
           }
         }
 
-        if(this.parseWeekday(parkingCapacity.weekday) === currentDateTime.getDay()) {
-          if(dbDateTime.getHours() === currentDateTime.getHours() +1) {
+        if(this.parseWeekday(parkingCapacity.weekday) === this.currentDateTime.getDay()) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() +1) {
             capacitySameDayHour1.push(parkingCapacity);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours() +2) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() +2) {
             capacitySameDayHour2.push(parkingCapacity);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours() +3) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() +3) {
             capacitySameDayHour3.push(parkingCapacity);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours() +4) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() +4) {
             capacitySameDayHour4.push(parkingCapacity);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours() +5) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() +5) {
             capacitySameDayHour5.push(parkingCapacity);
           }
-          if(dbDateTime.getHours() === currentDateTime.getHours() +6) {
+          if(dbDateTime.getHours() === this.currentDateTime.getHours() +6) {
             capacitySameDayHour6.push(parkingCapacity);
           }
         }
