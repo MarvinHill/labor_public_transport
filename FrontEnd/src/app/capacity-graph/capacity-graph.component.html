@@ -1,9 +1,5 @@
-<div class = "test">
-  <div class="col-grafik" *ngIf="auslastungen.length !== 0">
-    <div class="auslastungsGrafik">
-      <ng-container *ngFor="let index of auslastungen; index as i">
-        <span class="line-vertical " [ngStyle]="{'height.%': auslastungen.at(i)}"></span>
-      </ng-container>
-    </div>
+<div class="container-of-all">
+  <div class="graph" *ngFor="let index of auslastungen; index as i">
+    <div class="line-vertical" [ngStyle]="{'height.%': auslastungen.at(i)}"></div>
   </div>
 </div>

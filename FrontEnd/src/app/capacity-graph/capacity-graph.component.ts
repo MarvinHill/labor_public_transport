@@ -108,7 +108,6 @@ export class CapacityGraphComponent implements OnInit{
       this.auslastungen[8] = this.calculatePercentage(this.calculateMedian(capacitySameDayHour5));
       this.auslastungen[9] = this.calculatePercentage(this.calculateMedian(capacitySameDayHour6));
 
-      console.log(this.auslastungen)
     }
   }
 

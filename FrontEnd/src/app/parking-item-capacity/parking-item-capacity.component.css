@@ -55,10 +55,6 @@
   margin-right: 0.5em;
   display: inline-block;
 }
-.graph-location {
-  right: 0;
-  top: 0;
-}
 
 .funf20 {
   height: 25%;
@@ -88,8 +84,6 @@
   flex: 0 0 auto;
   width: 66.66666667%;
 }
-
-
 
   /* Ab 1200px */
   @media (min-width: 1200px) {
