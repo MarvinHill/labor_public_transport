@@ -41,7 +41,7 @@ export class CapacityGraphComponent implements OnInit{
   @Input() parking: ParkingLot;
   parkingName: String = "NAME";
 
-  auslastungen: number[] = [];
+  auslastungen: number[] = [1,1,1,1,1,1,1,1,1,1];
 
   constructor(private mapService : MapService, private dataService : DataServiceService){
     this.parkingCapacityThis = [];
