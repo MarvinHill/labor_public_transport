@@ -4,6 +4,9 @@ import { LineScheduleEntry } from '../LineScheduleEntry';
 import { DataServiceService } from '../services/data-service.service';
 import { RnvQuery } from '../RnvQuery';
 import { RnvStopEvent } from '../RnvStopEvent';
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
+import { MapService } from '../services/map.service';
+import { LatLng, Point } from 'leaflet';
 
 @Component({
   selector: 'app-timeline',
@@ -33,6 +36,8 @@ export class TimelineComponent implements OnInit,OnChanges {
   JSON : JSON = JSON;
   chache : Map<string, RnvStopEvent[]>
 
+  constructor(protected observerService : MapDetailsObserverService, protected mapService : MapService){}
+
   protected filterAndGetNewest( entries :  RnvStopEvent[]) : RnvStopEvent {
     var now : Date = new Date();
     entries = entries.filter(value => {
@@ -52,6 +57,12 @@ export class TimelineComponent implements OnInit,OnChanges {
     });
 
     return entries[0];
+  }
+
+  panToTransportLine(){
+    this.observerService.changeDisplay(this.shuttleLine);
+    var point : Point = this.shuttleLine.geoLinePoints[0];
+    this.mapService.openAndFlyTo(new LatLng(point.x, point.y));
   }
 
   private setTimeOfDate(strTime : string) : Date {

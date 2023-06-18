@@ -1,6 +1,6 @@
 <!-- Section: Timeline -->
 <section>
-  <div class="row p-3" [id]="this.shuttleLine.lineDesignator">
+  <div class="row p-3" [id]="this.shuttleLine.lineDesignator" (click) = "this.panToTransportLine()" role="button">
     <div class="text-box bc-g round p-3">
       <h5 class="fs-5 fw-bold">{{lineName}}</h5>
       <p class="fst-italic" style="text-align: right;">{{this.lineScheduleEntryList[0].station.stationDesignator}} -
