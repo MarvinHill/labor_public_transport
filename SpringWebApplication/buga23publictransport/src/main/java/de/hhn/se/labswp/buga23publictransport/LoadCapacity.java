@@ -46,8 +46,11 @@ public class LoadCapacity extends Thread{
 
                 capacityRepo.save(new ParkingCapacity(parkingName, Integer.parseInt(freeParkingspaces), currentTime, currentWeekday));
             }
+
+            int waitTime = ((59 - LocalDateTime.now().getMinute()) * 60000) + ((60 - LocalDateTime.now().getSecond()) * 1000);
+            System.out.println(waitTime + "ist die wartezeit");
             try {
-                sleep(3599000);
+                sleep(waitTime);
             } catch (InterruptedException e) {
                 log.info("Loading information failed...");
             }
