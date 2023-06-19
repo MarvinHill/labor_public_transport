@@ -17,7 +17,8 @@ export class ShuttleLineService {
   private http: HttpClient;
   private lines: ShuttleLine[];
 
-  constructor(http: HttpClient, private dataService : DataServiceService, private observerService : MapDetailsObserverService) {
+
+  constructor(http: HttpClient, private dataService: DataServiceService, private observerService: MapDetailsObserverService) {
     this.http = http;
   }
 
@@ -45,7 +46,7 @@ export class ShuttleLineService {
           line.lineScheduleEntryList.forEach(entry => {
             this.addLineStopToMap(layer[0] as L.LayerGroup, entry, line);
           });
-          
+
           layer[1] = line.lineDesignator;
           layers.push(layer);
         });
@@ -60,7 +61,7 @@ export class ShuttleLineService {
    * @param entry 
    * @param line 
    */
-  public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry, line : ShuttleLine): void {
+  public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry, line: ShuttleLine): void {
     //Todo: right icon designation for trains parkingslots and shuttle line view
     var shuttleMarkerIcon = L.icon({
       iconUrl: 'assets/image/ShuttleLineEntry.png',
@@ -90,29 +91,15 @@ export class ShuttleLineService {
    */
   public getPolyLine(line: ShuttleLine): L.Polyline {
     let tpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
-    var options;
-    if (line.lineDesignator == "BUGA Shuttlelinie") {
+    var options =
+    {
+      bubblingMouseEvents: false,
+      color: line.colorHexCode,
+      weight: 5,
+      opacity: 1,
+      smoothFactor: 1,
+    };
 
-      options =
-      {
-        bubblingMouseEvents : false,
-        color: line.colorHexCode,
-        weight: 5,
-        opacity: 1,
-        smoothFactor: 1,
-        //  dashArray: "25 20"
-      };
-    } else {
-      options =
-      {
-        bubblingMouseEvents : false,
-        color: line.colorHexCode,
-        weight: 5,
-        opacity: 1,
-        smoothFactor: 1
-      };
-
-    }
     return L.polyline(tpl, options);
   }
 
@@ -123,5 +110,4 @@ export class ShuttleLineService {
     }
     return tranformedPolyLine;
   }
-
 }

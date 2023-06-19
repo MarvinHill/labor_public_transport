@@ -21,7 +21,7 @@ import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoCardsComponent } from './info-cards/info-cards.component';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MapComponent } from './map/map.component';
@@ -36,6 +36,9 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchViewComponent } from './search-view/search-view.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchCategoryComponent } from './search-category/search-category.component';
+import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
+import { LineLegendComponent } from './line-legend/line-legend.component';
+import { TimeDisplayComponent } from './time-display/time-display.component';
 
 
 
@@ -67,6 +70,9 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
     SearchViewComponent,
     SearchResultComponent,
     SearchCategoryComponent,
+    PublicTransportViewComponent,
+    LineLegendComponent,
+    TimeDisplayComponent,
   ],
   imports: [
     BrowserModule,
