@@ -31,15 +31,15 @@ export class InfoSearchService implements SearchProvider{
       {
         return [];
       }
-      
-      var results : Searchable[] = [];
+
+      const results : Searchable[] = [];
       if(this.travel.toLowerCase().includes(target)){
         this.travel.split(" ").forEach(value => {
           if(value.toLowerCase().includes(target)){
             this.initializeValues("Allgemeine Informationen",value,target,"/travelinfo",results);
           }
         });
-        
+
       }
       if(this.parking.toLowerCase().includes(target)){
         this.parking.split(" ").forEach(value => {
@@ -47,7 +47,7 @@ export class InfoSearchService implements SearchProvider{
             this.initializeValues("Parken Informationen",value,target,"/info-parking",results);
           }
         })
-        
+
       }
       if(this.bus.toLowerCase().includes(target)){
         this.bus.split(" ").forEach(value => {
@@ -59,17 +59,17 @@ export class InfoSearchService implements SearchProvider{
       if(this.publicTransport.toLowerCase().includes(target)){
         this.publicTransport.split(" ").forEach(value => {
           if(value.toLowerCase().includes(target)){
-            this.initializeValues("Bahn Informationen",value,target,"/info-bahn",results); 
-          } 
-        })      
+            this.initializeValues("Bahn Informationen",value,target,"/info-bahn",results);
+          }
+        })
       }
 
       return results;
   }
 
   private initializeValues(category : string, foundIn : string, displayText : string, url : string, results : Searchable[]){
-    var searchResult : InfoSearchResult = new InfoSearchResult();
-    var LENGTH : number = 50
+    const searchResult : InfoSearchResult = new InfoSearchResult();
+    const LENGTH  = 50
     if(foundIn.length > LENGTH){
       foundIn = foundIn.substring(0,LENGTH-1);
     }

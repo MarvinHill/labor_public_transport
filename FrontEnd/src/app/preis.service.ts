@@ -8,7 +8,7 @@ export class PreisService {
 
   //Ticket Preise//
 
-  private preiseTagesKarten: { kinder: String, jungeErwachsene: number, erwachsene: number, gruppen: number, beguenstigte: number } = {
+  private preiseTagesKarten: { kinder: string, jungeErwachsene: number, erwachsene: number, gruppen: number, beguenstigte: number } = {
     kinder: "Frei",
     jungeErwachsene: 11.00,
     erwachsene: 28.00,
@@ -16,7 +16,7 @@ export class PreisService {
     beguenstigte: 18.00
   };
 
-  private preiseZweiTagesKarten: { kinder: String, jungeErwachsene: number, erwachsene: number, gruppen: number, beguenstigte: number } = {
+  private preiseZweiTagesKarten: { kinder: string, jungeErwachsene: number, erwachsene: number, gruppen: number, beguenstigte: number } = {
     kinder: "Frei",
     jungeErwachsene: 17.00,
     erwachsene: 43.00,
@@ -24,7 +24,7 @@ export class PreisService {
     beguenstigte: 28.00
   };
 
-  private preiseDauerkarten: { kinder: String, jungeErwachsene: number, erwachsene: number, gruppen: String, beguenstigte: number } = {
+  private preiseDauerkarten: { kinder: string, jungeErwachsene: number, erwachsene: number, gruppen: string, beguenstigte: number } = {
     kinder: "Frei",
     jungeErwachsene: 65.00,
     erwachsene: 145.00,
@@ -100,7 +100,7 @@ export class PreisService {
   }
 
   //BaWü Ticket Getter und Setter
- 
+
   getpreisBaWueTicket(fuer: string): any {
     const preis = this.preisBaWueTicket[fuer];
     return this.formatPreis(preis);

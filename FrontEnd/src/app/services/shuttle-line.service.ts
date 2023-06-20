@@ -23,22 +23,22 @@ export class ShuttleLineService {
   }
 
   /**
-   * 
-   * @param map 
+   *
+   * @param map
    */
   public initShuttleLineViewOnMap(layers, service : MapService) {
     this.dataService.getShuttleLines().then(
       (lines : ShuttleLine[]) => {
-  
+
         this.lines = lines;
         console.warn(lines);
         this.lines?.forEach(line => {
-          var layer = [new L.LayerGroup, ""];
+          const layer = [new L.LayerGroup, ""];
           // draw the real train or shuttle line into the map
           if (line.geoLinePoints.length > 0) {
-            var pl = this.getPolyLine(line);
+            const pl = this.getPolyLine(line);
             pl.addTo(layer[0] as L.LayerGroup);
-            pl.on("click", function (e: any) {     
+            pl.on("click", function (e: any) {
               this.observerService.changeDisplay(line)
             }.bind(this));
           }
@@ -56,14 +56,14 @@ export class ShuttleLineService {
 
   /**
    * Add a marker to the map with the line stop
-   * 
-   * @param map 
-   * @param entry 
-   * @param line 
+   *
+   * @param map
+   * @param entry
+   * @param line
    */
   public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry, line: ShuttleLine): void {
     //Todo: right icon designation for trains parkingslots and shuttle line view
-    var shuttleMarkerIcon = L.icon({
+    const shuttleMarkerIcon = L.icon({
       iconUrl: 'assets/image/ShuttleLineEntry.png',
       iconSize: [20, 20], // size of the icon
       shadowSize: [50, 64], // size of the shadow
@@ -72,7 +72,7 @@ export class ShuttleLineService {
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
-    let marker = new L.Marker(
+    const marker = new L.Marker(
       [entry.station.geoLocation.x, entry.station.geoLocation.y],
       { icon: shuttleMarkerIcon }
     );
@@ -84,10 +84,10 @@ export class ShuttleLineService {
   }
 
   /**
-   * 
-   * @param map 
-   * @param line 
-   * @returns 
+   *
+   * @param map
+   * @param line
+   * @returns
    */
   public getPolyLine(line: ShuttleLine): L.Polyline {
     let tpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
@@ -104,7 +104,7 @@ export class ShuttleLineService {
   }
 
   private transformPolyLinePointToLatlng(point: Point[]): L.LatLng[] {
-    var tranformedPolyLine: L.LatLng[] = [];
+    const tranformedPolyLine: L.LatLng[] = [];
     for (let i = 0; i < point.length; i++) {
       tranformedPolyLine.push(new L.LatLng((point[i]).x, (point[i]).y));
     }

@@ -25,7 +25,7 @@
             <h2>Wo kann ich parken?</h2>
             <p>
               Rund um die beiden Ausstellungsflächen gibt es keine Parkmöglichkeiten für private Besucher*innen.
-              Daher empfehlen wir die Parkplätze am Maimarktgelände
+              Daher empfehlen wir die Parkplätze am Maimarktgelände:
               <b>Wilhelm-Varnholt-Allee, Mannheim</b>
             </p>
           </div>
@@ -39,12 +39,9 @@
         <div class="box-wrapper">
           <div class="box">
             <h2>Weitere Parkmöglichkeiten</h2>
-            <p>Hier finden sie eine Übersicht weitere Parkmöglichektein in Manneim</p>
-            <ul>
-              <li>
-                <a href="https://parken-mannheim.de/parken">alle Parkmöglichkeiten</a>
-              </li>
-            </ul>
+            <button class="my-button" [routerLink]="['/parking']" >
+              Alle Parkplätze
+            </button>
           </div>
         </div>
         <div class="box-wrapper">
@@ -56,11 +53,9 @@
               <button (click)="redirectToPage()" class="my-button" >
                 Jetzt kompensieren!
               </button>
-
             </div>
           </div>
         </div>
-
       </div>
   </main>
   </body>

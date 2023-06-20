@@ -1,5 +1,5 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ShuttleLine } from '../ShuttleLine';
@@ -36,7 +36,7 @@ export class DataServiceService {
     const request = this.shuttleLineCache.pipeRequest(()=>{
       return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     });
-    return request;    
+    return request;
   }
 
   public getShuttleLine(id: number): Observable<ShuttleLine> {
@@ -81,5 +81,5 @@ export class DataServiceService {
     var query = this.baseurl + "?" + "hasafID=" + hasafID + "&timeStart=" + UTCTime;
     return this.http.get<TimeStopInfo>(query);
   }
-  
+
 }
