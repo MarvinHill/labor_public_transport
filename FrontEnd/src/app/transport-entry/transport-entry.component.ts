@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class TransportEntryComponent{
 
-  @Input() text: string = "no name";
-  @Input() imageName: string = "notfound";
+  @Input() text = "no name";
+  @Input() imageName = "notfound";
 
 }

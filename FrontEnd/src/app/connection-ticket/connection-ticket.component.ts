@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./connection-ticket.component.css']
 })
 export class ConnectionTicketComponent {
-  show: boolean = false;
+  show = false;
 
 toggleText() {
   this.show = !this.show;
