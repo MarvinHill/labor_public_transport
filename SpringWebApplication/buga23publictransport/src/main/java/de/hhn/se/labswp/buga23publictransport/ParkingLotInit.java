@@ -18,8 +18,8 @@ import java.util.List;
 public class ParkingLotInit {
 
     @Bean
-    CommandLineRunner initializeParkingLots(BikeParkingLotRepository bikeRepo, CarParkingLotRepository carRepo) {
-        //Auto
+    CommandLineRunner initializeParkingLots(BikeParkingLotRepository bikeRepo, CarParkingLotRepository carRepo, CampsiteParkingRepository campsiteRepo) {
+        //Car
         //Mit Info zur Auslastung: https://parken-mannheim.de/
         Point c1GeoLocation = new Point(49.486712989660845, 8.464162980407481);
         List<Point> c1Entrances = new ArrayList<>();
@@ -628,7 +628,7 @@ public class ParkingLotInit {
         bugaEingangsbereichPoly.add(new Point(49.4980409, 8.5228261));
         bugaEingangsbereichPoly.add(new Point(49.4980324, 8.5227426));
 
-        //Fahrad
+        //Bike
         Point luisenparkHaupteingangGeoLocation = new Point(49.4789910, 8.4965408);
         List<Point> luisenparkHaupteingangEntrances = new ArrayList<>();
         List<Point> luisenparkHaupteingangPoly = new ArrayList<>();
@@ -649,6 +649,63 @@ public class ParkingLotInit {
         Point spinelliParkEingangParkschaleGeoLocation = new Point(49.50456629500593, 8.516429628068975);
         List<Point> spinelliParkEingangParkschaleEntrances = new ArrayList<>();
         List <Point> spinelliParkEingangParkschalePoly = new ArrayList<>();
+
+        //Campsites
+        Point mannheimStrandbadGeoLocation = new Point(49.449609915097064, 8.445486131218207);
+        List<Point> mannheimStrandbadEntrances = new ArrayList<>();
+        mannheimStrandbadEntrances.add(new Point(49.448644848294094, 8.447485846644637));
+        List <Point> mannheimStrandbadPoly = new ArrayList<>();
+        mannheimStrandbadPoly.add(new Point(49.4506095, 8.4443036));
+        mannheimStrandbadPoly.add(new Point(49.4501561, 8.4447488));
+        mannheimStrandbadPoly.add(new Point(49.4498423, 8.4450921));
+        mannheimStrandbadPoly.add(new Point(49.4495533, 8.4454717));
+        mannheimStrandbadPoly.add(new Point(49.4491767, 8.4460296));
+        mannheimStrandbadPoly.add(new Point(49.4490750, 8.4461972));
+        mannheimStrandbadPoly.add(new Point(49.4490546, 8.4463353));
+        mannheimStrandbadPoly.add(new Point(49.4487477, 8.4468181));
+        mannheimStrandbadPoly.add(new Point(49.4484830, 8.4472616));
+        mannheimStrandbadPoly.add(new Point(49.4486657, 8.4475426));
+        mannheimStrandbadPoly.add(new Point(49.4490387, 8.4469329));
+        mannheimStrandbadPoly.add(new Point(49.4497251, 8.4458796));
+        mannheimStrandbadPoly.add(new Point(49.4501915, 8.4453038));
+        mannheimStrandbadPoly.add(new Point(49.4505195, 8.4449344));
+        mannheimStrandbadPoly.add(new Point(49.4505825, 8.4446595));
+        mannheimStrandbadPoly.add(new Point(49.4506595, 8.4443722));
+        mannheimStrandbadPoly.add(new Point(49.4506095, 8.4443036));
+
+        Point campingBlaueAdriaGeoLocation = new Point(49.424813706331705, 8.466795069411175);
+        List<Point> campingBlaueAdriaEntrances = new ArrayList<>();
+        campingBlaueAdriaEntrances.add(new Point(49.42516539411334, 8.467339803704036));
+        List <Point> campingBlaueAdriaPoly = new ArrayList<>();
+        campingBlaueAdriaPoly.add(new Point(49.42410790000, 8.46552110000));
+        campingBlaueAdriaPoly.add(new Point(49.42482370000, 8.46585880000));
+        campingBlaueAdriaPoly.add(new Point(49.42523100000, 8.46605100000));
+        campingBlaueAdriaPoly.add(new Point(49.42521510000, 8.46632890000));
+        campingBlaueAdriaPoly.add(new Point(49.42516660000, 8.46735010000));
+        campingBlaueAdriaPoly.add(new Point(49.42497680000, 8.46730560000));
+        campingBlaueAdriaPoly.add(new Point(49.42494240000, 8.46729700000));
+        campingBlaueAdriaPoly.add(new Point(49.42492230000, 8.46729190000));
+        campingBlaueAdriaPoly.add(new Point(49.42489640000, 8.46795440000));
+        campingBlaueAdriaPoly.add(new Point(49.42431250000, 8.46785470000));
+        campingBlaueAdriaPoly.add(new Point(49.42435110000, 8.46715120000));
+        campingBlaueAdriaPoly.add(new Point(49.42403040000, 8.46667120000));
+        campingBlaueAdriaPoly.add(new Point(49.42399230000, 8.46648150000));
+        campingBlaueAdriaPoly.add(new Point(49.42385700000, 8.46571400000));
+        campingBlaueAdriaPoly.add(new Point(49.42390600000, 8.46557920000));
+        campingBlaueAdriaPoly.add(new Point(49.42408540000, 8.46552770000));
+        campingBlaueAdriaPoly.add(new Point(49.42410790000, 8.46552110000));
+
+        Point mannheimNeuostheimGeoLocation = new Point(49.4747660235335, 8.525321985175125);
+        List<Point> mannheimNeuostheimEntrances = new ArrayList<>();
+        mannheimNeuostheimEntrances.add(new Point(49.4744678609929, 8.525177635467537));
+        mannheimNeuostheimEntrances.add(new Point(49.4756557427789, 8.525452931798828));
+        List <Point> mannheimNeuostheimPoly = new ArrayList<>();
+        mannheimNeuostheimPoly.add(new Point(49.4756554, 8.5253725));
+        mannheimNeuostheimPoly.add(new Point(49.4744737, 8.5250969));
+        mannheimNeuostheimPoly.add(new Point(49.4744682, 8.5251589));
+        mannheimNeuostheimPoly.add(new Point(49.4744493, 8.5253752));
+        mannheimNeuostheimPoly.add(new Point(49.4756397, 8.5256474));
+        mannheimNeuostheimPoly.add(new Point(49.4756554, 8.5253725));
 
         return args -> {
             carRepo.save(new CarParkingLot(c1GeoLocation, c1Poly, c1Entrances, "C1 Hauptverwaltung MPB, Parkhaus", true, true, ParkingType.CAR, "C1,13-15, 68159 Mannheim", false));
@@ -690,6 +747,13 @@ public class ParkingLotInit {
             bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", true, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim", false));
             bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim", false));
             bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim", false));
+
+            campsiteRepo.save(new CampsiteParking(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, true, ParkingType.CAMPSITE, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            campsiteRepo.save(new CampsiteParking(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, true, ParkingType.CAMPSITE, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            campsiteRepo.save(new CampsiteParking(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, true, ParkingType.CAMPSITE, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            campsiteRepo.save(new CampsiteParking(mannheimStrandbadGeoLocation, mannheimStrandbadPoly, mannheimStrandbadEntrances, "Mannheim Strandbad", false, true, ParkingType.CAMPSITE, "Strandbadweg 1, 68199 Mannheim", false, true, true, true));
+            campsiteRepo.save(new CampsiteParking(campingBlaueAdriaGeoLocation, campingBlaueAdriaPoly, campingBlaueAdriaEntrances, "Campingplatz Blaue Adria", false, false, ParkingType.CAMPSITE, "Adriastraße, 67122 Altrip", false, false, true, true));
+            campsiteRepo.save(new CampsiteParking(mannheimNeuostheimGeoLocation, mannheimNeuostheimPoly, mannheimNeuostheimEntrances, "Wohnmobilstellplatz Mannheim-Neuostheim", false, false, ParkingType.CAMPSITE, "Hans-Thoma-Straße 3, 68163 Mannheim", false, false, false, false));
         };
     }
 

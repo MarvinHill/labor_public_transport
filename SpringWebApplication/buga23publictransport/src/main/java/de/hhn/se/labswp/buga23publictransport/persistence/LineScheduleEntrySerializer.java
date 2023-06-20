@@ -25,7 +25,8 @@ public class LineScheduleEntrySerializer extends JsonSerializer<LineScheduleEntr
             gen.writeStartObject();
             gen.writeStringField("id", String.valueOf(line.getId()));
             gen.writeStringField("lineDesignator", line.getLineDesignator());
-            gen.writeStringField("delay", String.valueOf(line.getDelay()));
+//            Die Zeile muss gelöscht werden, aus Klasse wurde entfernt aber hier wurde vergessen
+//            gen.writeStringField("delay", String.valueOf(line.getDelay()));
             gen.writeEndObject();
         }
         gen.writeEndArray();
