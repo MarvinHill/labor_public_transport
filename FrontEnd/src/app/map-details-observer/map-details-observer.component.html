@@ -4,16 +4,16 @@
         <h2>{{observerService.data.name}}</h2>
         <div class="my-2">
             <p *ngIf="observerService.data.barrierfree" class="p-0 m-0">
-                Barrierefrei : ja
+                Barrierefrei : Ja
             </p>
             <p *ngIf="!observerService.data.barrierfree" class="p-0 m-0">
-                Barrierefrei : nein
+                Barrierefrei : Nein
             </p>
             <p *ngIf="observerService.data.charging" class="p-0 m-0">
-                Ladestationen : ja
+                Ladestationen : Ja
             </p>
             <p *ngIf="!observerService.data.charging" class="p-0 m-0">
-                Ladestationen : nein
+                Ladestationen : Nein
             </p>
         </div>
         <div role="button" class="google-routing-button" style="margin-left: auto; margin-right: auto; width: 25%;"
@@ -22,6 +22,38 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="observerService.show === ObserverState.CAMPSITE" class="row">
+  <div class="col text-center">
+    <img class="m-4" src="assets/icon/parkingIcon.svg" alt="parking-icon">
+    <h2>{{observerService.data.name}}</h2>
+    <div class="my-2">
+      <p *ngIf="observerService.data.electricity" class="p-0 m-0">
+        Strom : Ja
+      </p>
+      <p *ngIf="!observerService.data.electricity" class="p-0 m-0">
+        Strom : Nein
+      </p>
+      <p *ngIf="observerService.data.water" class="p-0 m-0">
+        Wasserversorgung : Ja
+      </p>
+      <p *ngIf="!observerService.data.water" class="p-0 m-0">
+        Wasserversorgung : Nein
+      </p>
+      <p *ngIf="observerService.data.dogsAllowed" class="p-0 m-0">
+        Hunde erlaubt : Ja
+      </p>
+      <p *ngIf="!observerService.data.dogsAllowed" class="p-0 m-0">
+        Hunde erlaubt : Nein
+      </p>
+    </div>
+    <div role="button" class="google-routing-button" style="margin-left: auto; margin-right: auto; width: 25%;"
+         (click)="openMaps();">
+      <img src="assets/icon/googleMaps.svg" alt="google maps">
+    </div>
+  </div>
+</div>
+
 <div *ngIf="observerService.show === ObserverState.RNV">RNV Details {{observerService.data}} </div>
 <div *ngIf="observerService.show === ObserverState.SHUTTLE">
     <app-timeline [shuttleLine]="observerService.data" [restrictSize]="false"></app-timeline>
