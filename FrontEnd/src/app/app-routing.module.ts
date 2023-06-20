@@ -14,6 +14,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { PreisService } from './preis.service';
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 import {BikeParkingItemComponent} from "./bike-parking-item/bike-parking-item.component";
+import {CampsiteParkingItemComponent} from "./campsite-parking-item/campsite-parking-item.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -30,7 +31,7 @@ const routes: Routes = [
   {path:'impressum', component: ImpressumComponent},
 
   {path:'bike-parking', component: BikeParkingItemComponent},
-  {path:'campsites', component: ParkingViewComponent}
+  {path:'campsites', component: CampsiteParkingItemComponent}
 ];
 
 @NgModule({
