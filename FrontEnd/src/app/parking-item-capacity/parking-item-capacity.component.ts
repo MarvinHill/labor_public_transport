@@ -1,10 +1,9 @@
-import { NgStyle } from '@angular/common';
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {ParkingLot} from "../ParkingLot";
 import {ParkingType} from "../ParkingType";
 import {MapService} from "../services/map.service";
 import {LatLng} from "leaflet";
-import { MapDetailsObserverService } from '../services/map-details-observer.service';
+import {MapDetailsObserverService} from '../services/map-details-observer.service';
 
 @Component({
   selector: 'app-parkingItemCapacity',
@@ -29,8 +28,7 @@ export class ParkingItemCapacityComponent implements OnInit {
   parkingName: String = "NAME";
   parkingID: number;
   parkingAddress: String = "ADDRESS";
-
-  protected readonly ParkingType = ParkingType;
+  carParkingType: ParkingType;
 
   // auslastungen: number[] = [50, 100, 75, 25, 25, 75, 50, 100, 9, 11, 10];
   auslastungen: number[] = [];
@@ -48,4 +46,5 @@ export class ParkingItemCapacityComponent implements OnInit {
     console.log(this.screenWidth);
   }
 
+  protected readonly ParkingType = ParkingType;
 }

@@ -22,6 +22,8 @@ export class DataServiceService {
 
   bikeParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
 
+  campsiteParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+
   constructor(private http:HttpClient, private router : Router ) {}
 
   update() {
@@ -36,7 +38,7 @@ export class DataServiceService {
     const request = this.shuttleLineCache.pipeRequest(()=>{
       return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     });
-    return request;    
+    return request;
   }
 
   public getShuttleLine(id: number): Observable<ShuttleLine> {
@@ -62,6 +64,13 @@ export class DataServiceService {
     })
   }
 
+  getAllCampsiteParking() {
+    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/campsite/all')
+    request.subscribe(resp => {
+      this.campsiteParking.next(resp);
+    })
+  }
+
   parkingCache : DataCache<ParkingLot> = new DataCache<ParkingLot>();
   getAllParking() {
     const request = this.parkingCache.pipeRequest(()=>{
@@ -81,5 +90,5 @@ export class DataServiceService {
     var query = this.baseurl + "?" + "hasafID=" + hasafID + "&timeStart=" + UTCTime;
     return this.http.get<TimeStopInfo>(query);
   }
-  
+
 }

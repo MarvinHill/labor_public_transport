@@ -36,6 +36,7 @@ export class MapService {
   userLocation = new L.LayerGroup;
   carParkingLots = new L.LayerGroup;
   carParkingLotEntrances = new L.LayerGroup;
+  campsiteParkingLot = new L.LayerGroup;
   publicTransportLines = [];
   bugaArea = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
@@ -69,6 +70,7 @@ export class MapService {
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
+    this.layerControl.addOverlay(this.campsiteParkingLot, "Wohnmobilstellplätze");
     this.layerControl.addOverlay(this.entrances, "Eingänge");
     this.layerControl.addOverlay(this.exits, "Ausgänge")
     this.publicTransportLines.forEach(entry => {
@@ -104,16 +106,26 @@ export class MapService {
         this.makeBikeParking(element);
       });
     })
+    this.dataService.campsiteParking.subscribe(values => {
+
+      values.forEach(element => {
+        this.makeCampsiteParking(element);
+      });
+    })
 
     this.dataService.getAllCarParking();
 
     this.dataService.getAllBikeParking();
+
+    this.dataService.getAllCampsiteParking();
 
     this.map.addLayer(this.userLocation);
 
     this.map.addLayer(this.carParkingLots);
 
     this.map.addLayer(this.bikeParkingLots);
+
+    this.map.addLayer(this.campsiteParkingLot);
 
     this.map.addLayer(this.bugaArea);
 
@@ -210,6 +222,61 @@ export class MapService {
     }
     marker.on("click", function (e: any) {
       this.observerService.changeDisplay(bikeparking)
+    }.bind(this));
+  }
+
+  makeCampsiteParking(campsite: ParkingLot) {
+    if (campsite.area.length > 0) {
+      var arr = [];
+      for (var i = 0; i < campsite.area.length; i++) {
+        arr.push([campsite.area.at(i).x, campsite.area.at(i).y]);
+      }
+      var markerLat;
+      var markerLon;
+      var poly;
+      var parkingIcon;
+      if(campsite.name.includes("P6") || campsite.name.includes("P7") || campsite.name.includes("P8")) {
+        poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.campsiteParkingLot);
+        markerLat = poly.getCenter().lat;
+        markerLon = poly.getCenter().lng + 0.00050;
+        parkingIcon = L.icon({
+          iconUrl: 'assets/icon/parking/Caravan.svg',
+          iconSize: [45, 72], // size of the icon
+          iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+      }
+      else {
+        poly = L.polygon(arr, { color: '#C830EE' }).addTo(this.campsiteParkingLot);
+        markerLat = poly.getCenter().lat;
+        markerLon = poly.getCenter().lng;
+        parkingIcon = L.icon({
+          iconUrl: 'assets/icon/parking/Camping.svg',
+          iconSize: [45, 72], // size of the icon
+          iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+      }
+      var marker = L.marker([markerLat, markerLon], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+    else {
+      var marker = L.marker([campsite.geoLocation.x, campsite.geoLocation.y], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Entrance.png',
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
+    });
+
+    if (campsite.entrance.length > 0) {
+      for (var i = 0; i < campsite.entrance.length; i++) {
+        L.marker([campsite.entrance.at(i).x, campsite.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
+      }
+    }
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(campsite)
     }.bind(this));
   }
 
