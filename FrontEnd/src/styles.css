@@ -43,6 +43,11 @@
     display: none;
 }
 
+.info > h3 {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 .info {
     display: block;
 }
