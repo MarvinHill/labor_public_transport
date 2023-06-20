@@ -176,6 +176,35 @@
   height: 0;
 }
 
+.distance-button-max {
+  position: absolute;
+  top: 1.5em;
+  left: 0.5em;
+  z-index: 1001;
+  border: solid lightgray 2px;
+  border-radius: 0.6em;
+  background: white;
+  font-weight: bolder;
+}
+
+.text-min {
+  visibility: hidden;
+}
+
+.text {
+  visibility: visible;
+ margin-top: 0.5em;
+  position: absolute;
+  top: 1.5em;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1001;
+  border: solid white 10px;
+  border-radius: 0.6em;
+  background: white;
+  font-weight: bolder;
+}
+
 .button-min {
   position: absolute;
   top: 1em;

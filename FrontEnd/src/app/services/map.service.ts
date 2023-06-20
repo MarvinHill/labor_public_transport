@@ -9,6 +9,8 @@ import { ShuttleLineService } from '../services/shuttle-line.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { SearchService } from './search.service';
+import { LineScheduleEntry } from '../LineScheduleEntry';
+import { ShuttleLine } from '../ShuttleLine';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,8 @@ export class MapService{
   public locateButtonClass = "button-min";
   public bugaBackButtonClass = "button-min";
   public speechBubbleClass = "speech-bubble-min";
+  public distanceButtonClass: string = "button-min";
+  public textClass: String = "text-min";
 
   public mapHeight = "10em";
 
@@ -36,6 +40,11 @@ export class MapService{
   bikeParkingLots = new L.LayerGroup;
   entrances = new L.LayerGroup;
   exits = new L.LayerGroup;
+  distanceShower = new L.LayerGroup;
+  myLocation;
+  s1; s2; dist; name; noob; noob2; newLatLng: any;
+  calculateDistance: number;
+  lat1; lat2; lng1; lng2: any;
   layerOptions : L.Control.LayersOptions = {
     position : "bottomright",
   }
@@ -51,6 +60,11 @@ export class MapService{
   topBarHeight: number;
   public innerWidth = 1000;
   breakPoint = 720;
+  lineScheduleEntryList: LineScheduleEntry[];
+  distance: number;
+  shuttleLine: ShuttleLine;
+  shuttleLineList: ShuttleLine[];
+
 
   constructor( private dataService: DataServiceService, protected observerService: MapDetailsObserverService
     , private shuttleLineService: ShuttleLineService, private snackbar: MatSnackBar) {
@@ -82,6 +96,11 @@ export class MapService{
     this.locateUser();
 
     this.makeLayerControls();
+
+    this.dataService.lines.subscribe(value => {
+      this.shuttleLineList = value;
+      this.myDistanceShower(this.shuttleLineList);
+    })
 
     this.dataService.carParking.subscribe(values => {
 
@@ -483,6 +502,8 @@ export class MapService{
       this.locateButtonClass = "locate-button-max shadow";
       this.bugaBackButtonClass = "buga-back-button-max shadow";
       this.speechBubbleClass = "speech-bubble pright acenter";
+      this.distanceButtonClass = "distance-button-max shadow";
+      this.textClass = "text";
       this.updateHeight()
       this.updateWidth();
     }
@@ -498,6 +519,8 @@ export class MapService{
       this.resizeButtonClass = "button-min";
       this.locateButtonClass = "button-min";
       this.bugaBackButtonClass = "button-min";
+      this.distanceButtonClass = "button-min";
+      this.textClass = "text-min";
       this.speechBubbleClass = "speech-bubble-min button-min";
       this.updateHeight()
       this.updateWidth();
@@ -546,27 +569,136 @@ export class MapService{
     }
   }
 
-  locateUser() : any {
+   // evtl. die Zahlen in Math.pow 71000 & 111000 -> genauer hinbekommen
+  // button oben links, damit die Linie aufgerufen wird
+  // evtl. auf der Linie hinschreiben, dass es ca. 300m weg ist oder so -> mal bei leaflet schauen
+
+  async locateUser(): Promise<any> {
     const userLocationGroup = this.userLocation;
-    this.map.locate({setView: true}).on('locationfound', function(e) {
 
-      const locationIcon = L.icon({
-        iconUrl: 'assets/icon/wavingPerson.gif',
-        iconSize:     [60, 72], // size of the icon
-        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    const locationPromise = new Promise((resolve) => {
+      this.map.locate({ setView: true }).on('locationfound', (e) => {
+        var locationIcon = L.icon({
+          iconUrl: 'assets/icon/wavingPerson.gif',
+          iconSize: [60, 72], // size of the icon
+          iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        const location = e.latlng;
+        userLocationGroup.clearLayers();
+
+        var marker = L.marker(location, { icon: locationIcon }).addTo(userLocationGroup);
+        marker.on("click", function (e) {
+          marker.bindPopup("You are Here!").openPopup();
+        });
+
+        resolve(location);
       });
-
-      const location = e.latlng;
-
-      userLocationGroup.clearLayers();
-      const marker = L.marker(location, {icon: locationIcon}).addTo(userLocationGroup);
-       marker.on("click", function(e) {
-         marker.bindPopup("You are Here!").openPopup();
-       })
     });
+
+    const pos = await locationPromise;
+    this.myLocation = pos;
     this.userLocation = userLocationGroup;
   }
+
+
+  async myDistanceShower(shuttleLineList: ShuttleLine[]): Promise<any> {
+    if (shuttleLineList == undefined) {
+      this.locateUser();
+    } else {
+      var a = 100000;// furthest distance search radius
+      let i, j: number;
+      for (i = 0; i < shuttleLineList.length; i++) {
+        for (j = 0; j < shuttleLineList[i].lineScheduleEntryList.length; j++) {
+          this.distance = this.getDistanceFromLatLonInKm(shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x, shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y, this.myLocation.lat, this.myLocation.lng);
+
+          if (this.distance < a) {// if the distance is less than what is already saved
+            a = this.distance;// new furthest search distance replaces the old one
+
+            this.s1 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x;
+            this.s2 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y;
+            this.name = shuttleLineList[i].lineScheduleEntryList[j].station.stationDesignator;
+
+          }
+        }
+      }
+
+      var xx: [number, number][] = [
+        [this.s1, this.s2],
+        [this.myLocation.lat, this.myLocation.lng]
+      ];
+      var layer = L.polyline(xx, { color: '#8A2BE2', dashArray: '20, 20', dashOffset: '0' }).addTo(this.distanceShower);
+
+      this.noob2 = this.noob.toFixed(2);
+
+      this.createMiddleMarkers(layer);
+      var popup = L.popup()
+        .setLatLng(this.newLatLng)
+        .setContent('~ ' + this.noob.toFixed(2) + ' km')
+        .openOn(this.map);
+
+      layer.bindPopup(popup, { closeButton: false, closeOnClick: false }).addTo(this.distanceShower);
+
+
+
+      this.distanceShower.addTo(this.userLocation);
+    }
+
+  }
+  // benutzt die Harversine Formel um die Fluglinie zu berechnen
+  getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = this.deg2rad(lon2 - lon1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2)
+      ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+
+    this.noob = d;
+    return d;
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI / 180)
+  }
+
+  distanceCaller() {
+    if (this.distance == 0) {
+      this.myDistanceShower(this.shuttleLineList);
+    } else {
+      this.distanceShower.clearLayers();
+      this.distance = 0;
+    }
+  }
+
+  locateUserCaller() {
+    this.locateUser();
+    this.distanceShower.clearLayers();
+    this.distance = 0;
+  }
+
+  calcMiddleLatLng(map, latlng1, latlng2) {
+    // calculate the middle coordinates between two markers
+    const p1 = map.project(latlng1);
+    const p2 = map.project(latlng2);
+    return map.unproject(p1._add(p2)._divideBy(2));
+  }
+
+  createMiddleMarkers(line) {
+    var latlngs = line.getLatLngs();
+    for (var i = 1; i < latlngs.length; i++) {
+      var left = latlngs[i - 1];
+      var right = latlngs[i];
+
+      this.newLatLng = this.calcMiddleLatLng(this.map, left, right);
+    }
+  }
+
 
   moveToBuga() : any {
     /* visual output for the user, letting him know that he is already at the Buga */

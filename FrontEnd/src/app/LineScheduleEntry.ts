@@ -8,6 +8,5 @@ export class LineScheduleEntry{   // -> ist ein Punk in der Shuttleline
     delay: number;
     publicTransportLine: ShuttleLine;
     station : Station;
-    stationDesignator: string;    // -> ist der Name
-    geoLocation: Point;
+    
 }

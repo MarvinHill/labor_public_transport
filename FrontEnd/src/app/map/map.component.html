@@ -1,9 +1,11 @@
 <div [ngClass]="mapService.mapContainerClass" id="map-container" [ngStyle]="{ 'height':mapService.mapHeight}">
   <div class="inner-container shadow">
-
     <button id="resize" [ngClass]="mapService.resizeButtonClass" (click)="mapService.resizeMap()">X</button>
-    <button id="locate" [ngClass]="mapService.locateButtonClass" (click)="mapService.locateUser()">
+    <button id="locate" [ngClass]="mapService.locateButtonClass" (click)="mapService.locateUserCaller()">
       <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/my_location.svg" style="height: 2.5em;">
+    </button>
+    <button id="distance" [ngClass]="mapService.distanceButtonClass" (click)="mapService.distanceCaller()">
+      <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/rulers.svg" style="height: 2.5em;">    
     </button>
     <button id="buga-back-button-id" [ngClass]="mapService.bugaBackButtonClass" (click)="mapService.moveToBuga()">
       <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/buga_logo.png" style="height: 2.5em;">
