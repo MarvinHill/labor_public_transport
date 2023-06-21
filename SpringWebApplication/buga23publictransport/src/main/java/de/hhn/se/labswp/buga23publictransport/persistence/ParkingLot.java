@@ -20,10 +20,14 @@ public class ParkingLot {
     String name;
     boolean barrierfree;
     boolean charging;
-    ParkingType parkingType;    // 1 = bike, 2 = car, 3 = bus
+    ParkingType parkingType;
     String address;
+    boolean employeeParking;
+    boolean electricity;
+    boolean water;
+    boolean dogsAllowed;
 
-    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address) {
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -32,6 +36,22 @@ public class ParkingLot {
         this.charging = charging;
         this.parkingType = parkingType;
         this.address = address;
+        this.employeeParking = employeeParking;
+    }
+
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking, boolean electricity, boolean water, boolean dogsAllowed) {
+        this.geoLocation = geoLocation;
+        this.area = area;
+        this.entrance = entrance;
+        this.name = name;
+        this.barrierfree = barrierfree;
+        this.charging = charging;
+        this.parkingType = parkingType;
+        this.address = address;
+        this.employeeParking = employeeParking;
+        this.electricity = electricity;
+        this.water = water;
+        this.dogsAllowed = dogsAllowed;
     }
 
     public ParkingLot() { }
@@ -102,5 +122,25 @@ public class ParkingLot {
 
     public String getAddress() {
         return this.address;
+    }
+
+    public void setEmployeeParking(boolean employeeParking) {
+        this.employeeParking = employeeParking;
+    }
+
+    public boolean getEmployeeParking() {
+        return employeeParking;
+    }
+
+    public boolean getElectricity() {
+        return electricity;
+    }
+
+    public boolean getWater() {
+        return water;
+    }
+
+    public boolean getDogsAllowed() {
+        return dogsAllowed;
     }
 }

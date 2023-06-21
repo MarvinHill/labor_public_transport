@@ -7,9 +7,9 @@ import org.springframework.data.geo.Point;
 import java.util.List;
 
 @Entity
-public class BikeParkingLot extends ParkingLot {
+public class CampsiteParking extends ParkingLot {
 
-    public BikeParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking) {
+    public CampsiteParking(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking, boolean electricity, boolean water, boolean dogsAllowed) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -19,7 +19,10 @@ public class BikeParkingLot extends ParkingLot {
         this.parkingType = parkingType;
         this.address = address;
         this.employeeParking = employeeParking;
+        this.electricity = electricity;
+        this.water = water;
+        this.dogsAllowed = dogsAllowed;
     }
 
-    public BikeParkingLot() { }
+    public CampsiteParking() { }
 }
