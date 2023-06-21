@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import * as L from 'leaflet';
 import { Point } from 'leaflet';
 import { DataServiceService } from './data-service.service';
 import { MapService } from './map.service';
-import { MapDetailsObserverComponent } from '../map-details-observer/map-details-observer.component';
 import { MapDetailsObserverService } from './map-details-observer.service';
 
 @Injectable({
@@ -29,6 +27,7 @@ export class ShuttleLineService {
   public initShuttleLineViewOnMap(layers, service: MapService) {
     this.dataService.getShuttleLines().then(
       (lines: ShuttleLine[]) => {
+
         this.lines = lines;
         console.warn(lines);
         this.lines?.forEach(line => {

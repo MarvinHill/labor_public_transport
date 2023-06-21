@@ -9,6 +9,7 @@ import { ShuttleLineService } from '../services/shuttle-line.service';
 import { LineLegendComponent } from '../line-legend/line-legend.component';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 @Injectable({
   providedIn: 'root'
@@ -119,8 +120,8 @@ export class MapService {
       this.observerService.changeVisibility(false);
     }.bind(this));
 
+    this.detectMapMovement();
   }
-
 
   makeCarParking(parkinglot: ParkingLot) {
     let parkingIcon = L.icon({

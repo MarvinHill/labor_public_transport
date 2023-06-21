@@ -14,9 +14,10 @@ import { DataCache } from '../DataCache';
 export class DataServiceService {
 
   //baseurl : string = 'https://get2buga.de/api';
-  baseurl = 'http://localhost:8080/api';
-
   private mapLocatorApiURL = "https://nominatim.openstreetmap.org/search";
+
+  baseurl: string = 'http://localhost:8080/api';
+
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 

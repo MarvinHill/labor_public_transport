@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleCha
 import { ShuttleLine } from '../ShuttleLine';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import { RnvStopEvent } from '../RnvStopEvent';
+import { MapDetailsObserverService } from '../services/map-details-observer.service';
+import { MapService } from '../services/map.service';
+import { LatLng, Point } from 'leaflet';
 
 @Component({
   selector: 'app-timeline',
@@ -20,17 +23,18 @@ export class TimelineComponent implements OnInit, OnChanges {
     this.setUp();
   }
 
-  @Input() public shuttleLine: ShuttleLine;
-  @Input() restrictSize: boolean = true;
+  @Input() shuttleLine: ShuttleLine;
+  @Input() restrictSize = true;
 
   lineName = "no line name";
   shuttleLineID: number;
   lineScheduleEntryList: LineScheduleEntry[];
   shuttleLineList: ShuttleLine[];
-
   number: number;
   JSON: JSON = JSON;
   chache: Map<string, RnvStopEvent[]>
+
+  constructor(protected observerService: MapDetailsObserverService, protected mapService: MapService) { }
 
   protected filterAndGetNewest(entries: RnvStopEvent[]): RnvStopEvent {
     var now: Date = new Date();
@@ -51,6 +55,12 @@ export class TimelineComponent implements OnInit, OnChanges {
     });
 
     return entries[0];
+  }
+
+  panToTransportLine() {
+    this.observerService.changeDisplay(this.shuttleLine);
+    var point: Point = this.shuttleLine.geoLinePoints[0];
+    this.mapService.openAndFlyTo(new LatLng(point.x, point.y));
   }
 
   private setTimeOfDate(strTime: string): Date {
@@ -93,13 +103,12 @@ export class TimelineComponent implements OnInit, OnChanges {
   }
 
   formateTime(str: string) {
-
     if (str == null) {
       return "";
     }
-    const tokens: string[] = str.split(":");
-    const hour: string = tokens[0].trim();
-    const min: string = tokens[1].trim();
+    var tokens: string[] = str.split(":");
+    var hour: string = tokens[0].trim();
+    var min: string = tokens[1].trim();
 
     return `${hour}:${min}`;
   }

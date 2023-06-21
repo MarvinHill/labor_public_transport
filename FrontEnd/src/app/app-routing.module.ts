@@ -13,6 +13,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { PreisService } from './preis.service';
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
+import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path:'parking', component: ParkingViewComponent},
   {path: 'connection-ticket', component: ConnectionTicketComponent},
   {path: 'PreisService', component: PreisService},
-  {path:'impressum', component: ImpressumComponent}
+  {path:'impressum', component: ImpressumComponent},
+  {path:'public-transport', component: PublicTransportViewComponent}
 ];
 
 @NgModule({

@@ -7,6 +7,10 @@
     background-color: #0677e0;
 }
 
+.bc-y {
+    background-color: #dfb947;
+}
+
 .bc-db {
     background-color: #154889;
 }
@@ -39,6 +43,11 @@
     display: none;
 }
 
+.info>h3 {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 .info {
     display: block;
 }
@@ -67,6 +76,16 @@
 
 .not-select {
     user-select: none;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .leaflet-control-layers-toggle {
@@ -105,14 +124,4 @@
     margin-right: 8px;
     text-align: center;
     vertical-align: middle;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
