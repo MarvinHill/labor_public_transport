@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import{ShuttleLine} from '../ShuttleLine';
 import { DataServiceService } from '../services/data-service.service';
+import { TransportType } from '../TransportType';
 
 
 @Component({
@@ -29,17 +30,11 @@ export class ShuttleViewComponent{
     this.http = http;
     this.dataService = dataService;
     dataService.lines.subscribe(value=> {
-      this.shuttleLineList = value;
+      this.shuttleLineList = value.filter(value => {
+        return value.transportType == TransportType[TransportType.Shuttle];
+      });
     })
     dataService.update()
   }
-
-  delete(item: number){
-    
-      const deletePost = this.http.delete('http://localhost:8080/ptl/' + item)
-      deletePost.subscribe(val => {
-        this.dataService.update();
-      })
-      }
 
 }

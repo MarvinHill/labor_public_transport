@@ -6,6 +6,7 @@ import { ShuttleLine } from '../ShuttleLine';
 import { Router } from '@angular/router';
 import {ParkingLot} from "../ParkingLot";
 import {ParkingCapacity} from "../ParkingCapacity";
+import { TimeStopInfo } from '../TimeStopInfo';
 import { DataCache } from '../DataCache';
 
 @Injectable({
@@ -14,15 +15,13 @@ import { DataCache } from '../DataCache';
 export class DataServiceService {
 
   //baseurl : string = 'https://get2buga.de/api';
-  baseurl  = 'http://localhost:8080/api';
-
-  private mapLocatorApiURL  = "https://nominatim.openstreetmap.org/search";
+  baseurl: string = 'http://localhost:8080/api';
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
-  carParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
+  carParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
 
-  bikeParking: Subject<ParkingLot[]> =new Subject<ParkingLot[]>();
+  bikeParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
 
   parkingCapacity: Subject<ParkingCapacity[]> =new Subject<ParkingCapacity[]>();
 
@@ -50,7 +49,7 @@ export class DataServiceService {
   getData() {
     return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     //https://api.openbrewerydb.org/breweries/search?page=1&per_page=5&query=
-    }
+  }
 
   getAllCarParking() {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all')
@@ -81,10 +80,17 @@ export class DataServiceService {
     })
   }
 
-  openMapExternal(from : string, to : string){
+  openMapExternal(from: string, to: string) {
     window.open(`https://www.google.de/maps/dir/${from}/${to}/`);
   }
-  openMapExternalWithDestPosition(lat : string, lon : string){
-      window.open(`https://www.google.de/maps/dir//${lat},${lon}/`);
+
+  openMapExternalWithDestPosition(lat: string, lon: string) {
+    window.open(`https://www.google.de/maps/dir//${lat},${lon}/`);
   }
+
+  public getTimeStopInfo(hasafID: String, UTCTime: String): Observable<TimeStopInfo> {
+    var query = this.baseurl + "?" + "hasafID=" + hasafID + "&timeStart=" + UTCTime;
+    return this.http.get<TimeStopInfo>(query);
+  }
+
 }
