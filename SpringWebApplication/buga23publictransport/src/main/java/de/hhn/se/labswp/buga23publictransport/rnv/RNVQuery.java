@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalUnit;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
-import static java.time.temporal.ChronoUnit.HOURS;
 
 @RestController
 public class RNVQuery {
@@ -72,13 +69,11 @@ public class RNVQuery {
 
     private static String get4HOffset() {
         var now = Instant.now();
-        now.plus(4, HOURS);
+        now = now.plus(240, ChronoUnit.MINUTES);
         return now.toString();
     }
 
     private static String getNow() {
         return Instant.now().toString();
     }
-
-
 }
