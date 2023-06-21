@@ -27,7 +27,9 @@ public class ParkingLot {
     boolean water;
     boolean dogsAllowed;
 
-    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking) {
+    int maxCapacity;
+
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, int maxCapacity, boolean employeeParking) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -39,7 +41,7 @@ public class ParkingLot {
         this.employeeParking = employeeParking;
     }
 
-    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking, boolean electricity, boolean water, boolean dogsAllowed) {
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, int maxCapacity, boolean employeeParking, boolean electricity, boolean water, boolean dogsAllowed) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -122,6 +124,14 @@ public class ParkingLot {
 
     public String getAddress() {
         return this.address;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public int getMaxCapacity() {
+        return this.maxCapacity;
     }
 
     public void setEmployeeParking(boolean employeeParking) {

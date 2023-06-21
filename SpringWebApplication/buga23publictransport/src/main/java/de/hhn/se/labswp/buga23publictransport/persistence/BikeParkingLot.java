@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class BikeParkingLot extends ParkingLot {
 
-    public BikeParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking) {
+    public BikeParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, int maxCapacity, boolean employeeParking) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -18,6 +18,7 @@ public class BikeParkingLot extends ParkingLot {
         this.charging = charging;
         this.parkingType = parkingType;
         this.address = address;
+        this.maxCapacity = maxCapacity;
         this.employeeParking = employeeParking;
     }
 

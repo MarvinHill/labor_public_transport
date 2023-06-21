@@ -12,6 +12,7 @@ export interface ParkingLot extends Searchable {
   charging: boolean;
   parkingType: ParkingType;
   address: string;
+  maxCapacity: number;
   employeeParking: boolean;
   electricity: boolean;
   water: boolean;
