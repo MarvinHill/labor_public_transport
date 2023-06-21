@@ -34,6 +34,12 @@ export class MapDetailsObserverService {
       this.changeVisibility(true);
       return;
     }
+    else if(data.parkingType === ParkingType.CARAVAN) {
+      this.show = ObserverState.CARAVAN;
+      this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
     else{
       this.changeVisibility(false);
       this.show = ObserverState.NOTHING;

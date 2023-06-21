@@ -106,6 +106,12 @@ export class MapService {
         this.makeBikeParking(element);
       });
     })
+    this.dataService.caravanParking.subscribe(values => {
+
+      values.forEach(element => {
+        this.makeCaravanParking(element);
+      });
+    })
     this.dataService.campsiteParking.subscribe(values => {
 
       values.forEach(element => {
@@ -116,6 +122,8 @@ export class MapService {
     this.dataService.getAllCarParking();
 
     this.dataService.getAllBikeParking();
+
+    this.dataService.getAllCaravanParking();
 
     this.dataService.getAllCampsiteParking();
 
@@ -225,43 +233,67 @@ export class MapService {
     }.bind(this));
   }
 
+  makeCaravanParking(caravanParking: ParkingLot) {
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Caravan.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    if (caravanParking.area.length > 0) {
+      var arr = [];
+      for (var i = 0; i < caravanParking.area.length; i++) {
+        arr.push([caravanParking.area.at(i).x, caravanParking.area.at(i).y]);
+      }
+      var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.campsiteParkingLot);
+      var marker = L.marker([poly.getCenter().lat, poly.getCenter().lng + 0.0005], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+    else {
+      var marker = L.marker([caravanParking.geoLocation.x, caravanParking.geoLocation.y], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(caravanParking)
+    }.bind(this));
+
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Entrance.png',
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
+    });
+
+    if (caravanParking.entrance.length > 0) {
+      for (var i = 0; i < caravanParking.entrance.length; i++) {
+        L.marker([caravanParking.entrance.at(i).x, caravanParking.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
+      }
+    }
+
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(caravanParking)
+    }.bind(this));
+  }
+
   makeCampsiteParking(campsite: ParkingLot) {
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Camping.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
     if (campsite.area.length > 0) {
       var arr = [];
       for (var i = 0; i < campsite.area.length; i++) {
         arr.push([campsite.area.at(i).x, campsite.area.at(i).y]);
       }
-      var markerLat;
-      var markerLon;
-      var poly;
-      var parkingIcon;
-      if(campsite.name.includes("P6") || campsite.name.includes("P7") || campsite.name.includes("P8")) {
-        poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.campsiteParkingLot);
-        markerLat = poly.getCenter().lat;
-        markerLon = poly.getCenter().lng + 0.00050;
-        parkingIcon = L.icon({
-          iconUrl: 'assets/icon/parking/Caravan.svg',
-          iconSize: [45, 72], // size of the icon
-          iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
-          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-        });
-      }
-      else {
-        poly = L.polygon(arr, { color: '#C830EE' }).addTo(this.campsiteParkingLot);
-        markerLat = poly.getCenter().lat;
-        markerLon = poly.getCenter().lng;
-        parkingIcon = L.icon({
-          iconUrl: 'assets/icon/parking/Camping.svg',
-          iconSize: [45, 72], // size of the icon
-          iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
-          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-        });
-      }
-      var marker = L.marker([markerLat, markerLon], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+      var poly = L.polygon(arr, { color: '#C830EE' }).addTo(this.campsiteParkingLot);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon }).addTo(this.campsiteParkingLot);
     }
     else {
       var marker = L.marker([campsite.geoLocation.x, campsite.geoLocation.y], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
     }
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(campsite)
+    }.bind(this));
 
     var entranceIcon = L.icon({
       iconUrl: 'assets/icon/parking/Entrance.png',
@@ -272,9 +304,10 @@ export class MapService {
 
     if (campsite.entrance.length > 0) {
       for (var i = 0; i < campsite.entrance.length; i++) {
-        L.marker([campsite.entrance.at(i).x, campsite.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
+        L.marker([campsite.entrance.at(i).x, campsite.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
       }
     }
+
     marker.on("click", function (e: any) {
       this.observerService.changeDisplay(campsite)
     }.bind(this));
