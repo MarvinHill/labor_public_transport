@@ -32,7 +32,8 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
 import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
 import { LineLegendComponent } from './line-legend/line-legend.component';
 import { TimeDisplayComponent } from './time-display/time-display.component';
-
+import { CampsiteParkingItemComponent } from './campsite-parking-item/campsite-parking-item.component';
+import { BikeParkingItemComponent } from "./bike-parking-item/bike-parking-item.component";
 
 
 @NgModule({
@@ -61,6 +62,8 @@ import { TimeDisplayComponent } from './time-display/time-display.component';
     PublicTransportViewComponent,
     LineLegendComponent,
     TimeDisplayComponent,
+    CampsiteParkingItemComponent,
+    BikeParkingItemComponent,
   ],
   imports: [
     BrowserModule,

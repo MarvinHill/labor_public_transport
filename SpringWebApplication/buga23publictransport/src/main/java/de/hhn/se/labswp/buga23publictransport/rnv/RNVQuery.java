@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalUnit;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import static java.time.temporal.ChronoUnit.HOURS;
@@ -22,6 +21,9 @@ public class RNVQuery {
     )
     public static TimeStopInfo getStationsTimes(
             @RequestParam String hasafId) throws IOException {
+
+        var debugTimeNow = getNow();
+        var debugTime4HAfter = get4HOffset();
         var query = new QueryBuilder(
                 ResourceUtils.getFile("classpath:graphql/GetStationTimes.graphql")
         )
@@ -33,6 +35,7 @@ public class RNVQuery {
                 .build();
 
         var response = RNV.callRNV(query);
+        var db_response = response.toString();
         ObjectMapper mapper = new ObjectMapper();
         var tsi = mapper.readValue(response, TimeStopInfo.class);
 
@@ -72,7 +75,7 @@ public class RNVQuery {
 
     private static String get4HOffset() {
         var now = Instant.now();
-        now.plus(4, HOURS);
+        now = now.plus(240, ChronoUnit.MINUTES);
         return now.toString();
     }
 

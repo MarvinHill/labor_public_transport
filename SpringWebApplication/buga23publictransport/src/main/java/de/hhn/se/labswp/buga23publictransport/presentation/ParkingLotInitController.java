@@ -16,11 +16,15 @@ public class ParkingLotInitController {
     ParkingLotRepository allRepo;
     CarParkingLotRepository carRepo;
     BikeParkingLotRepository bikeRepo;
+    CampsiteParkingRepository campsiteRepo;
+    CaravanParkingLotRepository caravanRepo;
 
-    ParkingLotInitController(ParkingLotRepository allRepo, CarParkingLotRepository carRepo, BikeParkingLotRepository bikeRepo) {
+    ParkingLotInitController(ParkingLotRepository allRepo, CarParkingLotRepository carRepo, BikeParkingLotRepository bikeRepo, CampsiteParkingRepository campsiteRepo, CaravanParkingLotRepository caravanRepo) {
         this.allRepo = allRepo;
         this.carRepo = carRepo;
         this.bikeRepo = bikeRepo;
+        this.campsiteRepo = campsiteRepo;
+        this.caravanRepo = caravanRepo;
     }
 
     @GetMapping("/all")
@@ -36,6 +40,16 @@ public class ParkingLotInitController {
     @GetMapping("/car/all")
     Iterable<CarParkingLot> carAll() {
         return carRepo.findAll();
+    }
+
+    @GetMapping("/campsite/all")
+    Iterable<CampsiteParking> campsiteAll() {
+        return campsiteRepo.findAll();
+    }
+
+    @GetMapping("/caravan/all")
+    Iterable<CaravanParkingLot> caravanAll() {
+        return caravanRepo.findAll();
     }
 
     @GetMapping("/all/{id}")

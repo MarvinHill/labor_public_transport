@@ -46,7 +46,7 @@ img{
         flex-direction: row;
         height: 30rem;
     }
-    
+
 }
 
 .accordion * {
@@ -61,7 +61,7 @@ img{
     padding: var(--_panel-padding);
     padding-right: calc(var(--_panel-padding) * 4);
     border-radius: calc(((var(--_panel-padding) * 2) + var(--_button-size)) / 2);
-    
+
   }
 
   @media (prefers-reduced-motion: no-preference){
@@ -79,7 +79,7 @@ img{
 }
 
 #info-car path {
-    fill: hsl(220, 70%, 50%); 
+    fill: hsl(220, 70%, 50%);
   }
 
 .accordion-panel:nth-child(3){
@@ -106,8 +106,8 @@ img{
 .accordion-content > p {
     transform: translateY(2rem);
     opacity: 0;
-    
-    
+
+
 
     margin-left: calc(var(--_button-size) + var(--_panel-gap));
 }
@@ -123,7 +123,7 @@ img{
 
 .accordion-panel:has([aria-expanded="true"]) p {
     transform: translateY(0);
-    opacity: 1; 
+    opacity: 1;
 }
 
 .accordion-title{
@@ -142,14 +142,14 @@ img{
         content: "";
         position: absolute;
 
-        
+
         left: calc((var(--_panel-gap) + var(--_button-size)) * -1);
         width: calc(100% + (var(--_button-size) * 2));
         height: var(--_button-size);
         background: hsl(0 0% 0% / 0.5);
         z-index: -1;
         border-radius: 100vw;
-        
+
     }
 }
 
@@ -160,7 +160,7 @@ img{
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    
+
     transition: filter 500ms ;
 
 }
