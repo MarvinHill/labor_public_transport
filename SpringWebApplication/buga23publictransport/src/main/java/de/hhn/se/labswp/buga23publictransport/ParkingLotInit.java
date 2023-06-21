@@ -1,27 +1,24 @@
 package de.hhn.se.labswp.buga23publictransport;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Polygon;
 import org.springframework.data.geo.Point;
 import de.hhn.se.labswp.buga23publictransport.business.ParkingType;
 import de.hhn.se.labswp.buga23publictransport.persistence.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Configuration
 public class ParkingLotInit {
 
     @Bean
     CommandLineRunner initializeParkingLots(BikeParkingLotRepository bikeRepo, CarParkingLotRepository carRepo, CampsiteParkingRepository campsiteRepo, CaravanParkingLotRepository caravanRepo) {
+        bikeRepo.deleteAll();
+        carRepo.deleteAll();
+        campsiteRepo.deleteAll();
+        caravanRepo.deleteAll();
+
         //Car
         //Mit Info zur Auslastung: https://parken-mannheim.de/
         Point c1GeoLocation = new Point(49.486712989660845, 8.464162980407481);
@@ -750,9 +747,9 @@ public class ParkingLotInit {
             bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim", 0, false));
             bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim", 0, false));
 
-            caravanRepo.save(new CaravanParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
-            caravanRepo.save(new CaravanParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
-            caravanRepo.save(new CaravanParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
 
             campsiteRepo.save(new CampsiteParking(mannheimStrandbadGeoLocation, mannheimStrandbadPoly, mannheimStrandbadEntrances, "Mannheim Strandbad", false, true, ParkingType.CAMPSITE, "Strandbadweg 1, 68199 Mannheim", false, true, true, true));
             campsiteRepo.save(new CampsiteParking(campingBlaueAdriaGeoLocation, campingBlaueAdriaPoly, campingBlaueAdriaEntrances, "Campingplatz Blaue Adria", false, false, ParkingType.CAMPSITE, "Adriastraße, 67122 Altrip", false, false, true, true));

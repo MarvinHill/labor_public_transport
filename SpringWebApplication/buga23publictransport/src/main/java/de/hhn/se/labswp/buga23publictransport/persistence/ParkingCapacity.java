@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 
 @Entity
 public class ParkingCapacity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,9 +28,7 @@ public class ParkingCapacity {
         this.weekday = weekday;
     }
 
-    public void setId(long id) {this.id = id;}
     public long getId() {return this.id;}
-
     public void setName(String name) {this.name = name;}
     public String getName() {return this.name;}
     public void setFreeParkingspaces(int freeParkingspaces) {this.freeParkingspaces = freeParkingspaces;}

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import * as L from 'leaflet';
 import { Point } from 'leaflet';
 import { DataServiceService } from './data-service.service';
 import { MapService } from './map.service';
-import { MapDetailsObserverComponent } from '../map-details-observer/map-details-observer.component';
 import { MapDetailsObserverService } from './map-details-observer.service';
 
 @Injectable({
@@ -22,13 +20,55 @@ export class ShuttleLineService {
     this.http = http;
   }
 
+  static IconP_R = L.divIcon({
+    className: "legend-label",
+    html: '<i class="label" border="solid"; style="background-color: #662483; border-color: #662483;">P+R</i>',
+    iconSize: [2, 2],
+    iconAnchor: [1, 1] // half of width + height
+  });
+
+  static Icon7 = L.divIcon({
+    className: "legend-label",
+    html: '<i class="label" style="background-color: #ffcc00; border-color: #ffcc00;">7</i>',
+    iconSize: [6, 12],
+    iconAnchor: [3, 6] // half of width + height
+  });
+
+  static IconBS = L.divIcon({
+    className: "legend-label",
+    html: '<i class="label" style="background-color: #00b1da; border-color: #00b1da;">BS</i>',
+    iconSize: [6, 12],
+    iconAnchor: [3, 6] // half of width + height
+  });
+
+  static Icon9 = L.divIcon({
+    className: "legend-label",
+    html: '<i class="label" style="background-color: #aaca47; border-color: #aaca47;">9</i>',
+    iconSize: [6, 12],
+    iconAnchor: [3, 6] // half of width + height
+  });
+
+  static IconBL = L.divIcon({
+    className: "legend-label",
+    html: '<i class="label" style="background-color: #e1416d; border-color: #e1416d;">BL</i>',
+    iconSize: [6, 12],
+    iconAnchor: [3, 6] // half of width + height
+  });
+
+  static Icon6 = L.divIcon({
+    className: "legend-label",
+    html: '<i class="label" style="background-color: #956c29; border-color: #956c29;">6</i>',
+    iconSize: [6, 12],
+    iconAnchor: [3, 6] // half of width + height
+  });
+
   /**
    *
    * @param map
    */
-  public initShuttleLineViewOnMap(layers, service : MapService) {
+  public initShuttleLineViewOnMap(layers, service: MapService) {
     this.dataService.getShuttleLines().then(
-      (lines : ShuttleLine[]) => {
+      (lines: ShuttleLine[]) => {
 
         this.lines = lines;
         console.warn(lines);
@@ -36,13 +76,12 @@ export class ShuttleLineService {
           const layer = [new L.LayerGroup, ""];
           // draw the real train or shuttle line into the map
           if (line.geoLinePoints.length > 0) {
-            const pl = this.getPolyLine(line);
+            var pl = this.getPolyLine(line, layer[0] as L.LayerGroup);
             pl.addTo(layer[0] as L.LayerGroup);
             pl.on("click", function (e: any) {
               this.observerService.changeDisplay(line)
             }.bind(this));
           }
-
           line.lineScheduleEntryList.forEach(entry => {
             this.addLineStopToMap(layer[0] as L.LayerGroup, entry, line);
           });
@@ -89,7 +128,7 @@ export class ShuttleLineService {
    * @param line
    * @returns
    */
-  public getPolyLine(line: ShuttleLine): L.Polyline {
+  public getPolyLine(line: ShuttleLine, layer: L.LayerGroup): L.Polyline {
     let tpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
     var options =
     {
@@ -100,6 +139,71 @@ export class ShuttleLineService {
       smoothFactor: 1,
     };
 
+    // here new function for line points
+    var lineSections = [];
+    // saves every magnitude in the lineSections array
+    for (var i = 0; i < tpl.length - 1; i++) {
+      // first point
+      var x1 = tpl[i].lat;
+      var y1 = tpl[i].lng;
+
+      // next point
+      var x2 = tpl[i + 1].lat;
+      var y2 = tpl[i + 1].lng;
+
+      // subtracted new vector 
+      var newX = x2 - x1;
+      var newY = y2 - y1;
+
+      // magnitude of the new vector
+      var mag = Math.sqrt(Math.pow(newX, 2) + Math.pow(newY, 2));
+      lineSections[i] = mag;
+    }
+
+    // setting for the distance for each label on the map
+    const maxDistance = 0.006;
+    var currentDistance = 0;
+
+    // iterate over all sections
+    for (let i = 0; i < lineSections.length; i++) {
+      // accumulate the current distance
+      currentDistance += lineSections[i];
+
+      // when we overstep the max Distance
+      if (currentDistance > maxDistance) {
+        // current point
+        var x1 = tpl[i].lat;
+        var y1 = tpl[i].lng;
+
+        // next point
+        var x2 = tpl[i + 1].lat;
+        var y2 = tpl[i + 1].lng;
+
+        // subtracted new vector
+        var newX = x2 - x1;
+        var newY = y2 - y1;
+
+        // magnitude of the vector
+        var mag = Math.sqrt(Math.pow(newX, 2) + Math.pow(newY, 2));
+
+        // normalize vector
+        var newXnormalized = newX / mag;
+        var newYnormalized = newY / mag;
+
+        // go further with the remaining distance
+        var overhead = currentDistance - maxDistance;
+
+        // go back to the origin of the vector
+        var endPosX = x1 + newXnormalized * overhead;
+        var endPosY = y1 + newYnormalized * overhead;
+
+        this.setLabelAt(line, [endPosX, endPosY] as L.LatLngTuple, layer);
+
+        // var remainingMagnitude = Math.sqrt(Math.pow(overhead, 2) + Math.pow(overhead, 2));
+        currentDistance = 0;
+      }
+    }
+
     return L.polyline(tpl, options);
   }
 
@@ -109,5 +213,34 @@ export class ShuttleLineService {
       tranformedPolyLine.push(new L.LatLng((point[i]).x, (point[i]).y));
     }
     return tranformedPolyLine;
+  }
+
+  private setLabelAt(line: ShuttleLine, pos: L.LatLngTuple, layer: L.LayerGroup) {
+    switch (line.lineDesignator) {
+      case ("P+R"):
+        L.marker(pos, { icon: ShuttleLineService.IconP_R }).addTo(layer);
+        break;
+
+      case ("7"):
+        L.marker(pos, { icon: ShuttleLineService.Icon7 }).addTo(layer);
+        break;
+
+      case ("BS"):
+        L.marker(pos, { icon: ShuttleLineService.IconBS }).addTo(layer);
+        break;
+
+      case ("9"):
+        L.marker(pos, { icon: ShuttleLineService.Icon9 }).addTo(layer);
+        break;
+
+      case ("BL"):
+        L.marker(pos, { icon: ShuttleLineService.IconBL }).addTo(layer);
+        break;
+
+      case ("6"):
+        L.marker(pos, { icon: ShuttleLineService.Icon6 }).addTo(layer);
+        break;
+    }
+
   }
 }

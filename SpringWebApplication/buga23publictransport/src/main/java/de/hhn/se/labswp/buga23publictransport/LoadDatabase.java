@@ -21,6 +21,10 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(PublicTransportLineRepo lineRepo, LineScheduleEntryRepo entryRepo, StationRepo stationRepo) {
         return args -> {
+            lineRepo.deleteAll();
+            entryRepo.deleteAll();
+            stationRepo.deleteAll();
+
             log.info("Preloading Database Entries");
             log.info("Preloading stops for public transport lines and shuttles");
 

@@ -1,5 +1,5 @@
 
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ShuttleLine } from '../ShuttleLine';
@@ -15,7 +15,10 @@ import { DataCache } from '../DataCache';
 export class DataServiceService {
 
   //baseurl : string = 'https://get2buga.de/api';
+  private mapLocatorApiURL = "https://nominatim.openstreetmap.org/search";
+
   baseurl: string = 'http://localhost:8080/api';
+
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
@@ -29,7 +32,7 @@ export class DataServiceService {
 
   caravanParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
 
-  constructor(private http:HttpClient, private router : Router ) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   update() {
     const request = this.http.get<ShuttleLine[]>(this.baseurl + '/ptl')
@@ -38,9 +41,9 @@ export class DataServiceService {
     });
   }
 
-  shuttleLineCache : DataCache<ShuttleLine> = new DataCache<ShuttleLine>();
+  shuttleLineCache: DataCache<ShuttleLine> = new DataCache<ShuttleLine>();
   public getShuttleLines(): Promise<ShuttleLine[]> {
-    const request = this.shuttleLineCache.pipeRequest(()=>{
+    const request = this.shuttleLineCache.pipeRequest(() => {
       return this.http.get<ShuttleLine[]>(this.baseurl + '/ptl');
     });
     return request;
@@ -83,9 +86,9 @@ export class DataServiceService {
     })
   }
 
-  parkingCache : DataCache<ParkingLot> = new DataCache<ParkingLot>();
+  parkingCache: DataCache<ParkingLot> = new DataCache<ParkingLot>();
   getAllParking() {
-    const request = this.parkingCache.pipeRequest(()=>{
+    const request = this.parkingCache.pipeRequest(() => {
       return this.http.get<ParkingLot[]>(this.baseurl + '/parking/all');
     });
     return request;
