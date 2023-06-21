@@ -24,6 +24,8 @@ export class DataServiceService {
 
   campsiteParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
 
+  caravanParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+
   constructor(private http:HttpClient, private router : Router ) {}
 
   update() {
@@ -68,6 +70,13 @@ export class DataServiceService {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/campsite/all')
     request.subscribe(resp => {
       this.campsiteParking.next(resp);
+    })
+  }
+
+  getAllCaravanParking() {
+    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/caravan/all')
+    request.subscribe(resp => {
+      this.caravanParking.next(resp);
     })
   }
 
