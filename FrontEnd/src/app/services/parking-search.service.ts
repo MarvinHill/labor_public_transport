@@ -6,6 +6,7 @@ import { DataServiceService } from './data-service.service';
 import { SearchService } from './search.service';
 import { MapService } from './map.service';
 import { Router } from '@angular/router';
+import { ParkingType } from '../ParkingType';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,10 @@ export class ParkingSearchService implements SearchProvider{
               element.category = "Parkplätze"
               element.displayText = element.name;
               element.searchAction = () => {
-                const local = "/parking"
+                var local = "/parking"
+                if(element.parkingType = ParkingType.BIKE){
+                  local = "/bike-parking";
+                } 
                 this.router.navigateByUrl(local);
                 this.searchService.minimize();
                 this.mapService.minimizeMap();
