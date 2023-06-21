@@ -115,7 +115,7 @@ export class MapService {
       });
     })
     this.dataService.update();
-    
+
     this.dataService.caravanParking.subscribe(values => {
 
       values.forEach(element => {
@@ -276,7 +276,7 @@ export class MapService {
 
     if (caravanParking.entrance.length > 0) {
       for (var i = 0; i < caravanParking.entrance.length; i++) {
-        L.marker([caravanParking.entrance.at(i).x, caravanParking.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
+        L.marker([caravanParking.entrance.at(i).x, caravanParking.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
       }
     }
 
@@ -316,7 +316,7 @@ export class MapService {
 
     if (campsite.entrance.length > 0) {
       for (var i = 0; i < campsite.entrance.length; i++) {
-        L.marker([campsite.entrance.at(i).x, campsite.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
+        L.marker([campsite.entrance.at(i).x, campsite.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
       }
     }
 
@@ -724,7 +724,7 @@ export class MapService {
       }
       if (this.distance < 20) {
         this.distanceText = true;
-      }else {
+      } else {
         this.distanceTextToFarAway = true;
       }
       var xx: [number, number][] = [
@@ -831,7 +831,16 @@ export class MapService {
       else if (!this.xPressed) {
         document.getElementById('speech-bubble-id').style.display = 'block';
       }
+      if (this.map.hasLayer(this.userLocation)) {
+        this.distanceText = false;
+        this.distanceTextToFarAway = false;
+      }
+      if(!(this.map.hasLayer(this.userLocation))) {
+        this.distanceText = false;
+        this.distanceTextToFarAway = false;
+      }
     });
+  
   }
 
   hideContainer() {

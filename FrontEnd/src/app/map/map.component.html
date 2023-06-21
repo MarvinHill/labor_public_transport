@@ -19,7 +19,7 @@
       </div>
     </div>
     <p id="t" *ngIf="this.mapService.distanceText" layout-align="center center" [ngClass]="mapService.textClass">Die Luftlinie von Ihrem Standort zu {{mapService.name}} beträgt: ~ {{mapService.noob2}} km</p>
-    <p id="t" *ngIf="this.mapService.distanceTextToFarAway" layout-align="center center" [ngClass]="mapService.textClass">Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können</p>
+    <p id="t" *ngIf="this.mapService.distanceTextToFarAway && this.mapService.userLocation" layout-align="center center" [ngClass]="mapService.textClass">Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können</p>
   </div>
  </div>
 
