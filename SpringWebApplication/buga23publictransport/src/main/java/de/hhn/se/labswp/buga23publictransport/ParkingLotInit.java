@@ -1,27 +1,24 @@
 package de.hhn.se.labswp.buga23publictransport;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Polygon;
 import org.springframework.data.geo.Point;
 import de.hhn.se.labswp.buga23publictransport.business.ParkingType;
 import de.hhn.se.labswp.buga23publictransport.persistence.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Configuration
 public class ParkingLotInit {
 
     @Bean
     CommandLineRunner initializeParkingLots(BikeParkingLotRepository bikeRepo, CarParkingLotRepository carRepo, CampsiteParkingRepository campsiteRepo, CaravanParkingLotRepository caravanRepo) {
+        bikeRepo.deleteAll();
+        carRepo.deleteAll();
+        campsiteRepo.deleteAll();
+        caravanRepo.deleteAll();
+
         //Car
         //Mit Info zur Auslastung: https://parken-mannheim.de/
         Point c1GeoLocation = new Point(49.486712989660845, 8.464162980407481);
