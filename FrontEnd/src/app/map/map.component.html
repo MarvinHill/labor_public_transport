@@ -1,9 +1,11 @@
 <div [ngClass]="mapService.mapContainerClass" id="map-container" [ngStyle]="{ 'height':mapService.mapHeight}">
   <div class="inner-container shadow">
-
     <button id="resize" [ngClass]="mapService.resizeButtonClass" (click)="mapService.resizeMap()">X</button>
-    <button id="locate" [ngClass]="mapService.locateButtonClass" (click)="mapService.locateUser()">
+    <button id="locate" [ngClass]="mapService.locateButtonClass" (click)="mapService.locateUserCaller()">
       <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/my_location.svg" style="height: 2.5em;">
+    </button>
+    <button id="distance" [ngClass]="mapService.distanceButtonClass" (click)="mapService.distanceCaller()">
+      <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/rulers.svg" style="height: 2.5em;">    
     </button>
     <button id="buga-back-button-id" [ngClass]="mapService.bugaBackButtonClass" (click)="mapService.moveToBuga()">
       <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/buga_logo.png" style="height: 2.5em;">
@@ -16,8 +18,10 @@
         <app-map-details-observer></app-map-details-observer>
       </div>
     </div>
+    <p id="t" *ngIf="this.mapService.distanceText" layout-align="center center" [ngClass]="mapService.textClass">Die Luftlinie von Ihrem Standort zu {{mapService.name}} beträgt: ~ {{mapService.noob2}} km</p>
+    <p id="t" *ngIf="this.mapService.distanceTextToFarAway && this.mapService.userLocation" layout-align="center center" [ngClass]="mapService.textClass">Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können</p>
   </div>
-</div>
+ </div>
 
 <div class="hidden-info">
   <h3>Karte</h3>
@@ -79,8 +83,26 @@
     </div>
     <div class="row p-2">
       <div class="col-4 text-center">
-        <img src="assets\info\image\buga.png" alt="" style="height: 5em;">
+        <img src="assets/icon/rulers.svg" alt="" style="height: 3em;">
       </div>
+      <div class="col-8">
+        <h6>Distanzlinie</h6>
+        <p>Eine Linie die den jetzigen Standort mit der nächstgelegenen Haltestelle verbindet.</p>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-4 text-center">
+        <img src="assets/icon/my_location.svg" alt="" style="height: 3.5em;">
+      </div>
+      <div class="col-8">
+        <h6>Standort</h6>
+        <p>Zoomt an den jetzigen Standort heran.</p>
+      </div>
+    </div>
+      <div class="row p-2">
+        <div class="col-4 text-center">
+          <img src="assets\info\image\buga.png" alt="" style="height: 5em;">
+        </div>
       <div class="col-8">
         <h6>Bundesgartenschau</h6>
         <p>Gebiet der Bundesgartenschau, Spinelli und Luisenpark. Die Linie dazwischen makiert die Seilbahn zwischen den Bereichen.</p>
