@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ParkingLot } from '../ParkingLot';
 import { ShuttleLine } from '../ShuttleLine';
 import { ObserverState } from '../ObserverState';
-import { RnvLine } from '../RnvLine';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { RnvLine } from '../RnvLine';
 export class MapDetailsObserverService {
 
   public data = null ;
-  public visible : boolean = true;
+  public visible  = true;
   public show:ObserverState = ObserverState.NOTHING;
 
 
@@ -24,7 +23,7 @@ export class MapDetailsObserverService {
       this.changeVisibility(true);
       return;
     }
-    else if("lineDesignator" in data){     
+    else if("lineDesignator" in data){
       this.show = ObserverState.SHUTTLE;
       this.data = <ShuttleLine> data;
       this.changeVisibility(true);
@@ -38,7 +37,6 @@ export class MapDetailsObserverService {
   }
 
   changeVisibility(visibility : boolean){
-        console.warn("changed visibility to " + visibility);
         this.visible = visibility;
   }
 

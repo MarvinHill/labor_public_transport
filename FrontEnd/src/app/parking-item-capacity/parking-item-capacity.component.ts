@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {ParkingLot} from "../ParkingLot";
 import {ParkingType} from "../ParkingType";
 import {MapService} from "../services/map.service";
@@ -16,18 +16,19 @@ export class ParkingItemCapacityComponent implements OnInit {
   bikeParkingLots: ParkingLot[];
   items: number[];
 
-  ngOnInit(): void {
+  public screenWidth: any;
 
+  ngOnInit(): void {
     this.parkingName = this.parking.name;
     this.parkingID = this.parking.id;
     this.parkingAddress = this.parking.address;
-
+    this.screenWidth = window.innerWidth;
   }
 
   @Input() parking: ParkingLot;
-  parkingName: String = "NAME";
+  parkingName = "NAME";
   parkingID: number;
-  parkingAddress: String = "ADDRESS";
+  parkingAddress = "ADDRESS";
 
   protected readonly ParkingType = ParkingType;
 
@@ -38,7 +39,13 @@ export class ParkingItemCapacityComponent implements OnInit {
 
   panToParkingLot(){
     this.observerService.changeDisplay(this.parking);
-    this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y)); 
+    this.mapService.openAndFlyTo(new LatLng(this.parking.geoLocation.x, this.parking.geoLocation.y));
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    this.screenWidth = window.innerWidth;
+    console.log(this.screenWidth);
   }
 
 }

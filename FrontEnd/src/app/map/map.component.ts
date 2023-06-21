@@ -14,12 +14,12 @@ export class MapComponent implements OnInit{
   constructor(protected mapService : MapService, protected observerService : MapDetailsObserverService,  protected renderer: Renderer2,){}
 
   ngOnInit(): void {
-     var map : L.Map = L.map('map', {
+     const map : L.Map = L.map('map', {
       center: this.mapService.centroid,
       zoom: 15,
       zoomControl: false
     });
- 
+
     this.mapService.init(map);
   }
 
@@ -29,6 +29,5 @@ export class MapComponent implements OnInit{
     this.mapService.updateHeight();
     this.mapService.updateWidth();
     this.mapService.updateMobileDesktopMap();
-
   }
 }

@@ -1,0 +1,65 @@
+import { Injectable } from '@angular/core';
+import { SearchProvider } from '../SearchProvider';
+import { DataServiceService } from './data-service.service';
+import { ShuttleLine } from '../ShuttleLine';
+import { take } from 'rxjs/operators';
+import { SearchService } from './search.service';
+import { Router } from '@angular/router';
+import { MapService } from './map.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ShuttleSearchService implements SearchProvider {
+
+  public searchService : SearchService;
+
+  constructor(private dataService: DataServiceService, private router : Router, private mapService : MapService) { }
+  async search(target: string): Promise<ShuttleLine[]> {
+
+    const request = this.dataService.getShuttleLines();
+
+    return new Promise<ShuttleLine[]>(
+      resolve => {
+        request.then(
+          (data: ShuttleLine[]) => {
+            data = data.filter(value => {
+              if (data == null) {
+                return false;
+              }
+              if (value.lineDesignator?.toLowerCase().includes(target)) {
+                return true;
+              }
+              let childMatched = false;
+              value.lineScheduleEntryList.forEach(element => {
+                if (element?.station?.stationDesignator?.toLowerCase().includes(target)) {
+                  childMatched = true;
+                }
+              });
+              if (childMatched) {
+                return true;
+              }
+
+              return false;
+            });
+            data.forEach(element => {
+              element.category = "Shuttle-Linien"
+              element.displayText = element.lineDesignator;
+              element.searchAction = () => {
+                const local = "/shuttle"
+                this.router.navigateByUrl(local);
+                this.searchService.minimize();
+                this.mapService.minimizeMap();
+                setTimeout(() => {
+                  const el = document.getElementById(element.displayText);
+                  el?.scrollIntoView({ block: "center" });
+                  console.warn("ran");
+                }, 2000);
+              };
+            });
+            resolve(data);
+          });
+      }
+    );
+  }
+}

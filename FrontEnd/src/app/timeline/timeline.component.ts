@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
 import { LineScheduleEntry } from '../LineScheduleEntry';
-import { DataServiceService } from '../services/data-service.service';
-import { RnvQuery } from '../RnvQuery';
 import { RnvStopEvent } from '../RnvStopEvent';
 
 @Component({
@@ -11,96 +9,97 @@ import { RnvStopEvent } from '../RnvStopEvent';
   styleUrls: ['./timeline.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimelineComponent implements OnInit,OnChanges {
+export class TimelineComponent implements OnInit, OnChanges {
   items: number[];
 
   ngOnChanges(changes: SimpleChanges) {
     this.setUp();
   }
-  
+
   ngOnInit(): void {
     this.setUp();
   }
 
   @Input() public shuttleLine: ShuttleLine;
-  @Input() restrictSize : boolean = true;
+  @Input() restrictSize: boolean = true;
 
-  lineName: string = "no line name";
+  lineName = "no line name";
   shuttleLineID: number;
   lineScheduleEntryList: LineScheduleEntry[];
   shuttleLineList: ShuttleLine[];
-  number: number; 
-  JSON : JSON = JSON;
-  chache : Map<string, RnvStopEvent[]>
 
-  protected filterAndGetNewest( entries :  RnvStopEvent[]) : RnvStopEvent {
-    var now : Date = new Date();
+  number: number;
+  JSON: JSON = JSON;
+  chache: Map<string, RnvStopEvent[]>
+
+  protected filterAndGetNewest(entries: RnvStopEvent[]): RnvStopEvent {
+    var now: Date = new Date();
     entries = entries.filter(value => {
-        if(value.plannedDeparture == null || value.realtimeDeparture == null){
-          return false;
-        } 
-        var planned : Date = this.setTimeOfDate(value.plannedDeparture);
-        var realtime : Date = this.setTimeOfDate(value.realtimeDeparture);
+      if (value.plannedDeparture == null || value.realtimeDeparture == null) {
+        return false;
+      }
+      var planned: Date = this.setTimeOfDate(value.plannedDeparture);
+      var realtime: Date = this.setTimeOfDate(value.realtimeDeparture);
 
-        if(planned != null && (planned > now || realtime > now)){
-          return true;
-        }
-        else {
-          return false;
-        }
-    
+      if (planned != null && (planned > now || realtime > now)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+
     });
 
     return entries[0];
   }
 
-  private setTimeOfDate(strTime : string) : Date {
-    var date : Date = new Date();
+  private setTimeOfDate(strTime: string): Date {
+    var date: Date = new Date();
 
-    var splitTime : string[] = strTime.split(":");
+    var splitTime: string[] = strTime.split(":");
 
-    date.setSeconds( splitTime[2] as unknown as number);
+    date.setSeconds(splitTime[2] as unknown as number);
     date.setMinutes(splitTime[1] as unknown as number);
     date.setHours(splitTime[0] as unknown as number);
 
     return date;
   }
 
-
   private setUp() {
     this.chache = new Map();
     this.lineName = this.shuttleLine.lineDesignator;
     this.lineScheduleEntryList = this.shuttleLine.lineScheduleEntryList;
     this.shuttleLineID = this.shuttleLine.id;
-    this.number = this.lineScheduleEntryList.length - 1;    
+    this.number = this.lineScheduleEntryList.length - 1;
   }
 
-  protected parseAndGetTimetable(lineScheduleEntry : LineScheduleEntry) : RnvStopEvent[]{
-    if(this.chache.has(lineScheduleEntry.station.stationDesignator)){
+  protected parseAndGetTimetable(lineScheduleEntry: LineScheduleEntry): RnvStopEvent[] {
+    if (this.chache.has(lineScheduleEntry.station.stationDesignator)) {
       return this.chache.get(lineScheduleEntry.station.stationDesignator);
     }
     const parse = this.JSON.parse(lineScheduleEntry.station.timeInfoJSON).timeInfo;
     this.chache.set(
-      lineScheduleEntry.station.stationDesignator, 
+      lineScheduleEntry.station.stationDesignator,
       parse
-      );
+    );
 
     return parse;
   }
 
-  protected parseAndFilterLine(lineScheduleEntry : LineScheduleEntry) : RnvStopEvent[]{
+  protected parseAndFilterLine(lineScheduleEntry: LineScheduleEntry): RnvStopEvent[] {
     return this.parseAndGetTimetable(lineScheduleEntry).filter(value => {
       return value.lineGroup === this.shuttleLine.lineDesignator;
     })
   }
 
-  formateTime(str : string){
-    if(str == null){
+  formateTime(str: string) {
+
+    if (str == null) {
       return "";
     }
-    var tokens : string[] = str.split(":");
-    var hour : string = tokens[0].trim();
-    var min : string = tokens[1].trim();
+    const tokens: string[] = str.split(":");
+    const hour: string = tokens[0].trim();
+    const min: string = tokens[1].trim();
 
     return `${hour}:${min}`;
   }
