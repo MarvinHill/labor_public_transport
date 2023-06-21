@@ -750,9 +750,9 @@ public class ParkingLotInit {
             bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim", 0, false));
             bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim", 0, false));
 
-            caravanRepo.save(new CaravanParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
-            caravanRepo.save(new CaravanParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
-            caravanRepo.save(new CaravanParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
 
             campsiteRepo.save(new CampsiteParking(mannheimStrandbadGeoLocation, mannheimStrandbadPoly, mannheimStrandbadEntrances, "Mannheim Strandbad", false, true, ParkingType.CAMPSITE, "Strandbadweg 1, 68199 Mannheim", false, true, true, true));
             campsiteRepo.save(new CampsiteParking(campingBlaueAdriaGeoLocation, campingBlaueAdriaPoly, campingBlaueAdriaEntrances, "Campingplatz Blaue Adria", false, false, ParkingType.CAMPSITE, "Adriastraße, 67122 Altrip", false, false, true, true));
