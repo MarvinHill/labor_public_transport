@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.time.*;
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -19,6 +19,9 @@ public class RNVQuery {
     )
     public static TimeStopInfo getStationsTimes(
             @RequestParam String hasafId) throws IOException {
+
+        var debugTimeNow = getNow();
+        var debugTime4HAfter = get4HOffset();
         var query = new QueryBuilder(
                 ResourceUtils.getFile("classpath:graphql/GetStationTimes.graphql")
         )
@@ -26,10 +29,11 @@ public class RNVQuery {
                 .replaceData(QueryBuilder.RNVStationId, hasafId)
                 .replaceData(QueryBuilder.RNVStartTime, getNow())
                 .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
-                .replaceData("\"", "\\\"")              // transforms " -> \"
+                .replaceData("\"", "\\\"")              // transforms (") -> (\")
                 .build();
 
         var response = RNV.callRNV(query);
+        var db_response = response.toString();
         ObjectMapper mapper = new ObjectMapper();
         var tsi = mapper.readValue(response, TimeStopInfo.class);
 
@@ -46,7 +50,7 @@ public class RNVQuery {
                     .replaceData(QueryBuilder.RNVStartTime, getNow())
                     .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
                     .replaceData(QueryBuilder.RNVCursor, tsi.getCursor())
-                    .replaceData("\"", "\\\"")              // transforms " -> \"
+                    .replaceData("\"", "\\\"")             // transforms (") -> (\")
                     .build();
             tsi = mapper.readValue(RNV.callRNV(queryAfter), TimeStopInfo.class);
             timeInfos.add(tsi);
