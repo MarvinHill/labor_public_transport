@@ -43,7 +43,7 @@
     display: none;
 }
 
-.info > h3 {
+.info>h3 {
     text-decoration: underline;
     font-weight: bold;
 }
@@ -78,6 +78,16 @@
     user-select: none;
 }
 
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 .leaflet-control-layers-toggle {
     width: auto;
     background-position: 3px 50%;
@@ -99,8 +109,15 @@
     border-radius: 5px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .legend {
     line-height: 25px;
@@ -110,7 +127,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .legend-entry {
     pointer-events: none;
-    color: #ffffff;
+    color: #FFFFFF;
     width: 45px;
     height: 25px;
     float: left;

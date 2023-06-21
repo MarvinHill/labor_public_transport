@@ -12,8 +12,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-import static java.time.temporal.ChronoUnit.HOURS;
-
 @RestController
 public class RNVQuery {
     @GetMapping(
@@ -31,7 +29,7 @@ public class RNVQuery {
                 .replaceData(QueryBuilder.RNVStationId, hasafId)
                 .replaceData(QueryBuilder.RNVStartTime, getNow())
                 .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
-                .replaceData("\"", "\\\"")              // transforms " -> \"
+                .replaceData("\"", "\\\"")              // transforms (") -> (\")
                 .build();
 
         var response = RNV.callRNV(query);
@@ -52,7 +50,7 @@ public class RNVQuery {
                     .replaceData(QueryBuilder.RNVStartTime, getNow())
                     .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
                     .replaceData(QueryBuilder.RNVCursor, tsi.getCursor())
-                    .replaceData("\"", "\\\"")              // transforms " -> \"
+                    .replaceData("\"", "\\\"")             // transforms (") -> (\")
                     .build();
             tsi = mapper.readValue(RNV.callRNV(queryAfter), TimeStopInfo.class);
             timeInfos.add(tsi);
@@ -82,6 +80,4 @@ public class RNVQuery {
     private static String getNow() {
         return Instant.now().toString();
     }
-
-
 }

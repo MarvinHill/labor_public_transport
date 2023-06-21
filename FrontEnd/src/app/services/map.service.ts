@@ -6,10 +6,10 @@ import { ParkingLot } from '../ParkingLot';
 import { DataServiceService } from '../services/data-service.service';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { ShuttleLineService } from '../services/shuttle-line.service';
+import { LineLegendComponent } from '../line-legend/line-legend.component';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import { SearchService } from './search.service';
-import { LineLegendComponent } from '../line-legend/line-legend.component';
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +43,8 @@ export class MapService {
   }
   layerControl = L.control.layers(null, null, this.layerOptions);
 
-
   @ViewChild('container', { static: false }) container: ElementRef;
   @ViewChild('bugaBackButton', { static: false }) bugaBackButton: ElementRef;
-
 
   windowHeight: number;
   windowWidth: number;
@@ -54,7 +52,7 @@ export class MapService {
   public innerWidth = 1000;
   breakPoint = 720;
 
-  constructor( private dataService: DataServiceService, protected observerService: MapDetailsObserverService
+  constructor(private dataService: DataServiceService, protected observerService: MapDetailsObserverService
     , private shuttleLineService: ShuttleLineService, private snackbar: MatSnackBar) {
   }
 
@@ -520,41 +518,41 @@ export class MapService {
     L.polyline(cableCarLine, { color: '#e1416d' }).addTo(this.bugaArea);
 
   }
-  makeEntrances(){
+  makeEntrances() {
     const entranceIcon = L.icon({
       iconUrl: 'assets/icon/Entrance.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-  const haupteingangLuisenpark = L.marker([49.47938, 8.49609], {icon: entranceIcon}).addTo(this.entrances);
-  const eingangFernmeldeturm = L.marker([49.48643, 8.49230], {icon: entranceIcon}).addTo(this.entrances);
-  const haupteingangSpinellipark = L.marker([49.49772, 8.52095], {icon: entranceIcon}).addTo(this.entrances);
-  const eingangParkschale = L.marker([49.502722, 8.518795], {icon: entranceIcon}).addTo(this.entrances);
+    const haupteingangLuisenpark = L.marker([49.47938, 8.49609], { icon: entranceIcon }).addTo(this.entrances);
+    const eingangFernmeldeturm = L.marker([49.48643, 8.49230], { icon: entranceIcon }).addTo(this.entrances);
+    const haupteingangSpinellipark = L.marker([49.49772, 8.52095], { icon: entranceIcon }).addTo(this.entrances);
+    const eingangParkschale = L.marker([49.502722, 8.518795], { icon: entranceIcon }).addTo(this.entrances);
 
-  haupteingangLuisenpark.bindPopup("<b>Haupteingang Luisenpark</b> <br> Einlass: 9 - 19 Uhr").openPopup();
-  eingangFernmeldeturm.bindPopup("<b>Eingang Fernmeldeturm</b> <br> Einlass: 9 - 19 Uhr");
-  haupteingangSpinellipark.bindPopup("<b>Haupteingang Spinellipark</b> <br> Einlass: 9 - 19 Uhr");
-  eingangParkschale.bindPopup("<b>Eingang Parkschale</b> <br> Einlass: 9 - 19 Uhr");
+    haupteingangLuisenpark.bindPopup("<b>Haupteingang Luisenpark</b> <br> Einlass: 9 - 19 Uhr").openPopup();
+    eingangFernmeldeturm.bindPopup("<b>Eingang Fernmeldeturm</b> <br> Einlass: 9 - 19 Uhr");
+    haupteingangSpinellipark.bindPopup("<b>Haupteingang Spinellipark</b> <br> Einlass: 9 - 19 Uhr");
+    eingangParkschale.bindPopup("<b>Eingang Parkschale</b> <br> Einlass: 9 - 19 Uhr");
 
 
   }
 
-  makeExits(){
+  makeExits() {
     const exitIcon = L.icon({
       iconUrl: 'assets/icon/Exit.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-  const ausgangOttoBeckStraße = L.marker([49.484908, 8.488246], {icon: exitIcon}).addTo(this.exits);
-  const ausgangFichtestraße = L.marker([49.483051, 8.491305], {icon: exitIcon}).addTo(this.exits);
-  const ausgangAmOberenLuisenpark = L.marker([49.479891, 8.494275], {icon: exitIcon}).addTo(this.exits);
-  const ausgangPaulMartinUfer = L.marker([49.483305, 8.501183], {icon: exitIcon}).addTo(this.exits);
-  const ausgangSpinelliPark = L.marker([49.497048, 8.520173], {icon: exitIcon}).addTo(this.exits);
-  //var ausgangKantineIris = L.marker([49.497885, 8.520818], {icon: exitIcon}).addTo(this.exits);
-  const ausgangNeuerBugaWeg = L.marker([49.498066, 8.522661], {icon: exitIcon}).addTo(this.exits);
-  const ausgangWachenheimerStraße = L.marker([49.502006, 8.515099], {icon: exitIcon}).addTo(this.exits);
+    const ausgangOttoBeckStraße = L.marker([49.484908, 8.488246], { icon: exitIcon }).addTo(this.exits);
+    const ausgangFichtestraße = L.marker([49.483051, 8.491305], { icon: exitIcon }).addTo(this.exits);
+    const ausgangAmOberenLuisenpark = L.marker([49.479891, 8.494275], { icon: exitIcon }).addTo(this.exits);
+    const ausgangPaulMartinUfer = L.marker([49.483305, 8.501183], { icon: exitIcon }).addTo(this.exits);
+    const ausgangSpinelliPark = L.marker([49.497048, 8.520173], { icon: exitIcon }).addTo(this.exits);
+    //var ausgangKantineIris = L.marker([49.497885, 8.520818], {icon: exitIcon}).addTo(this.exits);
+    const ausgangNeuerBugaWeg = L.marker([49.498066, 8.522661], { icon: exitIcon }).addTo(this.exits);
+    const ausgangWachenheimerStraße = L.marker([49.502006, 8.515099], { icon: exitIcon }).addTo(this.exits);
 
   }
 
@@ -670,9 +668,9 @@ export class MapService {
     this.userLocation = userLocationGroup;
   }
 
-  moveToBuga() : any {
+  moveToBuga(): any {
     /* visual output for the user, letting him know that he is already at the Buga */
-    if(this.map.getCenter().lat >= 49.49021061654624 && this.map.getCenter().lat <= 49.49127559245556 && this.map.getCenter().lng >= 8.508478545177866 && this.map.getCenter().lng <= 8.510290295871553) {
+    if (this.map.getCenter().lat >= 49.49021061654624 && this.map.getCenter().lat <= 49.49127559245556 && this.map.getCenter().lng >= 8.508478545177866 && this.map.getCenter().lng <= 8.510290295871553) {
       this.snackbar.open("Du bist bereits an der Buga", 'Schließen', {
         verticalPosition: 'bottom',
       });
@@ -689,21 +687,21 @@ export class MapService {
   detectMapMovement(): void {
     this.map.on('move', () => {
       /* check if the user is near the Buga */
-      if(this.map.getCenter().lat >= 49.36289598710729 && this.map.getCenter().lat <= 49.615075626689 && this.map.getCenter().lng >= 8.299441337585451 && this.map.getCenter().lng <= 8.695807456970217) {
+      if (this.map.getCenter().lat >= 49.36289598710729 && this.map.getCenter().lat <= 49.615075626689 && this.map.getCenter().lng >= 8.299441337585451 && this.map.getCenter().lng <= 8.695807456970217) {
         /* hide speech-bubble */
         document.getElementById('speech-bubble-id').style.display = 'none';
         this.xPressed = false;
       }
       /* show speech-bubble */
-      else if(!this.xPressed) {
+      else if (!this.xPressed) {
         document.getElementById('speech-bubble-id').style.display = 'block';
       }
     });
   }
 
   hideContainer() {
-      document.getElementById('speech-bubble-id').style.display = 'none';
-      this.xPressed = true;
+    document.getElementById('speech-bubble-id').style.display = 'none';
+    this.xPressed = true;
   }
 
   public openAndFlyTo(pos: LatLng): void {

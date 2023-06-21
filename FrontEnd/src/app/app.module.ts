@@ -9,7 +9,7 @@ import { TransportEntryComponent } from './transport-entry/transport-entry.compo
 import { RoutingTopBarComponent } from './routing-top-bar/routing-top-bar.component';
 import { ShuttleViewComponent } from './shuttle-view/shuttle-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TravelinfoComponent } from './travelinfo/travelinfo.component';
@@ -26,13 +26,13 @@ import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { ParkingItemCapacityComponent } from "./parking-item-capacity/parking-item-capacity.component";
 import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
 import { ImpressumComponent } from './impressum/impressum.component';
+import { LineLegendComponent } from './line-legend/line-legend.component';
+import { TimeDisplayComponent } from './time-display/time-display.component';
 import { SearchViewComponent } from './search-view/search-view.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchCategoryComponent } from './search-category/search-category.component';
 import { CapacityGraphComponent } from './capacity-graph/capacity-graph.component';
 import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
-import { LineLegendComponent } from './line-legend/line-legend.component';
-import { TimeDisplayComponent } from './time-display/time-display.component';
 import { CampsiteParkingItemComponent } from './campsite-parking-item/campsite-parking-item.component';
 import { BikeParkingItemComponent } from "./bike-parking-item/bike-parking-item.component";
 
@@ -57,6 +57,8 @@ import { BikeParkingItemComponent } from "./bike-parking-item/bike-parking-item.
     ParkingViewComponent,
     ImpressumComponent,
     ConnectionTicketComponent,
+    LineLegendComponent,
+    TimeDisplayComponent,
     SearchViewComponent,
     SearchResultComponent,
     SearchCategoryComponent,
@@ -64,6 +66,7 @@ import { BikeParkingItemComponent } from "./bike-parking-item/bike-parking-item.
     PublicTransportViewComponent,
     LineLegendComponent,
     TimeDisplayComponent,
+    PublicTransportViewComponent,
     CampsiteParkingItemComponent,
     BikeParkingItemComponent,
   ],
@@ -75,7 +78,13 @@ import { BikeParkingItemComponent } from "./bike-parking-item/bike-parking-item.
     FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    AppRoutingModule,BrowserModule,BrowserAnimationsModule, FormsModule,ReactiveFormsModule,MatButtonModule,MatSnackBarModule,
+    AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
