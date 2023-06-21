@@ -113,7 +113,7 @@ export class TimelineComponent implements OnInit,OnChanges {
     var hour : string = tokens[0].trim();
     var min : string = tokens[1].trim();
 
-    return `${hour}:${min}`;
+    return `${hour}:${min} Uhr`;
   }
 
 
