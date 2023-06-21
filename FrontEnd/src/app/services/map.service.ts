@@ -15,7 +15,7 @@ import { ShuttleLine } from '../ShuttleLine';
 @Injectable({
   providedIn: 'root'
 })
-export class MapService{
+export class MapService {
 
   private map: L.Map;
   public centroid: L.LatLngExpression = [49.485, 8.5];
@@ -43,10 +43,11 @@ export class MapService{
   distanceShower = new L.LayerGroup;
   myLocation;
   s1; s2; dist; name; noob; noob2; newLatLng: any;
-  calculateDistance: number;
+  calculateDistance; distance: number;
   lat1; lat2; lng1; lng2: any;
-  layerOptions : L.Control.LayersOptions = {
-    position : "bottomright",
+  distanceText; distanceTextToFarAway: boolean;
+  layerOptions: L.Control.LayersOptions = {
+    position: "bottomright",
   }
   layerControl = L.control.layers(null, null, this.layerOptions);
 
@@ -61,16 +62,15 @@ export class MapService{
   public innerWidth = 1000;
   breakPoint = 720;
   lineScheduleEntryList: LineScheduleEntry[];
-  distance: number;
   shuttleLine: ShuttleLine;
   shuttleLineList: ShuttleLine[];
 
 
-  constructor( private dataService: DataServiceService, protected observerService: MapDetailsObserverService
+  constructor(private dataService: DataServiceService, protected observerService: MapDetailsObserverService
     , private shuttleLineService: ShuttleLineService, private snackbar: MatSnackBar) {
   }
 
-  makeLayerControls(){
+  makeLayerControls() {
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
@@ -99,7 +99,6 @@ export class MapService{
 
     this.dataService.lines.subscribe(value => {
       this.shuttleLineList = value;
-      this.myDistanceShower(this.shuttleLineList);
     })
 
     this.dataService.carParking.subscribe(values => {
@@ -114,12 +113,15 @@ export class MapService{
         this.makeBikeParking(element);
       });
     })
+    this.dataService.update();
 
     this.dataService.getAllCarParking();
 
     this.dataService.getAllBikeParking();
 
     this.map.addLayer(this.userLocation);
+
+    this.map.addLayer(this.distanceShower);
 
     this.map.addLayer(this.carParkingLots);
 
@@ -146,28 +148,28 @@ export class MapService{
   makeCarParking(parkinglot: ParkingLot) {
     let parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerCar.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    if(parkinglot.charging === true){
+    if (parkinglot.charging === true) {
       parkingIcon = L.icon({
         iconUrl: 'assets/icon/parking/MarkerECar.png',
-        iconSize:     [45, 72], // size of the icon
-        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconSize: [45, 72], // size of the icon
+        iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
     }
-    if(parkinglot.area.length > 0) {
+    if (parkinglot.area.length > 0) {
       const arr = [];
       for (var i = 0; i < parkinglot.area.length; i++) {
         arr.push([parkinglot.area.at(i).x, parkinglot.area.at(i).y]);
       }
-      const poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.carParkingLots);
-      var marker = L.marker(poly.getCenter(), {icon:parkingIcon});
+      const poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.carParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon });
     }
     else {
-      var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], {icon:parkingIcon});
+      var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], { icon: parkingIcon });
     }
 
     marker.on("click", function (e: any) {
@@ -177,23 +179,23 @@ export class MapService{
 
     const entranceIcon = L.icon({
       iconUrl: 'assets/icon/parking/Entrance.png',
-      iconSize:     [15, 15], // size of the icon
-      iconAnchor:   [7.5, 7.5], // point of the icon which will correspond to marker's location
-      popupAnchor:  [7.5, 15] // point from which the popup should open relative to the iconAnchor
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
     });
 
-    if(parkinglot.entrance.length > 0) {
+    if (parkinglot.entrance.length > 0) {
       for (var i = 0; i < parkinglot.entrance.length; i++) {
-        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
+        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
       }
     }
 
-    this.map.on("zoomend", function(e){
-      if(this.map.getZoom() < 16 ){
+    this.map.on("zoomend", function (e) {
+      if (this.map.getZoom() < 16) {
         this.carParkingLotEntrances.remove();
       }
-      else{
-        if(this.map.hasLayer(this.carParkingLots)){
+      else {
+        if (this.map.hasLayer(this.carParkingLots)) {
           this.carParkingLotEntrances.addTo(this.map);
         }
       }
@@ -203,20 +205,20 @@ export class MapService{
   makeBikeParking(bikeparking: ParkingLot) {
     const parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerBike.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    if(bikeparking.area.length > 0) {
+    if (bikeparking.area.length > 0) {
       const arr = [];
-      for(let i = 0; i < bikeparking.area.length; i++) {
+      for (let i = 0; i < bikeparking.area.length; i++) {
         arr.push([bikeparking.area.at(i).x, bikeparking.area.at(i).y]);
       }
-      const poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.bikeParkingLots);
-      var marker = L.marker(poly.getCenter(), {icon : parkingIcon}).addTo(this.bikeParkingLots);
+      const poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.bikeParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon }).addTo(this.bikeParkingLots);
     }
     else {
-      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], {icon: parkingIcon}).addTo(this.bikeParkingLots);
+      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], { icon: parkingIcon }).addTo(this.bikeParkingLots);
     }
     marker.on("click", function (e: any) {
       this.observerService.changeDisplay(bikeparking)
@@ -350,7 +352,7 @@ export class MapService{
       [49.48045330000, 8.49416330000],
       [49.48034150000, 8.49376110000]
     ];
-    L.polygon(luisenParkPoly, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polygon(luisenParkPoly, { color: '#e1416d' }).addTo(this.bugaArea);
 
     const spinelliParkPoly: [number, number][] = [
       [49.49853330000, 8.51280300000],
@@ -419,7 +421,7 @@ export class MapService{
       [49.49850190000, 8.51232290000],
       [49.49853330000, 8.51280300000]
     ];
-    L.polygon(spinelliParkPoly, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polygon(spinelliParkPoly, { color: '#e1416d' }).addTo(this.bugaArea);
 
     const cableCarLine: [number, number][] = [
       [49.4827573, 8.4998941],
@@ -435,48 +437,48 @@ export class MapService{
       [49.4960904, 8.5198828],
       [49.4962948, 8.5201892]
     ];
-    L.polyline(cableCarLine, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polyline(cableCarLine, { color: '#e1416d' }).addTo(this.bugaArea);
 
   }
-  makeEntrances(){
+  makeEntrances() {
     const entranceIcon = L.icon({
       iconUrl: 'assets/icon/Entrance.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-  const haupteingangLuisenpark = L.marker([49.47938, 8.49609], {icon: entranceIcon}).addTo(this.entrances);
-  const eingangFernmeldeturm = L.marker([49.48643, 8.49230], {icon: entranceIcon}).addTo(this.entrances);
-  const haupteingangSpinellipark = L.marker([49.49772, 8.52095], {icon: entranceIcon}).addTo(this.entrances);
-  const eingangParkschale = L.marker([49.502722, 8.518795], {icon: entranceIcon}).addTo(this.entrances);
+    const haupteingangLuisenpark = L.marker([49.47938, 8.49609], { icon: entranceIcon }).addTo(this.entrances);
+    const eingangFernmeldeturm = L.marker([49.48643, 8.49230], { icon: entranceIcon }).addTo(this.entrances);
+    const haupteingangSpinellipark = L.marker([49.49772, 8.52095], { icon: entranceIcon }).addTo(this.entrances);
+    const eingangParkschale = L.marker([49.502722, 8.518795], { icon: entranceIcon }).addTo(this.entrances);
 
-  haupteingangLuisenpark.bindPopup("<b>Haupteingang Luisenpark</b> <br> Einlass: 9 - 19 Uhr").openPopup();
-  eingangFernmeldeturm.bindPopup("<b>Eingang Fernmeldeturm</b> <br> Einlass: 9 - 19 Uhr");
-  haupteingangSpinellipark.bindPopup("<b>Haupteingang Spinellipark</b> <br> Einlass: 9 - 19 Uhr");
-  eingangParkschale.bindPopup("<b>Eingang Parkschale</b> <br> Einlass: 9 - 19 Uhr");
+    haupteingangLuisenpark.bindPopup("<b>Haupteingang Luisenpark</b> <br> Einlass: 9 - 19 Uhr").openPopup();
+    eingangFernmeldeturm.bindPopup("<b>Eingang Fernmeldeturm</b> <br> Einlass: 9 - 19 Uhr");
+    haupteingangSpinellipark.bindPopup("<b>Haupteingang Spinellipark</b> <br> Einlass: 9 - 19 Uhr");
+    eingangParkschale.bindPopup("<b>Eingang Parkschale</b> <br> Einlass: 9 - 19 Uhr");
 
 
   }
 
-  makeExits(){
+  makeExits() {
     const exitIcon = L.icon({
       iconUrl: 'assets/icon/Exit.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-  const ausgangOttoBeckStraße = L.marker([49.484908, 8.488246], {icon: exitIcon}).addTo(this.exits);
-  const ausgangFichtestraße = L.marker([49.483051, 8.491305], {icon: exitIcon}).addTo(this.exits);
-  const ausgangAmOberenLuisenpark = L.marker([49.479891, 8.494275], {icon: exitIcon}).addTo(this.exits);
-  const ausgangPaulMartinUfer = L.marker([49.483305, 8.501183], {icon: exitIcon}).addTo(this.exits);
-  const ausgangSpinelliPark = L.marker([49.497048, 8.520173], {icon: exitIcon}).addTo(this.exits);
-  //var ausgangKantineIris = L.marker([49.497885, 8.520818], {icon: exitIcon}).addTo(this.exits);
-  const ausgangNeuerBugaWeg = L.marker([49.498066, 8.522661], {icon: exitIcon}).addTo(this.exits);
-  const ausgangWachenheimerStraße = L.marker([49.502006, 8.515099], {icon: exitIcon}).addTo(this.exits);
+    const ausgangOttoBeckStraße = L.marker([49.484908, 8.488246], { icon: exitIcon }).addTo(this.exits);
+    const ausgangFichtestraße = L.marker([49.483051, 8.491305], { icon: exitIcon }).addTo(this.exits);
+    const ausgangAmOberenLuisenpark = L.marker([49.479891, 8.494275], { icon: exitIcon }).addTo(this.exits);
+    const ausgangPaulMartinUfer = L.marker([49.483305, 8.501183], { icon: exitIcon }).addTo(this.exits);
+    const ausgangSpinelliPark = L.marker([49.497048, 8.520173], { icon: exitIcon }).addTo(this.exits);
+    //var ausgangKantineIris = L.marker([49.497885, 8.520818], {icon: exitIcon}).addTo(this.exits);
+    const ausgangNeuerBugaWeg = L.marker([49.498066, 8.522661], { icon: exitIcon }).addTo(this.exits);
+    const ausgangWachenheimerStraße = L.marker([49.502006, 8.515099], { icon: exitIcon }).addTo(this.exits);
 
   }
 
-  init(map : L.Map): void {
+  init(map: L.Map): void {
     this.map = map;
     const inter = interval(100);
     inter.subscribe(v => {
@@ -569,9 +571,6 @@ export class MapService{
     }
   }
 
-   // evtl. die Zahlen in Math.pow 71000 & 111000 -> genauer hinbekommen
-  // button oben links, damit die Linie aufgerufen wird
-  // evtl. auf der Linie hinschreiben, dass es ca. 300m weg ist oder so -> mal bei leaflet schauen
 
   async locateUser(): Promise<any> {
     const userLocationGroup = this.userLocation;
@@ -607,7 +606,7 @@ export class MapService{
     if (shuttleLineList == undefined) {
       this.locateUser();
     } else {
-      var a = 100000;// furthest distance search radius
+      var a = 20;// furthest distance search radius
       let i, j: number;
       for (i = 0; i < shuttleLineList.length; i++) {
         for (j = 0; j < shuttleLineList[i].lineScheduleEntryList.length; j++) {
@@ -619,11 +618,14 @@ export class MapService{
             this.s1 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x;
             this.s2 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y;
             this.name = shuttleLineList[i].lineScheduleEntryList[j].station.stationDesignator;
-
           }
         }
       }
-
+      if (this.distance < 20) {
+        this.distanceText = true;
+      }else {
+        this.distanceTextToFarAway = true;
+      }
       var xx: [number, number][] = [
         [this.s1, this.s2],
         [this.myLocation.lat, this.myLocation.lng]
@@ -639,13 +641,10 @@ export class MapService{
         .openOn(this.map);
 
       layer.bindPopup(popup, { closeButton: false, closeOnClick: false }).addTo(this.distanceShower);
-
-
-
-      this.distanceShower.addTo(this.userLocation);
     }
-
+    this.distanceShower.addTo(this.userLocation);
   }
+
   // benutzt die Harversine Formel um die Fluglinie zu berechnen
   getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     var R = 6371; // Radius of the earth in km
@@ -668,11 +667,13 @@ export class MapService{
   }
 
   distanceCaller() {
-    if (this.distance == 0) {
+    if (this.distance == 0 || this.distance == undefined) {
       this.myDistanceShower(this.shuttleLineList);
     } else {
       this.distanceShower.clearLayers();
       this.distance = 0;
+      this.distanceText = false;
+      this.distanceTextToFarAway = false;
     }
   }
 
@@ -680,6 +681,8 @@ export class MapService{
     this.locateUser();
     this.distanceShower.clearLayers();
     this.distance = 0;
+    this.distanceText = false;
+    this.distanceTextToFarAway = false;
   }
 
   calcMiddleLatLng(map, latlng1, latlng2) {
@@ -694,15 +697,14 @@ export class MapService{
     for (var i = 1; i < latlngs.length; i++) {
       var left = latlngs[i - 1];
       var right = latlngs[i];
-
       this.newLatLng = this.calcMiddleLatLng(this.map, left, right);
     }
   }
 
 
-  moveToBuga() : any {
+  moveToBuga(): any {
     /* visual output for the user, letting him know that he is already at the Buga */
-    if(this.map.getCenter().lat >= 49.49021061654624 && this.map.getCenter().lat <= 49.49127559245556 && this.map.getCenter().lng >= 8.508478545177866 && this.map.getCenter().lng <= 8.510290295871553) {
+    if (this.map.getCenter().lat >= 49.49021061654624 && this.map.getCenter().lat <= 49.49127559245556 && this.map.getCenter().lng >= 8.508478545177866 && this.map.getCenter().lng <= 8.510290295871553) {
       this.snackbar.open("Du bist bereits an der Buga", 'Schließen', {
         verticalPosition: 'bottom',
       });
@@ -719,24 +721,24 @@ export class MapService{
   detectMapMovement(): void {
     this.map.on('move', () => {
       /* check if the user is near the Buga */
-      if(this.map.getCenter().lat >= 49.36289598710729 && this.map.getCenter().lat <= 49.615075626689 && this.map.getCenter().lng >= 8.299441337585451 && this.map.getCenter().lng <= 8.695807456970217) {
+      if (this.map.getCenter().lat >= 49.36289598710729 && this.map.getCenter().lat <= 49.615075626689 && this.map.getCenter().lng >= 8.299441337585451 && this.map.getCenter().lng <= 8.695807456970217) {
         /* hide speech-bubble */
         document.getElementById('speech-bubble-id').style.display = 'none';
         this.xPressed = false;
       }
       /* show speech-bubble */
-      else if(!this.xPressed) {
+      else if (!this.xPressed) {
         document.getElementById('speech-bubble-id').style.display = 'block';
       }
     });
   }
 
   hideContainer() {
-      document.getElementById('speech-bubble-id').style.display = 'none';
-      this.xPressed = true;
+    document.getElementById('speech-bubble-id').style.display = 'none';
+    this.xPressed = true;
   }
 
-  public openAndFlyTo(pos : LatLng) : void {
+  public openAndFlyTo(pos: LatLng): void {
     this.maximizeMap();
     //this.observerService.changeVisibility(false);
     this.map.flyTo(pos, 18);

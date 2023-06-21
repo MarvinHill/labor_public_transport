@@ -84,7 +84,7 @@
 
 .locate-button-max {
   position: absolute;
-  top: 7em;
+  top: 11em;
   right: 0.5em;
   width: 3.5em;
   height: 3em;
@@ -97,7 +97,7 @@
 
 .buga-back-button-max {
   position: absolute;
-  top: 11em;
+  top: 15em;
   right: 0.5em;
   width: 3.5em;
   height: 3em;
@@ -136,7 +136,7 @@
 /* rectangle for the speech bubble */
 .speech-bubble {
   position: absolute;
-  top: 11.5em;
+  top: 15.5em;
   right: 5em;
   height: 2em;
   padding-right: 2em;
@@ -178,12 +178,14 @@
 
 .distance-button-max {
   position: absolute;
-  top: 1.5em;
-  left: 0.5em;
-  z-index: 1001;
+  top: 7em;
+  right: 0.5em;
+  width: 3.5em;
+  height: 3em;
   border: solid lightgray 2px;
   border-radius: 0.6em;
   background: white;
+  z-index: 1305;
   font-weight: bolder;
 }
 
@@ -193,11 +195,11 @@
 
 .text {
   visibility: visible;
- margin-top: 0.5em;
+  top: 1em;  
   position: absolute;
-  top: 1.5em;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  text-align: center;
+  left: 30%;
+  right: 30%;
   z-index: 1001;
   border: solid white 10px;
   border-radius: 0.6em;
