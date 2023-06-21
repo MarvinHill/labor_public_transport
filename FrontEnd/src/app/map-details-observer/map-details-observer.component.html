@@ -25,7 +25,7 @@
 
 <div *ngIf="observerService.show === ObserverState.CAMPSITE" class="row">
   <div class="col text-center">
-    <img class="m-4" src="assets/icon/parkingIcon.svg" alt="parking-icon">
+    <img class="m-4" src="assets/image/camping_observer_icon.svg" alt="parking-icon">
     <h2>{{observerService.data.name}}</h2>
     <div class="my-2">
       <p *ngIf="observerService.data.electricity" class="p-0 m-0">
@@ -45,6 +45,31 @@
       </p>
       <p *ngIf="!observerService.data.dogsAllowed" class="p-0 m-0">
         Hunde erlaubt : Nein
+      </p>
+    </div>
+    <div role="button" class="google-routing-button" style="margin-left: auto; margin-right: auto; width: 25%;"
+         (click)="openMaps();">
+      <img src="assets/icon/googleMaps.svg" alt="google maps">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="observerService.show === ObserverState.CARAVAN" class="row">
+  <div class="col text-center">
+    <img class="m-4" src="assets/icon/parkingIcon.svg" alt="parking-icon">
+    <h2>{{observerService.data.name}}</h2>
+    <div class="my-2">
+      <p *ngIf="observerService.data.barrierfree" class="p-0 m-0">
+        Barrierefrei : Ja
+      </p>
+      <p *ngIf="!observerService.data.barrierfree" class="p-0 m-0">
+        Barrierefrei : Nein
+      </p>
+      <p *ngIf="observerService.data.charging" class="p-0 m-0">
+        Ladestationen : Ja
+      </p>
+      <p *ngIf="!observerService.data.charging" class="p-0 m-0">
+        Ladestationen : Nein
       </p>
     </div>
     <div role="button" class="google-routing-button" style="margin-left: auto; margin-right: auto; width: 25%;"
