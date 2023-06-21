@@ -41,7 +41,7 @@ export class ParkingSearchService implements SearchProvider{
               element.displayText = element.name;
               element.searchAction = () => {
                 var local = "/parking"
-                if(element.parkingType = ParkingType.BIKE){
+                if(element.parkingType == ParkingType.BIKE){
                   local = "/bike-parking";
                 } 
                 this.router.navigateByUrl(local);
