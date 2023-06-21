@@ -17,7 +17,8 @@ export class ShuttleLineService {
   private http: HttpClient;
   private lines: ShuttleLine[];
 
-  constructor(http: HttpClient, private dataService : DataServiceService, private observerService : MapDetailsObserverService) {
+
+  constructor(http: HttpClient, private dataService: DataServiceService, private observerService: MapDetailsObserverService) {
     this.http = http;
   }
 
@@ -60,7 +61,7 @@ export class ShuttleLineService {
    * @param entry
    * @param line
    */
-  public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry, line : ShuttleLine): void {
+  public addLineStopToMap(layer: L.LayerGroup, entry: LineScheduleEntry, line: ShuttleLine): void {
     //Todo: right icon designation for trains parkingslots and shuttle line view
     const shuttleMarkerIcon = L.icon({
       iconUrl: 'assets/image/ShuttleLineEntry.png',
@@ -89,30 +90,16 @@ export class ShuttleLineService {
    * @returns
    */
   public getPolyLine(line: ShuttleLine): L.Polyline {
-    const tpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
-    let options;
-    if (line.lineDesignator == "BUGA Shuttlelinie") {
+    let tpl = this.transformPolyLinePointToLatlng(line.geoLinePoints);
+    var options =
+    {
+      bubblingMouseEvents: false,
+      color: line.colorHexCode,
+      weight: 5,
+      opacity: 1,
+      smoothFactor: 1,
+    };
 
-      options =
-      {
-        bubblingMouseEvents : false,
-        color: line.colorHexCode,
-        weight: 5,
-        opacity: 1,
-        smoothFactor: 1,
-        //  dashArray: "25 20"
-      };
-    } else {
-      options =
-      {
-        bubblingMouseEvents : false,
-        color: line.colorHexCode,
-        weight: 5,
-        opacity: 1,
-        smoothFactor: 1
-      };
-
-    }
     return L.polyline(tpl, options);
   }
 
@@ -123,5 +110,4 @@ export class ShuttleLineService {
     }
     return tranformedPolyLine;
   }
-
 }

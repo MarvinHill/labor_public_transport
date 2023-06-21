@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { SearchService } from './search.service';
 import { Router } from '@angular/router';
 import { MapService } from './map.service';
+import { TransportType } from '../TransportType';
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +44,16 @@ export class ShuttleSearchService implements SearchProvider {
               return false;
             });
             data.forEach(element => {
-              element.category = "Shuttle-Linien"
+              element.category = "Shutte Linien und ÖPNV"
               element.displayText = element.lineDesignator;
               element.searchAction = () => {
-                const local = "/shuttle"
+                var local = ""
+                if(element.transportType == TransportType[TransportType.Train]){
+                  local = "/public-transport"
+                }
+                if(element.transportType == TransportType[TransportType.Shuttle]){
+                  local = "/shuttle"
+                }
                 this.router.navigateByUrl(local);
                 this.searchService.minimize();
                 this.mapService.minimizeMap();

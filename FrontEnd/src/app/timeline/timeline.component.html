@@ -1,6 +1,6 @@
 <!-- Section: Timeline -->
 <section>
-  <div class="row p-3" [id]="this.shuttleLine.lineDesignator">
+  <div class="row p-3" [id]="this.shuttleLine.lineDesignator" (click) = "this.panToTransportLine()" role="button">
     <div class="text-box bc-g round p-3">
       <h5 class="fs-5 fw-bold">{{lineName}}</h5>
       <p class="fst-italic" style="text-align: right;">{{this.lineScheduleEntryList[0].station.stationDesignator}} -
@@ -8,13 +8,17 @@
       <div style="overflow-x: hidden; overflow-y: auto;" class="height" [class.height]="restrictSize === true">
         <ul class="timeline">
           <li class="timeline-item1" style="text-align: start;">
-            <p class="fw-normal">{{this.lineScheduleEntryList[0].station.stationDesignator}} <br> </p>
+            <p class="fw-normal">
+              <app-time-display [stationName] ="lineScheduleEntryList[0]?.station.stationDesignator" [realtime] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntryList[0]))?.realtimeDeparture)" [planned] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntryList[0]))?.plannedDeparture)"></app-time-display>
+              </p>
           </li>
           <li class="timeline-item"
             *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
             style="text-align: start;">
             <div *ngIf="!first && !last">
-              <p class="fw-normal">{{lineScheduleEntry.station.stationDesignator}} <br>
+              <p class="fw-normal">
+                <app-time-display [stationName] ="lineScheduleEntry.station.stationDesignator" [realtime] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.realtimeDeparture)" [planned] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.plannedDeparture)"></app-time-display>
+                <br>
               </p>
             </div>
           </li>
@@ -22,7 +26,9 @@
             *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
             style="text-align: start;">
             <div *ngIf="last">
-              <p class="fw-normal">{{lineScheduleEntry.station.stationDesignator}} <br>
+              <p class="fw-normal">
+                <app-time-display [stationName] ="lineScheduleEntry.station.stationDesignator" [realtime] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.realtimeDeparture)" [planned] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.plannedDeparture)"></app-time-display>
+                <br>
               </p>
             </div>
           </li>
