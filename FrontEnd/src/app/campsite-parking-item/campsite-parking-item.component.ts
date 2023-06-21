@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {UserLoginServiceService} from "../services/user-login-service.service";
 import {DataServiceService} from "../services/data-service.service";
 import {ParkingLot} from "../ParkingLot";
 
@@ -13,7 +12,6 @@ export class CampsiteParkingItemComponent implements OnInit {
   caravanParkingLots: ParkingLot[];
   campsiteParkingLots: ParkingLot[];
   http:HttpClient;
-  loginService : UserLoginServiceService;
   options!: {
     headers?: HttpHeaders | { [header: string]: string | string[]; };
     observe?: 'body' | 'events' | 'response';
@@ -25,9 +23,8 @@ export class CampsiteParkingItemComponent implements OnInit {
 
   dataService: DataServiceService;
 
-  constructor(http:HttpClient, loginService : UserLoginServiceService,  dataService: DataServiceService){
+  constructor(http:HttpClient,  dataService: DataServiceService){
     this.http = http;
-    this.loginService = loginService;
     this.dataService = dataService;
     dataService.getAllCarParking();
 

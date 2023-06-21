@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { ShuttleLine } from '../ShuttleLine';
-import { ParkingLot } from '../ParkingLot';
-import { RnvLine } from '../RnvLine';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { DataServiceService } from '../services/data-service.service';
 import { ObserverState } from '../ObserverState';

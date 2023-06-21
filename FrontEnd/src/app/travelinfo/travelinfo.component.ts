@@ -19,5 +19,9 @@ export class TravelinfoComponent {
     window.location.href = 'https://www.buga23.de/besuch-service/barrierefreiheit-mobilitaetsverleih/';
   } 
 
+  redirectToMoreContact(){
+    window.location.href = 'https://www.buga23.de/kontakt/';
+  }
+
   constructor(@Inject(PreisService) public preisService : PreisService){}
 }

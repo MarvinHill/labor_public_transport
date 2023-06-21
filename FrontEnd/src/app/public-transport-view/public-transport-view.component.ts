@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
 import { DataServiceService } from '../services/data-service.service';
-import { UserLoginServiceService } from '../user-login-service.service';
 import { TransportType } from '../TransportType';
 
 @Component({

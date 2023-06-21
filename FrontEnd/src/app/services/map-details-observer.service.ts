@@ -10,7 +10,7 @@ import {ParkingType} from "../ParkingType";
 export class MapDetailsObserverService {
 
   public data = null ;
-  public visible : boolean = true;
+  public visible  = true;
   public show:ObserverState = ObserverState.NOTHING;
 
   constructor() { }

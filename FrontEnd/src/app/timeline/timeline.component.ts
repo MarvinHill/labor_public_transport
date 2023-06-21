@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ShuttleLine } from '../ShuttleLine';
 import { LineScheduleEntry } from '../LineScheduleEntry';
-import { DataServiceService } from '../services/data-service.service';
-import { RnvQuery } from '../RnvQuery';
 import { RnvStopEvent } from '../RnvStopEvent';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
 import { MapService } from '../services/map.service';
@@ -20,15 +18,17 @@ export class TimelineComponent implements OnInit,OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.setUp();
   }
-  
+
+
   ngOnInit(): void {
     this.setUp();
   }
 
-  @Input() public shuttleLine: ShuttleLine;
-  @Input() restrictSize : boolean = true;
 
-  lineName: string = "no line name";
+  @Input() shuttleLine: ShuttleLine;
+  @Input() restrictSize  = true;
+
+  lineName = "no line name";
   shuttleLineID: number;
   lineScheduleEntryList: LineScheduleEntry[];
   shuttleLineList: ShuttleLine[];

@@ -18,7 +18,7 @@ export class ShuttleSearchService implements SearchProvider {
   constructor(private dataService: DataServiceService, private router : Router, private mapService : MapService) { }
   async search(target: string): Promise<ShuttleLine[]> {
 
-    var request = this.dataService.getShuttleLines();
+    const request = this.dataService.getShuttleLines();
 
     return new Promise<ShuttleLine[]>(
       resolve => {
@@ -31,7 +31,7 @@ export class ShuttleSearchService implements SearchProvider {
               if (value.lineDesignator?.toLowerCase().includes(target)) {
                 return true;
               }
-              var childMatched = false;
+              let childMatched = false;
               value.lineScheduleEntryList.forEach(element => {
                 if (element?.station?.stationDesignator?.toLowerCase().includes(target)) {
                   childMatched = true;
@@ -58,7 +58,7 @@ export class ShuttleSearchService implements SearchProvider {
                 this.searchService.minimize();
                 this.mapService.minimizeMap();
                 setTimeout(() => {
-                  var el = document.getElementById(element.displayText);
+                  const el = document.getElementById(element.displayText);
                   el?.scrollIntoView({ block: "center" });
                   console.warn("ran");
                 }, 2000);

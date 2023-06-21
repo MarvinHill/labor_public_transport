@@ -25,10 +25,10 @@ export class ParkingItemCapacityComponent implements OnInit {
   }
 
   @Input() parking: ParkingLot;
-  parkingName: String = "NAME";
+  parkingName = "NAME";
   parkingID: number;
-  parkingAddress: String = "ADDRESS";
-  carParkingType: ParkingType;
+  parkingAddress = "ADDRESS";
+  protected readonly ParkingType = ParkingType;
 
   // auslastungen: number[] = [50, 100, 75, 25, 25, 75, 50, 100, 9, 11, 10];
   auslastungen: number[] = [];
@@ -46,5 +46,4 @@ export class ParkingItemCapacityComponent implements OnInit {
     console.log(this.screenWidth);
   }
 
-  protected readonly ParkingType = ParkingType;
 }
