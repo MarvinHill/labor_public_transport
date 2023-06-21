@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ParkingLot } from '../ParkingLot';
-import { ShuttleLine } from '../ShuttleLine';
-import { ObserverState } from '../ObserverState';
+import {Injectable} from '@angular/core';
+import {ParkingLot} from '../ParkingLot';
+import {ShuttleLine} from '../ShuttleLine';
+import {ObserverState} from '../ObserverState';
+import {ParkingType} from "../ParkingType";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,10 @@ export class MapDetailsObserverService {
   public visible  = true;
   public show:ObserverState = ObserverState.NOTHING;
 
-
-
   constructor() { }
 
   changeDisplay(data){
-    if("parkingType" in data){
+    if(data.parkingType === ParkingType.CAR || data.parkingType === ParkingType.BIKE){
       this.show = ObserverState.PARKING;
       this.data = <ParkingLot> data;
       this.changeVisibility(true);
@@ -26,6 +25,18 @@ export class MapDetailsObserverService {
     else if("lineDesignator" in data){
       this.show = ObserverState.SHUTTLE;
       this.data = <ShuttleLine> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if(data.parkingType === ParkingType.CAMPSITE) {
+      this.show = ObserverState.CAMPSITE;
+      this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if(data.parkingType === ParkingType.CARAVAN) {
+      this.show = ObserverState.CARAVAN;
+      this.data = <ParkingLot> data;
       this.changeVisibility(true);
       return;
     }

@@ -20,12 +20,16 @@ public class ParkingLot {
     String name;
     boolean barrierfree;
     boolean charging;
-    ParkingType parkingType;    // 1 = bike, 2 = car, 3 = bus
+    ParkingType parkingType;
     String address;
+    boolean employeeParking;
+    boolean electricity;
+    boolean water;
+    boolean dogsAllowed;
 
     int maxCapacity;
 
-    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, int maxCapacity) {
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, int maxCapacity, boolean employeeParking) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
@@ -34,7 +38,22 @@ public class ParkingLot {
         this.charging = charging;
         this.parkingType = parkingType;
         this.address = address;
-        this.maxCapacity = maxCapacity;
+        this.employeeParking = employeeParking;
+    }
+
+    public ParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, int maxCapacity, boolean employeeParking, boolean electricity, boolean water, boolean dogsAllowed) {
+        this.geoLocation = geoLocation;
+        this.area = area;
+        this.entrance = entrance;
+        this.name = name;
+        this.barrierfree = barrierfree;
+        this.charging = charging;
+        this.parkingType = parkingType;
+        this.address = address;
+        this.employeeParking = employeeParking;
+        this.electricity = electricity;
+        this.water = water;
+        this.dogsAllowed = dogsAllowed;
     }
 
     public ParkingLot() { }
@@ -113,5 +132,25 @@ public class ParkingLot {
 
     public int getMaxCapacity() {
         return this.maxCapacity;
+    }
+
+    public void setEmployeeParking(boolean employeeParking) {
+        this.employeeParking = employeeParking;
+    }
+
+    public boolean getEmployeeParking() {
+        return employeeParking;
+    }
+
+    public boolean getElectricity() {
+        return electricity;
+    }
+
+    public boolean getWater() {
+        return water;
+    }
+
+    public boolean getDogsAllowed() {
+        return dogsAllowed;
     }
 }

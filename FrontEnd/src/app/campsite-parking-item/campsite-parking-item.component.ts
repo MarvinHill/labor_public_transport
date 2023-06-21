@@ -4,12 +4,13 @@ import {DataServiceService} from "../services/data-service.service";
 import {ParkingLot} from "../ParkingLot";
 
 @Component({
-  selector: 'app-parking-view',
-  templateUrl: './parking-view.component.html',
-  styleUrls: ['./parking-view.component.css']
+  selector: 'app-campsite-parking-item',
+  templateUrl: './campsite-parking-item.component.html',
+  styleUrls: ['./campsite-parking-item.component.css']
 })
-export class ParkingViewComponent implements OnInit{
-  carParkingLots: ParkingLot[];
+export class CampsiteParkingItemComponent implements OnInit {
+  caravanParkingLots: ParkingLot[];
+  campsiteParkingLots: ParkingLot[];
   http:HttpClient;
   options!: {
     headers?: HttpHeaders | { [header: string]: string | string[]; };
@@ -25,10 +26,16 @@ export class ParkingViewComponent implements OnInit{
   constructor(http:HttpClient,  dataService: DataServiceService){
     this.http = http;
     this.dataService = dataService;
-    dataService.carParking.subscribe(value=> {
-      this.carParkingLots = value;
-    })
     dataService.getAllCarParking();
+
+    dataService.caravanParking.subscribe(value=> {
+      this.caravanParkingLots = value;
+    })
+    dataService.campsiteParking.subscribe(value=> {
+      this.campsiteParkingLots = value;
+    })
+    dataService.getAllCaravanParking();
+    dataService.getAllCampsiteParking();
   }
 
   ngOnInit(): void {
@@ -38,7 +45,7 @@ export class ParkingViewComponent implements OnInit{
 
   @Input() park: ParkingLot;
 
-  name = "NAME";
+  name:String = "NAME";
   parkingId: number;
 
 }

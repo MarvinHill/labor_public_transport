@@ -6,8 +6,12 @@
       <p class="white-font">{{parkingAddress}}</p>
       <div class="tag-container" *ngIf="screenWidth > 767">
         <li class="tag" *ngIf="parking.barrierfree === true">Barrierefrei</li>
-        <li class="tag" *ngIf="parking.charging === true">Ladestationen</li>
-        <li class="tag-halter" *ngIf="parking.charging === false && parking.barrierfree === false && screenWidth > 767">.</li>
+        <li class="tag" *ngIf="parking.charging === true && parking.parkingType === ParkingType.CAR">Ladestationen</li>
+        <li class="tag" *ngIf="parking.electricity === true && parking.parkingType === ParkingType.CAMPSITE">Strom</li>
+        <li class="tag" *ngIf="parking.water === true && parking.parkingType === ParkingType.CAMPSITE">Wasser</li>
+        <li class="tag" *ngIf="parking.dogsAllowed === true && parking.parkingType === ParkingType.CAMPSITE">Hunde</li>
+        <li class="tag" *ngIf="parking.employeeParking === true">Mitarbeiter</li>
+        <li class="tag-halter" *ngIf="parking.charging === false && parking.barrierfree === false && parking.employeeParking === false && screenWidth > 767">.</li>
       </div>
     </div>
     <div class="col-grafik" *ngIf="parking.maxCapacity > 0"><app-capacity-graph [parking]="parking"></app-capacity-graph></div>

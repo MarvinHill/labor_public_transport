@@ -4,12 +4,12 @@ import {DataServiceService} from "../services/data-service.service";
 import {ParkingLot} from "../ParkingLot";
 
 @Component({
-  selector: 'app-parking-view',
-  templateUrl: './parking-view.component.html',
-  styleUrls: ['./parking-view.component.css']
+  selector: 'app-bike-parking-item',
+  templateUrl: './bike-parking-item.component.html',
+  styleUrls: ['./bike-parking-item.component.css']
 })
-export class ParkingViewComponent implements OnInit{
-  carParkingLots: ParkingLot[];
+export class BikeParkingItemComponent implements OnInit {
+  bikeParkingLots: ParkingLot[];
   http:HttpClient;
   options!: {
     headers?: HttpHeaders | { [header: string]: string | string[]; };
@@ -25,10 +25,12 @@ export class ParkingViewComponent implements OnInit{
   constructor(http:HttpClient,  dataService: DataServiceService){
     this.http = http;
     this.dataService = dataService;
-    dataService.carParking.subscribe(value=> {
-      this.carParkingLots = value;
-    })
     dataService.getAllCarParking();
+
+    dataService.bikeParking.subscribe(value=> {
+      this.bikeParkingLots = value;
+    })
+    dataService.getAllBikeParking();
   }
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class ParkingViewComponent implements OnInit{
 
   @Input() park: ParkingLot;
 
-  name = "NAME";
+  name:String = "NAME";
   parkingId: number;
 
 }
