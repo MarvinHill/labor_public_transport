@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ParkingCapacity} from "../ParkingCapacity";
 import {ParkingLot} from "../ParkingLot";
 import {MapService} from "../services/map.service";
@@ -9,7 +9,7 @@ import {DataServiceService} from "../services/data-service.service";
   templateUrl: './capacity-graph.component.html',
   styleUrls: ['./capacity-graph.component.css']
 })
-export class CapacityGraphComponent implements OnInit{
+export class CapacityGraphComponent implements OnInit, OnChanges{
   carParkingLots: ParkingLot[];
   bikeParkingLots: ParkingLot[];
   parkingCapacityAll: ParkingCapacity[];
@@ -26,6 +26,17 @@ export class CapacityGraphComponent implements OnInit{
     await this.fetchParkingCapacity();
 
     this.calculateCapacity();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.parking) {
+      // Die 'parking'-Eingabe hat sich geändert
+      // Hier können Sie die notwendigen Aktualisierungen vornehmen und die Ansicht neu berechnen
+      this.parking = changes.parking.currentValue;
+      this.parkingName = this.parking.name;
+      this.totalParkingspaces = this.parking.maxCapacity;
+      this.calculateCapacity();
+    }
   }
 
   async fetchParkingCapacity(): Promise<void> {
