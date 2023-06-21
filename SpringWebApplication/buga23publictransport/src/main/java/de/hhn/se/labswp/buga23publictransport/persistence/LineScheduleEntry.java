@@ -18,10 +18,6 @@ public class LineScheduleEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalTime arrivalTime;
-    private int waitTime;
-    private int delay;
-
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;
@@ -32,30 +28,12 @@ public class LineScheduleEntry {
     }
 
     public LineScheduleEntry(
-            LocalTime arrivalTime,
-            int waitTime,
-            int delay,
             Station station) {
-        this.arrivalTime = arrivalTime;
-        this.waitTime = waitTime;
-        this.delay = delay;
         this.station = station;
     }
 
     public Long getId() {
         return this.id;
-    }
-
-    public int getDelay() {
-        return this.delay;
-    }
-
-    public int getWaitTime() {
-        return this.waitTime;
-    }
-
-    public LocalTime getArrivalTime() {
-        return this.arrivalTime;
     }
 
     public Station getStation() {

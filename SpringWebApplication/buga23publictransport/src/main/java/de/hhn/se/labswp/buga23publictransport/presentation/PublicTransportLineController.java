@@ -59,13 +59,6 @@ public class PublicTransportLineController {
         return line.get();
     }
 
-    @PostMapping("/ptl")
-    ResponseEntity<?> createLine(@RequestBody PublicTransportLine line) {
-        log.info("Created " + line);
-        repo.save(line);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
-    }
-
     @DeleteMapping("/ptl/{lineId}")
     ResponseEntity<?> deleteLine(@PathVariable("lineId") String lineId) {
         long parsedId = Long.parseLong(lineId);

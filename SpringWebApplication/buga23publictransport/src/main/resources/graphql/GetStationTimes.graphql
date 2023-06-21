@@ -1,0 +1,35 @@
+# Returns all journey from the given hasafid
+# needs to be filtered with lines ...
+{
+# e.g. station id 2444 Nationaltheater
+  station(id: "rnv_hasaf_station_id") {
+    hafasID
+    longName
+    # start time here 2023-05-30T12:27:36Z
+    journeys(startTime: "rnv_start_time", first: 50, endTime: "rnv_end_time") {
+      totalCount
+      cursor
+      elements {
+        ... on Journey {
+          line {
+            lineGroup {
+              label
+            }
+          }
+          stops(onlyHafasID: "rnv_hasaf_station_id") {
+            station {
+              longName
+            }
+            plannedDeparture {
+              isoString
+            }
+            realtimeDeparture {
+              isoString
+            }
+            destinationLabel
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 export enum ParkingType {
-  BIKE,
-  CAR,
-  BUS
+  BIKE = "BIKE",
+  CAR = "CAR",
+  CAMPSITE = "CAMPSITE",
+  CARAVAN = "CARAVAN"
 }
-

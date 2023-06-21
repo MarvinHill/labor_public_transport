@@ -1,7 +1,12 @@
 <app-routing-top-bar></app-routing-top-bar>
+<div class="top-bar-padding"></div>
 <app-map></app-map>
 <div id="content">
     <router-outlet></router-outlet>
 </div>
 <app-search-view *ngIf="this.searchService.maximized"></app-search-view>
+<div class="container d-flex justify-content-center p-3">
+<a class="text-muted px-3" [routerLink]="['impressum']" (click) = "minimizeMap()" style="text-align: center;">Impressum</a>
+</div>
+
 <div style="height: 12em"></div>

@@ -11,15 +11,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @Configuration
 public class ParkingLotInit {
 
     @Bean
-    CommandLineRunner initializeParkingLots(BikeParkingLotRepository bikeRepo, CarParkingLotRepository carRepo) {
-        //Auto
+    CommandLineRunner initializeParkingLots(BikeParkingLotRepository bikeRepo, CarParkingLotRepository carRepo, CampsiteParkingRepository campsiteRepo, CaravanParkingLotRepository caravanRepo) {
+        //Car
         //Mit Info zur Auslastung: https://parken-mannheim.de/
         Point c1GeoLocation = new Point(49.486712989660845, 8.464162980407481);
         List<Point> c1Entrances = new ArrayList<>();
@@ -619,7 +622,16 @@ public class ParkingLotInit {
         gbgParkhausPoly.add(new Point(49.4954609, 8.5239946));
         gbgParkhausPoly.add(new Point(49.4960379, 8.5238637));
 
-        //Fahrad
+        Point bugaEingangsbereichGeoLocation = new Point(49.49807042068113, 8.522808655368982);
+        List<Point> bugaEingangsbereichEntrances = new ArrayList<>();
+        List<Point> bugaEingangsbereichPoly = new ArrayList<>();
+        bugaEingangsbereichPoly.add(new Point(49.4980324, 8.5227426));
+        bugaEingangsbereichPoly.add(new Point(49.4979374, 8.5227657));
+        bugaEingangsbereichPoly.add(new Point(49.4979437, 8.5228458));
+        bugaEingangsbereichPoly.add(new Point(49.4980409, 8.5228261));
+        bugaEingangsbereichPoly.add(new Point(49.4980324, 8.5227426));
+
+        //Bike
         Point luisenparkHaupteingangGeoLocation = new Point(49.4789910, 8.4965408);
         List<Point> luisenparkHaupteingangEntrances = new ArrayList<>();
         List<Point> luisenparkHaupteingangPoly = new ArrayList<>();
@@ -641,55 +653,110 @@ public class ParkingLotInit {
         List<Point> spinelliParkEingangParkschaleEntrances = new ArrayList<>();
         List <Point> spinelliParkEingangParkschalePoly = new ArrayList<>();
 
-        return args -> {
-            carRepo.save(new CarParkingLot(c1GeoLocation, c1Poly, c1Entrances, "C1 Hauptverwaltung MPB, Parkhaus", true, true, ParkingType.CAR, "C1,13-15, 68159 Mannheim"));
-            carRepo.save(new CarParkingLot(colliniCenterMuldeGeoLocation, colliniCenterMuldePoly, colliniCenterMuldeEntrances, "Collini-Center Mulde, Parkplatz", false, false, ParkingType.CAR, "Cahn-Garnier-Ufer, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(d3GeoLocation, d3Poly, d3Entrances, "D3, Tiefgarage", true, false, ParkingType.CAR, "D3 5, 68159 Mannheim"));
-            carRepo.save(new CarParkingLot(d5GeoLocation, d5Poly, d5Entrances, "D5 Reiß-Museum, Tiefgarage", true, true, ParkingType.CAR, "D5, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(g1GeoLocation, g1Poly, g1Entrances, "G1 Marktplatz, Tiefgarage", false, true, ParkingType.CAR, "G1 1, 68159 Mannheim"));
-            carRepo.save(new CarParkingLot(h6GeoLocation, h6Poly, h6Entrances, "H6, Tiefgarage", false, false, ParkingType.CAR, "H6 1, 68159 Mannheim"));
-            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1, Tiefgarage", true, false, ParkingType.CAR, "Willy-Brandt-Platz 5, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(p2GeoLocation, p2Poly, p2Entrances, "Hauptbahnhof P2, Parkhaus", true, false, ParkingType.CAR, "Heinrich-von-Stephan-Straße 6, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(p3GeoLocation, p3Poly, p3Entrances, "Hauptbahnhof P3, Parkhaus", true, true,ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim"));
-            carRepo.save(new CarParkingLot(p5GeoLocation, p5Poly, p5Entrances, "Hauptbahnhof P5, Parkhaus", true, true, ParkingType.CAR, "Glücksteinallee 9, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(klinikumGeoLocation, klinikumPoly, klinikumEntrances, "Klinikum, Tiefgarage", true, false, ParkingType.CAR, "Theodor-Kutzer-Ufer 1, 68167 Mannheim"));
-            carRepo.save(new CarParkingLot(kunsthalleGeoLocation, kunsthallePoly, kunsthalleEntrances, "Kunsthalle, Tiefgarage", true, true, ParkingType.CAR, "Friedrichsplatz 5, 68165 Mannheim"));
-            carRepo.save(new CarParkingLot(klinikumP3GeoLocation, klinikumP3Poly, klinikumP3Entrances, "Klinikum P3, Parkplatz", false, false, ParkingType.CAR, "Theodor-Kutzer-Ufer 4, 68167 Mannheim"));
-            carRepo.save(new CarParkingLot(m4aGeoLocation, m4aPoly, m4aEntrances, "M4a, Parkplatz", false, false, ParkingType.CAR, "M4a, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(n1GeoLocation, n1Poly, n1Entrances, "N1, Parkhaus", true, true, ParkingType.CAR, "N1 3, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(n2GeoLocation, n2Poly, n2Entrances, "N2 Stadthaus, Parkhaus", true, true, ParkingType.CAR, "N2 14, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(n6KomfortGeoLocation, n6KomfortPoly, n6KomfortEntrances, "N6 Komforthaus, Parkhaus", false, false, ParkingType.CAR, "N6 3, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(n6StandardGeoLocation, n6StandardPoly, n6StandardEntrances, "N6 Standardhaus, Parkhaus", true, true, ParkingType.CAR, "N6 3, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(u2GeoLocation, u2Poly, u2Entrances, "U2, Tiefgarage", true, true, ParkingType.CAR, "Herschelplatz, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(sapP1GeoLocation, sapP1Poly, sapP1Entrances,"SAP Arena P1, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(sapP2GeoLocation, sapP2Poly, sapP2Entrances, "SAP Arena P2, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(sapP3GeoLocation, sapP3Poly, sapP3Entrances, "SAP Arena P3, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(cityAirportGeoLocation, cityAirportPoly, cityAirportEntrances, "City Airport, Parkhaus", false, false, ParkingType.CAR, "Seckenheimer Landstraße 170, 68163 Mannheim"));
-            carRepo.save(new CarParkingLot(p4GeoLocation, p4Poly, p4Entrances, "Hauptbahnhof P4, Parkplatz", false, true, ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim"));
-            carRepo.save(new CarParkingLot(lortzingblockGeoLocation, lortzingblockPoly, lortzingblockEntrances, "Lortzingblock, Parkhaus", true, false, ParkingType.CAR, "Waldhofstraße 25, 68169 Mannheim"));
-            carRepo.save(new CarParkingLot(marchivumGeoLocation, marchivumPoly, marchivumEntrances, "Marchivum, Parkplatz", false, true, ParkingType.CAR, "Bunsenstraße, 68169 Mannheim"));
-            carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, false, ParkingType.CAR, "Neckarvorlandstraße 56, 68159 Mannheim"));
-            carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, false, ParkingType.CAR, "N7 17, 68161 Mannheim"));
-            carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR, "Am Roggenplatz, 68305 Mannheim"));
-            carRepo.save(new CarParkingLot(gbgParkhausGeoLocation, gbgParkhausPoly, gbgParkhausEntrances, "GBG-Parkhaus", true, false, ParkingType.CAR, "Spinelli-Platz 2, 68259 Mannheim"));
+        //Campsites
+        Point mannheimStrandbadGeoLocation = new Point(49.449609915097064, 8.445486131218207);
+        List<Point> mannheimStrandbadEntrances = new ArrayList<>();
+        mannheimStrandbadEntrances.add(new Point(49.448644848294094, 8.447485846644637));
+        List <Point> mannheimStrandbadPoly = new ArrayList<>();
+        mannheimStrandbadPoly.add(new Point(49.4506095, 8.4443036));
+        mannheimStrandbadPoly.add(new Point(49.4501561, 8.4447488));
+        mannheimStrandbadPoly.add(new Point(49.4498423, 8.4450921));
+        mannheimStrandbadPoly.add(new Point(49.4495533, 8.4454717));
+        mannheimStrandbadPoly.add(new Point(49.4491767, 8.4460296));
+        mannheimStrandbadPoly.add(new Point(49.4490750, 8.4461972));
+        mannheimStrandbadPoly.add(new Point(49.4490546, 8.4463353));
+        mannheimStrandbadPoly.add(new Point(49.4487477, 8.4468181));
+        mannheimStrandbadPoly.add(new Point(49.4484830, 8.4472616));
+        mannheimStrandbadPoly.add(new Point(49.4486657, 8.4475426));
+        mannheimStrandbadPoly.add(new Point(49.4490387, 8.4469329));
+        mannheimStrandbadPoly.add(new Point(49.4497251, 8.4458796));
+        mannheimStrandbadPoly.add(new Point(49.4501915, 8.4453038));
+        mannheimStrandbadPoly.add(new Point(49.4505195, 8.4449344));
+        mannheimStrandbadPoly.add(new Point(49.4505825, 8.4446595));
+        mannheimStrandbadPoly.add(new Point(49.4506595, 8.4443722));
+        mannheimStrandbadPoly.add(new Point(49.4506095, 8.4443036));
 
-            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", true, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim"));
-            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim"));
+        Point campingBlaueAdriaGeoLocation = new Point(49.424813706331705, 8.466795069411175);
+        List<Point> campingBlaueAdriaEntrances = new ArrayList<>();
+        campingBlaueAdriaEntrances.add(new Point(49.42516539411334, 8.467339803704036));
+        List <Point> campingBlaueAdriaPoly = new ArrayList<>();
+        campingBlaueAdriaPoly.add(new Point(49.42410790000, 8.46552110000));
+        campingBlaueAdriaPoly.add(new Point(49.42482370000, 8.46585880000));
+        campingBlaueAdriaPoly.add(new Point(49.42523100000, 8.46605100000));
+        campingBlaueAdriaPoly.add(new Point(49.42521510000, 8.46632890000));
+        campingBlaueAdriaPoly.add(new Point(49.42516660000, 8.46735010000));
+        campingBlaueAdriaPoly.add(new Point(49.42497680000, 8.46730560000));
+        campingBlaueAdriaPoly.add(new Point(49.42494240000, 8.46729700000));
+        campingBlaueAdriaPoly.add(new Point(49.42492230000, 8.46729190000));
+        campingBlaueAdriaPoly.add(new Point(49.42489640000, 8.46795440000));
+        campingBlaueAdriaPoly.add(new Point(49.42431250000, 8.46785470000));
+        campingBlaueAdriaPoly.add(new Point(49.42435110000, 8.46715120000));
+        campingBlaueAdriaPoly.add(new Point(49.42403040000, 8.46667120000));
+        campingBlaueAdriaPoly.add(new Point(49.42399230000, 8.46648150000));
+        campingBlaueAdriaPoly.add(new Point(49.42385700000, 8.46571400000));
+        campingBlaueAdriaPoly.add(new Point(49.42390600000, 8.46557920000));
+        campingBlaueAdriaPoly.add(new Point(49.42408540000, 8.46552770000));
+        campingBlaueAdriaPoly.add(new Point(49.42410790000, 8.46552110000));
+
+        Point mannheimNeuostheimGeoLocation = new Point(49.4747660235335, 8.525321985175125);
+        List<Point> mannheimNeuostheimEntrances = new ArrayList<>();
+        mannheimNeuostheimEntrances.add(new Point(49.4744678609929, 8.525177635467537));
+        mannheimNeuostheimEntrances.add(new Point(49.4756557427789, 8.525452931798828));
+        List <Point> mannheimNeuostheimPoly = new ArrayList<>();
+        mannheimNeuostheimPoly.add(new Point(49.4756554, 8.5253725));
+        mannheimNeuostheimPoly.add(new Point(49.4744737, 8.5250969));
+        mannheimNeuostheimPoly.add(new Point(49.4744682, 8.5251589));
+        mannheimNeuostheimPoly.add(new Point(49.4744493, 8.5253752));
+        mannheimNeuostheimPoly.add(new Point(49.4756397, 8.5256474));
+        mannheimNeuostheimPoly.add(new Point(49.4756554, 8.5253725));
+
+        return args -> {
+            carRepo.save(new CarParkingLot(c1GeoLocation, c1Poly, c1Entrances, "C1 Hauptverwaltung MPB, Parkhaus", true, true, ParkingType.CAR, "C1,13-15, 68159 Mannheim", 211, false));
+            carRepo.save(new CarParkingLot(colliniCenterMuldeGeoLocation, colliniCenterMuldePoly, colliniCenterMuldeEntrances, "Collini-Center Mulde, Parkplatz", false, false, ParkingType.CAR, "Cahn-Garnier-Ufer, 68161 Mannheim", 213, false));
+            carRepo.save(new CarParkingLot(d3GeoLocation, d3Poly, d3Entrances, "D3, Tiefgarage", true, false, ParkingType.CAR, "D3 5, 68159 Mannheim", 378, false));
+            carRepo.save(new CarParkingLot(d5GeoLocation, d5Poly, d5Entrances, "D5 Reiß-Museum, Tiefgarage", true, true, ParkingType.CAR, "D5, 68161 Mannheim", 365, false));
+            carRepo.save(new CarParkingLot(g1GeoLocation, g1Poly, g1Entrances, "G1 Marktplatz, Tiefgarage", false, true, ParkingType.CAR, "G1 1, 68159 Mannheim", 337, false));
+            carRepo.save(new CarParkingLot(h6GeoLocation, h6Poly, h6Entrances, "H6, Tiefgarage", false, false, ParkingType.CAR, "H6 1, 68159 Mannheim", 271, false));
+            carRepo.save(new CarParkingLot(p1GeoLocation, p1Poly, p1Entrances, "Hauptbahnhof P1, Tiefgarage", true, false, ParkingType.CAR, "Willy-Brandt-Platz 5, 68161 Mannheim", 327, false));
+            carRepo.save(new CarParkingLot(p2GeoLocation, p2Poly, p2Entrances, "Hauptbahnhof P2, Parkhaus", true, false, ParkingType.CAR, "Heinrich-von-Stephan-Straße 6, 68161 Mannheim", 326, false));
+            carRepo.save(new CarParkingLot(p3GeoLocation, p3Poly, p3Entrances, "Hauptbahnhof P3, Parkhaus", true, true,ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim", 222, false));
+            carRepo.save(new CarParkingLot(p5GeoLocation, p5Poly, p5Entrances, "Hauptbahnhof P5, Parkhaus", true, true, ParkingType.CAR, "Glücksteinallee 9, 68163 Mannheim", 584, false));
+            carRepo.save(new CarParkingLot(klinikumGeoLocation, klinikumPoly, klinikumEntrances, "Klinikum, Tiefgarage", true, false, ParkingType.CAR, "Theodor-Kutzer-Ufer 1, 68167 Mannheim", 509, false));
+            carRepo.save(new CarParkingLot(kunsthalleGeoLocation, kunsthallePoly, kunsthalleEntrances, "Kunsthalle, Tiefgarage", true, true, ParkingType.CAR, "Friedrichsplatz 5, 68165 Mannheim", 406, false));
+            carRepo.save(new CarParkingLot(klinikumP3GeoLocation, klinikumP3Poly, klinikumP3Entrances, "Klinikum P3, Parkplatz", false, false, ParkingType.CAR, "Theodor-Kutzer-Ufer 4, 68167 Mannheim", 313, false));
+            carRepo.save(new CarParkingLot(m4aGeoLocation, m4aPoly, m4aEntrances, "M4a, Parkplatz", false, false, ParkingType.CAR, "M4a, 68161 Mannheim", 68, false));
+            carRepo.save(new CarParkingLot(n1GeoLocation, n1Poly, n1Entrances, "N1, Parkhaus", true, true, ParkingType.CAR, "N1 3, 68161 Mannheim", 727, false));
+            carRepo.save(new CarParkingLot(n2GeoLocation, n2Poly, n2Entrances, "N2 Stadthaus, Parkhaus", true, true, ParkingType.CAR, "N2 14, 68161 Mannheim", 727, false));
+            carRepo.save(new CarParkingLot(n6KomfortGeoLocation, n6KomfortPoly, n6KomfortEntrances, "N6 Komforthaus, Parkhaus", false, false, ParkingType.CAR, "N6 3, 68161 Mannheim", 201, false));
+            carRepo.save(new CarParkingLot(n6StandardGeoLocation, n6StandardPoly, n6StandardEntrances, "N6 Standardhaus, Parkhaus", true, true, ParkingType.CAR, "N6 3, 68161 Mannheim", 298, false));
+            carRepo.save(new CarParkingLot(u2GeoLocation, u2Poly, u2Entrances, "U2, Tiefgarage", true, true, ParkingType.CAR, "Herschelplatz, 68161 Mannheim", 190, false));
+            carRepo.save(new CarParkingLot(sapP1GeoLocation, sapP1Poly, sapP1Entrances,"SAP Arena P1, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 348, false));
+            carRepo.save(new CarParkingLot(sapP2GeoLocation, sapP2Poly, sapP2Entrances, "SAP Arena P2, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 815, false));
+            carRepo.save(new CarParkingLot(sapP3GeoLocation, sapP3Poly, sapP3Entrances, "SAP Arena P3, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 850, false));
+            carRepo.save(new CarParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 1500, false));
+            carRepo.save(new CarParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 1500, false));
+            carRepo.save(new CarParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Parkplatz", true, true, ParkingType.CAR, "Xaver-Fuhr-Straße 152, 68163 Mannheim", 1500, false));
+            carRepo.save(new CarParkingLot(cityAirportGeoLocation, cityAirportPoly, cityAirportEntrances, "City Airport, Parkhaus", false, false, ParkingType.CAR, "Seckenheimer Landstraße 170, 68163 Mannheim", 0, false));
+            carRepo.save(new CarParkingLot(p4GeoLocation, p4Poly, p4Entrances, "Hauptbahnhof P4, Parkplatz", false, true, ParkingType.CAR, "Keplerstraße 21-25, 68165 Mannheim", 0, false));
+            carRepo.save(new CarParkingLot(lortzingblockGeoLocation, lortzingblockPoly, lortzingblockEntrances, "Lortzingblock, Parkhaus", true, false, ParkingType.CAR, "Waldhofstraße 25, 68169 Mannheim", 0, false));
+            carRepo.save(new CarParkingLot(marchivumGeoLocation, marchivumPoly, marchivumEntrances, "Marchivum, Parkplatz", false, true, ParkingType.CAR, "Bunsenstraße, 68169 Mannheim", 0, false));
+            carRepo.save(new CarParkingLot(musikparkGeoLocation, musikparkPoly, musikparkEntrances, "Musikpark, Parkplatz", false, false, ParkingType.CAR, "Neckarvorlandstraße 56, 68159 Mannheim", 0, false));
+            carRepo.save(new CarParkingLot(n7CinemaxxGeoLocation, n7CinemaxxPoly, n7CinemaxxEntrances, "N7 CinemaxX, Parkhaus", true, false, ParkingType.CAR, "N7 17, 68161 Mannheim", 0, false));
+            carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR, "Am Roggenplatz, 68305 Mannheim", 0, false));
+            carRepo.save(new CarParkingLot(gbgParkhausGeoLocation, gbgParkhausPoly, gbgParkhausEntrances, "GBG-Parkhaus", true, false, ParkingType.CAR, "Spinelli-Platz 2, 68259 Mannheim", 0, true));
+
+            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim", 0, false));
+            bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", true, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim", 0, false));
+            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim", 0, false));
+            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim", 0, false));
+
+            caravanRepo.save(new CaravanParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+
+            campsiteRepo.save(new CampsiteParking(mannheimStrandbadGeoLocation, mannheimStrandbadPoly, mannheimStrandbadEntrances, "Mannheim Strandbad", false, true, ParkingType.CAMPSITE, "Strandbadweg 1, 68199 Mannheim", false, true, true, true));
+            campsiteRepo.save(new CampsiteParking(campingBlaueAdriaGeoLocation, campingBlaueAdriaPoly, campingBlaueAdriaEntrances, "Campingplatz Blaue Adria", false, false, ParkingType.CAMPSITE, "Adriastraße, 67122 Altrip", false, false, true, true));
+            campsiteRepo.save(new CampsiteParking(mannheimNeuostheimGeoLocation, mannheimNeuostheimPoly, mannheimNeuostheimEntrances, "Wohnmobilstellplatz Mannheim-Neuostheim", false, false, ParkingType.CAMPSITE, "Hans-Thoma-Straße 3, 68163 Mannheim", false, false, false, false));
         };
     }
-
-//    @Bean
-//    @Scheduled(cron = "0 15 * * *")
-//    CommandLineRunner updateParkingCapacity(ParkingCapacityRepository capacityRepo) {
-//
-//        return args -> {
-//
-//            //capacityRepo.save(new ParkingCapacity(name, freeParkingspaces));
-//        };
-//    }
 }
