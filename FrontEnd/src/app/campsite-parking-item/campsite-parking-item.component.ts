@@ -10,6 +10,7 @@ import {ParkingLot} from "../ParkingLot";
   styleUrls: ['./campsite-parking-item.component.css']
 })
 export class CampsiteParkingItemComponent implements OnInit {
+  caravanParkingLots: ParkingLot[];
   campsiteParkingLots: ParkingLot[];
   http:HttpClient;
   loginService : UserLoginServiceService;
@@ -30,9 +31,13 @@ export class CampsiteParkingItemComponent implements OnInit {
     this.dataService = dataService;
     dataService.getAllCarParking();
 
+    dataService.caravanParking.subscribe(value=> {
+      this.caravanParkingLots = value;
+    })
     dataService.campsiteParking.subscribe(value=> {
       this.campsiteParkingLots = value;
     })
+    dataService.getAllCaravanParking();
     dataService.getAllCampsiteParking();
   }
 

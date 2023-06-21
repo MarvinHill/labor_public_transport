@@ -9,6 +9,13 @@
 <div id="carParkingContent" class="content" style="display: block;">
   <div class="container-lg">
     <div class="row">
+      <ng-container *ngFor="let item of caravanParkingLots;">
+        <div class="col-md-6 padding-own">
+          <div>
+            <div class = "col-12"><app-parkingItemCapacity [parking]="item"></app-parkingItemCapacity></div>
+          </div>
+        </div>
+      </ng-container>
       <ng-container *ngFor="let item of campsiteParkingLots;">
         <div class="col-md-6 padding-own">
           <div>
