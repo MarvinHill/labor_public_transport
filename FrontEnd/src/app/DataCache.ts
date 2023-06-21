@@ -1,4 +1,4 @@
-import { Observable, firstValueFrom, lastValueFrom } from "rxjs";
+import { firstValueFrom} from "rxjs";
 
 const MILLISECOND_PER_SECOND = 1000;
 const SECOND_PER_MINUTE = 60;

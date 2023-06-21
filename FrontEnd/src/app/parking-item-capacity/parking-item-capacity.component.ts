@@ -26,9 +26,9 @@ export class ParkingItemCapacityComponent implements OnInit {
   }
 
   @Input() parking: ParkingLot;
-  parkingName: String = "NAME";
+  parkingName = "NAME";
   parkingID: number;
-  parkingAddress: String = "ADDRESS";
+  parkingAddress = "ADDRESS";
 
   protected readonly ParkingType = ParkingType;
 

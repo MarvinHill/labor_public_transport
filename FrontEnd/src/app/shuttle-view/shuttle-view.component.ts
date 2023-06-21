@@ -1,9 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 
 import{ShuttleLine} from '../ShuttleLine';
-import { UserLoginServiceService } from '../services/user-login-service.service';
-import { LineScheduleEntry } from '../LineScheduleEntry';
 import { DataServiceService } from '../services/data-service.service';
 
 
@@ -16,7 +14,6 @@ export class ShuttleViewComponent{
 
   shuttleLineList: ShuttleLine[];
   http:HttpClient;
-  loginService : UserLoginServiceService;
   options!: {
     headers?: HttpHeaders | { [header: string]: string | string[]; };
     observe?: 'body' | 'events' | 'response';
@@ -28,9 +25,8 @@ export class ShuttleViewComponent{
 
   dataService: DataServiceService;
 
-  constructor(http:HttpClient, loginService : UserLoginServiceService,  dataService: DataServiceService){
+  constructor(http:HttpClient, dataService: DataServiceService){
     this.http = http;
-    this.loginService = loginService;
     this.dataService = dataService;
     dataService.lines.subscribe(value=> {
       this.shuttleLineList = value;
