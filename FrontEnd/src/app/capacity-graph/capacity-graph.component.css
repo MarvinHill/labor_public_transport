@@ -1,0 +1,59 @@
+.line-vertical {
+  border-radius: 99px;
+  align-self: flex-end;
+  /* Breite der einzelnen Linien */
+  width: 9%;
+  margin: 2%;
+  z-index: 30;
+}
+
+.color-past {
+  background-color: #0677e0;
+}
+
+.color-now {
+  background-color: #0627a0;
+}
+
+.color-forecast {
+  background-color: gray;
+}
+
+.container-of-all {
+  height:9em;
+  width:100%;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  z-index: 20;
+}
+
+.graph {
+  height: 70%;
+  display: flex;
+  padding-top: 0.3rem;
+  align-items: baseline;
+  overflow-x: auto;
+  width:100%;
+  z-index: 25;
+  justify-content: space-between;
+}
+
+.header-font {
+  font-size: small;
+}
+
+.scale-font {
+  font-size: small;
+}
+
+.scale-container {
+  width: 100%;
+  display: flex;
+}
+
+.time-container {
+  border-top: 0.2em solid #0627a0;
+  width: 30%;
+  margin-left: -5%;
+  text-align: center;
+}

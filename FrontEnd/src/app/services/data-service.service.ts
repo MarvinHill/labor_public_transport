@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ShuttleLine } from '../ShuttleLine';
 import { Router } from '@angular/router';
-import { ParkingLot } from "../ParkingLot";
+import {ParkingLot} from "../ParkingLot";
+import {ParkingCapacity} from "../ParkingCapacity";
 import { TimeStopInfo } from '../TimeStopInfo';
 import { DataCache } from '../DataCache';
 
@@ -21,6 +22,8 @@ export class DataServiceService {
   carParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
 
   bikeParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+
+  parkingCapacity: Subject<ParkingCapacity[]> =new Subject<ParkingCapacity[]>();
 
   campsiteParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
 
@@ -88,9 +91,17 @@ export class DataServiceService {
     return request;
   }
 
+  getAllParkingCapacity() {
+    const request = this.http.get<ParkingCapacity[]>(this.baseurl + '/capacity/all')
+    request.subscribe(resp => {
+      this.parkingCapacity.next(resp);
+    })
+  }
+
   openMapExternal(from: string, to: string) {
     window.open(`https://www.google.de/maps/dir/${from}/${to}/`);
   }
+
   openMapExternalWithDestPosition(lat: string, lon: string) {
     window.open(`https://www.google.de/maps/dir//${lat},${lon}/`);
   }

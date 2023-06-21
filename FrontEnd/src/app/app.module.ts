@@ -29,6 +29,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchViewComponent } from './search-view/search-view.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchCategoryComponent } from './search-category/search-category.component';
+import { CapacityGraphComponent } from './capacity-graph/capacity-graph.component';
 import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
 import { LineLegendComponent } from './line-legend/line-legend.component';
 import { TimeDisplayComponent } from './time-display/time-display.component';
@@ -59,6 +60,7 @@ import { BikeParkingItemComponent } from "./bike-parking-item/bike-parking-item.
     SearchViewComponent,
     SearchResultComponent,
     SearchCategoryComponent,
+    CapacityGraphComponent,
     PublicTransportViewComponent,
     LineLegendComponent,
     TimeDisplayComponent,
