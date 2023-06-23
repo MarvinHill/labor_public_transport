@@ -1,11 +1,11 @@
 services:
   web:
-    build: ./nginx.dockerfile
+    build: ./nginx
     ports:
       - "8080:8080"
     restart: always
   get2buga:
-    build: ./get2buga.dockerfile
+    build: ./get2buga
     ports:
       - "80:80"
     restart: always
