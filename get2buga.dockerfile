@@ -8,6 +8,7 @@ WORKDIR /get2buga/FrontEnd
 RUN apt install nodejs -y
 RUN apt install npm -y
 RUN npm install
+RUN npm install -g @angular/cli@latest
 RUN ng build
 
 WORKDIR /get2buga
