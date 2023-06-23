@@ -3,10 +3,8 @@ RUN apt update
 RUN apt install openjdk-17-jdk openjdk-17-jre -y
 RUN apt-get install git -y
 RUN git clone "https://github.com/MarvinHill/labor_public_transport.git" /get2buga
-
 RUN apt install -y curl
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x
-RUN -E bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash
 RUN apt install -y nodejs
 WORKDIR /get2buga/FrontEnd
 RUN npm install
