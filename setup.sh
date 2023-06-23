@@ -1,6 +1,7 @@
 #!/bin/bash 
 PROGRESS=0
 REPO_URL="https://github.com/MarvinHill/labor_public_transport.git"
+export DOMAIN_OR_IP="get2buga.de"
 
 print_progress() {
     str=""
@@ -51,6 +52,19 @@ activate_ufw(){
 clone_get2buga(){
     git clone $REPO_URL /home/get2buga
     echo "Das Git Repo wurde geklont"
+}
+
+build_project(){
+    #Changin IP for DataService
+    #cd /home/get2buga/FrontEnd/src/app/services/
+    #sed -i "s/baseurl: string =.*/baseurl: string = '$DOMAIN_OR_IP';" data-service.service.ts
+    #ng build
+    #Changing Cross Origin Policy
+
+    cd /home/get2buga/SpringWebApplication/buga23publictransport
+    ./gradlew clean build
+    ./gradlew bootWar
+    echo "Das Projekt wurde gebuildet"
 }
 
 build_dockerfile(){
@@ -112,6 +126,7 @@ print_progress
 clone_get2buga
 print_progress
 
+build_project
 build_dockerfile
 print_progress
 
