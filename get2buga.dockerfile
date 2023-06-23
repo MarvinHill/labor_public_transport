@@ -17,8 +17,6 @@ RUN ng build
 
 WORKDIR /get2buga/SpringWebApplication/buga23publictransport
 RUN chmod +x ./gradlew
-RUN sleep 60
-RUN ./gradlew clean build --project-cache-dir=../cache
-RUN ./gradlew bootWar --project-cache-dir=../cache
+RUN ./gradlew bootWar
 WORKDIR /get2buga/SpringWebApplication/buga23publictransport/build/libs
 CMD [ "java", "-jar get2buga.jar" ]
