@@ -60,25 +60,6 @@ clone_get2buga(){
     echo "Das Git Repo wurde geklont"
 }
 
-build_project(){
-    #Changin IP for DataService
-    #cd /home/get2buga/FrontEnd/src/app/services/
-    #sed -i "s/baseurl: string =.*/baseurl: string = '$DOMAIN_OR_IP';" data-service.service.ts
-    #ng build
-    #Changing Cross Origin Policy
-
-    cd /home/get2buga/SpringWebApplication/buga23publictransport
-    ./gradlew clean build
-    ./gradlew bootWar
-    echo "Das Projekt wurde gebuildet"
-}
-
-build_dockerfile(){
-    cd /home/get2buga
-    docker build -t get2buga
-    echo "Das Dockerfile wurde gebuildet"
-}
-
 start_dockercompose(){
     cd /home/get2buga
     docker compose up
@@ -90,8 +71,6 @@ echo ""
 cat << EOF 
 Der Installations-Prozess startet jetzt
 --------------------------------------------
-
-HINWEIS : Stellen Sie sicher, dass Sie mit dem Hochschul VPN verbunden sind und sowohl auf das Bitbucket git repository wie auch auf das Internet zugreifen können.
 
 Folgendes wird installiert:
 
@@ -130,10 +109,6 @@ activate_ufw
 print_progress
 
 clone_get2buga
-print_progress
-
-build_project
-build_dockerfile
 print_progress
 
 start_dockercompose
