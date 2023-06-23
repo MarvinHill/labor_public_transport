@@ -59,6 +59,7 @@ clone_get2buga(){
     git clone $REPO_URL /home/get2buga
     cd /home/get2buga
     git checkout docker-install
+    git pull
     echo "Das Git Repo wurde geklont"
 }
 
