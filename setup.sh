@@ -3,7 +3,8 @@ PROGRESS=0
 REPO_URL="https://github.com/MarvinHill/labor_public_transport/tree/docker-install"
 export DOMAIN_OR_IP="get2buga.de"
 
-curl -OL https://raw.githubusercontent.com/MarvinHill/labor_public_transport/docker-install/setup.sh
+#curl -OL https://raw.githubusercontent.com/MarvinHill/labor_public_transport/docker-install/setup.sh
+#chmod +x ./setup.sh
 
 
 print_progress() {
