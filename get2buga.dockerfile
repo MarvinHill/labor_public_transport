@@ -6,6 +6,7 @@ RUN git clone "https://github.com/MarvinHill/labor_public_transport.git" /get2bu
 
 WORKDIR /get2buga
 RUN git checkout docker-install
+RUN git pull
 
 WORKDIR /get2buga/FrontEnd
 RUN apt install -y curl
