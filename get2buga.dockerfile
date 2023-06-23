@@ -4,8 +4,9 @@ RUN apt install openjdk-17-jdk openjdk-17-jre -y
 RUN apt-get install git -y
 RUN git clone "https://github.com/MarvinHill/labor_public_transport.git" /get2buga
 
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+RUN nvm install node
 WORKDIR /get2buga/FrontEnd
-RUN apt install nodejs -y
 RUN apt install npm -y
 RUN npm install
 RUN npm install -g @angular/cli@latest
