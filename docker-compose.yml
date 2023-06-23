@@ -17,6 +17,8 @@ services:
     image: mariadb:latest
     volumes:
     - get2buga:/var/lib/mysql
+    ports:
+      - "3306:3306"
     restart: always
 volumes:
   get2buga:
