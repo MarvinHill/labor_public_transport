@@ -5,6 +5,7 @@ RUN apt-get install git -y
 RUN git clone "https://github.com/MarvinHill/labor_public_transport.git" /get2buga
 WORKDIR /get2buga
 RUN git checkout docker-install
+WORKDIR /get2buga/SpringWebApplication/buga23publictransport
 RUN ./gradlew clean build
 RUN ./gradlew bootWar
 WORKDIR /get2buga/SpringWebApplication/buga23publictransport/build/libs
