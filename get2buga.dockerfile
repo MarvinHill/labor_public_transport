@@ -1,7 +1,7 @@
 FROM sapmachine:lts
 RUN sudo apt update
 RUN sudo apt-get install git
-COPY /home/get2buga /get2buga
+ADD /home/get2buga /get2buga
 WORKDIR /get2buga
 RUN git checkout docker-install
 RUN ./gradlew clean build
