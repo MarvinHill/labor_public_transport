@@ -5,6 +5,9 @@ RUN apt-get install git -y
 RUN git clone "https://github.com/MarvinHill/labor_public_transport.git" /get2buga
 
 WORKDIR /get2buga/FrontEnd
+RUN apt install nodejs -y
+RUN apt install npm
+RUN npm install
 RUN ng build
 
 WORKDIR /get2buga
