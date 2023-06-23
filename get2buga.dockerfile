@@ -1,4 +1,4 @@
-FROM ubuntu:lts
+FROM ubuntu:latest
 RUN apt update
 RUN apt install openjdk-17-jdk openjdk-17-jre
 RUN apt-get install git
