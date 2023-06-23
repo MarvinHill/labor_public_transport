@@ -1,6 +1,7 @@
-FROM sapmachine:lts
-RUN sudo apt update
-RUN sudo apt-get install git
+FROM ubuntu:lts
+RUN apt update
+RUN apt install openjdk-17-jdk openjdk-17-jre
+RUN apt-get install git
 RUN git clone "https://github.com/MarvinHill/labor_public_transport.git" /get2buga
 WORKDIR /get2buga
 RUN git checkout docker-install
