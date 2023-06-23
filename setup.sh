@@ -13,7 +13,7 @@ print_progress() {
     do
     str="$str="
     done
-    echo "Install Progress: [$str] $PROGRESS%"
+    echo "\033[0;32mInstall Progress: [$str] $PROGRESS%\033[0m"
 }
 
 update_system(){
