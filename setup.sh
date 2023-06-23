@@ -1,6 +1,5 @@
 #!/bin/bash 
 PROGRESS=0
-REPO_URL="https://github.com/MarvinHill/labor_public_transport/tree/docker-install"
 export DOMAIN_OR_IP="get2buga.de"
 
 #curl -OL https://raw.githubusercontent.com/MarvinHill/labor_public_transport/docker-install/setup.sh
@@ -20,11 +19,6 @@ print_progress() {
 update_system(){
     sudo apt update
     echo "Systempakete wurden geupdated"
-}
-
-install_git(){
-    sudo apt-get install git
-    echo "Git wurde installiert"
 }
 
 install_docker(){
@@ -53,11 +47,6 @@ configure_ports(){
 activate_ufw(){
     sudo ufw enable
     echo "ufw wurde aktiviert"
-}
-
-clone_get2buga(){
-    git clone $REPO_URL /home/get2buga
-    echo "Das Git Repo wurde geklont"
 }
 
 start_dockercompose(){
@@ -93,9 +82,6 @@ EOF
 update_system
 print_progress
 
-install_git
-print_progress
-
 install_docker
 print_progress
 
@@ -106,9 +92,6 @@ configure_ports
 print_progress
 
 activate_ufw
-print_progress
-
-clone_get2buga
 print_progress
 
 start_dockercompose
