@@ -20,8 +20,8 @@ services:
     ports:
       - "3306:3306"
     restart: always
-    command:
-      - "--env MARIADB_PASSWORD='^3O*Pp928Adj'"
+    environment:
+      MARIADB_PASSWORD : ^3O*Pp928Adj
 volumes:
   get2buga:
   
