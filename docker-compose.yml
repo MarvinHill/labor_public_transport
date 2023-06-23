@@ -1,0 +1,18 @@
+services:
+  web:
+    build: ./nginx.dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+  get2buga:
+    build: ./get2buga.dockerfile
+    ports:
+      - "80:80"
+    restart: always
+  db:
+    image: mariadb:latest
+    volumes:
+    - get2buga:/var/lib/mysql
+    restart: always
+volumes:
+  get2buga:
