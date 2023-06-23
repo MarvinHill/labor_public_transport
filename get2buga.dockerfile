@@ -1,7 +1,7 @@
 FROM sapmachine:lts
 RUN sudo apt update
 RUN sudo apt-get install git
-RUN git clone "https://github.com/MarvinHill/labor_public_transport.git" /get2buga
+COPY /home/get2buga /get2buga
 WORKDIR /get2buga
 RUN git checkout docker-install
 RUN ./gradlew clean build
