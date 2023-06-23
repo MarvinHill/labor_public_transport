@@ -16,10 +16,12 @@ services:
   db:
     image: mariadb:latest
     volumes:
-    - get2buga:/var/lib/mysql
+      - get2buga:/var/lib/mysql
     ports:
       - "3306:3306"
     restart: always
+    command:
+      - "--env MARIADB_PASSWORD=^3O*Pp928Adj"
 volumes:
   get2buga:
   
