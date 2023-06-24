@@ -36,7 +36,7 @@ export class ParkingSearchService implements SearchProvider{
               return false;
             });
             data.forEach(element => {
-              element.category = "Auto Parkplätze"
+              element.category = "Autoparkplätze"
               element.displayText = element.name;
               element.searchAction = () => {
                 var local = "/parking"
