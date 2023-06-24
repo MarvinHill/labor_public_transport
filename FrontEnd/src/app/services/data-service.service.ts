@@ -64,6 +64,14 @@ export class DataServiceService {
     })
   }
 
+  campingCache: DataCache<ParkingLot> = new DataCache<ParkingLot>();
+  getAllCarParkingRequest() {
+    const request = this.campingCache.pipeRequest(() => {
+      return this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all')
+    })
+    return request;
+  }
+
   getAllBikeParking() {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all')
     request.subscribe(resp => {
@@ -78,12 +86,29 @@ export class DataServiceService {
     })
   }
 
+  carCache: DataCache<ParkingLot> = new DataCache<ParkingLot>();
+  getAllCampsiteParkingRequest() {
+    const request = this.carCache.pipeRequest(() => {
+      return this.http.get<ParkingLot[]>(this.baseurl + '/parking/campsite/all');
+    })
+    return request;
+  }
+
   getAllCaravanParking() {
     const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/caravan/all')
     request.subscribe(resp => {
       this.caravanParking.next(resp);
     })
   }
+
+  caravanCache: DataCache<ParkingLot> = new DataCache<ParkingLot>();
+  getAllCaravanParkingRequest() {
+    const request = this.caravanCache.pipeRequest(() => {
+      return this.http.get<ParkingLot[]>(this.baseurl + '/parking/caravan/all')
+    })
+    return request;
+  }
+
 
   parkingCache: DataCache<ParkingLot> = new DataCache<ParkingLot>();
   getAllParking() {

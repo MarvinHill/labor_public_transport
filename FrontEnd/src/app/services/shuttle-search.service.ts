@@ -13,10 +13,8 @@ import { TransportType } from '../TransportType';
 })
 export class ShuttleSearchService implements SearchProvider {
 
-  public searchService : SearchService;
-
   constructor(private dataService: DataServiceService, private router : Router, private mapService : MapService) { }
-  async search(target: string): Promise<ShuttleLine[]> {
+  async search(target: string, searchService : SearchService): Promise<ShuttleLine[]> {
 
     const request = this.dataService.getShuttleLines();
 
@@ -55,7 +53,7 @@ export class ShuttleSearchService implements SearchProvider {
                   local = "/shuttle"
                 }
                 this.router.navigateByUrl(local);
-                this.searchService.minimize();
+                searchService.minimize();
                 this.mapService.minimizeMap();
                 setTimeout(() => {
                   const el = document.getElementById(element.displayText);

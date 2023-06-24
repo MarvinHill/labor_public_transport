@@ -1,3 +1,5 @@
+import { SearchService } from "./services/search.service";
+
 export interface SearchProvider{
-    search(target : string) : void;
+    search(target : string, parent : SearchService) : void;
 }
