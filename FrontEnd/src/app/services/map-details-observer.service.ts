@@ -3,6 +3,7 @@ import {ParkingLot} from '../ParkingLot';
 import {ShuttleLine} from '../ShuttleLine';
 import {ObserverState} from '../ObserverState';
 import {ParkingType} from "../ParkingType";
+import { Entrance} from '../Entrance';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,12 @@ export class MapDetailsObserverService {
     else if(data.parkingType === ParkingType.CARAVAN) {
       this.show = ObserverState.CARAVAN;
       this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if("entranceDescription" in data){
+      this.show = ObserverState.ENTRANCE;
+      this.data = <Entrance> data;
       this.changeVisibility(true);
       return;
     }
