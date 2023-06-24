@@ -544,7 +544,7 @@ export class MapService {
   makeEntrances() {
 
     var entries = [
-      new Entrance(new Point(49.47938, 8.49609), "Eingang Fernmeldeturm", "Einlass: 9 - 19 Uhr"),
+      new Entrance(new Point(49.47938, 8.49609), "Haupteingang Luisenpark", "Einlass: 9 - 19 Uhr"),
       new Entrance(new Point(49.48643, 8.49230),"Eingang Fernmeldeturm","Einlass: 9 - 19 Uhr"),
       new Entrance(new Point(49.49772, 8.52095),"Haupteingang Spinellipark","Einlass: 9 - 19 Uhr"),
       new Entrance(new Point(49.502722, 8.518795),"Eingang Parkschale","Einlass: 9 - 19 Uhr")
