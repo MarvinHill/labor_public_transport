@@ -14,12 +14,12 @@
     </ng-container>
   </div>
   <div class="scale-container">
-    <div class="time-container scale-font">{{(currentDateTime.getHours()-2 %24) + ":00"}}</div>
+    <div class="time-container scale-font">{{((currentDateTime.getHours()-2) %24) + ":00"}}</div>
     <div class="time-container scale-font"></div>
     <div class="time-container scale-font">{{(currentDateTime.getHours()) + ":00"}}</div>
     <div class="time-container scale-font"></div>
-    <div class="time-container scale-font">{{(currentDateTime.getHours()+2 %24) + ":00"}}</div>
+    <div class="time-container scale-font">{{((currentDateTime.getHours()+2) %24) + ":00"}}</div>
     <div class="time-container scale-font"></div>
-    <div class="time-container scale-font">{{(currentDateTime.getHours()+4 %24) + ":00"}}</div>
+    <div class="time-container scale-font">{{((currentDateTime.getHours()+4) %24) + ":00"}}</div>
   </div>
 </div>
