@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {DataServiceService} from "../services/data-service.service";
 import {ParkingLot} from "../ParkingLot";
+import {BikeParkingLot} from "../BikeParkingLot";
 
 @Component({
   selector: 'app-bike-parking-item',
@@ -34,11 +35,11 @@ export class BikeParkingItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.name = this.park.name;
-    this.parkingId = this.park.id;
+    this.name = this.bikeParking.name;
+    this.parkingId = this.bikeParking.id;
   }
 
-  @Input() park: ParkingLot;
+  @Input() bikeParking: BikeParkingLot;
 
   name:String = "NAME";
   parkingId: number;
