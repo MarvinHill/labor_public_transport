@@ -167,14 +167,14 @@ export class MapService {
 
   makeCarParking(parkinglot: ParkingLot) {
     let parkingIcon = L.icon({
-      iconUrl: 'assets/icon/parking/MarkerCar.png',
+      iconUrl: 'assets/icon/parking/MarkerCar.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
     if (parkinglot.charging === true) {
       parkingIcon = L.icon({
-        iconUrl: 'assets/icon/parking/MarkerECar.png',
+        iconUrl: 'assets/icon/parking/MarkerECar.svg',
         iconSize: [45, 72], // size of the icon
         iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -224,7 +224,7 @@ export class MapService {
 
   makeBikeParking(bikeparking: ParkingLot) {
     const parkingIcon = L.icon({
-      iconUrl: 'assets/icon/parking/MarkerBike.png',
+      iconUrl: 'assets/icon/parking/MarkerBike.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -542,7 +542,7 @@ export class MapService {
   }
   makeEntrances() {
     const entranceIcon = L.icon({
-      iconUrl: 'assets/icon/Entrance.png',
+      iconUrl: 'assets/icon/Entrance.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -562,7 +562,7 @@ export class MapService {
 
   makeExits() {
     const exitIcon = L.icon({
-      iconUrl: 'assets/icon/Exit.png',
+      iconUrl: 'assets/icon/Exit.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
