@@ -22,42 +22,42 @@ export class ShuttleLineService {
 
   static IconP_R = L.divIcon({
     className: "legend-label",
-    html: '<i class="label" border="solid"; style="background-color: #662483; border-color: #662483;">P+R</i>',
+    html: '<i class="label" border="solid"; style="background-color: #662483; border-color: #662483; color: white; padding: 0.25em;">P+R</i>',
     iconSize: [2, 2],
     iconAnchor: [1, 1] // half of width + height
   });
 
   static Icon7 = L.divIcon({
     className: "legend-label",
-    html: '<i class="label" style="background-color: #ffcc00; border-color: #ffcc00;">7</i>',
+    html: '<i class="label" style="background-color: #ffcc00; border-color: #ffcc00; color: white; padding: 0.25em;">7</i>',
     iconSize: [6, 12],
     iconAnchor: [3, 6] // half of width + height
   });
 
   static IconBS = L.divIcon({
     className: "legend-label",
-    html: '<i class="label" style="background-color: #00b1da; border-color: #00b1da;">BS</i>',
+    html: '<i class="label" style="background-color: #00b1da; border-color: #00b1da; color: white; padding: 0.25em;">BS</i>',
     iconSize: [6, 12],
     iconAnchor: [3, 6] // half of width + height
   });
 
   static Icon9 = L.divIcon({
     className: "legend-label",
-    html: '<i class="label" style="background-color: #aaca47; border-color: #aaca47;">9</i>',
+    html: '<i class="label" style="background-color: #aaca47; border-color: #aaca47; color: white; padding: 0.25em;">9</i>',
     iconSize: [6, 12],
     iconAnchor: [3, 6] // half of width + height
   });
 
   static IconBL = L.divIcon({
     className: "legend-label",
-    html: '<i class="label" style="background-color: #e1416d; border-color: #e1416d;">BL</i>',
+    html: '<i class="label" style="background-color: #e1416d; border-color: #e1416d; color: white; padding: 0.25em;">BL</i>',
     iconSize: [6, 12],
     iconAnchor: [3, 6] // half of width + height
   });
 
   static Icon6 = L.divIcon({
     className: "legend-label",
-    html: '<i class="label" style="background-color: #956c29; border-color: #956c29;">6</i>',
+    html: '<i class="label" style="background-color: #956c29; border-color: #956c29; color: white; padding: 0.25em;">6</i>',
     iconSize: [6, 12],
     iconAnchor: [3, 6] // half of width + height
   });
@@ -218,27 +218,39 @@ export class ShuttleLineService {
   private setLabelAt(line: ShuttleLine, pos: L.LatLngTuple, layer: L.LayerGroup) {
     switch (line.lineDesignator) {
       case ("P+R"):
-        L.marker(pos, { icon: ShuttleLineService.IconP_R }).addTo(layer);
+        L.marker(pos, { icon: ShuttleLineService.IconP_R }).on("click",() => {
+          this.observerService.changeDisplay(line)
+        } ).addTo(layer);
         break;
 
       case ("7"):
-        L.marker(pos, { icon: ShuttleLineService.Icon7 }).addTo(layer);
+        L.marker(pos, { icon: ShuttleLineService.Icon7 }).on("click",() => {
+          this.observerService.changeDisplay(line)
+        } ).addTo(layer);
         break;
 
       case ("BS"):
-        L.marker(pos, { icon: ShuttleLineService.IconBS }).addTo(layer);
+        L.marker(pos, { icon: ShuttleLineService.IconBS }).on("click",() => {
+          this.observerService.changeDisplay(line)
+        } ).addTo(layer);
         break;
 
       case ("9"):
-        L.marker(pos, { icon: ShuttleLineService.Icon9 }).addTo(layer);
+        L.marker(pos, { icon: ShuttleLineService.Icon9 }).on("click",() => {
+          this.observerService.changeDisplay(line)
+        } ).addTo(layer);
         break;
 
       case ("BL"):
-        L.marker(pos, { icon: ShuttleLineService.IconBL }).addTo(layer);
+        L.marker(pos, { icon: ShuttleLineService.IconBL }).on("click",() => {
+          this.observerService.changeDisplay(line)
+        } ).addTo(layer);
         break;
 
       case ("6"):
-        L.marker(pos, { icon: ShuttleLineService.Icon6 }).addTo(layer);
+        L.marker(pos, { icon: ShuttleLineService.Icon6 }).on("click",() => {
+          this.observerService.changeDisplay(line)
+        } ).addTo(layer);
         break;
     }
 
