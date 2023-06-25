@@ -8,6 +8,10 @@ import {ParkingLot} from "../ParkingLot";
 import {ParkingCapacity} from "../ParkingCapacity";
 import { TimeStopInfo } from '../TimeStopInfo';
 import { DataCache } from '../DataCache';
+import {CarParkingLot} from "../CarParkingLot";
+import {CampsiteParkingLot} from "../CampsiteParkingLot";
+import {CaravanParkingLot} from "../CaravanParkingLot";
+import {BikeParkingLot} from "../BikeParkingLot";
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +25,15 @@ export class DataServiceService {
 
   lines: Subject<ShuttleLine[]> = new Subject<ShuttleLine[]>();
 
-  carParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+  carParking: Subject<CarParkingLot[]> = new Subject<CarParkingLot[]>();
 
-  bikeParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+  bikeParking: Subject<BikeParkingLot[]> = new Subject<BikeParkingLot[]>();
 
   parkingCapacity: Subject<ParkingCapacity[]> =new Subject<ParkingCapacity[]>();
 
-  campsiteParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+  campsiteParking: Subject<CampsiteParkingLot[]> = new Subject<CampsiteParkingLot[]>();
 
-  caravanParking: Subject<ParkingLot[]> = new Subject<ParkingLot[]>();
+  caravanParking: Subject<CaravanParkingLot[]> = new Subject<CaravanParkingLot[]>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -58,28 +62,28 @@ export class DataServiceService {
   }
 
   getAllCarParking() {
-    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/car/all')
+    const request = this.http.get<CarParkingLot[]>(this.baseurl + '/parking/car/all')
     request.subscribe(resp => {
       this.carParking.next(resp);
     })
   }
 
   getAllBikeParking() {
-    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/bike/all')
+    const request = this.http.get<BikeParkingLot[]>(this.baseurl + '/parking/bike/all')
     request.subscribe(resp => {
       this.bikeParking.next(resp);
     })
   }
 
   getAllCampsiteParking() {
-    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/campsite/all')
+    const request = this.http.get<CampsiteParkingLot[]>(this.baseurl + '/parking/campsite/all')
     request.subscribe(resp => {
       this.campsiteParking.next(resp);
     })
   }
 
   getAllCaravanParking() {
-    const request = this.http.get<ParkingLot[]>(this.baseurl + '/parking/caravan/all')
+    const request = this.http.get<CaravanParkingLot[]>(this.baseurl + '/parking/caravan/all')
     request.subscribe(resp => {
       this.caravanParking.next(resp);
     })
