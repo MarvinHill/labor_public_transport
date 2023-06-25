@@ -9,20 +9,16 @@ import java.util.List;
 @Entity
 public class CaravanParkingLot extends ParkingLot {
 
-    public CaravanParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address, boolean employeeParking, boolean electricity, boolean water, boolean dogsAllowed) {
+    public CaravanParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, ParkingType parkingType, String address) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
         this.name = name;
         this.barrierfree = barrierfree;
-        this.charging = charging;
         this.parkingType = parkingType;
         this.address = address;
-        this.employeeParking = employeeParking;
-        this.electricity = electricity;
-        this.water = water;
-        this.dogsAllowed = dogsAllowed;
     }
 
     public CaravanParkingLot() { }
+
 }
