@@ -80,7 +80,6 @@ export class MapService {
     this.publicTransportLines.forEach(entry => {
       this.layerControl.addOverlay(entry[0], entry[1]);
     });
-    this.layerControl.addTo(this.map);
   }
 
   public initMap(): void {
@@ -840,7 +839,7 @@ export class MapService {
         this.distanceTextToFarAway = false;
       }
     });
-  
+
   }
 
   hideContainer() {

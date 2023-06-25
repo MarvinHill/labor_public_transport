@@ -28,16 +28,16 @@ export class CapacityGraphComponent implements OnInit, OnChanges{
     this.calculateCapacity();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
     if (changes.parking) {
-      // Die 'parking'-Eingabe hat sich geändert
-      // Hier können Sie die notwendigen Aktualisierungen vornehmen und die Ansicht neu berechnen
       this.parking = changes.parking.currentValue;
       this.parkingName = this.parking.name;
       this.totalParkingspaces = this.parking.maxCapacity;
+
+      await this.fetchParkingCapacity();
+
       this.calculateCapacity();
-    }
-  }
+    }  }
 
   async fetchParkingCapacity(): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -60,10 +60,10 @@ export class CapacityGraphComponent implements OnInit, OnChanges{
   calculateCapacity() {
     if((this.totalParkingspaces != 0)) {
       this.parkingCapacityAll.forEach(parkingCapacity => {
-        if(parkingCapacity.name === "SAPArenaP6-P8,Parkplatz" && ((this.parkingName === "SAP Arena P6, Parkplatz") ||
+        if((parkingCapacity.name === "SAPArenaP6-P8,Parkplatz" || parkingCapacity.name === "SAP Arena P6-P8, Parkplatz") && ((this.parkingName === "SAP Arena P6, Parkplatz") ||
           (this.parkingName === "SAP Arena P7, Parkplatz") || (this.parkingName === "SAP Arena P8, Parkplatz"))) {
           this.parkingCapacityThis.push(parkingCapacity);
-        } else if(parkingCapacity.name.includes(this.parkingName.replace(/\s/g, "").split(',')[0])) {
+        } else if(parkingCapacity.name.replace(/\s/g, "").includes(this.parkingName.replace(/\s/g, "").split(',')[0])) {
           this.parkingCapacityThis.push(parkingCapacity);
         }
       })
@@ -123,8 +123,6 @@ export class CapacityGraphComponent implements OnInit, OnChanges{
       this.auslastungen[8] = this.calculatePercentage(this.calculateMedian(capacitySameDayHour5));
       this.auslastungen[9] = this.calculatePercentage(this.calculateMedian(capacitySameDayHour6));
 
-
-      //this.auslastungen = [50,55,60,65,70,75,60,50,40,50];
     }
   }
 
