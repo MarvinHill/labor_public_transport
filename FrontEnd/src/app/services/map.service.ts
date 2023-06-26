@@ -47,10 +47,9 @@ export class MapService {
   exits = new L.LayerGroup;
   distanceShower = new L.LayerGroup;
   myLocation;
-  s1; s2; dist; name; noob; noob2; newLatLng: any;
+  s1; s2; dist; name; noob; newLatLng: any;
   calculateDistance; distance: number;
   lat1; lat2; lng1; lng2: any;
-  distanceText; distanceTextToFarAway; kartoffelsalat: boolean;
   layerOptions: L.Control.LayersOptions = {
     position: "bottomright",
   }
@@ -723,7 +722,7 @@ export class MapService {
           }
         }
       }
-      if (this.distance >= 20 || this.distance == undefined) {
+      if (a == 20 || this.distance == undefined) {
         new L.Tooltip()
         .setLatLng(this.map.getCenter())
         .setContent('Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können')
@@ -736,14 +735,14 @@ export class MapService {
       ];
       var layer = L.polyline(xx, { color: '#8A2BE2', dashArray: '20, 20', dashOffset: '0' }).addTo(this.distanceShower);
 
-      this.noob2 = this.noob.toFixed(2);
+      this.noob = a.toFixed(2);
 
       this.createMiddleMarkers(layer);
 
 
       var popup = L.popup()
         .setLatLng(this.newLatLng)
-        .setContent('Die Luftlinie von Ihrem Standort zu ' + this.name + ' beträgt: ~ ' + this.noob2 + ' km')
+        .setContent('Die Luftlinie von Ihrem Standort zu ' + this.name + ' beträgt: ~ ' + this.noob + ' km')
         .addTo(this.distanceShower);
       layer.bindPopup(popup);
       layer.addTo(this.distanceShower);
@@ -761,8 +760,8 @@ export class MapService {
     var a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2)
-      ;
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c; // Distance in km
 
@@ -780,8 +779,6 @@ export class MapService {
     } else {
       this.distanceShower.clearLayers();
       this.distance = 0;
-      this.distanceText = false;
-      this.distanceTextToFarAway = false;
     }
   }
 
@@ -789,8 +786,6 @@ export class MapService {
     this.locateUser();
     this.distanceShower.clearLayers();
     this.distance = 0;
-    this.distanceText = false;
-    this.distanceTextToFarAway = false;
   }
 
   calcMiddleLatLng(map, latlng1, latlng2) {
