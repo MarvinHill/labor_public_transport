@@ -47,7 +47,7 @@ export class MapService {
   exits = new L.LayerGroup;
   distanceShower = new L.LayerGroup;
   myLocation;
-  s1; s2; dist; name; noob; noob2; newLatLng; popup2: any;
+  s1; s2; dist; name; noob; noob2; newLatLng: any;
   calculateDistance; distance: number;
   lat1; lat2; lng1; lng2: any;
   distanceText; distanceTextToFarAway; kartoffelsalat: boolean;
@@ -726,10 +726,10 @@ export class MapService {
         }
       }
       if (this.distance >= 20 || this.distance == undefined) {
-        this.popup2 = new L.Tooltip()
-        this.popup2.setLatLng(this.map.getCenter())
-        this.popup2.setContent('Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können')
-        this.popup2.addTo(this.distanceShower);
+        new L.Tooltip()
+        .setLatLng(this.map.getCenter())
+        .setContent('Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können')
+        .addTo(this.distanceShower);
       }
       else {
       var xx: [number, number][] = [
