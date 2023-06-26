@@ -13,6 +13,8 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { SearchService } from './search.service';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import { ShuttleLine } from '../ShuttleLine';
+import { style } from '@angular/animations';
+
 
 @Injectable({
   providedIn: 'root'
@@ -45,10 +47,10 @@ export class MapService {
   exits = new L.LayerGroup;
   distanceShower = new L.LayerGroup;
   myLocation;
-  s1; s2; dist; name; noob; noob2; newLatLng: any;
+  s1; s2; dist; name; noob; noob2; newLatLng; popup2: any;
   calculateDistance; distance: number;
   lat1; lat2; lng1; lng2: any;
-  distanceText; distanceTextToFarAway: boolean;
+  distanceText; distanceTextToFarAway; kartoffelsalat: boolean;
   layerOptions: L.Control.LayersOptions = {
     position: "bottomright",
   }
@@ -80,7 +82,7 @@ export class MapService {
     this.publicTransportLines.forEach(entry => {
       this.layerControl.addOverlay(entry[0], entry[1]);
     });
-    this.layerControl.addTo(this.map);
+
   }
 
   public initMap(): void {
@@ -707,6 +709,7 @@ export class MapService {
     if (shuttleLineList == undefined) {
       this.locateUser();
     } else {
+      console.log("am");
       var a = 20;// furthest distance search radius
       let i, j: number;
       for (i = 0; i < shuttleLineList.length; i++) {
@@ -715,18 +718,20 @@ export class MapService {
 
           if (this.distance < a) {// if the distance is less than what is already saved
             a = this.distance;// new furthest search distance replaces the old one
-
+            console.log("here:" + shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x);
             this.s1 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x;
             this.s2 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y;
             this.name = shuttleLineList[i].lineScheduleEntryList[j].station.stationDesignator;
           }
         }
       }
-      if (this.distance < 20) {
-        this.distanceText = true;
-      } else {
-        this.distanceTextToFarAway = true;
+      if (this.distance >= 20 || this.distance == undefined) {
+        this.popup2 = new L.Tooltip()
+        this.popup2.setLatLng(this.map.getCenter())
+        this.popup2.setContent('Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können')
+        this.popup2.addTo(this.distanceShower);
       }
+      else {
       var xx: [number, number][] = [
         [this.s1, this.s2],
         [this.myLocation.lat, this.myLocation.lng]
@@ -736,14 +741,18 @@ export class MapService {
       this.noob2 = this.noob.toFixed(2);
 
       this.createMiddleMarkers(layer);
+
+
       var popup = L.popup()
         .setLatLng(this.newLatLng)
-        .setContent('~ ' + this.noob.toFixed(2) + ' km')
-        .openOn(this.map);
-
-      layer.bindPopup(popup, { closeButton: false, closeOnClick: false }).addTo(this.distanceShower);
+        .setContent('Die Luftlinie von Ihrem Standort zu ' + this.name + ' beträgt: ~ ' + this.noob2 + ' km')
+        .addTo(this.distanceShower);
+      layer.bindPopup(popup);
+      layer.addTo(this.distanceShower);
     }
-    this.distanceShower.addTo(this.userLocation);
+      this.distanceShower.addTo(this.userLocation);
+    }
+
   }
 
   // benutzt die Harversine Formel um die Fluglinie zu berechnen
@@ -831,16 +840,8 @@ export class MapService {
       else if (!this.xPressed) {
         document.getElementById('speech-bubble-id').style.display = 'block';
       }
-      if (this.map.hasLayer(this.userLocation)) {
-        this.distanceText = false;
-        this.distanceTextToFarAway = false;
-      }
-      if(!(this.map.hasLayer(this.userLocation))) {
-        this.distanceText = false;
-        this.distanceTextToFarAway = false;
-      }
     });
-  
+
   }
 
   hideContainer() {

@@ -194,7 +194,6 @@
 }
 
 .text {
-  visibility: visible;
   top: 1em;  
   position: absolute;
   text-align: center;
