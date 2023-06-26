@@ -723,30 +723,30 @@ export class MapService {
         }
       }
       if (a == 20 || this.distance == undefined) {
-        new L.Tooltip()
-        .setLatLng(this.map.getCenter())
-        .setContent('Sie sind zu weit von der nächsten Haltestelle entfernt um diese Funktion nutzen zu können')
-        .addTo(this.distanceShower);
+        new L.Tooltip({direction:'center'})
+          .setLatLng(this.map.getCenter())
+          .setContent('<b>Sie sind zu weit von der nächsten Haltestelle<br>entfernt um diese Funktion nutzen zu können</b>')
+          .addTo(this.distanceShower);
       }
       else {
-      var xx: [number, number][] = [
-        [this.s1, this.s2],
-        [this.myLocation.lat, this.myLocation.lng]
-      ];
-      var layer = L.polyline(xx, { color: '#8A2BE2', dashArray: '20, 20', dashOffset: '0' }).addTo(this.distanceShower);
+        var xx: [number, number][] = [
+          [this.s1, this.s2],
+          [this.myLocation.lat, this.myLocation.lng]
+        ];
+        var layer = L.polyline(xx, { color: '#8A2BE2', dashArray: '20, 20', dashOffset: '0' }).addTo(this.distanceShower);
 
-      this.noob = a.toFixed(2);
+        this.noob = a.toFixed(2);
 
-      this.createMiddleMarkers(layer);
+        this.createMiddleMarkers(layer);
 
 
-      var popup = L.popup()
-        .setLatLng(this.newLatLng)
-        .setContent('Die Luftlinie von Ihrem Standort zu ' + this.name + ' beträgt: ~ ' + this.noob + ' km')
-        .addTo(this.distanceShower);
-      layer.bindPopup(popup);
-      layer.addTo(this.distanceShower);
-    }
+        var popup = L.popup()
+          .setLatLng(this.newLatLng)
+          .setContent('<b>Die Luftlinie von Ihrem Standort zu ' + this.name + ' beträgt: ~ ' + this.noob + ' km</b>')
+          .addTo(this.distanceShower);
+        layer.bindPopup(popup);
+        layer.addTo(this.distanceShower);
+      }
       this.distanceShower.addTo(this.userLocation);
     }
 
@@ -761,7 +761,7 @@ export class MapService {
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
-      
+
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c; // Distance in km
 
