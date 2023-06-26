@@ -709,7 +709,6 @@ export class MapService {
     if (shuttleLineList == undefined) {
       this.locateUser();
     } else {
-      console.log("am");
       var a = 20;// furthest distance search radius
       let i, j: number;
       for (i = 0; i < shuttleLineList.length; i++) {
@@ -718,7 +717,6 @@ export class MapService {
 
           if (this.distance < a) {// if the distance is less than what is already saved
             a = this.distance;// new furthest search distance replaces the old one
-            console.log("here:" + shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x);
             this.s1 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x;
             this.s2 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y;
             this.name = shuttleLineList[i].lineScheduleEntryList[j].station.stationDesignator;
