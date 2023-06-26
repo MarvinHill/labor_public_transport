@@ -196,7 +196,7 @@ table-layout: fixed;
 th,
 td {
 padding: 10px;
-text-align: center;
+text-align:left;
 white-space: nowrap;
 }
 
@@ -221,12 +221,42 @@ font-weight: normal;
 text-align: center;
 }
 
+@media(max-width: 700px){
+  th{
+    display: none;
+  }
+
+  td{
+    display: grid;
+   grid-template-columns: 20ch auto;
+    padding: 0.5rem 1rem;
+  }
+
+  td:first-child{
+    padding-top: 2rem;
+  }
+
+  td:last-child{
+    padding-bottom: 2rem;
+  }
+
+  th[data-cell="Kartentyp"] {
+    display: block;
+  }
+
+  td::before{
+    content: attr(data-cell) ": ";
+    font-weight: normal;
+  }
+}
+
 footer {
+  display: block;
 background-color: #f8f8f8;
 color: #777;
 font-size: 14px;
 padding: 20px;
-text-align: center;
+text-align: left;
 width: 100%;
 max-width: 800px;
 margin: auto;

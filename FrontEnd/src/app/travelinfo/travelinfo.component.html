@@ -38,56 +38,60 @@
 			<div class="box">
 			  <h2>Ticketpreise</h2>
 			  <div class="table-container">
-			  <table>
-				<thead>
-				  <tr>
-					<th></th> <!-- Leerzelle für die Row-Überschriften-Spalte -->
-					<th>Kinder**</th>
-					<th>Junge Erwachsene</th>
-					<th>Erwachsene</th>
-					<th>Gruppen</th>
-					<th>Begünstigte***</th>
-				  </tr>
-				</thead>
-				<tbody>
-				  <tr>
-					<th>Tageskarten</th>
-					<td>{{ preisService.getPreisTagesKarten('kinder') }}</td>
-					<td>{{ preisService.getPreisTagesKarten('jungeErwachsene') }}€</td>
-					<td>{{ preisService.getPreisTagesKarten('erwachsene') }}€</td>
-					<td>{{ preisService.getPreisTagesKarten('gruppen') }}€</td>
-					<td>{{ preisService.getPreisTagesKarten('beguenstigte') }}€</td>
-				  </tr>
-				  <tr>
-					<th>Zweitageskarten*</th>
-					<td>{{ preisService.getPreisZweiTagesKarten('kinder') }}</td>
-					<td>{{ preisService.getPreisZweiTagesKarten('jungeErwachsene') }}€</td>
-					<td>{{ preisService.getPreisZweiTagesKarten('erwachsene') }}€</td>
-					<td>{{ preisService.getPreisZweiTagesKarten('gruppen') }}€</td>
-					<td>{{ preisService.getPreisZweiTagesKarten('beguenstigte') }}€</td>
-				  </tr>
-				  <tr>
-					<th>Dauerkarten</th>
-					<td>{{ preisService.getPreisDauerkarten('kinder') }}</td>
-					<td>{{ preisService.getPreisDauerkarten('jungeErwachsene') }}€</td>
-					<td>{{ preisService.getPreisDauerkarten('erwachsene') }}€</td>
-					<td>{{ preisService.getPreisDauerkarten('gruppen') }}</td>
-					<td>{{ preisService.getPreisDauerkarten('beguenstigte') }}€</td>
-				  </tr>
-				</tbody>
-			  </table>
-			</div>
+			<table>
+			  <tr>
+				<th></th>
+				<th>Kinder</th>
+				<th>Junge Erwachsene</th>
+				<th>Erwachsene</th>
+				<th>Gruppen</th>
+				<th>Begünstigte***</th>
+			  </tr>
+
+			  <tr>
+				<th data-cell="Kartentyp">Tageskarten</th>
+				<td data-cell="Kinder">{{ preisService.getPreisTagesKarten('kinder') }}</td>
+				<td data-cell="Junge Erwachsene">{{ preisService.getPreisTagesKarten('jungeErwachsene') }}€</td>
+				<td data-cell="Erwachsene">{{ preisService.getPreisTagesKarten('erwachsene') }}€</td>
+				<td data-cell="Gruppen">{{ preisService.getPreisTagesKarten('gruppen') }}€</td>
+				<td data-cell="Beguenstigte***">{{ preisService.getPreisTagesKarten('beguenstigte') }}€</td>
+			  </tr>
+
+			  <tr>
+				<th data-cell="Kartentyp">Zweitageskarten*</th>
+				<td data-cell="Kinder">{{ preisService.getPreisZweiTagesKarten('kinder') }}</td>
+				<td data-cell="Junge Erwachsene">{{ preisService.getPreisZweiTagesKarten('jungeErwachsene') }}€</td>
+				<td data-cell="Erwachsene">{{ preisService.getPreisZweiTagesKarten('erwachsene') }}€</td>
+				<td data-cell="Gruppen">{{ preisService.getPreisZweiTagesKarten('gruppen') }}€</td>
+				<td data-cell="Beguenstigte***">{{ preisService.getPreisZweiTagesKarten('beguenstigte') }}€</td>
+			  </tr>
+
+			  <tr>
+				<th data-cell="Kartentyp">Dauerkarten</th>
+				<td data-cell="Kinder**">{{ preisService.getPreisDauerkarten('kinder') }}</td>
+				<td data-cell="Junge Erwachsene">{{ preisService.getPreisDauerkarten('jungeErwachsene') }}€</td>
+				<td data-cell="Erwachsene">{{ preisService.getPreisDauerkarten('erwachsene') }}€</td>
+				<td data-cell="Gruppen">{{ preisService.getPreisDauerkarten('gruppen') }}</td>
+				<td data-cell="Beguenstigte***">{{ preisService.getPreisDauerkarten('beguenstigte') }}€</td>
+			  </tr>
+			</table>
 			<footer>
-				<b>Kinder</b> bis einschließlich 14 Jahre,
-				<b>Junge Erwachsene</b> 15-24 Jahre,
-				<b>Erwachsene</b> ab 25 Jahre
-				und
-				<b>Gruppen</b> ab 12 Personen
+				<b>Kinder</b> bis einschließlich 14 Jahre <br>
+				<b>Junge Erwachsene</b> 15-24 Jahre <br>
+				<b>Erwachsene</b> ab 25 Jahre <br>
+				<b>Gruppen</b> ab 12 Personen <br>
 				<br>
-				Weitere Informationen unten
-			  </footer>
-
-
+				<b>*</b> Der Eintritt muss an zwei aufeinanderfolgenden Tagen erfolgen. <br>
+				<b>**</b> bis 14 Jahre, maßgeblich ist das Alter am 14. April 2023. Kinder im Alter bis 14 Jahren haben nur in Begleitung einer volljährigen Aufsichtsperson Zutritt. Für den Zutritt bedarf es einer 0,00€ Karte.<br>
+			    <b>***</b>Diese Ermäßigung steht Personen zu, auf die Folgendes zutrifft und die dies mit einem Nachweis belegen können:<br>
+			
+			Behinderung ab GdB 50, bei Merkmal B oder H im Behindertenausweis ist die Begleitperson frei
+			Bezug von ALG II bzw. Hartz IV nach SGB II
+			Bezug von Hilfe zum Lebensunterhalt oder Grundsicherung im Alter nach SGB XII
+			Bezug von Grundsicherung bei voller Erwerbsminderung nach SGB XII	  
+	
+		</footer>
+			</div>
 			  <button (click)="redirectToTicketShop()" class="my-button" >
 				Ticketshop
 			</button>
@@ -118,15 +122,6 @@
 			  </div>
 			</div>
 		  </div>
-
-		  <footer>* Der Eintritt muss an zwei aufeinanderfolgenden Tagen erfolgen.
-			** bis 14 Jahre, maßgeblich ist das Alter am 14. April 2023. Kinder im Alter bis 14 Jahren haben nur in Begleitung einer volljährigen Aufsichtsperson Zutritt. Für den Zutritt bedarf es einer 0,00€ Karte.
-			*** Diese Ermäßigung steht Personen zu, auf die Folgendes zutrifft und die dies mit einem Nachweis belegen können:
-
-			Behinderung ab GdB 50, bei Merkmal B oder H im Behindertenausweis ist die Begleitperson frei
-			Bezug von ALG II bzw. Hartz IV nach SGB II
-			Bezug von Hilfe zum Lebensunterhalt oder Grundsicherung im Alter nach SGB XII
-			Bezug von Grundsicherung bei voller Erwerbsminderung nach SGB XII</footer>
 		</div>
   </main>
 </body>
