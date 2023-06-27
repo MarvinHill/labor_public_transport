@@ -43,7 +43,7 @@ public class ParkingLotInitController {
     }
 
     @GetMapping("/campsite/all")
-    Iterable<CampsiteParking> campsiteAll() {
+    Iterable<CampsiteParkingLot> campsiteAll() {
         return campsiteRepo.findAll();
     }
 

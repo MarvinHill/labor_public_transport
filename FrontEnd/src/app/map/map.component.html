@@ -5,7 +5,7 @@
       <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/my_location.svg" style="height: 2.5em;">
     </button>
     <button id="distance" [ngClass]="mapService.distanceButtonClass" (click)="mapService.distanceCaller()">
-      <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/rulers.svg" style="height: 2.5em;">    
+      <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/rulers.svg" style="height: 2.5em;">
     </button>
     <button id="buga-back-button-id" [ngClass]="mapService.bugaBackButtonClass" (click)="mapService.moveToBuga()">
       <img class="not-select p-1 material-symbols-outlined icon-info" src="assets/icon/buga_logo.png" style="height: 2.5em;">
@@ -96,13 +96,22 @@
         <p>Zoomt an den jetzigen Standort heran.</p>
       </div>
     </div>
-      <div class="row p-2">
+    <div class="row p-2">
         <div class="col-4 text-center">
-          <img src="assets\info\image\buga.png" alt="" style="height: 5em;">
+          <img src="assets/icon/buga_logo.png" alt="" style="height: 5em;">
         </div>
       <div class="col-8">
+        <h6>Zurück zur Buga</h6>
+        <p>Durch klicken dieses Buttons wird man zurück zur Buga gezoomt</p>
+      </div>
+    </div>
+    <div class="row p-2">
+      <div class="col-4 text-center">
+        <img src="assets/info/image/buga.png" alt="" style="height: 5em;">
+      </div>
+      <div class="col-8">
         <h6>Bundesgartenschau</h6>
-        <p>Gebiet der Bundesgartenschau, Spinelli und Luisenpark. Die Linie dazwischen makiert die Seilbahn zwischen den Bereichen.</p>
+        <p>Gebiet der Bundesgartenschau, Spinelli und Luisenpark. Die Linie dazwischen markiert die Seilbahn zwischen den Bereichen.</p>
       </div>
     </div>
   </div>
