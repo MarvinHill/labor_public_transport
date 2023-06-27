@@ -1,74 +1,96 @@
 import { ElementRef, HostListener, Injectable, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { LatLng } from 'leaflet';
+import { LatLng, Point} from 'leaflet';
 import { interval } from 'rxjs';
 import { ParkingLot } from '../ParkingLot';
 import { DataServiceService } from '../services/data-service.service';
 import { MapDetailsObserverService } from '../services/map-details-observer.service';
-import { UserLoginServiceService } from '../services/user-login-service.service';
 import { ShuttleLineService } from '../services/shuttle-line.service';
+import { LineLegendComponent } from '../line-legend/line-legend.component';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import { SearchService } from './search.service';
+import { LineScheduleEntry } from '../LineScheduleEntry';
+import { ShuttleLine } from '../ShuttleLine';
+import { style } from '@angular/animations';
+
+import {CarParkingLot} from "../CarParkingLot";
+import {BikeParkingLot} from "../BikeParkingLot";
+import {CaravanParkingLot} from "../CaravanParkingLot";
+import {CampsiteParkingLot} from "../CampsiteParkingLot";
+import { Entrance} from '../Entrance';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MapService{
+export class MapService {
 
   private map: L.Map;
   public centroid: L.LatLngExpression = [49.485, 8.5];
 
-  public minimized: boolean = true;
+  public minimized = true;
 
-  public mapContainerClass: string = "map-container-small-desktop";
-  public resizeButtonClass: string = "button-min";
-  public locateButtonClass: string = "button-min";
+  public mapContainerClass = "map-container-small-desktop";
+  public resizeButtonClass = "button-min";
+  public locateButtonClass = "button-min";
+  public bugaBackButtonClass = "button-min";
+  public speechBubbleClass = "speech-bubble-min";
+  public distanceButtonClass: string = "button-min";
+  public textClass: String = "text-min";
 
-  private userService: UserLoginServiceService;
-
-  public isLoggedIn: boolean = true;
-  public mapHeight: string = "10em";
+  public mapHeight = "10em";
 
   userLocation = new L.LayerGroup;
   carParkingLots = new L.LayerGroup;
   carParkingLotEntrances = new L.LayerGroup;
+  campsiteParkingLot = new L.LayerGroup;
   publicTransportLines = [];
   bugaArea = new L.LayerGroup;
   bikeParkingLots = new L.LayerGroup;
-  layerOptions : L.Control.LayersOptions = {
-    position : "bottomright",
+  entrances = new L.LayerGroup;
+  exits = new L.LayerGroup;
+  distanceShower = new L.LayerGroup;
+  myLocation;
+  s1; s2; dist; name; noob; newLatLng: any;
+  calculateDistance; distance: number;
+  lat1; lat2; lng1; lng2: any;
+  layerOptions: L.Control.LayersOptions = {
+    position: "bottomright",
   }
   layerControl = L.control.layers(null, null, this.layerOptions);
 
-
-
   @ViewChild('container', { static: false }) container: ElementRef;
+  @ViewChild('bugaBackButton', { static: false }) bugaBackButton: ElementRef;
 
   windowHeight: number;
   windowWidth: number;
   topBarHeight: number;
-  public innerWidth: number = 1000;
-  breakPoint: number = 720;
+  public innerWidth = 1000;
+  breakPoint = 720;
+  lineScheduleEntryList: LineScheduleEntry[];
+  shuttleLine: ShuttleLine;
+  shuttleLineList: ShuttleLine[];
 
-
-  constructor(userService: UserLoginServiceService, private dataService: DataServiceService, protected observerService: MapDetailsObserverService
-    ,  private shuttleLineService: ShuttleLineService) {
-    this.userService = userService;
-    this.userService.isLoggedIn.subscribe(value => {
-      this.isLoggedIn = value;
-    });
+  constructor(private dataService: DataServiceService, protected observerService: MapDetailsObserverService
+    , private shuttleLineService: ShuttleLineService, private snackbar: MatSnackBar) {
   }
 
-  makeLayerControls(){
+  makeLayerControls() {
     this.layerControl.addOverlay(this.userLocation, "Position");
     this.layerControl.addOverlay(this.carParkingLots, "Autoparkplätze");
     this.layerControl.addOverlay(this.bikeParkingLots, "Fahrradparkplätze");
+    this.layerControl.addOverlay(this.campsiteParkingLot, "Wohnmobilstellplätze");
+    this.layerControl.addOverlay(this.entrances, "Eingänge");
+    this.layerControl.addOverlay(this.exits, "Ausgänge")
     this.publicTransportLines.forEach(entry => {
       this.layerControl.addOverlay(entry[0], entry[1]);
     });
-    this.layerControl.addTo(this.map);
+
   }
 
   public initMap(): void {
-    
+
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -82,6 +104,10 @@ export class MapService{
 
     this.makeLayerControls();
 
+    this.dataService.lines.subscribe(value => {
+      this.shuttleLineList = value;
+    })
+
     this.dataService.carParking.subscribe(values => {
 
       values.forEach(element => {
@@ -94,18 +120,45 @@ export class MapService{
         this.makeBikeParking(element);
       });
     })
+    this.dataService.update();
+
+    this.dataService.caravanParking.subscribe(values => {
+
+      values.forEach(element => {
+        this.makeCaravanParking(element);
+      });
+    })
+    this.dataService.campsiteParking.subscribe(values => {
+
+      values.forEach(element => {
+        this.makeCampsiteParking(element);
+      });
+    })
 
     this.dataService.getAllCarParking();
 
     this.dataService.getAllBikeParking();
 
+    this.dataService.getAllCaravanParking();
+
+    this.dataService.getAllCampsiteParking();
+
     this.map.addLayer(this.userLocation);
+
+    this.map.addLayer(this.distanceShower);
 
     this.map.addLayer(this.carParkingLots);
 
     this.map.addLayer(this.bikeParkingLots);
 
+    this.map.addLayer(this.campsiteParkingLot);
+
     this.map.addLayer(this.bugaArea);
+
+    this.map.addLayer(this.entrances)
+
+    this.map.addLayer(this.exits);
+    this.map.removeLayer(this.exits); // Default = wird nicht angezeigt
 
     this.publicTransportLines.forEach(entry => {
       this.map.addLayer(entry[0]);
@@ -115,33 +168,34 @@ export class MapService{
       this.observerService.changeVisibility(false);
     }.bind(this));
 
+    this.detectMapMovement();
   }
 
-  makeCarParking(parkinglot: ParkingLot) {
-    var parkingIcon = L.icon({
-      iconUrl: 'assets/icon/parking/MarkerCar.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  makeCarParking(parkinglot: CarParkingLot) {
+    let parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/MarkerCar.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    if(parkinglot.charging === true){
+    if (parkinglot.charging === true) {
       parkingIcon = L.icon({
-        iconUrl: 'assets/icon/parking/MarkerECar.png',
-        iconSize:     [45, 72], // size of the icon
-        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        iconUrl: 'assets/icon/parking/MarkerECar.svg',
+        iconSize: [45, 72], // size of the icon
+        iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
     }
-    if(parkinglot.area.length > 0) {
-      var arr = [];
+    if (parkinglot.area.length > 0) {
+      const arr = [];
       for (var i = 0; i < parkinglot.area.length; i++) {
         arr.push([parkinglot.area.at(i).x, parkinglot.area.at(i).y]);
       }
-      var poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.carParkingLots);
-      var marker = L.marker(poly.getCenter(), {icon:parkingIcon});
+      const poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.carParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon });
     }
     else {
-      var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], {icon:parkingIcon});
+      var marker = L.marker([parkinglot.geoLocation.x, parkinglot.geoLocation.y], { icon: parkingIcon });
     }
 
     marker.on("click", function (e: any) {
@@ -149,56 +203,138 @@ export class MapService{
     }.bind(this));
     marker.addTo(this.carParkingLots);
 
-    var entranceIcon = L.icon({
+    const entranceIcon = L.icon({
       iconUrl: 'assets/icon/parking/Entrance.png',
-      iconSize:     [15, 15], // size of the icon
-      iconAnchor:   [7.5, 7.5], // point of the icon which will correspond to marker's location
-      popupAnchor:  [7.5, 15] // point from which the popup should open relative to the iconAnchor
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
     });
 
-    if(parkinglot.entrance.length > 0) {
+    if (parkinglot.entrance.length > 0) {
       for (var i = 0; i < parkinglot.entrance.length; i++) {
-        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], {icon: entranceIcon}).addTo(this.carParkingLotEntrances);
+        L.marker([parkinglot.entrance.at(i).x, parkinglot.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
       }
     }
 
-    this.map.on("zoomend", function(e){
-      if(this.map.getZoom() < 16 ){
+    this.map.on("zoomend", function (e) {
+      if (this.map.getZoom() < 16) {
         this.carParkingLotEntrances.remove();
       }
-      else{
-        if(this.map.hasLayer(this.carParkingLots)){
+      else {
+        if (this.map.hasLayer(this.carParkingLots)) {
           this.carParkingLotEntrances.addTo(this.map);
         }
       }
     }.bind(this));
   }
 
-  makeBikeParking(bikeparking: ParkingLot) {
-    var parkingIcon = L.icon({
-      iconUrl: 'assets/icon/parking/MarkerBike.png',
-      iconSize:     [45, 72], // size of the icon
-      iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  makeBikeParking(bikeparking: BikeParkingLot) {
+    const parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/MarkerBike.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    if(bikeparking.area.length > 0) {
-      var arr = [];
-      for(var i = 0; i < bikeparking.area.length; i++) {
+    if (bikeparking.area.length > 0) {
+      const arr = [];
+      for (let i = 0; i < bikeparking.area.length; i++) {
         arr.push([bikeparking.area.at(i).x, bikeparking.area.at(i).y]);
       }
-      var poly = L.polygon(arr, {color: '#0677e0'}).addTo(this.bikeParkingLots);
-      var marker = L.marker(poly.getCenter(), {icon : parkingIcon}).addTo(this.bikeParkingLots);
+      const poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.bikeParkingLots);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon }).addTo(this.bikeParkingLots);
     }
     else {
-      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], {icon: parkingIcon}).addTo(this.bikeParkingLots);
+      var marker = L.marker([bikeparking.geoLocation.x, bikeparking.geoLocation.y], { icon: parkingIcon }).addTo(this.bikeParkingLots);
     }
     marker.on("click", function (e: any) {
       this.observerService.changeDisplay(bikeparking)
     }.bind(this));
   }
 
+  makeCaravanParking(caravanParking: CaravanParkingLot) {
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Caravan.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    if (caravanParking.area.length > 0) {
+      var arr = [];
+      for (var i = 0; i < caravanParking.area.length; i++) {
+        arr.push([caravanParking.area.at(i).x, caravanParking.area.at(i).y]);
+      }
+      var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.campsiteParkingLot);
+      var lat = poly.getCenter().lat;
+      var lon = poly.getCenter().lng;
+      var marker = L.marker([lat, lon + 0.0005], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+    else {
+      var marker = L.marker([caravanParking.geoLocation.x, caravanParking.geoLocation.y], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(caravanParking)
+    }.bind(this));
+
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Entrance.png',
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
+    });
+
+    if (caravanParking.entrance.length > 0) {
+      for (var i = 0; i < caravanParking.entrance.length; i++) {
+        L.marker([caravanParking.entrance.at(i).x, caravanParking.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
+      }
+    }
+
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(caravanParking)
+    }.bind(this));
+  }
+
+  makeCampsiteParking(campsite: CampsiteParkingLot) {
+    var parkingIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Camping.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    if (campsite.area.length > 0) {
+      var arr = [];
+      for (var i = 0; i < campsite.area.length; i++) {
+        arr.push([campsite.area.at(i).x, campsite.area.at(i).y]);
+      }
+      var poly = L.polygon(arr, { color: '#C830EE' }).addTo(this.campsiteParkingLot);
+      var marker = L.marker(poly.getCenter(), { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+    else {
+      var marker = L.marker([campsite.geoLocation.x, campsite.geoLocation.y], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+    }
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(campsite)
+    }.bind(this));
+
+    var entranceIcon = L.icon({
+      iconUrl: 'assets/icon/parking/Entrance.png',
+      iconSize: [15, 15], // size of the icon
+      iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+      popupAnchor: [7.5, 15] // point from which the popup should open relative to the iconAnchor
+    });
+
+    if (campsite.entrance.length > 0) {
+      for (var i = 0; i < campsite.entrance.length; i++) {
+        L.marker([campsite.entrance.at(i).x, campsite.entrance.at(i).y], { icon: entranceIcon }).addTo(this.carParkingLotEntrances);
+      }
+    }
+
+    marker.on("click", function (e: any) {
+      this.observerService.changeDisplay(campsite);
+    }.bind(this));
+  }
+
   drawBugaArea() {
-    var luisenParkPoly: [number, number][] = [
+    const luisenParkPoly: [number, number][] = [
       [49.48034150000, 8.49376110000],
       [49.48033310000, 8.49376800000],
       [49.48028010000, 8.49381850000],
@@ -324,9 +460,9 @@ export class MapService{
       [49.48045330000, 8.49416330000],
       [49.48034150000, 8.49376110000]
     ];
-    L.polygon(luisenParkPoly, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polygon(luisenParkPoly, { color: '#e1416d' }).addTo(this.bugaArea);
 
-    var spinelliParkPoly: [number, number][] = [
+    const spinelliParkPoly: [number, number][] = [
       [49.49853330000, 8.51280300000],
       [49.49808640000, 8.51285800000],
       [49.49801330000, 8.51335820000],
@@ -393,9 +529,9 @@ export class MapService{
       [49.49850190000, 8.51232290000],
       [49.49853330000, 8.51280300000]
     ];
-    L.polygon(spinelliParkPoly, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polygon(spinelliParkPoly, { color: '#e1416d' }).addTo(this.bugaArea);
 
-    var cableCarLine: [number, number][] = [
+    const cableCarLine: [number, number][] = [
       [49.4827573, 8.4998941],
       [49.4829827, 8.5002318],
       [49.4837367, 8.5013620],
@@ -409,44 +545,99 @@ export class MapService{
       [49.4960904, 8.5198828],
       [49.4962948, 8.5201892]
     ];
-    L.polyline(cableCarLine, {color: '#e1416d'}).addTo(this.bugaArea);
+    L.polyline(cableCarLine, { color: '#e1416d' }).addTo(this.bugaArea);
+
+  }
+  makeEntrances() {
+
+    var entries = [
+      new Entrance(new Point(49.47938, 8.49609), "Haupteingang Luisenpark", "Einlass: 9 - 19 Uhr"),
+      new Entrance(new Point(49.48643, 8.49230),"Eingang Fernmeldeturm","Einlass: 9 - 19 Uhr"),
+      new Entrance(new Point(49.49772, 8.52095),"Haupteingang Spinellipark","Einlass: 9 - 19 Uhr"),
+      new Entrance(new Point(49.502722, 8.518795),"Eingang Parkschale","Einlass: 9 - 19 Uhr")
+    ]
+
+    const entranceIcon = L.icon({
+      iconUrl: 'assets/icon/Entrance.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+
+    entries.forEach( entry => {
+      const marker =  L.marker([entry.geoLocation.x,entry.geoLocation.y], { icon: entranceIcon }).addTo(this.entrances);
+      marker.on("click", function (e: any) {
+        this.observerService.changeDisplay(entry);
+      }.bind(this));
+    });
 
   }
 
-  init(map : L.Map): void {
+  makeExits() {
+    const exitIcon = L.icon({
+      iconUrl: 'assets/icon/Exit.svg',
+      iconSize: [45, 72], // size of the icon
+      iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    const ausgangOttoBeckStraße = L.marker([49.484908, 8.488246], { icon: exitIcon }).addTo(this.exits);
+    const ausgangFichtestraße = L.marker([49.483051, 8.491305], { icon: exitIcon }).addTo(this.exits);
+    const ausgangAmOberenLuisenpark = L.marker([49.479891, 8.494275], { icon: exitIcon }).addTo(this.exits);
+    const ausgangPaulMartinUfer = L.marker([49.483305, 8.501183], { icon: exitIcon }).addTo(this.exits);
+    const ausgangSpinelliPark = L.marker([49.497048, 8.520173], { icon: exitIcon }).addTo(this.exits);
+    //var ausgangKantineIris = L.marker([49.497885, 8.520818], {icon: exitIcon}).addTo(this.exits);
+    const ausgangNeuerBugaWeg = L.marker([49.498066, 8.522661], { icon: exitIcon }).addTo(this.exits);
+    const ausgangWachenheimerStraße = L.marker([49.502006, 8.515099], { icon: exitIcon }).addTo(this.exits);
+
+  }
+
+  init(map: L.Map): void {
     this.map = map;
-    var inter = interval(100);
+    const inter = interval(100);
     inter.subscribe(v => {
       this.map.invalidateSize();
     })
     this.shuttleLineService.initShuttleLineViewOnMap(this.publicTransportLines, this);
+    new LineLegendComponent().addToMap(map);
     this.innerWidth = window.innerWidth;
     this.updateHeight();
     this.updateWidth();
     this.updateMobileDesktopMap();
     this.drawBugaArea();
+    this.makeEntrances();
+    this.makeExits();
   }
 
   maximizeMap(): void {
     if (this.minimized) {
+      this.minimized = false;
+
+      this.layerControl.addTo(this.map);
       this.mapContainerClass = "map-container-large shadow";
       this.resizeButtonClass = "resize-button-max shadow";
       this.locateButtonClass = "locate-button-max shadow";
-
-      this.minimized = false;
+      this.bugaBackButtonClass = "buga-back-button-max shadow";
+      this.speechBubbleClass = "speech-bubble pright acenter";
+      this.distanceButtonClass = "distance-button-max shadow";
+      this.textClass = "text";
       this.updateHeight()
       this.updateWidth();
     }
     this.map.invalidateSize();
-
   }
 
   minimizeMap(): void {
     if (!this.minimized) {
       this.minimized = true;
+
+      this.map.removeControl(this.layerControl);
       this.updateMobileDesktopMap();
       this.resizeButtonClass = "button-min";
       this.locateButtonClass = "button-min";
+      this.bugaBackButtonClass = "button-min";
+      this.distanceButtonClass = "button-min";
+      this.textClass = "text-min";
+      this.speechBubbleClass = "speech-bubble-min button-min";
       this.updateHeight()
       this.updateWidth();
     }
@@ -494,31 +685,181 @@ export class MapService{
     }
   }
 
-  locateUser() : any {
+
+  async locateUser(): Promise<any> {
     const userLocationGroup = this.userLocation;
-    this.map.locate({setView: true}).on('locationfound', function(e) {
 
-      var locationIcon = L.icon({
-        iconUrl: 'assets/icon/wavingPerson.gif',
-        iconSize:     [60, 72], // size of the icon
-        iconAnchor:   [22.5, 70], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    const locationPromise = new Promise((resolve) => {
+      this.map.locate({ setView: true }).on('locationfound', (e) => {
+        var locationIcon = L.icon({
+          iconUrl: 'assets/icon/wavingPerson.gif',
+          iconSize: [60, 72], // size of the icon
+          iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        const location = e.latlng;
+        userLocationGroup.clearLayers();
+
+        var marker = L.marker(location, { icon: locationIcon }).addTo(userLocationGroup);
+        marker.on("click", function (e) {
+          marker.bindPopup("You are Here!").openPopup();
+        });
+
+        resolve(location);
       });
-
-      const location = e.latlng;
-
-      userLocationGroup.clearLayers();
-      var marker = L.marker(location, {icon: locationIcon}).addTo(userLocationGroup);
-       marker.on("click", function(e) {
-         marker.bindPopup("You are Here!").openPopup();
-       })
     });
+
+    const pos = await locationPromise;
+    this.myLocation = pos;
     this.userLocation = userLocationGroup;
   }
 
-  public openAndFlyTo(pos : LatLng) : void {
-    this.maximizeMap(); 
-    this.observerService.changeVisibility(false);
+
+  async myDistanceShower(shuttleLineList: ShuttleLine[]): Promise<any> {
+    if (shuttleLineList == undefined) {
+      this.locateUser();
+    } else {
+      var a = 20;// furthest distance search radius
+      let i, j: number;
+      for (i = 0; i < shuttleLineList.length; i++) {
+        for (j = 0; j < shuttleLineList[i].lineScheduleEntryList.length; j++) {
+          this.distance = this.getDistanceFromLatLonInKm(shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x, shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y, this.myLocation.lat, this.myLocation.lng);
+
+          if (this.distance < a) {// if the distance is less than what is already saved
+            a = this.distance;// new furthest search distance replaces the old one
+            this.s1 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x;
+            this.s2 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y;
+            this.name = shuttleLineList[i].lineScheduleEntryList[j].station.stationDesignator;
+          }
+        }
+      }
+      if (a == 20 || this.distance == undefined) {
+        new L.Tooltip({direction:'center'})
+          .setLatLng(this.map.getCenter())
+          .setContent('<b>Sie sind zu weit von der nächsten Haltestelle<br>entfernt um diese Funktion nutzen zu können</b>')
+          .addTo(this.distanceShower);
+      }
+      else {
+        var xx: [number, number][] = [
+          [this.s1, this.s2],
+          [this.myLocation.lat, this.myLocation.lng]
+        ];
+        var layer = L.polyline(xx, { color: '#8A2BE2', dashArray: '20, 20', dashOffset: '0' }).addTo(this.distanceShower);
+
+        this.noob = a.toFixed(2);
+
+        this.createMiddleMarkers(layer);
+
+
+        var popup = L.popup()
+          .setLatLng(this.newLatLng)
+          .setContent('<b>Die Luftlinie von Ihrem Standort zu ' + this.name + ' beträgt: ~ ' + this.noob + ' km</b>')
+          .addTo(this.distanceShower);
+        layer.bindPopup(popup);
+        layer.addTo(this.distanceShower);
+      }
+      this.distanceShower.addTo(this.userLocation);
+    }
+
+  }
+
+  // benutzt die Harversine Formel um die Fluglinie zu berechnen
+  getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = this.deg2rad(lon2 - lon1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+
+    this.noob = d;
+    return d;
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI / 180)
+  }
+
+  distanceCaller() {
+    if (this.distance == 0 || this.distance == undefined) {
+      this.myDistanceShower(this.shuttleLineList);
+    } else {
+      this.distanceShower.clearLayers();
+      this.distance = 0;
+    }
+  }
+
+  locateUserCaller() {
+    this.locateUser();
+    this.distanceShower.clearLayers();
+    this.distance = 0;
+  }
+
+  calcMiddleLatLng(map, latlng1, latlng2) {
+    // calculate the middle coordinates between two markers
+    const p1 = map.project(latlng1);
+    const p2 = map.project(latlng2);
+    return map.unproject(p1._add(p2)._divideBy(2));
+  }
+
+  createMiddleMarkers(line) {
+    var latlngs = line.getLatLngs();
+    for (var i = 1; i < latlngs.length; i++) {
+      var left = latlngs[i - 1];
+      var right = latlngs[i];
+      this.newLatLng = this.calcMiddleLatLng(this.map, left, right);
+    }
+  }
+
+
+  moveToBuga(): any {
+    /* visual output for the user, letting him know that he is already at the Buga */
+    if (this.map.getCenter().lat >= 49.49021061654624 && this.map.getCenter().lat <= 49.49127559245556 && this.map.getCenter().lng >= 8.508478545177866 && this.map.getCenter().lng <= 8.510290295871553) {
+      this.snackbar.open("Du bist bereits an der Buga", 'Schließen', {
+        verticalPosition: 'bottom',
+      });
+    }
+    /* move to the Buga */
+    else {
+      this.map.setView(new LatLng(49.4906602, 8.5092189), 14);
+    }
+  }
+
+  /* boolean value for the button to hide the speech-bubble */
+  xPressed = false;
+
+  detectMapMovement(): void {
+    this.map.on('move', () => {
+      /* check if the user is near the Buga */
+      if (this.map.getCenter().lat >= 49.36289598710729 && this.map.getCenter().lat <= 49.615075626689 && this.map.getCenter().lng >= 8.299441337585451 && this.map.getCenter().lng <= 8.695807456970217) {
+        /* hide speech-bubble */
+        document.getElementById('speech-bubble-id').style.display = 'none';
+        this.xPressed = false;
+      }
+      /* show speech-bubble */
+      else if (!this.xPressed) {
+        document.getElementById('speech-bubble-id').style.display = 'block';
+      }
+    });
+
+
+  }
+
+  hideContainer() {
+    document.getElementById('speech-bubble-id').style.display = 'none';
+    this.xPressed = true;
+  }
+
+  public openAndFlyTo(pos: LatLng): void {
+    this.maximizeMap();
+    //this.observerService.changeVisibility(false);
     this.map.flyTo(pos, 18);
   }
 }
+
+

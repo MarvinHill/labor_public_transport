@@ -1,10 +1,11 @@
 import { NgIfContext, Location } from '@angular/common';
-import { Component, ElementRef, HostListener, Inject, TemplateRef } from '@angular/core';
+import { Component, HostListener, TemplateRef } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { IfStmt } from '@angular/compiler';
-import { interval, timer } from 'rxjs';
-import { Router, NavigationEnd, RouterFeature } from '@angular/router';
-import { UserLoginServiceService } from '../services/user-login-service.service';
+import { interval } from 'rxjs';
+import { Router} from '@angular/router';
+import { MapService } from '../services/map.service';
+import { SearchService } from '../services/search.service';
+
 
 
 @Component({
@@ -25,13 +26,13 @@ import { UserLoginServiceService } from '../services/user-login-service.service'
   ]
 })
 export class RoutingTopBarComponent {
-  userService: UserLoginServiceService;
-  public innerWidth: number = 500;
+  mapService: MapService;
+  public innerWidth = 500;
   desktop: TemplateRef<NgIfContext<boolean>>;
   mobile: TemplateRef<NgIfContext<boolean>>;
-  infoWindow: boolean = false;
+  infoWindow = false;
   router: Router;
-  update: boolean = true;
+  update = true;
 
 
   ngAfterViewInit() {
@@ -43,8 +44,8 @@ export class RoutingTopBarComponent {
     this.innerWidth = event.target.innerWidth;
   }
 
-  constructor(userService: UserLoginServiceService, router: Router, private location : Location) {
-    this.userService = userService;
+  constructor( mapService: MapService, router: Router, private location : Location, protected searchService : SearchService) {
+    this.mapService = mapService;
     this.router = router;
 
     const source = interval(200);
@@ -57,8 +58,8 @@ export class RoutingTopBarComponent {
       return;
     }
 
-    var elements = Array.from(document.getElementsByClassName("hidden-info")) as HTMLElement[];
-    var container = document.getElementById("info-container");
+    const elements = Array.from(document.getElementsByClassName("hidden-info")) as HTMLElement[];
+    const container = document.getElementById("info-container");
 
     if (container != null) {
       container.childNodes.forEach(element => {
@@ -69,7 +70,7 @@ export class RoutingTopBarComponent {
 
     elements.forEach(element => {
 
-      var clone = element.cloneNode(true);
+      const clone = element.cloneNode(true);
       if (clone instanceof HTMLElement) {
         clone.className = "info";
       }
@@ -88,7 +89,14 @@ export class RoutingTopBarComponent {
   }
 
   goBack(){
+    if (!this.mapService.minimized) {
+      this.mapService.minimizeMap();
+    } else if (!(window.location.href.substring(window.location.href.lastIndexOf('/') + 1) === "main")) {
       this.location.back();
+    }
   }
 
+  minimizeMap() {
+    this.mapService.minimizeMap();
+  }
 }

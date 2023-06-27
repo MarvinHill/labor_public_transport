@@ -7,31 +7,122 @@
 
 </head>
 <body>
+	<main>
 	<header>
 		<h1>Anreise zur BUGA 23</h1>
+		<div class="header-content">
 		<nav>
 			<ul>
-				<li class="list" [routerLink]="['/info-parking']">Auto</li>
+        <li class="list" [routerLink]="['/travelinfo']">Allg. Infos </li>
+        <li class="list" [routerLink]="['/info-parking']">Parken</li>
 				<li class="list" [routerLink]="['/info-bus']">Bus </li>
 				<li class="list" [routerLink]="['/info-bahn']">Bahn </li>
 			</ul>
 		  </nav>
+		</div>
 	</header>
+		<div class="container">
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Öffnungszeiten</h2>
+			  <p>
+				Der Einlass an den Haupteingängen (jeweils Nord und Süd) auf Spinelli und im Luisenpark ist von 9:00 bis 19:00 Uhr möglich.Zu bestimmten Abendveranstaltungen werden die Öffnungs- und Einlasszeiten der BUGA 23 bis 30 Minuten nach Veranstaltungsbeginn verlängert. Die Seilbahn fährt täglich von 9:00 - 22:00 Uhr.
+				Das Gelände ist bei Einbruch der Dunkelheit über die offiziellen Ausgänge zu verlassen. Die Nachtsperrzeit beginnt bei Spätveranstaltungen 30 Minuten nach Veranstaltungsende.
+			  </p>
+			  <button (click)="redirectToParkOrdnung()" class="my-button" >
+				Parkordnung
+			</button>
+			</div>
+		  </div>
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Ticketpreise</h2>
+			  <div class="table-container">
+			<table>
+			  <tr>
+				<th></th>
+				<th>Kinder</th>
+				<th>Junge Erwachsene</th>
+				<th>Erwachsene</th>
+				<th>Gruppen</th>
+				<th>Begünstigte***</th>
+			  </tr>
 
-	<main>
-		<header>
-			<h3>Anreise mit dem Auto</h3>
-		</header>
-		<app-info-parking-text></app-info-parking-text>
-		<header>
-			<h3>Anreise mit dem Bus</h3>
-		</header>
-		<app-info-bus-text></app-info-bus-text>
-		<header>
-			<h3>Anreise mit der Bahn</h3>
-		</header>
-		<app-info-bahn-text></app-info-bahn-text>
+			  <tr>
+				<th data-cell="Kartentyp">Tageskarten</th>
+				<td data-cell="Kinder">{{ preisService.getPreisTagesKarten('kinder') }}</td>
+				<td data-cell="Junge Erwachsene">{{ preisService.getPreisTagesKarten('jungeErwachsene') }}€</td>
+				<td data-cell="Erwachsene">{{ preisService.getPreisTagesKarten('erwachsene') }}€</td>
+				<td data-cell="Gruppen">{{ preisService.getPreisTagesKarten('gruppen') }}€</td>
+				<td data-cell="Beguenstigte***">{{ preisService.getPreisTagesKarten('beguenstigte') }}€</td>
+			  </tr>
+
+			  <tr>
+				<th data-cell="Kartentyp">Zweitageskarten*</th>
+				<td data-cell="Kinder">{{ preisService.getPreisZweiTagesKarten('kinder') }}</td>
+				<td data-cell="Junge Erwachsene">{{ preisService.getPreisZweiTagesKarten('jungeErwachsene') }}€</td>
+				<td data-cell="Erwachsene">{{ preisService.getPreisZweiTagesKarten('erwachsene') }}€</td>
+				<td data-cell="Gruppen">{{ preisService.getPreisZweiTagesKarten('gruppen') }}€</td>
+				<td data-cell="Beguenstigte***">{{ preisService.getPreisZweiTagesKarten('beguenstigte') }}€</td>
+			  </tr>
+
+			  <tr>
+				<th data-cell="Kartentyp">Dauerkarten</th>
+				<td data-cell="Kinder**">{{ preisService.getPreisDauerkarten('kinder') }}</td>
+				<td data-cell="Junge Erwachsene">{{ preisService.getPreisDauerkarten('jungeErwachsene') }}€</td>
+				<td data-cell="Erwachsene">{{ preisService.getPreisDauerkarten('erwachsene') }}€</td>
+				<td data-cell="Gruppen">{{ preisService.getPreisDauerkarten('gruppen') }}</td>
+				<td data-cell="Beguenstigte***">{{ preisService.getPreisDauerkarten('beguenstigte') }}€</td>
+			  </tr>
+			</table>
+			<footer>
+				<b>Kinder</b> bis einschließlich 14 Jahre <br>
+				<b>Junge Erwachsene</b> 15-24 Jahre <br>
+				<b>Erwachsene</b> ab 25 Jahre <br>
+				<b>Gruppen</b> ab 12 Personen <br>
+				<br>
+				<b>*</b> Der Eintritt muss an zwei aufeinanderfolgenden Tagen erfolgen. <br>
+				<b>**</b> bis 14 Jahre, maßgeblich ist das Alter am 14. April 2023. Kinder im Alter bis 14 Jahren haben nur in Begleitung einer volljährigen Aufsichtsperson Zutritt. Für den Zutritt bedarf es einer 0,00€ Karte.<br>
+			    <b>***</b>Diese Ermäßigung steht Personen zu, auf die Folgendes zutrifft und die dies mit einem Nachweis belegen können:<br>
+			
+			Behinderung ab GdB 50, bei Merkmal B oder H im Behindertenausweis ist die Begleitperson frei
+			Bezug von ALG II bzw. Hartz IV nach SGB II
+			Bezug von Hilfe zum Lebensunterhalt oder Grundsicherung im Alter nach SGB XII
+			Bezug von Grundsicherung bei voller Erwerbsminderung nach SGB XII	  
 	
-	
+		</footer>
+			</div>
+			  <button (click)="redirectToTicketShop()" class="my-button" >
+				Ticketshop
+			</button>
+			</div>
+		  </div>
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Barrierefreiheit und Mobilitätsverleih</h2>
+			  <p>Die BUGA 23 soll ein Erlebnis für alle Menschen sein. Um dieses Ziel zu erreichen, arbeiten die Veranstalter*innen daran, Barrieren zu erkennen und bestmöglich abzubauen.
+
+				Im Folgenden finden Sie Informationen zu den Maßnahmen, die bereits getroffen wurden, um Ihren Besuch auf der BUGA 23 möglichst barrierefrei zu gestalten.</p>
+
+				<button (click)="redirectToBarrierefreiheit()" class="my-button" >
+					Barrierefreiheit & Mobilitätsverleih
+				</button>
+			</div>
+		  </div>
+		  <div class="box-wrapper">
+			<div class="box">
+			  <h2>Kontakt zur Buga</h2>
+			  <b>Telefon:</b> +49 (621) 3999 2023 <br>
+			  <b>E-Mail: </b> <a href="mailto:info@buga23.de">info@buga23.de</a>
+			  <br><br>
+			  <div class="box-button">
+				<button (click)="redirectToMoreContact()" class="my-button" >
+				  Weitere Kontaktdetails
+				</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
   </main>
-  </body>
+</body>
+</html>

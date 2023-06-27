@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {DataServiceService} from "../services/data-service.service";
 import {ParkingLot} from "../ParkingLot";
-import { LatLng } from 'leaflet';
-import { MapService } from '../services/map.service';
+import {BikeParkingLot} from "../BikeParkingLot";
 
 @Component({
   selector: 'app-bike-parking-item',
@@ -10,23 +11,37 @@ import { MapService } from '../services/map.service';
 })
 export class BikeParkingItemComponent implements OnInit {
   bikeParkingLots: ParkingLot[];
-  items: number[];
+  http:HttpClient;
+  options!: {
+    headers?: HttpHeaders | { [header: string]: string | string[]; };
+    observe?: 'body' | 'events' | 'response';
+    params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; };
+    reportProgress?: boolean;
+    responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+    withCredentials?: boolean;
+  };
 
-  ngOnInit(): void {
+  dataService: DataServiceService;
 
-    this.bikeParkingName = this.bikeParking.name;
-    // this.parkID = this.bikeParking.id;
-    this.bikeParkingAddress = this.bikeParking.address;
+  constructor(http:HttpClient,  dataService: DataServiceService){
+    this.http = http;
+    this.dataService = dataService;
+    dataService.getAllCarParking();
+
+    dataService.bikeParking.subscribe(value=> {
+      this.bikeParkingLots = value;
+    })
+    dataService.getAllBikeParking();
   }
 
-  constructor(protected mapService : MapService){}
+  ngOnInit(): void {
+    this.name = this.bikeParking.name;
+    this.parkingId = this.bikeParking.id;
+  }
 
-  @Input() bikeParking: ParkingLot;
-  bikeParkingName: String = "NAME";
-  parkID: number;
-  bikeParkingAddress: String = "ADDRESS";
+  @Input() bikeParking: BikeParkingLot;
 
-  panToBikeParkingLot(){
-    this.mapService.openAndFlyTo(new LatLng(this.bikeParking.geoLocation.x, this.bikeParking.geoLocation.y));
-}
+  name:String = "NAME";
+  parkingId: number;
+
 }

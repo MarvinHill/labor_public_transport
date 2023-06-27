@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ParkingLot } from '../ParkingLot';
-import { ObserverState } from '../ObserverState';
-import { RnvLine } from '../RnvLine';
+import {Injectable} from '@angular/core';
+import {ParkingLot} from '../ParkingLot';
+import {ShuttleLine} from '../ShuttleLine';
+import {ObserverState} from '../ObserverState';
+import {ParkingType} from "../ParkingType";
+import { Entrance} from '../Entrance';
 
 @Injectable({
   providedIn: 'root'
@@ -9,27 +11,53 @@ import { RnvLine } from '../RnvLine';
 export class MapDetailsObserverService {
 
   public data = null ;
-  public visible : boolean = true;
+  public visible  = true;
   public show:ObserverState = ObserverState.NOTHING;
-
-
 
   constructor() { }
 
   changeDisplay(data){
-
-    if("parkingType" in data){
+    if(data.parkingType === ParkingType.CAR){
       this.show = ObserverState.PARKING;
       this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if("lineDesignator" in data){
+      this.show = ObserverState.SHUTTLE;
+      this.data = <ShuttleLine> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if(data.parkingType === ParkingType.BIKE) {
+      this.show = ObserverState.BIKE;
+      this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if(data.parkingType === ParkingType.CAMPSITE) {
+      this.show = ObserverState.CAMPSITE;
+      this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if(data.parkingType === ParkingType.CARAVAN) {
+      this.show = ObserverState.CARAVAN;
+      this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if("entranceDescription" in data){
+      this.show = ObserverState.ENTRANCE;
+      this.data = <Entrance> data;
+      this.changeVisibility(true);
+      return;
     }
     else{
-      this.visible = false;
+      this.changeVisibility(false);
       this.show = ObserverState.NOTHING;
+      return;
     }
-
-
-    this.changeVisibility(true);
-
   }
 
   changeVisibility(visibility : boolean){
@@ -40,3 +68,7 @@ export class MapDetailsObserverService {
     this.visible = !this.visible;
   }
 }
+function detectChanges() {
+  throw new Error('Function not implemented.');
+}
+

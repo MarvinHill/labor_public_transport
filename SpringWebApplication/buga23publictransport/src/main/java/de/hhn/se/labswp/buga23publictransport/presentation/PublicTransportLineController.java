@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/api")
 public class PublicTransportLineController {
     @Autowired
     LineScheduleService lineScheduleServiceImpl;
@@ -56,13 +57,6 @@ public class PublicTransportLineController {
             return null;
         }
         return line.get();
-    }
-
-    @PostMapping("/ptl")
-    ResponseEntity<?> createLine(@RequestBody PublicTransportLine line) {
-        log.info("Created " + line);
-        repo.save(line);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/ptl/{lineId}")

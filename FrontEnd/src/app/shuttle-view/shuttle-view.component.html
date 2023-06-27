@@ -12,15 +12,9 @@
     <h3 class="m-3">DER WEG ZUR BUGA 23</h3>
     <div class="row">
         <ng-container *ngFor="let item of shuttleLineList;">
-            <div class="col-md-6 p-3">
+            <div class="col-md-6">
                     <div class="col-xs-4 panel"><app-timeline [shuttleLine]="item"></app-timeline></div>
-                    <div class="col-1" *ngIf="loginService.logginStatus === true" (click) = "delete(item.id)"> <img class="material-symbols-outlined col-2" style="margin: auto; height: 2.5em; width: 1.5em;" src="assets/icon/close_FILL0_wght400_GRAD0_opsz48.svg"></div>
             </div>
     </ng-container>
     </div>
-</div>
-
-<div class="container-lg justfy-content-center" *ngIf="loginService.logginStatus === true">
-    <h3 class="m-3">ADD A NEW SHUTTLE LINE</h3>
-    <app-add-shuttle-line></app-add-shuttle-line>
 </div>

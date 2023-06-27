@@ -9,16 +9,15 @@ import java.util.List;
 @Entity
 public class BikeParkingLot extends ParkingLot {
 
-    public BikeParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, boolean barrierfree, boolean charging, ParkingType parkingType, String address) {
+    public BikeParkingLot(Point geoLocation, List<Point> area, List<Point> entrance, String name, ParkingType parkingType, String address) {
         this.geoLocation = geoLocation;
         this.area = area;
         this.entrance = entrance;
         this.name = name;
-        this.barrierfree = barrierfree;
-        this.charging = charging;
         this.parkingType = parkingType;
         this.address = address;
     }
 
     public BikeParkingLot() { }
+
 }

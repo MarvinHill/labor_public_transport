@@ -17,20 +17,14 @@ public class LineScheduleEntrySerializer extends JsonSerializer<LineScheduleEntr
         gen.writeStartObject();
 
         gen.writeStringField("id", String.valueOf(value.getId()));
-        gen.writeStringField("arrivalTime", value.getArrivalTime().toString());
-        gen.writeStringField("waitTime", String.valueOf(value.getWaitTime()));
-        gen.writeStringField("delay", String.valueOf(value.getDelay()));
-        gen.writeStringField("stationDesignator", value.getStationDesignator());
-
-        gen.writeFieldName("geoLocation");
-        gen.writeObject(value.getGeoLocation());
+        gen.writeFieldName("station");
+        gen.writeObject(value.getStation());
 
         gen.writeArrayFieldStart("publicTransportLines");
         for (var line : value.getPublicTransportLine()) {
             gen.writeStartObject();
             gen.writeStringField("id", String.valueOf(line.getId()));
             gen.writeStringField("lineDesignator", line.getLineDesignator());
-            gen.writeStringField("delay", String.valueOf(line.getDelay()));
             gen.writeEndObject();
         }
         gen.writeEndArray();

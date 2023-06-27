@@ -6,32 +6,13 @@
   </svg>
 </div>
 
-<div>
-  <div class="container-lg" style="padding: 0;">
-    <button [ngClass]="carButtonClass" (click)="switchCar()">FÜR AUTOS</button>
-    <button [ngClass]="bikeButtonClass" (click)="switchBike()">FÜR FAHRRÄDER</button>
-  </div>
-</div>
-
   <div id="carParkingContent" class="content" style="display: block;">
     <div class="container-lg">
       <div class="row">
         <ng-container *ngFor="let item of carParkingLots;">
-          <div class="p-3 col-md-6">
-            <app-parkingItem [carParking]="item"></app-parkingItem> 
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <div id="bikeParkingContent" class="content">
-    <div class="container-lg">
-      <div class="row">
-        <ng-container *ngFor="let item of bikeParkingLots;">
-          <div class="col-md-6 p-3">
-            <div class="row">
-              <div class = "col-12"><app-bike-parking-item [bikeParking]="item"></app-bike-parking-item></div>
+          <div class="col-md-6 padding-own">
+            <div>
+              <div class = "col-12"><app-parkingItemCapacity [parking]="item"></app-parkingItemCapacity></div>
             </div>
           </div>
         </ng-container>

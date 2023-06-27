@@ -6,16 +6,17 @@ import { TravelinfoComponent } from './travelinfo/travelinfo.component';
 import { InfoParkingComponent } from './info-parking/info-parking.component';
 import { InfoBahnComponent } from './info-bahn/info-bahn.component';
 import { InfoBusComponent } from './info-bus/info-bus.component';
-import { InfoCardsComponent } from './info-cards/info-cards.component';
-import { InfoBahnTextComponent } from './info-bahn-text/info-bahn-text.component';
-import { InfoBusTextComponent } from './info-bus-text/info-bus-text.component';
-import { InfoCarouselComponent } from './info-carousel/info-carousel.component';
-import { InfoParkingTextComponent } from './info-parking-text/info-parking-text.component';
-import { ShuttleLineEntryComponent } from './shuttle-line-entry/shuttle-line-entry.component';
+
 import { MapComponent } from "./map/map.component";
 import { ParkingViewComponent } from './parking-view/parking-view.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ImpressumComponent } from './impressum/impressum.component';
+import { PreisService } from './preis.service';
+import { ConnectionTicketComponent } from './connection-ticket/connection-ticket.component';
+import {BikeParkingItemComponent} from "./bike-parking-item/bike-parking-item.component";
+import {CampsiteParkingItemComponent} from "./campsite-parking-item/campsite-parking-item.component";
+import { PublicTransportViewComponent } from './public-transport-view/public-transport-view.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
@@ -27,11 +28,16 @@ const routes: Routes = [
   {path:"info-bus", component: InfoBusComponent},
   {path:'map', component: MapComponent},
   {path:'parking', component: ParkingViewComponent},
-  {path:'impressum', component: ImpressumComponent}
+  {path: 'connection-ticket', component: ConnectionTicketComponent},
+  {path: 'PreisService', component: PreisService},
+  {path:'impressum', component: ImpressumComponent},
+  {path:'public-transport', component: PublicTransportViewComponent},
+  {path:'bike-parking', component: BikeParkingItemComponent},
+  {path:'campsites', component: CampsiteParkingItemComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: "top", useHash: true})],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   exports: [RouterModule]
 })

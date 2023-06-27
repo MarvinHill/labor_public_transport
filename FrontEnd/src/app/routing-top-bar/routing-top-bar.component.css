@@ -1,21 +1,25 @@
-.info-window{
-    position:absolute;
-    right: 0;
-    top: 0;
-    padding-right: 1em;
-    padding-top: 4em;
-    padding-left: 1em;
-    padding-bottom: 1em;
-    max-width: 100vw;
-    
+.info-window {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 4em 1em 1em;
+  max-width: 100vw;
 }
 
-#info-container{
-    max-height: 70vh;
-    overflow-y: scroll;
+#info-container {
+  max-height: 70vh;
+  overflow-y: scroll;
 }
 
-.icon-info{
-    position: relative;
-    z-index: 1000000;
+.icon-info {
+  position: relative;
+  z-index: 100;
+}
+
+#top-bar {
+  height: 100px;
+  width: 100%;
+  /*position: sticky;*/
+  top: 0;
+  background-color: #ffffff;
 }

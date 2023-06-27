@@ -38,8 +38,11 @@
   content: "";
 }
 
-.background-bar2 {
-  height: 30em; /*oder 100%*/
+.height {
+  height: 30vh; /*oder 100%*/
+}
+
+.round{
   border-radius: 1em;
 }
 

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-4 order-md-2 d-flex align-items-center justify-content-center">
+      <img [src]="'assets/image/ConnectionTicket.png'">
+    </div>
+    
+    <div class="col-12 col-md-4 order-md-1 d-flex align-items-center justify-content-center">
+      <div class="list">
+        <ul>
+          <li>Eintritt zur BUGA</li>
+          <li>gültig im Nahverkehr</li>
+          <li>bis zu 3 eigene Kinder mitnehmen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4 order-md-3 d-flex align-items-center justify-content-center">
+      <div class="button">
+        <button (click)="redirectToTicket()" class="ticket-button">
+          Jetzt Kombiticket sichern!
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden-info">
+  <h3>Verbindungsticket</h3>
+  <p>Das Verbindungsticket verbindet die Anreiße mit dem Eintritt auf die Buga</p>
+  <div>
+    <h5>Weitere Informationen</h5>
+    <p>Über einen Klick auf "Jetzt Kombiticket sichern!" können mehr Informationen zum Ticket auf der Deutschen Bahn Seite abgerufen werden.</p>
+  </div>
+</div>
