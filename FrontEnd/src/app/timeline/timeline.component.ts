@@ -87,6 +87,10 @@ export class TimelineComponent implements OnInit, OnChanges {
     if (this.chache.has(lineScheduleEntry.station.stationDesignator)) {
       return this.chache.get(lineScheduleEntry.station.stationDesignator);
     }
+    
+    if(lineScheduleEntry.station.timeInfoJSON == null){
+      return [];
+    }
     const parse = this.JSON.parse(lineScheduleEntry.station.timeInfoJSON).timeInfo;
     this.chache.set(
       lineScheduleEntry.station.stationDesignator,

@@ -21,6 +21,6 @@ export class LineLegendComponent {
       div.innerHTML += '<i class="legend-entry" style="background-color: #956c29; border-color: #956c29;"> 6 </i>' + '<br>';   // 6
       return div;
     };
-    LineLegendComponent.legend.addTo(map);
+    //LineLegendComponent.legend.addTo(map);
   }
 }

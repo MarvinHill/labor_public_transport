@@ -1,17 +1,15 @@
 package de.hhn.se.labswp.buga23publictransport;
 
 import de.hhn.se.labswp.buga23publictransport.persistence.*;
-
-import java.io.File;
-
 import de.hhn.se.labswp.buga23publictransport.util.LineLoader;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
 
+import java.io.File;
 import java.util.List;
 
 @Configuration
@@ -21,6 +19,14 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(PublicTransportLineRepo lineRepo, LineScheduleEntryRepo entryRepo, StationRepo stationRepo) {
         return args -> {
+            if (lineRepo.count() != 0 || entryRepo.count() != 0 || stationRepo.count() != 0){
+                return;
+            }
+
+            lineRepo.deleteAll();
+            entryRepo.deleteAll();
+            stationRepo.deleteAll();
+
             log.info("Preloading Database Entries");
             log.info("Preloading stops for public transport lines and shuttles");
 
@@ -327,7 +333,9 @@ public class LoadDatabase {
             bugaLine6.addLineScheduleEntryList(sapArena);
             bugaLine6.addLineScheduleEntryList(sapArenaSBF);
             log.info("Saving Buga Line 6" + lineRepo.save(bugaLine6));
-        };
+        }
+
+                ;
     }
 }
 

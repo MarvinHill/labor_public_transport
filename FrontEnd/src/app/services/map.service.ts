@@ -835,6 +835,7 @@ export class MapService {
       }
     });
 
+
   }
 
   hideContainer() {
