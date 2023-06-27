@@ -3,6 +3,7 @@ import {ParkingLot} from '../ParkingLot';
 import {ShuttleLine} from '../ShuttleLine';
 import {ObserverState} from '../ObserverState';
 import {ParkingType} from "../ParkingType";
+import { Entrance} from '../Entrance';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class MapDetailsObserverService {
   constructor() { }
 
   changeDisplay(data){
-    if(data.parkingType === ParkingType.CAR || data.parkingType === ParkingType.BIKE){
+    if(data.parkingType === ParkingType.CAR){
       this.show = ObserverState.PARKING;
       this.data = <ParkingLot> data;
       this.changeVisibility(true);
@@ -25,6 +26,13 @@ export class MapDetailsObserverService {
     else if("lineDesignator" in data){
       this.show = ObserverState.SHUTTLE;
       this.data = <ShuttleLine> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if(data.parkingType === ParkingType.BIKE) {
+      // this.show = ObserverState.BIKE;
+      this.show = ObserverState.CARAVAN;
+      this.data = <ParkingLot> data;
       this.changeVisibility(true);
       return;
     }
@@ -37,6 +45,12 @@ export class MapDetailsObserverService {
     else if(data.parkingType === ParkingType.CARAVAN) {
       this.show = ObserverState.CARAVAN;
       this.data = <ParkingLot> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if("entranceDescription" in data){
+      this.show = ObserverState.ENTRANCE;
+      this.data = <Entrance> data;
       this.changeVisibility(true);
       return;
     }

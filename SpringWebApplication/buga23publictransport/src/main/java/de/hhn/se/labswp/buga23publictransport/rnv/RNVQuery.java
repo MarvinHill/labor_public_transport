@@ -19,21 +19,17 @@ public class RNVQuery {
     )
     public static TimeStopInfo getStationsTimes(
             @RequestParam String hasafId) throws IOException {
-
-        var debugTimeNow = getNow();
-        var debugTime4HAfter = get4HOffset();
         var query = new QueryBuilder(
                 ResourceUtils.getFile("classpath:graphql/GetStationTimes.graphql")
         )
                 .buildRawQuery()
                 .replaceData(QueryBuilder.RNVStationId, hasafId)
                 .replaceData(QueryBuilder.RNVStartTime, getNow())
-                .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
+                .replaceData(QueryBuilder.RNVEndTime, get1HOffset())
                 .replaceData("\"", "\\\"")              // transforms (") -> (\")
                 .build();
 
         var response = RNV.callRNV(query);
-        var db_response = response.toString();
         ObjectMapper mapper = new ObjectMapper();
         var tsi = mapper.readValue(response, TimeStopInfo.class);
 
@@ -48,7 +44,7 @@ public class RNVQuery {
                     .buildRawQuery()
                     .replaceData(QueryBuilder.RNVStationId, hasafId)
                     .replaceData(QueryBuilder.RNVStartTime, getNow())
-                    .replaceData(QueryBuilder.RNVEndTime, get4HOffset())
+                    .replaceData(QueryBuilder.RNVEndTime, get1HOffset())
                     .replaceData(QueryBuilder.RNVCursor, tsi.getCursor())
                     .replaceData("\"", "\\\"")             // transforms (") -> (\")
                     .build();
@@ -71,9 +67,9 @@ public class RNVQuery {
         return finalInfo;
     }
 
-    private static String get4HOffset() {
+    private static String get1HOffset() {
         var now = Instant.now();
-        now = now.plus(240, ChronoUnit.MINUTES);
+        now = now.plus(60, ChronoUnit.MINUTES);
         return now.toString();
     }
 

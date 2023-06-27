@@ -4,5 +4,6 @@ export enum ObserverState{
     PARKING,
     NOTHING,
     CAMPSITE,
-    CARAVAN
+    CARAVAN,
+    ENTRANCE
   }

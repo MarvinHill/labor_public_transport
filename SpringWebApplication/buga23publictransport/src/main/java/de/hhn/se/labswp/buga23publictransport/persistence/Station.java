@@ -1,6 +1,5 @@
 package de.hhn.se.labswp.buga23publictransport.persistence;
 
-import de.hhn.se.labswp.buga23publictransport.rnv.persistence.TimeStopInfo;
 import jakarta.persistence.*;
 
 import org.springframework.data.geo.Point;
@@ -15,7 +14,7 @@ public class Station {
     private Point geoLocation;
     private String stationDesignator;
     @Column(length = 10000)
-    private String TimeInfoJSON;
+    private String timeInfoJSON;
 
     public Station() {
     }
@@ -47,10 +46,10 @@ public class Station {
     }
 
     public String getTimeInfoJSON() {
-        return TimeInfoJSON;
+        return timeInfoJSON;
     }
 
     public void setTimeInfoJSON(String timeInfoJSON) {
-        TimeInfoJSON = timeInfoJSON;
+        this.timeInfoJSON = timeInfoJSON;
     }
 }

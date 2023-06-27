@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { SearchProvider } from '../SearchProvider';
-import { take } from 'rxjs';
-import { ParkingLot } from '../ParkingLot';
-import { DataServiceService } from './data-service.service';
-import { SearchService } from './search.service';
-import { MapService } from './map.service';
 import { Router } from '@angular/router';
+import { ParkingLot } from '../ParkingLot';
 import { ParkingType } from '../ParkingType';
+import { SearchProvider } from '../SearchProvider';
+import { DataServiceService } from './data-service.service';
+import { MapService } from './map.service';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ParkingSearchService implements SearchProvider{
+export class CaravanSearchService implements SearchProvider{
 
   constructor(
     private dataService : DataServiceService,
@@ -20,7 +19,7 @@ export class ParkingSearchService implements SearchProvider{
     ) { }
   async search(target: string, searchService : SearchService): Promise<ParkingLot[]> {
 
-    const request = this.dataService.getAllCarParkingRequest();
+    const request = this.dataService.getAllCaravanParkingRequest();
 
     return new Promise<ParkingLot[]>(
       resolve => {
@@ -36,17 +35,16 @@ export class ParkingSearchService implements SearchProvider{
               return false;
             });
             data.forEach(element => {
-              element.category = "Autoparkplätze"
+              element.category = "Wohnmobilstellplätze"
               element.displayText = element.name;
               element.searchAction = () => {
-                var local = "/parking"
+                var local = "/campsites"
                 this.router.navigateByUrl(local);
                 searchService.minimize();
                 this.mapService.minimizeMap();
                 setTimeout(() => {
                   const el = document.getElementById(element.displayText);
                   el?.scrollIntoView({ block: "center" });
-                  console.warn("ran");
                 },2000);
               };
             });
