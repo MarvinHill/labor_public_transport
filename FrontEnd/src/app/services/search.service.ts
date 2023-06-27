@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { MapService } from './map.service';
 import {Injector} from "@angular/core";
 import { InfoSearchService } from './info-search.service';
+import { CampingSearchService } from './camping-search.service';
+import { CaravanSearchService } from './caravan-search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,8 @@ export class SearchService {
     private parkingSearchProvider : ParkingSearchService,
     private shuttleLineSearchProvider: ShuttleSearchService,
     private infoSearchProvider: InfoSearchService,
+    private campingSearchProvider : CampingSearchService,
+    private caravanSearchProvider : CaravanSearchService
     ) {}
 
   async search(searchValue : string) : Promise<Searchable[]> {
@@ -35,18 +39,19 @@ export class SearchService {
 
     const searchResult = [];
 
-    this.parkingSearchProvider.searchService = this;
-    const parkingSearch = await this.parkingSearchProvider.search(searchValue);
-    this.shuttleLineSearchProvider.searchService = this;
-    const shuttleSearch = await this.shuttleLineSearchProvider.search(searchValue);
-    this.infoSearchProvider.searchService = this;
-    const infoSearch = await this.infoSearchProvider.search(searchValue);
+    const parkingSearch = await this.parkingSearchProvider.search(searchValue,this);
+    const shuttleSearch = await this.shuttleLineSearchProvider.search(searchValue,this);
+    const infoSearch = await this.infoSearchProvider.search(searchValue,this);
+    const campingSearch = await this.campingSearchProvider.search(searchValue,this);
+    const caravanSearch = await this.caravanSearchProvider.search(searchValue,this);
 
 
     searchResult.push(
       parkingSearch,
       shuttleSearch,
-      infoSearch
+      infoSearch,
+      campingSearch,
+      caravanSearch
       );
 
       return searchResult;
