@@ -116,10 +116,16 @@ export class ShuttleLineService {
       { icon: shuttleMarkerIcon }
     );
     marker.on("click", function (e: any) {
-      this.observerService.changeDisplay(line)
+      this.observerService.changeDisplay(line);
+      setTimeout(() => {
+        const el = document.getElementById(entry.station.stationDesignator);
+        el?.scrollIntoView({ block: "center",  behavior:"smooth", inline: 'nearest' });
+      }, 2000);
+      
     }.bind(this));
     marker.bindPopup("<span>" + entry.station.stationDesignator + "</span>").openPopup();
     marker.addTo(layer);
+    
   }
 
   /**
