@@ -20,8 +20,7 @@ public class RNVScheduler {
     StationRepo stationRepo;
 
     // update every hour with new time stop infos
-    // @Scheduled(cron = "@hourly")
-    @Scheduled(fixedRate = 3600000, initialDelay = 1000) // 4 minutes delay for debugging ... annoying every time after start up
+    @Scheduled(cron = "@hourly")
     @Async
     public void updateTimeInfoIntoDatabase() throws IOException {
         logger.info("Invoking updateTimeInfoDatabase() ...");

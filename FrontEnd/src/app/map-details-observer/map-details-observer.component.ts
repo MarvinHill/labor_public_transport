@@ -14,7 +14,7 @@ export class MapDetailsObserverComponent {
   constructor(protected service : DataServiceService, protected observerService : MapDetailsObserverService){}
 
   openMaps(){
- 
+    
     this.service.openMapExternalWithDestPosition(this.observerService?.data.geoLocation.x, this.observerService?.data.geoLocation.y);
   }
 

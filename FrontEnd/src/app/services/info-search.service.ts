@@ -12,8 +12,6 @@ import { MapService } from './map.service';
 })
 export class InfoSearchService implements SearchProvider{
 
-  public searchService : SearchService;
-
   // Intended to be set from another component
   public travel : string;
   public parking : string;
@@ -21,7 +19,7 @@ export class InfoSearchService implements SearchProvider{
   public publicTransport : string;
 
   constructor(private router : Router, private mapService : MapService ) { }
-  search(target: string): Searchable[] {
+  search(target: string, searchService : SearchService): Searchable[] {
     if(
       this.checkNotInitialized(this.travel)||
       this.checkNotInitialized(this.parking)||
@@ -36,7 +34,7 @@ export class InfoSearchService implements SearchProvider{
       if(this.travel.toLowerCase().includes(target)){
         this.travel.split(" ").forEach(value => {
           if(value.toLowerCase().includes(target)){
-            this.initializeValues("Allgemeine Informationen",value,target,"/travelinfo",results);
+            this.initializeValues("Allgemeine Informationen",value,target,"/travelinfo",results, searchService);
           }
         });
 
@@ -44,7 +42,7 @@ export class InfoSearchService implements SearchProvider{
       if(this.parking.toLowerCase().includes(target)){
         this.parking.split(" ").forEach(value => {
           if(value.toLowerCase().includes(target)){
-            this.initializeValues("Parken Informationen",value,target,"/info-parking",results);
+            this.initializeValues("Parken Informationen",value,target,"/info-parking",results, searchService);
           }
         })
 
@@ -52,14 +50,14 @@ export class InfoSearchService implements SearchProvider{
       if(this.bus.toLowerCase().includes(target)){
         this.bus.split(" ").forEach(value => {
           if(value.toLowerCase().includes(target)){
-            this.initializeValues("Bus Informationen",value,target,"/info-bus",results);
+            this.initializeValues("Bus Informationen",value,target,"/info-bus",results, searchService);
           }
         })
       }
       if(this.publicTransport.toLowerCase().includes(target)){
         this.publicTransport.split(" ").forEach(value => {
           if(value.toLowerCase().includes(target)){
-            this.initializeValues("Bahn Informationen",value,target,"/info-bahn",results);
+            this.initializeValues("Bahn Informationen",value,target,"/info-bahn",results, searchService);
           }
         })
       }
@@ -67,7 +65,7 @@ export class InfoSearchService implements SearchProvider{
       return results;
   }
 
-  private initializeValues(category : string, foundIn : string, displayText : string, url : string, results : Searchable[]){
+  private initializeValues(category : string, foundIn : string, displayText : string, url : string, results : Searchable[], searchService : SearchService){
     const searchResult : InfoSearchResult = new InfoSearchResult();
     const LENGTH  = 50
     if(foundIn.length > LENGTH){
@@ -77,7 +75,7 @@ export class InfoSearchService implements SearchProvider{
     searchResult.displayText = `"${displayText}" in "${foundIn}" gefunden`;
     searchResult.searchAction = () => {
         this.router.navigateByUrl(url);
-        this.searchService.minimize();
+        searchService.minimize();
         this.mapService.minimizeMap();
     };
     results.push(searchResult);

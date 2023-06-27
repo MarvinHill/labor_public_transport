@@ -1,6 +1,6 @@
 import { ElementRef, HostListener, Injectable, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { LatLng } from 'leaflet';
+import { LatLng, Point} from 'leaflet';
 import { interval } from 'rxjs';
 import { ParkingLot } from '../ParkingLot';
 import { DataServiceService } from '../services/data-service.service';
@@ -15,6 +15,7 @@ import { LineScheduleEntry } from '../LineScheduleEntry';
 import { ShuttleLine } from '../ShuttleLine';
 import { style } from '@angular/animations';
 
+import { Entrance} from '../Entrance';
 
 @Injectable({
   providedIn: 'root'
@@ -168,14 +169,14 @@ export class MapService {
 
   makeCarParking(parkinglot: ParkingLot) {
     let parkingIcon = L.icon({
-      iconUrl: 'assets/icon/parking/MarkerCar.png',
+      iconUrl: 'assets/icon/parking/MarkerCar.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
     if (parkinglot.charging === true) {
       parkingIcon = L.icon({
-        iconUrl: 'assets/icon/parking/MarkerECar.png',
+        iconUrl: 'assets/icon/parking/MarkerECar.svg',
         iconSize: [45, 72], // size of the icon
         iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -225,7 +226,7 @@ export class MapService {
 
   makeBikeParking(bikeparking: ParkingLot) {
     const parkingIcon = L.icon({
-      iconUrl: 'assets/icon/parking/MarkerBike.png',
+      iconUrl: 'assets/icon/parking/MarkerBike.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -322,7 +323,7 @@ export class MapService {
     }
 
     marker.on("click", function (e: any) {
-      this.observerService.changeDisplay(campsite)
+      this.observerService.changeDisplay(campsite);
     }.bind(this));
   }
 
@@ -542,28 +543,33 @@ export class MapService {
 
   }
   makeEntrances() {
+
+    var entries = [
+      new Entrance(new Point(49.47938, 8.49609), "Haupteingang Luisenpark", "Einlass: 9 - 19 Uhr"),
+      new Entrance(new Point(49.48643, 8.49230),"Eingang Fernmeldeturm","Einlass: 9 - 19 Uhr"),
+      new Entrance(new Point(49.49772, 8.52095),"Haupteingang Spinellipark","Einlass: 9 - 19 Uhr"),
+      new Entrance(new Point(49.502722, 8.518795),"Eingang Parkschale","Einlass: 9 - 19 Uhr")
+    ]
+
     const entranceIcon = L.icon({
-      iconUrl: 'assets/icon/Entrance.png',
+      iconUrl: 'assets/icon/Entrance.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    const haupteingangLuisenpark = L.marker([49.47938, 8.49609], { icon: entranceIcon }).addTo(this.entrances);
-    const eingangFernmeldeturm = L.marker([49.48643, 8.49230], { icon: entranceIcon }).addTo(this.entrances);
-    const haupteingangSpinellipark = L.marker([49.49772, 8.52095], { icon: entranceIcon }).addTo(this.entrances);
-    const eingangParkschale = L.marker([49.502722, 8.518795], { icon: entranceIcon }).addTo(this.entrances);
 
-    haupteingangLuisenpark.bindPopup("<b>Haupteingang Luisenpark</b> <br> Einlass: 9 - 19 Uhr").openPopup();
-    eingangFernmeldeturm.bindPopup("<b>Eingang Fernmeldeturm</b> <br> Einlass: 9 - 19 Uhr");
-    haupteingangSpinellipark.bindPopup("<b>Haupteingang Spinellipark</b> <br> Einlass: 9 - 19 Uhr");
-    eingangParkschale.bindPopup("<b>Eingang Parkschale</b> <br> Einlass: 9 - 19 Uhr");
-
+    entries.forEach( entry => {
+      const marker =  L.marker([entry.geoLocation.x,entry.geoLocation.y], { icon: entranceIcon }).addTo(this.entrances);
+      marker.on("click", function (e: any) {
+        this.observerService.changeDisplay(entry);
+      }.bind(this));
+    });
 
   }
 
   makeExits() {
     const exitIcon = L.icon({
-      iconUrl: 'assets/icon/Exit.png',
+      iconUrl: 'assets/icon/Exit.svg',
       iconSize: [45, 72], // size of the icon
       iconAnchor: [22.5, 70], // point of the icon which will correspond to marker's location
       popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
