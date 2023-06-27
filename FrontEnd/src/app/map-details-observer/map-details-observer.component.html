@@ -89,3 +89,18 @@
 <div *ngIf="observerService.show === ObserverState.NOTHING">
     <p>Keine Details für dieses Objekt.</p>
 </div>
+
+<div *ngIf="observerService.show === ObserverState.ENTRANCE" class="row">
+  <div class="col text-center">
+      <img class="m-4" src="assets/icon/EntranceDetails.png">
+      <h2>{{observerService.data.entranceDescription}}</h2>
+      <div class="my-2">
+          <p class="p-0 m-0">
+              {{observerService.data.openingHours}}
+          </p>
+      <div role="button" class="google-routing-button" style="margin-left: auto; margin-right: auto; width: 25%;"
+          (click)="openMaps();">
+          <img src="assets/icon/googleMaps.svg" alt="google maps">
+      </div>
+  </div>
+</div>
