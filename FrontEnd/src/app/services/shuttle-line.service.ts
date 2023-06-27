@@ -119,7 +119,8 @@ export class ShuttleLineService {
       this.observerService.changeDisplay(line);
       setTimeout(() => {
         const el = document.getElementById(entry.station.stationDesignator);
-        el?.scrollIntoView({ block: "center",  behavior:"smooth", inline: 'nearest' });
+        const win = document.getElementById("sidebar");
+         win?.scrollTo({ top: el.offsetTop,  behavior:"smooth"});
       }, 2000);
       
     }.bind(this));

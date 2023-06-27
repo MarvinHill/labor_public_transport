@@ -7,14 +7,16 @@
         {{this.lineScheduleEntryList[number].station.stationDesignator}}</p>
       <div style="overflow-x: hidden; overflow-y: auto;" class="height" [class.height]="restrictSize === true">
         <ul class="timeline">
-          <li class="timeline-item1" style="text-align: start;">
+          <li class="timeline-item1" style="text-align: start;" [id]="lineScheduleEntryList[0]?.station.stationDesignator">
             <p class="fw-normal">
               <app-time-display [stationName] ="lineScheduleEntryList[0]?.station.stationDesignator" [realtime] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntryList[0]))?.realtimeDeparture)" [planned] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntryList[0]))?.plannedDeparture)"></app-time-display>
               </p>
           </li>
           <li class="timeline-item"
             *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
-            style="text-align: start;">
+            style="text-align: start;"
+            [id]="lineScheduleEntry?.station.stationDesignator"
+            >
             <div *ngIf="!first && !last">
               <p class="fw-normal">
                 <app-time-display [stationName] ="lineScheduleEntry.station.stationDesignator" [realtime] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.realtimeDeparture)" [planned] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.plannedDeparture)"></app-time-display>
@@ -24,7 +26,9 @@
           </li>
           <li class="timeline-item1"
             *ngFor="let lineScheduleEntry of lineScheduleEntryList,let first = first ;let last = last;let i = index; "
-            style="text-align: start;">
+            style="text-align: start;"
+            [id]="lineScheduleEntry?.station.stationDesignator"
+            >
             <div *ngIf="last">
               <p class="fw-normal">
                 <app-time-display [stationName] ="lineScheduleEntry.station.stationDesignator" [realtime] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.realtimeDeparture)" [planned] = "this.formateTime(this.filterAndGetNewest(this.parseAndFilterLine(lineScheduleEntry))?.plannedDeparture)"></app-time-display>
