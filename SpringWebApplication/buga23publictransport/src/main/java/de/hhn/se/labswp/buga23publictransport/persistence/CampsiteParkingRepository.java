@@ -4,4 +4,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CampsiteParkingRepository extends JpaRepository<CampsiteParking, Long> { }
+public interface CampsiteParkingRepository extends JpaRepository<CampsiteParkingLot, Long> { }

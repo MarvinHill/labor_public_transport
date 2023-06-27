@@ -13,6 +13,10 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { SearchService } from './search.service';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import { ShuttleLine } from '../ShuttleLine';
+import {CarParkingLot} from "../CarParkingLot";
+import {BikeParkingLot} from "../BikeParkingLot";
+import {CaravanParkingLot} from "../CaravanParkingLot";
+import {CampsiteParkingLot} from "../CampsiteParkingLot";
 import { Entrance} from '../Entrance';
 
 @Injectable({
@@ -165,7 +169,7 @@ export class MapService {
     this.detectMapMovement();
   }
 
-  makeCarParking(parkinglot: ParkingLot) {
+  makeCarParking(parkinglot: CarParkingLot) {
     let parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerCar.svg',
       iconSize: [45, 72], // size of the icon
@@ -222,7 +226,7 @@ export class MapService {
     }.bind(this));
   }
 
-  makeBikeParking(bikeparking: ParkingLot) {
+  makeBikeParking(bikeparking: BikeParkingLot) {
     const parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerBike.svg',
       iconSize: [45, 72], // size of the icon
@@ -245,7 +249,7 @@ export class MapService {
     }.bind(this));
   }
 
-  makeCaravanParking(caravanParking: ParkingLot) {
+  makeCaravanParking(caravanParking: CaravanParkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/Caravan.svg',
       iconSize: [45, 72], // size of the icon
@@ -258,7 +262,9 @@ export class MapService {
         arr.push([caravanParking.area.at(i).x, caravanParking.area.at(i).y]);
       }
       var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.campsiteParkingLot);
-      var marker = L.marker([poly.getCenter().lat, poly.getCenter().lng + 0.0005], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+      var lat = poly.getCenter().lat;
+      var lon = poly.getCenter().lng;
+      var marker = L.marker([lat, lon + 0.0005], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
     }
     else {
       var marker = L.marker([caravanParking.geoLocation.x, caravanParking.geoLocation.y], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
@@ -285,7 +291,7 @@ export class MapService {
     }.bind(this));
   }
 
-  makeCampsiteParking(campsite: ParkingLot) {
+  makeCampsiteParking(campsite: CampsiteParkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/Camping.svg',
       iconSize: [45, 72], // size of the icon

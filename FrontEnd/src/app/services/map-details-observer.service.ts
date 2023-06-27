@@ -17,7 +17,7 @@ export class MapDetailsObserverService {
   constructor() { }
 
   changeDisplay(data){
-    if(data.parkingType === ParkingType.CAR || data.parkingType === ParkingType.BIKE){
+    if(data.parkingType === ParkingType.CAR){
       this.show = ObserverState.PARKING;
       this.data = <ParkingLot> data;
       this.changeVisibility(true);
@@ -26,6 +26,12 @@ export class MapDetailsObserverService {
     else if("lineDesignator" in data){
       this.show = ObserverState.SHUTTLE;
       this.data = <ShuttleLine> data;
+      this.changeVisibility(true);
+      return;
+    }
+    else if(data.parkingType === ParkingType.BIKE) {
+      this.show = ObserverState.BIKE;
+      this.data = <ParkingLot> data;
       this.changeVisibility(true);
       return;
     }
