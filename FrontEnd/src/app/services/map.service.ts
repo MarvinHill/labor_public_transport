@@ -13,6 +13,12 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { SearchService } from './search.service';
 import { LineScheduleEntry } from '../LineScheduleEntry';
 import { ShuttleLine } from '../ShuttleLine';
+import { style } from '@angular/animations';
+
+import {CarParkingLot} from "../CarParkingLot";
+import {BikeParkingLot} from "../BikeParkingLot";
+import {CaravanParkingLot} from "../CaravanParkingLot";
+import {CampsiteParkingLot} from "../CampsiteParkingLot";
 import { Entrance} from '../Entrance';
 
 @Injectable({
@@ -46,10 +52,9 @@ export class MapService {
   exits = new L.LayerGroup;
   distanceShower = new L.LayerGroup;
   myLocation;
-  s1; s2; dist; name; noob; noob2; newLatLng: any;
+  s1; s2; dist; name; noob; newLatLng: any;
   calculateDistance; distance: number;
   lat1; lat2; lng1; lng2: any;
-  distanceText; distanceTextToFarAway: boolean;
   layerOptions: L.Control.LayersOptions = {
     position: "bottomright",
   }
@@ -81,6 +86,7 @@ export class MapService {
     this.publicTransportLines.forEach(entry => {
       this.layerControl.addOverlay(entry[0], entry[1]);
     });
+
   }
 
   public initMap(): void {
@@ -165,7 +171,7 @@ export class MapService {
     this.detectMapMovement();
   }
 
-  makeCarParking(parkinglot: ParkingLot) {
+  makeCarParking(parkinglot: CarParkingLot) {
     let parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerCar.svg',
       iconSize: [45, 72], // size of the icon
@@ -222,7 +228,7 @@ export class MapService {
     }.bind(this));
   }
 
-  makeBikeParking(bikeparking: ParkingLot) {
+  makeBikeParking(bikeparking: BikeParkingLot) {
     const parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/MarkerBike.svg',
       iconSize: [45, 72], // size of the icon
@@ -245,7 +251,7 @@ export class MapService {
     }.bind(this));
   }
 
-  makeCaravanParking(caravanParking: ParkingLot) {
+  makeCaravanParking(caravanParking: CaravanParkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/Caravan.svg',
       iconSize: [45, 72], // size of the icon
@@ -258,7 +264,9 @@ export class MapService {
         arr.push([caravanParking.area.at(i).x, caravanParking.area.at(i).y]);
       }
       var poly = L.polygon(arr, { color: '#0677e0' }).addTo(this.campsiteParkingLot);
-      var marker = L.marker([poly.getCenter().lat, poly.getCenter().lng + 0.0005], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
+      var lat = poly.getCenter().lat;
+      var lon = poly.getCenter().lng;
+      var marker = L.marker([lat, lon + 0.0005], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
     }
     else {
       var marker = L.marker([caravanParking.geoLocation.x, caravanParking.geoLocation.y], { icon: parkingIcon }).addTo(this.campsiteParkingLot);
@@ -285,7 +293,7 @@ export class MapService {
     }.bind(this));
   }
 
-  makeCampsiteParking(campsite: ParkingLot) {
+  makeCampsiteParking(campsite: CampsiteParkingLot) {
     var parkingIcon = L.icon({
       iconUrl: 'assets/icon/parking/Camping.svg',
       iconSize: [45, 72], // size of the icon
@@ -720,35 +728,40 @@ export class MapService {
 
           if (this.distance < a) {// if the distance is less than what is already saved
             a = this.distance;// new furthest search distance replaces the old one
-
             this.s1 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.x;
             this.s2 = shuttleLineList[i].lineScheduleEntryList[j].station.geoLocation.y;
             this.name = shuttleLineList[i].lineScheduleEntryList[j].station.stationDesignator;
           }
         }
       }
-      if (this.distance < 20) {
-        this.distanceText = true;
-      } else {
-        this.distanceTextToFarAway = true;
+      if (a == 20 || this.distance == undefined) {
+        new L.Tooltip({direction:'center'})
+          .setLatLng(this.map.getCenter())
+          .setContent('<b>Sie sind zu weit von der nächsten Haltestelle<br>entfernt um diese Funktion nutzen zu können</b>')
+          .addTo(this.distanceShower);
       }
-      var xx: [number, number][] = [
-        [this.s1, this.s2],
-        [this.myLocation.lat, this.myLocation.lng]
-      ];
-      var layer = L.polyline(xx, { color: '#8A2BE2', dashArray: '20, 20', dashOffset: '0' }).addTo(this.distanceShower);
+      else {
+        var xx: [number, number][] = [
+          [this.s1, this.s2],
+          [this.myLocation.lat, this.myLocation.lng]
+        ];
+        var layer = L.polyline(xx, { color: '#8A2BE2', dashArray: '20, 20', dashOffset: '0' }).addTo(this.distanceShower);
 
-      this.noob2 = this.noob.toFixed(2);
+        this.noob = a.toFixed(2);
 
-      this.createMiddleMarkers(layer);
-      var popup = L.popup()
-        .setLatLng(this.newLatLng)
-        .setContent('~ ' + this.noob.toFixed(2) + ' km')
-        .openOn(this.map);
+        this.createMiddleMarkers(layer);
 
-      layer.bindPopup(popup, { closeButton: false, closeOnClick: false }).addTo(this.distanceShower);
+
+        var popup = L.popup()
+          .setLatLng(this.newLatLng)
+          .setContent('<b>Die Luftlinie von Ihrem Standort zu ' + this.name + ' beträgt: ~ ' + this.noob + ' km</b>')
+          .addTo(this.distanceShower);
+        layer.bindPopup(popup);
+        layer.addTo(this.distanceShower);
+      }
+      this.distanceShower.addTo(this.userLocation);
     }
-    this.distanceShower.addTo(this.userLocation);
+
   }
 
   // benutzt die Harversine Formel um die Fluglinie zu berechnen
@@ -759,8 +772,8 @@ export class MapService {
     var a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2)
-      ;
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c; // Distance in km
 
@@ -778,8 +791,6 @@ export class MapService {
     } else {
       this.distanceShower.clearLayers();
       this.distance = 0;
-      this.distanceText = false;
-      this.distanceTextToFarAway = false;
     }
   }
 
@@ -787,8 +798,6 @@ export class MapService {
     this.locateUser();
     this.distanceShower.clearLayers();
     this.distance = 0;
-    this.distanceText = false;
-    this.distanceTextToFarAway = false;
   }
 
   calcMiddleLatLng(map, latlng1, latlng2) {
@@ -836,15 +845,8 @@ export class MapService {
       else if (!this.xPressed) {
         document.getElementById('speech-bubble-id').style.display = 'block';
       }
-      if (this.map.hasLayer(this.userLocation)) {
-        this.distanceText = false;
-        this.distanceTextToFarAway = false;
-      }
-      if(!(this.map.hasLayer(this.userLocation))) {
-        this.distanceText = false;
-        this.distanceTextToFarAway = false;
-      }
     });
+
 
   }
 

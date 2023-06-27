@@ -746,18 +746,18 @@ public class ParkingLotInit {
             carRepo.save(new CarParkingLot(roggenplatzGeoLocation, roggenPoly, roggenplatzEntrances, "Roggenplatz, Tiefgarage", false, false, ParkingType.CAR, "Am Roggenplatz, 68305 Mannheim", 0, false));
             carRepo.save(new CarParkingLot(gbgParkhausGeoLocation, gbgParkhausPoly, gbgParkhausEntrances, "GBG-Parkhaus", true, false, ParkingType.CAR, "Spinelli-Platz 2, 68259 Mannheim", 0, true));
 
-            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim", 0, false));
-            bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", true, false, ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim", 0, false));
-            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", true, false, ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim", 0, false));
-            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", true, false, ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim", 0, false));
+            bikeRepo.save(new BikeParkingLot(luisenparkHaupteingangGeoLocation, luisenparkHaupteingangPoly, luisenparkHaupteingangEntrances, "Luisenpark Haupteingang, Fahradstellplatz", ParkingType.BIKE, "Theodor-Heuss-Anlage 3, 68165 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(luisenparkFernmeldeturmGeoLocation, luisenparkFernmeldeturmPoly, luisenparkFernmeldeturmEntrances, "Luisenpark Eingang Fernmeldeturm, Fahradstellplatz", ParkingType.BIKE, "Hans-Reschke-Ufer 2, 68165 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(spinelliParkHaupteingangGeoLocation, spinelliParkHaupteingangPoly, spinelliParkHaupteingangEntrances, "Spinelli Park Haupteingang, Fahradstellplatz", ParkingType.BIKE, "Spinelli - Bks 1587, 68259 Mannheim"));
+            bikeRepo.save(new BikeParkingLot(spinelliParkEingangParkschaleGeoLocation, spinelliParkEingangParkschalePoly, spinelliParkEingangParkschaleEntrances, "Spinelli Park Eingang Parkschale, Fahradstellplatz", ParkingType.BIKE, "Saarbrücker Straße, 68309 Mannheim"));
 
-            caravanRepo.save(new CaravanParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
-            caravanRepo.save(new CaravanParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
-            caravanRepo.save(new CaravanParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Wohnmobilstellplatz", true, true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim", false, false, false, false));
+            caravanRepo.save(new CaravanParkingLot(sapP6GeoLocation, sapP6Poly, sapP6Entrances, "SAP Arena P6, Wohnmobilstellplatz", true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
+            caravanRepo.save(new CaravanParkingLot(sapP7GeoLocation, sapP7Poly, sapP7Entrances, "SAP Arena P7, Wohnmobilstellplatz", true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
+            caravanRepo.save(new CaravanParkingLot(sapP8GeoLocation, sapP8Poly, sapP8Entrances, "SAP Arena P8, Wohnmobilstellplatz", true, ParkingType.CARAVAN, "Xaver-Fuhr-Straße 152, 68163 Mannheim"));
 
-            campsiteRepo.save(new CampsiteParking(mannheimStrandbadGeoLocation, mannheimStrandbadPoly, mannheimStrandbadEntrances, "Mannheim Strandbad", false, true, ParkingType.CAMPSITE, "Strandbadweg 1, 68199 Mannheim", false, true, true, true));
-            campsiteRepo.save(new CampsiteParking(campingBlaueAdriaGeoLocation, campingBlaueAdriaPoly, campingBlaueAdriaEntrances, "Campingplatz Blaue Adria", false, false, ParkingType.CAMPSITE, "Adriastraße, 67122 Altrip", false, false, true, true));
-            campsiteRepo.save(new CampsiteParking(mannheimNeuostheimGeoLocation, mannheimNeuostheimPoly, mannheimNeuostheimEntrances, "Wohnmobilstellplatz Mannheim-Neuostheim", false, false, ParkingType.CAMPSITE, "Hans-Thoma-Straße 3, 68163 Mannheim", false, false, false, false));
+            campsiteRepo.save(new CampsiteParkingLot(mannheimStrandbadGeoLocation, mannheimStrandbadPoly, mannheimStrandbadEntrances, "Mannheim Strandbad", false, true, ParkingType.CAMPSITE, "Strandbadweg 1, 68199 Mannheim", false, true, true));
+            campsiteRepo.save(new CampsiteParkingLot(campingBlaueAdriaGeoLocation, campingBlaueAdriaPoly, campingBlaueAdriaEntrances, "Campingplatz Blaue Adria", false, false, ParkingType.CAMPSITE, "Adriastraße, 67122 Altrip", false, false, true));
+            campsiteRepo.save(new CampsiteParkingLot(mannheimNeuostheimGeoLocation, mannheimNeuostheimPoly, mannheimNeuostheimEntrances, "Wohnmobilstellplatz Mannheim-Neuostheim", false, false, ParkingType.CAMPSITE, "Hans-Thoma-Straße 3, 68163 Mannheim", false, false, false));
         };
     }
 }

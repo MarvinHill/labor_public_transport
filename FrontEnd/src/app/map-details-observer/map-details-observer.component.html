@@ -82,6 +82,19 @@
   </div>
 </div>
 
+
+<div *ngIf="observerService.show === ObserverState.BIKE" class="row">
+  <div class="col text-center">
+    <img class="m-4" src="assets/icon/bike_parking_icon_observer.svg" alt="parking-icon">
+    <h2>{{observerService.data.name}}</h2>
+    <div role="button" class="google-routing-button" style="margin-left: auto; margin-right: auto; width: 25%;"
+         (click)="openMaps();">
+      <img src="assets/icon/googleMaps.svg" alt="google maps">
+    </div>
+  </div>
+</div>
+
+
 <div *ngIf="observerService.show === ObserverState.RNV">RNV Details {{observerService.data}} </div>
 <div *ngIf="observerService.show === ObserverState.SHUTTLE">
     <app-timeline [shuttleLine]="observerService.data" [restrictSize]="false"></app-timeline>
