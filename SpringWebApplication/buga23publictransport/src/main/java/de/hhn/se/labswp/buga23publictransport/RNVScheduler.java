@@ -26,8 +26,7 @@ public class RNVScheduler {
     StationRepo stationRepo;
 
     // update every hour with new time stop infos
-    // @Scheduled(cron = "@hourly")
-    @Scheduled(fixedRate = 1000000)
+    @Scheduled(cron = "@hourly")
     @Async
     public void updateTimeInfoIntoDatabase() throws IOException {
         logger.info("Invoking updateTimeInfoDatabase() hourly ...");
