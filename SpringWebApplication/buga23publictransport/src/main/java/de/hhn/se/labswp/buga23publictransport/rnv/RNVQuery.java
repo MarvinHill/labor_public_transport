@@ -18,14 +18,17 @@ public class RNVQuery {
             value = "/call_rnv"
     )
     public static TimeStopInfo getStationsTimes(
-            @RequestParam String hasafId) throws IOException {
+            @RequestParam String hasafId,
+            @RequestParam String startTime,
+            @RequestParam String endTime
+    ) throws IOException {
         var query = new QueryBuilder(
                 ResourceUtils.getFile("classpath:graphql/GetStationTimes.graphql")
         )
                 .buildRawQuery()
                 .replaceData(QueryBuilder.RNVStationId, hasafId)
-                .replaceData(QueryBuilder.RNVStartTime, getNow())
-                .replaceData(QueryBuilder.RNVEndTime, get1HOffset())
+                .replaceData(QueryBuilder.RNVStartTime, startTime)
+                .replaceData(QueryBuilder.RNVEndTime, endTime)
                 .replaceData("\"", "\\\"")              // transforms (") -> (\")
                 .build();
 
@@ -43,8 +46,8 @@ public class RNVQuery {
             )
                     .buildRawQuery()
                     .replaceData(QueryBuilder.RNVStationId, hasafId)
-                    .replaceData(QueryBuilder.RNVStartTime, getNow())
-                    .replaceData(QueryBuilder.RNVEndTime, get1HOffset())
+                    .replaceData(QueryBuilder.RNVStartTime, startTime)
+                    .replaceData(QueryBuilder.RNVEndTime, endTime)
                     .replaceData(QueryBuilder.RNVCursor, tsi.getCursor())
                     .replaceData("\"", "\\\"")             // transforms (") -> (\")
                     .build();
@@ -67,13 +70,20 @@ public class RNVQuery {
         return finalInfo;
     }
 
-    private static String get1HOffset() {
+    public static String get1HOffset() {
         var now = Instant.now();
         now = now.plus(60, ChronoUnit.MINUTES);
         return now.toString();
     }
 
-    private static String getNow() {
+    public static String[] getAllDay() {
+        var tuple = new String[2];
+        tuple[0] = Instant.now().toString();
+        tuple[1] = Instant.now().plus(23, ChronoUnit.HOURS).toString();
+        return tuple;
+    }
+
+    public static String getNow() {
         return Instant.now().toString();
     }
 }
