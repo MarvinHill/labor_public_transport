@@ -88,10 +88,12 @@ public class TimeStopInfoDeserializer extends StdDeserializer<TimeStopInfo> {
                 continue;
             }
 
-            // TODO: Filter right direction here
-            if (DESTINATION_MAP_TO_BUGA.get(timeInfo.lineGroup) == null) {
-                continue;
+            if (!lineGroup.equals("P+R")) {
+                if (DESTINATION_MAP_TO_BUGA.get(timeInfo.lineGroup) == null) {
+                    continue;
+                }
             }
+
 
             timeStopInfo.getTimeInfo().add(timeInfo);
         }

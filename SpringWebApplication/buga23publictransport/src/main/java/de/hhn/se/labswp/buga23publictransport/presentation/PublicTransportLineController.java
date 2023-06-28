@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import de.hhn.se.labswp.buga23publictransport.LoadDatabase;
 import de.hhn.se.labswp.buga23publictransport.business.LineScheduleService;
-import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntry;
-import de.hhn.se.labswp.buga23publictransport.persistence.LineScheduleEntryRepo;
-import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLine;
-import de.hhn.se.labswp.buga23publictransport.persistence.PublicTransportLineRepo;
+import de.hhn.se.labswp.buga23publictransport.persistence.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +28,9 @@ public class PublicTransportLineController {
     private PublicTransportLineRepo repo;
     private LineScheduleEntryRepo repo2;
 
+    @Autowired
+    private StationRepo stationRepo;
+
     private static final Logger log = LoggerFactory.getLogger(PublicTransportLineController.class);
 
     PublicTransportLineController(PublicTransportLineRepo repo, LineScheduleEntryRepo repo2) {
@@ -47,6 +47,11 @@ public class PublicTransportLineController {
     @GetMapping("/lse")
     Iterable<LineScheduleEntry> all2() {
         return repo2.findAll();
+    }
+
+    @GetMapping("stations")
+    Iterable<Station> allStations() {
+        return stationRepo.findAll();
     }
 
     @GetMapping("/ptl/{lineId}")
